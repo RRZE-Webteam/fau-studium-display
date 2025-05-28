@@ -1,0 +1,1 @@
+{"version":3,"file":"block/index.css","mappings":";;;AAAA;;;;EAAA,C","sources":["webpack://fau-studium-display/./src/block/editor.scss"],"sourcesContent":["/**\n * The following styles get applied inside the editor only.\n *\n * Replace them with your own styles or remove the file completely.\n */\n\n//@use '../../scss/fau-studium-display';\n\n\n"],"names":[],"sourceRoot":""}
