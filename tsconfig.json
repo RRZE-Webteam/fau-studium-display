@@ -10,7 +10,8 @@
     "allowSyntheticDefaultImports": true,
     "target": "es2015",
     "downlevelIteration": true,
-    "typeRoots": ["./node_modules/@types", "./declarations"]
+    "typeRoots": ["./node_modules/@types", "./declarations"],
+    "esModuleInterop": true
   },
   "include": [
     "./src/**/*",

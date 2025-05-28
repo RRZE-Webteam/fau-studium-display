@@ -7,7 +7,7 @@ import {
     PanelBody,
     RadioControl,
     ComboboxControl,
-    Spinner,
+    Spinner, ToggleControl,
 } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 import { useState, useEffect } from '@wordpress/element';
@@ -23,6 +23,7 @@ interface BlockAttributes {
     degreeProgram: number;
     language: string;
     format: string;
+    showSearch : boolean;
     items: string[];
 }
 
@@ -31,7 +32,7 @@ const Edit = ({
                   setAttributes,
               }: BlockEditProps<BlockAttributes>) => {
     const blockProps = useBlockProps();
-    const { degreeProgram, language, format = 'full' } = attributes;
+    const { degreeProgram, language, format = 'full', showSearch = false } = attributes;
     const [degreePrograms, setDegreePrograms] = useState(fauStudiumData.degreePrograms);
     const [selectedFormat, setSelectedFormat] = useState<string>(format);
 
@@ -51,6 +52,10 @@ const Edit = ({
         }
     };
 
+    const onChangeShowSearch = (value: boolean) => {
+        setAttributes({ showSearch: value });
+    }
+
     return (
         <div {...blockProps}>
             <InspectorControls>
@@ -68,6 +73,16 @@ const Edit = ({
                         ]}
                         onChange={onChangeFormat}
                     />
+
+                    {(selectedFormat === "grid"
+                        || selectedFormat === "table"
+                        || selectedFormat === "list") && (
+                        <ToggleControl
+                            label={__('Show Search', 'fau-studium-display')}
+                            checked={!!showSearch}
+                            onChange={onChangeShowSearch}
+                        />
+                    )}
 
                     <ComboboxControl
                         label={__('Degree Program', 'fau-studium-display')}

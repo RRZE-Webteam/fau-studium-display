@@ -25,7 +25,7 @@ class Main
 
         // fetch degree program list for combobox
         $api = new API();
-        $degree_programs = $api->get_programs();
+        $degree_programs = $api->get_programs('id_title');
         wp_localize_script($script_handle, 'fauStudiumData', [
             'degreePrograms' => $degree_programs,
         ]);
