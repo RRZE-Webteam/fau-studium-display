@@ -31,16 +31,10 @@ $facts = [
     ],
     'faculty' => [
         'label' => __('Faculty', 'fau-studium-display'),
-     //   'value' => $data['faculty']['name'] ?? ''
+        'value' => $facts['faculty']['value'] = !empty($data['faculty']) ? implode(', ', array_column($data['faculty'], 'name')) : ''
     ]
 ];
-$faculty_names = [];
-if (!empty($data['faculty'])) {
-    foreach ($data['faculty'] as $faculty) {
-        $faculty_names[] = $faculty['name'];
-    }
-}
-$facts['faculty']['value'] = implode(', ', $faculty_names);
+
 $special_features = [
     'label' => __('Special Features', 'fau-studium-display'),
     'value' => $data['content']['special_features']['description'] ?? ''
@@ -59,6 +53,7 @@ foreach ($facts as $fact) {
 
 <section class="fau-studium-display degree-program-box">
     <h1><?php _e('Fact Sheet', 'fau-studium-display');?></h1>
+
     <?php if (!empty($fact_list)): ?>
     <dl class="facts">
         <?php echo wp_kses_post($fact_list); ?>
