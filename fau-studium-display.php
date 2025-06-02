@@ -22,6 +22,7 @@ defined('ABSPATH') || exit;
 define('FAU_STUDIUM_DISPLAY_PLUGIN_FILE', __FILE__);
 define('FAU_STUDIUM_DISPLAY_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('FAU_STUDIUM_DISPLAY_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('FAU_STUDIUM_DISPLAY_PLUGIN_VERSION', '1.0.0');
 
 // Constants
 const FAU_STUDIUM_DISPLAY_PHP_VERSION = '8.2';

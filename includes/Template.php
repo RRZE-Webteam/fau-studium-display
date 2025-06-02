@@ -22,7 +22,7 @@ class Template {
         }
 
         ob_start();
-        extract($data);  // Make the $data array available as variables in the template
+        //extract($data);  // Make the $data array available as variables in the template
         include $template_path;
         return ob_get_clean();
     }

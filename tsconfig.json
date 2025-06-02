@@ -11,7 +11,10 @@
     "target": "es2015",
     "downlevelIteration": true,
     "typeRoots": ["./node_modules/@types", "./declarations"],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowJs": true,
+    "strict": true,
+    "noEmit": true
   },
   "include": [
     "./src/**/*",

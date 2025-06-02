@@ -9,7 +9,7 @@
   "example": {},
   "attributes": {
     "degreeProgram": {
-      "type": "integer",
+      "type": "number",
       "default": 0
     },
     "language": {
@@ -87,6 +87,5 @@
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "viewScript": "file:./view.js",
-  "style": "file:./style-index.css",
   "render": "file:./render.php"
 }

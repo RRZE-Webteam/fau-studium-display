@@ -9,3 +9,8 @@ declare const fauStudiumData: {
         value: string;
     }[];
 };
+
+declare module '*.json' {
+    const value: any;
+    export default value;
+}

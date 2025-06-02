@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@wordpress/block-editor": "^14.4.0",
-    "@wordpress/server-side-render": "^6.0.0"
+    "@wordpress/blocks": "^13.9.0",
+    "@wordpress/server-side-render": "^5.9.0"
   }
 }

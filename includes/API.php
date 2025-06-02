@@ -9,7 +9,7 @@ class API
     public function __construct() {
         $this->api_url = 'https://meinstudium.fau.de/wp-json/fau/v1/degree-program';
     }
-    public function get_programs($format = '') {
+    public function get_programs($format = '', $show_empty = false) {
         $transient_name = 'fau_studium_degree_programs_list';
         $degree_programs = get_transient($transient_name);
         //$degree_programs = false;
@@ -26,6 +26,7 @@ class API
                         ],
                         $data
                     );
+
                 } else {
                     $degree_programs = $data;
                 }
@@ -34,6 +35,13 @@ class API
             } else {
                 $degree_programs = [];
             }
+        }
+        if ($show_empty) {
+            $empty_option[ 0 ] = [
+                'label' => __('-- Please select --', 'fau-studium-display'),
+                'value' => '0',
+            ];
+            $degree_programs = array_merge($empty_option, $degree_programs);
         }
 
         return $degree_programs;

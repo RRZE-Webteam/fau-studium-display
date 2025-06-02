@@ -5,9 +5,8 @@ import {
 } from '@wordpress/block-editor';
 import {
     PanelBody,
-    RadioControl,
     ComboboxControl,
-    Spinner, ToggleControl,
+    ToggleControl,
 } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 import { useState, useEffect } from '@wordpress/element';
@@ -36,19 +35,25 @@ const Edit = ({
     const [degreePrograms, setDegreePrograms] = useState(fauStudiumData.degreePrograms);
     const [selectedFormat, setSelectedFormat] = useState<string>(format);
 
-    const onChangeFormat = (value: string) => {
-        setSelectedFormat(value);
-        setAttributes({ format: value });
+    const onChangeFormat = (value: string | null | undefined) => {
+        if (typeof value === 'string') {
+            setSelectedFormat(value);
+            setAttributes({ format: value });
+        }
     };
 
-    const onChangeLanguage = (value: string) => {
-        setAttributes({ language: value });
+    const onChangeLanguage = (value: string | null | undefined) => {
+        if (typeof value === 'string') {
+            setAttributes({ language: value });
+        }
     };
 
-    const onChangeDegreeProgram = (value: string) => {
-        const numericValue = parseInt(value, 10);
-        if (!isNaN(numericValue)) {
-            setAttributes({ degreeProgram: numericValue });
+    const onChangeDegreeProgram = (value: string | null | undefined) => {
+        if (typeof value === 'string') {
+            const numericValue = parseInt(value, 10);
+            if (!isNaN(numericValue)) {
+                setAttributes({ degreeProgram: numericValue });
+            }
         }
     };
 
@@ -95,8 +100,8 @@ const Edit = ({
                         label={__('Language', 'fau-studium-display')}
                         value={language}
                         options={[
-                            { label: 'Deutsch', value: 'de' },
-                            { label: 'Englisch', value: 'en' },
+                            { label: __('German', 'fau-studium-display'), value: 'de' },
+                            { label: __('English', 'fau-studium-display'), value: 'en' },
                         ]}
                         onChange={onChangeLanguage}
                     />

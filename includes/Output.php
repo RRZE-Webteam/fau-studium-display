@@ -17,7 +17,15 @@ class Output
             $data = $api->get_program((int)$atts['degreeProgram']);
             $data = $this->get_localized_data($data, $lang);
         } else {
-            $data = $api->get_programs();
+            $programs = $api->get_programs();
+            //var_dump($programs);
+            $data = [];
+            foreach($programs as $program) {
+                $programdata = $api->get_program($program['value']);
+                if (!empty($programdata)) {
+                    $data[$program['value']] = $programdata;
+                }
+            }
         }
 
         // Load the template and pass the sorted data
@@ -26,6 +34,8 @@ class Output
         $format = wp_strip_all_tags($atts['format']);
         $templatefile = 'degree-program-'.$format;
 
+        wp_enqueue_style('fau-studium-display');
+
         return $template->render($templatefile, $data);
     }
 
@@ -33,7 +43,7 @@ class Output
         if ($lang == 'de') {
             unset($data['translations']);
         } elseif ($lang == 'en') {
-            $data = $data['translations'] ?? $data;
+            $data = $data['translations']['en'] ?? $data;
         }
         return $data;
     }
