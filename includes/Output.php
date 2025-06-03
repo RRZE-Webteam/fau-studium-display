@@ -12,7 +12,8 @@ class Output
         $api = new API();
 
         //var_dump($atts);
-        if (!empty($atts['degreeProgram'])) {
+
+        if (isset($atts['format']) && in_array($atts['format'], ['full', 'box'])) {
             $lang = $atts['language'] == 'en' ? 'en' : 'de';
             $data = $api->get_program((int)$atts['degreeProgram']);
             $data = $this->get_localized_data($data, $lang);
@@ -36,7 +37,7 @@ class Output
 
         wp_enqueue_style('fau-studium-display');
 
-        return $template->render($templatefile, $data);
+        return $template->render($templatefile, $data, $atts);
     }
 
     private function get_localized_data($data, $lang) {

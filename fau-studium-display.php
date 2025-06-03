@@ -18,6 +18,8 @@ namespace FAU\StudiumDisplay;
 
 defined('ABSPATH') || exit;
 
+require_once 'config/config.php';
+
 // Define plugin constants
 define('FAU_STUDIUM_DISPLAY_PLUGIN_FILE', __FILE__);
 define('FAU_STUDIUM_DISPLAY_PLUGIN_PATH', plugin_dir_path(__FILE__));

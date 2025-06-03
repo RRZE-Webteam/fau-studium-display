@@ -2,6 +2,8 @@
 
 namespace FAU\StudiumDisplay;
 
+use function FAU\StudiumDisplay\Config\get_output_fields;
+
 class Main
 {
     protected string $pluginFile;
@@ -24,14 +26,39 @@ class Main
         $script_handle = generate_block_asset_handle( 'fau-studium-display', 'editorScript' );
         wp_set_script_translations( $script_handle, 'fau-studium-display', plugin_dir_path( __DIR__ ) . 'languages' );
 
-        // fetch degree program list for combobox
+        // get degree program list for combobox
         $api = new API();
         $degree_programs = $api->get_programs('id_title', true);
         wp_localize_script($script_handle, 'fauStudiumData', [
             'degreePrograms' => $degree_programs,
         ]);
 
-        error_log( 'Script Handle: ' . $script_handle );
+        // get format "full" display options from config
+        $items_full = get_output_fields('full');
+        $items_full_formatted = [];
+        foreach ($items_full as $value => $label) {
+            $items_full_formatted[] = [
+                'label' => $label,
+                'value' => $value,
+            ];
+        }
+        wp_localize_script($script_handle, 'fauStudiumData', [
+            'itemsFullOptions' => $items_full_formatted,
+        ]);
+
+        // get format "grid" display options from config
+        $items_grid = get_output_fields('grid');
+        $items_grid_formatted = [];
+        foreach ($items_grid as $value => $label) {
+            $items_grid_formatted[] = [
+                'label' => $label,
+                'value' => $value,
+            ];
+        }
+        wp_localize_script($script_handle, 'fauStudiumData', [
+            'itemsGridOptions' => $items_grid_formatted,
+        ]);
+
     }
 
 

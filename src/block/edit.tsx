@@ -6,7 +6,7 @@ import {
 import {
     PanelBody,
     ComboboxControl,
-    ToggleControl,
+    ToggleControl, CheckboxControl,
 } from '@wordpress/components';
 import ServerSideRender from '@wordpress/server-side-render';
 import { useState, useEffect } from '@wordpress/element';
@@ -23,7 +23,8 @@ interface BlockAttributes {
     language: string;
     format: string;
     showSearch : boolean;
-    items: string[];
+    selectedItemsGrid: string[];
+    selectedItemsFull: string[];
 }
 
 const Edit = ({
@@ -32,7 +33,11 @@ const Edit = ({
               }: BlockEditProps<BlockAttributes>) => {
     const blockProps = useBlockProps();
     const { degreeProgram, language, format = 'full', showSearch = false } = attributes;
-    const [degreePrograms, setDegreePrograms] = useState(fauStudiumData.degreePrograms);
+    const [degreePrograms, setDegreePrograms] = useState(() => fauStudiumData?.degreePrograms ?? []);
+    const [itemsFull, setItemsFull] = useState(() => fauStudiumData?.itemsFullOptions ?? []);
+    const { selectedItemsFull = [] } = attributes;
+    const [itemsGrid, setItemsGrid] = useState(() => fauStudiumData?.itemsGridOptions ?? []);
+    const { selectedItemsGrid = [] } = attributes;
     const [selectedFormat, setSelectedFormat] = useState<string>(format);
 
     const onChangeFormat = (value: string | null | undefined) => {
@@ -60,6 +65,22 @@ const Edit = ({
     const onChangeShowSearch = (value: boolean) => {
         setAttributes({ showSearch: value });
     }
+
+    const toggleItemGrid = (value: string) => {
+        const updated = selectedItemsGrid.includes(value)
+            ? selectedItemsGrid.filter((v: string) => v !== value)
+            : [...selectedItemsGrid, value];
+
+        setAttributes({ selectedItemsGrid: updated });
+    };
+
+    const toggleItemFull = (value: string) => {
+        const updated = selectedItemsFull.includes(value)
+            ? selectedItemsFull.filter((v: string) => v !== value)
+            : [...selectedItemsFull, value];
+
+        setAttributes({ selectedItemsGrid: updated });
+    };
 
     return (
         <div {...blockProps}>
@@ -89,12 +110,17 @@ const Edit = ({
                         />
                     )}
 
-                    <ComboboxControl
-                        label={__('Degree Program', 'fau-studium-display')}
-                        value={degreeProgram.toString()}
-                        options={degreePrograms}
-                        onChange={onChangeDegreeProgram}
-                    />
+                    {(selectedFormat === "full"
+                        || selectedFormat === "box") && (
+                        <>
+                        <ComboboxControl
+                            label={__('Degree Program', 'fau-studium-display')}
+                            value={degreeProgram?.toString?.() ?? ''}
+                            options={degreePrograms ?? []}
+                            onChange={onChangeDegreeProgram}
+                        />
+                        </>
+                    )}
 
                     <ComboboxControl
                         label={__('Language', 'fau-studium-display')}
@@ -107,6 +133,33 @@ const Edit = ({
                     />
 
                 </PanelBody>
+
+                {(selectedFormat === "grid") && (
+                    <PanelBody title={__('Select items', 'fau-studium-display')} initialOpen={true}>
+                        {itemsGrid.map((item: { label: string; value: string }) => (
+                            <CheckboxControl
+                                key={item.value}
+                                label={item.label}
+                                checked={selectedItemsGrid.includes(item.value)}
+                                onChange={() => toggleItemGrid(item.value)}
+                            />
+                        ))}
+                    </PanelBody>
+                )}
+
+                {(selectedFormat === "full") && (
+                    <PanelBody title={__('Select items', 'fau-studium-display')} initialOpen={true}>
+                        {itemsFull.map((item: { label: string; value: string }) => (
+                            <CheckboxControl
+                                key={item.value}
+                                label={item.label}
+                                checked={selectedItemsFull.includes(item.value)}
+                                onChange={() => toggleItemFull(item.value)}
+                            />
+                        ))}
+                    </PanelBody>
+                )}
+
             </InspectorControls>
 
             <ServerSideRender

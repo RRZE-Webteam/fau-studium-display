@@ -13,7 +13,7 @@ class Template {
         $this->template_dir = $template_dir;
     }
 
-    public function render($template_name, $data = []) {
+    public function render($template_name, $data = [], $atts = []) {
         $template_path = $this->template_dir . $template_name . '.php';
 
         if (!file_exists($template_path)) {

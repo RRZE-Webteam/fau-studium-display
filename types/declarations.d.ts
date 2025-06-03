@@ -8,6 +8,14 @@ declare const fauStudiumData: {
         label: string;
         value: string;
     }[];
+    itemsFullOptions: {
+        label: string;
+        value: string;
+    }[];
+    itemsGridOptions: {
+        label: string;
+        value: string;
+    }[];
 };
 
 declare module '*.json' {
