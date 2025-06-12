@@ -2,6 +2,9 @@
 
 namespace FAU\StudiumDisplay;
 
+defined('ABSPATH') || exit;
+
+use function FAU\StudiumDisplay\Config\get_labels;
 use function FAU\StudiumDisplay\Config\get_output_fields;
 
 class Main
@@ -15,6 +18,8 @@ class Main
         add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
         add_action('init', [$this, 'createBlocks']);
         add_filter('block_categories_all', [$this, 'rrzeBlockCategory'], 10, 2);
+
+        CPT::init();
     }
 
 
@@ -29,33 +34,19 @@ class Main
         // get degree program list for combobox
         $api = new API();
         $degree_programs = $api->get_programs('id_title', true);
-        wp_localize_script($script_handle, 'fauStudiumData', [
-            'degreePrograms' => $degree_programs,
-        ]);
-
-        // get format "full" display options from config
-        $items_full = get_output_fields('full');
-        $items_full_formatted = [];
-        foreach ($items_full as $value => $label) {
-            $items_full_formatted[] = [
-                'label' => $label,
-                'value' => $value,
-            ];
-        }
-        wp_localize_script($script_handle, 'fauStudiumData', [
-            'itemsFullOptions' => $items_full_formatted,
-        ]);
 
         // get format "grid" display options from config
+        $labels = get_labels('de');
         $items_grid = get_output_fields('grid');
         $items_grid_formatted = [];
-        foreach ($items_grid as $value => $label) {
+        foreach ($items_grid as $item) {
             $items_grid_formatted[] = [
-                'label' => $label,
-                'value' => $value,
+                'label' => $labels[$item] ?? $item,
+                'value' => $item,
             ];
         }
         wp_localize_script($script_handle, 'fauStudiumData', [
+            'degreePrograms' => $degree_programs,
             'itemsGridOptions' => $items_grid_formatted,
         ]);
 

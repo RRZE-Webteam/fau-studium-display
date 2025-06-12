@@ -23,8 +23,8 @@ interface BlockAttributes {
     language: string;
     format: string;
     showSearch : boolean;
+    showTitle : boolean;
     selectedItemsGrid: string[];
-    selectedItemsFull: string[];
 }
 
 const Edit = ({
@@ -32,10 +32,8 @@ const Edit = ({
                   setAttributes,
               }: BlockEditProps<BlockAttributes>) => {
     const blockProps = useBlockProps();
-    const { degreeProgram, language, format = 'full', showSearch = false } = attributes;
+    const { degreeProgram, language, format = 'full', showSearch, showTitle = false } = attributes;
     const [degreePrograms, setDegreePrograms] = useState(() => fauStudiumData?.degreePrograms ?? []);
-    const [itemsFull, setItemsFull] = useState(() => fauStudiumData?.itemsFullOptions ?? []);
-    const { selectedItemsFull = [] } = attributes;
     const [itemsGrid, setItemsGrid] = useState(() => fauStudiumData?.itemsGridOptions ?? []);
     const { selectedItemsGrid = [] } = attributes;
     const [selectedFormat, setSelectedFormat] = useState<string>(format);
@@ -66,20 +64,18 @@ const Edit = ({
         setAttributes({ showSearch: value });
     }
 
+    const onChangeShowTitle = (value: boolean) => {
+        setAttributes({ showTitle: value });
+    }
+
     const toggleItemGrid = (value: string) => {
         const updated = selectedItemsGrid.includes(value)
             ? selectedItemsGrid.filter((v: string) => v !== value)
             : [...selectedItemsGrid, value];
 
-        setAttributes({ selectedItemsGrid: updated });
-    };
+        //setAttributes({ selectedItemsGrid: updated });
+        setAttributes({ selectedItemsGrid: [...updated] });
 
-    const toggleItemFull = (value: string) => {
-        const updated = selectedItemsFull.includes(value)
-            ? selectedItemsFull.filter((v: string) => v !== value)
-            : [...selectedItemsFull, value];
-
-        setAttributes({ selectedItemsGrid: updated });
     };
 
     return (
@@ -122,6 +118,15 @@ const Edit = ({
                         </>
                     )}
 
+                    {(selectedFormat === "box") && (
+                        <ToggleControl
+                            label={__('Show Title', 'fau-studium-display')}
+                            value={degreeProgram?.toString?.() ?? ''}
+                            checked={!!showTitle}
+                            onChange={onChangeShowTitle}
+                        />
+                    )}
+
                     <ComboboxControl
                         label={__('Language', 'fau-studium-display')}
                         value={language}
@@ -142,19 +147,6 @@ const Edit = ({
                                 label={item.label}
                                 checked={selectedItemsGrid.includes(item.value)}
                                 onChange={() => toggleItemGrid(item.value)}
-                            />
-                        ))}
-                    </PanelBody>
-                )}
-
-                {(selectedFormat === "full") && (
-                    <PanelBody title={__('Select items', 'fau-studium-display')} initialOpen={true}>
-                        {itemsFull.map((item: { label: string; value: string }) => (
-                            <CheckboxControl
-                                key={item.value}
-                                label={item.label}
-                                checked={selectedItemsFull.includes(item.value)}
-                                onChange={() => toggleItemFull(item.value)}
                             />
                         ))}
                     </PanelBody>

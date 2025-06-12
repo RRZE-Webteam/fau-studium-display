@@ -105,6 +105,12 @@ function get_labels ($lang = 'de') {
                 'en' => 'Featured image'
             ]
         ],
+        'teaser_image' => [
+            'labels' => [
+                'de' => 'Thumbnail',
+                'en' => 'Thumbnail'
+            ]
+        ],
         'title' => [
             'labels' => [
                 'de' => 'Titel',

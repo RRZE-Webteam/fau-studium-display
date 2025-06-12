@@ -1,0 +1,193 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FAU Studium Display\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-12 12:41+0000\n"
+"PO-Revision-Date: 2025-06-12 14:35+0000\n"
+"Last-Translator: \n"
+"Language-Team: Deutsch (Sie)\n"
+"Language: de_DE_formal\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.8.0; wp-6.8.1; php-8.3.14\n"
+"X-Domain: fau-studium-display\n"
+"X-Loco-Fallback: de_DE\n"
+"X-Loco-Template: languages/fau-studium-display-de_DE.po\n"
+"X-Loco-Template-Mode: PO,JSON"
+
+#: templates/degree-program-box.php:27 templates/degree-program-full.php:23
+msgid "%s semesters"
+msgstr "%s Semester"
+
+#: includes/API.php:39
+msgid "-- Please select --"
+msgstr "-- Bitte auswählen --"
+
+#: templates/degree-program-full.php:138
+msgid "1st semester"
+msgstr "1. Semester"
+
+#: templates/degree-program-box.php:21 templates/degree-program-full.php:17
+#: templates/degree-program-full.php:135
+msgid "Admission Requirements"
+msgstr "Zulassungsvoraussetzungen"
+
+#: templates/degree-program-full.php:134
+msgid "Admission Requirements and Application"
+msgstr "Zulassungsvoraussetzungen und Bewerbung"
+
+#: templates/degree-program-full.php:145
+msgid "Application Deadline"
+msgstr "Bewerbungsfrist"
+
+#: build/block/block.json src/block/block.json
+msgctxt "block title"
+msgid "FAU-Studium Display"
+msgstr "FAU-Studium Display"
+
+#: templates/degree-program-box.php:16 templates/degree-program-full.php:12
+msgid "Degree"
+msgstr "Abschluss"
+
+#: build/block/index.js:148 build/block/index.js:1
+msgid "Degree Program"
+msgstr "Studiengang"
+
+#: includes/CPT.php:22
+msgid "Degree Programs"
+msgstr "Studiengänge"
+
+#: build/block/index.js:165 build/block/index.js:1
+msgid "English"
+msgstr "Englisch"
+
+#: templates/degree-program-box.php:72 templates/degree-program-full.php:94
+msgid "Fact Sheet"
+msgstr "Steckbrief"
+
+#: templates/degree-program-box.php:35 templates/degree-program-full.php:31
+msgid "Faculty"
+msgstr "Fakultät"
+
+#. Plugin Name of the plugin
+#: fau-studium-display.php
+msgid "FAU Studium Display"
+msgstr "FAU Studium Display"
+
+#: build/block/index.js:120 build/block/index.js:1
+msgid "Format"
+msgstr "Format"
+
+#: build/block/index.js:123 build/block/index.js:1
+msgid "Full"
+msgstr "Seite"
+
+#: build/block/index.js:117 build/block/index.js:1
+msgid "General Settings"
+msgstr "Allgemeine Einstellungen"
+
+#: build/block/index.js:162 build/block/index.js:1
+msgid "German"
+msgstr "Deutsch"
+
+#: build/block/index.js:131 build/block/index.js:1
+msgid "Grid"
+msgstr "Kacheln"
+
+#: templates/degree-program-full.php:141
+msgid "Higher semesters"
+msgstr "Höhere Semester"
+
+#. Plugin URI of the plugin
+#: fau-studium-display.php
+msgid "https://github.com/RRZE-Webteam/fau-studium-display"
+msgstr "https://github.com/RRZE-Webteam/fau-studium-display"
+
+#: build/block/index.js:128 build/block/index.js:1
+msgid "Infobox"
+msgstr "Infobox"
+
+#: build/block/index.js:159 build/block/index.js:1
+msgid "Language"
+msgstr "Sprache"
+
+#: build/block/index.js:137 build/block/index.js:1
+msgid "List"
+msgstr "Liste"
+
+#: templates/degree-program-box.php:50 templates/degree-program-full.php:46
+msgid "Location"
+msgstr "Studienort"
+
+#: templates/degree-program-grid.php:80
+msgid "No degree programs found."
+msgstr "Keine Studiengänge gefunden."
+
+#: templates/degree-program-full.php:148 templates/degree-program-full.php:149
+msgid "not possible"
+msgstr "nicht möglich"
+
+#: templates/degree-program-box.php:44 templates/degree-program-full.php:40
+msgid "Number of Students"
+msgstr "Größe"
+
+#. Description of the plugin
+#: fau-studium-display.php
+msgid "Plugin for displaying the degree program information on websites."
+msgstr "Plugin zur Darstellung von Studiengangsinformationen"
+
+#: includes/Main.php:74
+msgid "RRZE"
+msgstr "RRZE"
+
+#. Author of the plugin
+#: fau-studium-display.php
+msgid "RRZE Webteam"
+msgstr "RRZE Webteam"
+
+#: build/block/index.js:171 build/block/index.js:1
+msgid "Select items"
+msgstr "Auswählen"
+
+#: build/block/index.js:143 build/block/index.js:1
+msgid "Show Search"
+msgstr "Suche anzeigen"
+
+#: build/block/index.js:154 build/block/index.js:1
+msgid "Show Title"
+msgstr "Titel anzeigen"
+
+#: templates/degree-program-box.php:60 templates/degree-program-full.php:56
+msgid "Special Features"
+msgstr "Besondere Hinweise"
+
+#: templates/degree-program-box.php:54 templates/degree-program-full.php:50
+msgid "Special ways to study"
+msgstr "Besondere Studienformen"
+
+#: templates/degree-program-box.php:26 templates/degree-program-full.php:22
+msgid "Standard Duration"
+msgstr "Regelstudienzeit"
+
+#: templates/degree-program-box.php:39 templates/degree-program-full.php:35
+msgid "Start of Degree Program"
+msgstr "Studienbeginn"
+
+#: templates/degree-program-full.php:152
+msgid "Summer semester"
+msgstr "Sommersemester"
+
+#: build/block/index.js:134 build/block/index.js:1
+msgid "Table"
+msgstr "Tabelle"
+
+#: templates/degree-program-box.php:31 templates/degree-program-full.php:27
+msgid "Teaching Language"
+msgstr "Unterrichtssprache"
+
+#: templates/degree-program-full.php:151
+msgid "Winter semester"
+msgstr "Wintersemester"

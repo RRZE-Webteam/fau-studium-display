@@ -24,11 +24,13 @@
       "type": "boolean",
       "default": false
     },
-    "selectedItemsFull": {
-      "type": "array"
+    "showTitle": {
+      "type": "boolean",
+      "default": false
     },
     "selectedItemsGrid": {
-      "type": "array"
+      "type": "array",
+      "default": []
     }
   },
   "supports": {

@@ -3,6 +3,7 @@
 defined('ABSPATH') || exit;
 
 //var_dump($data);
+//var_dump($atts);
 
 $number_of_students_raw = $data['number_of_students']['name'] ?? '';
 if (!empty($number_of_students_raw)) {
@@ -16,11 +17,6 @@ $facts = [
         'value' => $data['degree']['name'] ?? '',
         'itemprop' => 'educationalCredentialAwarded'
     ],
-    'start' => [
-        'label' => __('Start of Degree Program', 'fau-studium-display'),
-        'value' => !empty($data['start']) ? implode(', ', $data['start']) : '',
-        //'itemprop' => 'startDate'
-    ],
     'admission_requirements' => [
         'label' => __('Admission Requirements', 'fau-studium-display'),
         'value' => $data['admission_requirement_link']['name'] ?? '',
@@ -31,12 +27,6 @@ $facts = [
         'value' => (!empty($data['standard_duration']) ? sprintf(__('%s semesters', 'fau-studium-display'), $data['standard_duration']): ''),
         'itemprop' => 'timeToComplete'
     ],
-    'number_of_students' => [
-        'label' => __('Number of Students', 'fau-studium-display'),
-        'value' => $data['number_of_students']['name'] ?? '',
-        'itemprop' => 'maximumEnrollment',
-        'itemprop_content' => $number_of_students ?? ''
-    ],
     'teaching_language' => [
         'label' => __('Teaching Language', 'fau-studium-display'),
         'value' => $data['teaching_language'] ?? ''
@@ -44,6 +34,25 @@ $facts = [
     'faculty' => [
         'label' => __('Faculty', 'fau-studium-display'),
         'value' => $facts['faculty']['value'] = !empty($data['faculty']) ? implode(', ', array_column($data['faculty'], 'name')) : ''
+    ],
+    'start' => [
+        'label' => __('Start of Degree Program', 'fau-studium-display'),
+        'value' => !empty($data['start']) ? implode(', ', $data['start']) : '',
+        //'itemprop' => 'startDate'
+    ],
+    'number_of_students' => [
+        'label' => __('Number of Students', 'fau-studium-display'),
+        'value' => $data['number_of_students']['name'] ?? '',
+        'itemprop' => 'maximumEnrollment',
+        'itemprop_content' => $number_of_students ?? ''
+    ],
+    'location' => [
+        'label' => __('Location', 'fau-studium-display'),
+        'value' => $data['location']['name'] ?? '',
+    ],
+    'attribute' => [
+        'label' => __('Special ways to study', 'fau-studium-display'),
+        'value' => isset($data['attributes']) ? implode(', ', $data['attributes']) : '',
     ]
 ];
 
@@ -60,11 +69,13 @@ foreach ($facts as $fact) {
     }
 }
 
+$title = $atts['showTitle'] ? $data['title'] . ' (' . $data['degree']['abbreviation'] . ')': __('Fact Sheet', 'fau-studium-display');
+
 ?>
 
 <section class="fau-studium-display degree-program-box" itemtype="https://schema.org/EducationalOccupationalProgram" itemscope>
     <div class="thumbtack"></div>
-    <h1><?php _e('Fact Sheet', 'fau-studium-display');?></h1>
+    <h1><?php echo $title;?></h1>
     <meta itemprop="name" content="<?php echo $data['title'];?>">
     <?php if (!empty($fact_list)): ?>
     <dl class="facts">

@@ -1,0 +1,203 @@
+# Copyright (C) 2025 RRZE Webteam
+# This file is distributed under the GNU General Public License v3.
+msgid ""
+msgstr ""
+"Project-Id-Version: FAU Studium Display 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fau-studium-display\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-06-12T14:34:54+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: fau-studium-display\n"
+
+#. Plugin Name of the plugin
+#: fau-studium-display.php
+msgid "FAU Studium Display"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: fau-studium-display.php
+msgid "https://github.com/RRZE-Webteam/fau-studium-display"
+msgstr ""
+
+#. Description of the plugin
+#: fau-studium-display.php
+msgid "Plugin for displaying the degree program information on websites."
+msgstr ""
+
+#. Author of the plugin
+#: fau-studium-display.php
+msgid "RRZE Webteam"
+msgstr ""
+
+#: includes/API.php:39
+msgid "-- Please select --"
+msgstr ""
+
+#: includes/CPT.php:22
+msgid "Degree Programs"
+msgstr ""
+
+#: includes/Main.php:74
+msgid "RRZE"
+msgstr ""
+
+#: templates/degree-program-box.php:16
+#: templates/degree-program-full.php:12
+msgid "Degree"
+msgstr ""
+
+#: templates/degree-program-box.php:21
+#: templates/degree-program-full.php:17
+#: templates/degree-program-full.php:135
+msgid "Admission Requirements"
+msgstr ""
+
+#: templates/degree-program-box.php:26
+#: templates/degree-program-full.php:22
+msgid "Standard Duration"
+msgstr ""
+
+#: templates/degree-program-box.php:27
+#: templates/degree-program-full.php:23
+msgid "%s semesters"
+msgstr ""
+
+#: templates/degree-program-box.php:31
+#: templates/degree-program-full.php:27
+msgid "Teaching Language"
+msgstr ""
+
+#: templates/degree-program-box.php:35
+#: templates/degree-program-full.php:31
+msgid "Faculty"
+msgstr ""
+
+#: templates/degree-program-box.php:39
+#: templates/degree-program-full.php:35
+msgid "Start of Degree Program"
+msgstr ""
+
+#: templates/degree-program-box.php:44
+#: templates/degree-program-full.php:40
+msgid "Number of Students"
+msgstr ""
+
+#: templates/degree-program-box.php:50
+#: templates/degree-program-full.php:46
+msgid "Location"
+msgstr ""
+
+#: templates/degree-program-box.php:54
+#: templates/degree-program-full.php:50
+msgid "Special ways to study"
+msgstr ""
+
+#: templates/degree-program-box.php:60
+#: templates/degree-program-full.php:56
+msgid "Special Features"
+msgstr ""
+
+#: templates/degree-program-box.php:72
+#: templates/degree-program-full.php:94
+msgid "Fact Sheet"
+msgstr ""
+
+#: templates/degree-program-full.php:134
+msgid "Admission Requirements and Application"
+msgstr ""
+
+#: templates/degree-program-full.php:138
+msgid "1st semester"
+msgstr ""
+
+#: templates/degree-program-full.php:141
+msgid "Higher semesters"
+msgstr ""
+
+#: templates/degree-program-full.php:145
+msgid "Application Deadline"
+msgstr ""
+
+#: templates/degree-program-full.php:148
+#: templates/degree-program-full.php:149
+msgid "not possible"
+msgstr ""
+
+#: templates/degree-program-full.php:151
+msgid "Winter semester"
+msgstr ""
+
+#: templates/degree-program-full.php:152
+msgid "Summer semester"
+msgstr ""
+
+#: templates/degree-program-grid.php:80
+msgid "No degree programs found."
+msgstr ""
+
+#: build/block/index.js:117
+msgid "General Settings"
+msgstr ""
+
+#: build/block/index.js:120
+msgid "Format"
+msgstr ""
+
+#: build/block/index.js:123
+msgid "Full"
+msgstr ""
+
+#: build/block/index.js:128
+msgid "Infobox"
+msgstr ""
+
+#: build/block/index.js:131
+msgid "Grid"
+msgstr ""
+
+#: build/block/index.js:134
+msgid "Table"
+msgstr ""
+
+#: build/block/index.js:137
+msgid "List"
+msgstr ""
+
+#: build/block/index.js:143
+msgid "Show Search"
+msgstr ""
+
+#: build/block/index.js:148
+msgid "Degree Program"
+msgstr ""
+
+#: build/block/index.js:154
+msgid "Show Title"
+msgstr ""
+
+#: build/block/index.js:159
+msgid "Language"
+msgstr ""
+
+#: build/block/index.js:162
+msgid "German"
+msgstr ""
+
+#: build/block/index.js:165
+msgid "English"
+msgstr ""
+
+#: build/block/index.js:171
+msgid "Select items"
+msgstr ""
+
+#: build/block/block.json
+#: src/block/block.json
+msgctxt "block title"
+msgid "FAU-Studium Display"
+msgstr ""

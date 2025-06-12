@@ -8,7 +8,7 @@
   \******************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"fau-studium/display","version":"1.0.3","title":"FAU-Studium Display","category":"rrze","description":"","example":{},"attributes":{"degreeProgram":{"type":"number","default":0},"language":{"type":"string","default":"de"},"format":{"type":"string","default":"full"},"showSearch":{"type":"boolean","default":false},"selectedItemsFull":{"type":"array"},"selectedItemsGrid":{"type":"array"}},"supports":{"html":false},"textdomain":"fau-studium-display","editorScript":"file:./index.js","editorStyle":"file:./index.css","viewScript":"file:./view.js","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"fau-studium/display","version":"1.0.3","title":"FAU-Studium Display","category":"rrze","description":"","example":{},"attributes":{"degreeProgram":{"type":"number","default":0},"language":{"type":"string","default":"de"},"format":{"type":"string","default":"full"},"showSearch":{"type":"boolean","default":false},"showTitle":{"type":"boolean","default":false},"selectedItemsGrid":{"type":"array","default":[]}},"supports":{"html":false},"textdomain":"fau-studium-display","editorScript":"file:./index.js","editorStyle":"file:./index.css","viewScript":"file:./view.js","render":"file:./render.php"}');
 
 /***/ }),
 
@@ -46,28 +46,22 @@ const Edit = ({
   attributes,
   setAttributes
 }) => {
-  var _degreeProgram$toStri;
+  var _degreeProgram$toStri, _degreeProgram$toStri2;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
   const {
     degreeProgram,
     language,
     format = 'full',
-    showSearch = false
+    showSearch,
+    showTitle = false
   } = attributes;
   const [degreePrograms, setDegreePrograms] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(() => {
     var _fauStudiumData$degre;
     return (_fauStudiumData$degre = fauStudiumData?.degreePrograms) !== null && _fauStudiumData$degre !== void 0 ? _fauStudiumData$degre : [];
   });
-  const [itemsFull, setItemsFull] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(() => {
-    var _fauStudiumData$items;
-    return (_fauStudiumData$items = fauStudiumData?.itemsFullOptions) !== null && _fauStudiumData$items !== void 0 ? _fauStudiumData$items : [];
-  });
-  const {
-    selectedItemsFull = []
-  } = attributes;
   const [itemsGrid, setItemsGrid] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(() => {
-    var _fauStudiumData$items2;
-    return (_fauStudiumData$items2 = fauStudiumData?.itemsGridOptions) !== null && _fauStudiumData$items2 !== void 0 ? _fauStudiumData$items2 : [];
+    var _fauStudiumData$items;
+    return (_fauStudiumData$items = fauStudiumData?.itemsGridOptions) !== null && _fauStudiumData$items !== void 0 ? _fauStudiumData$items : [];
   });
   const {
     selectedItemsGrid = []
@@ -103,16 +97,17 @@ const Edit = ({
       showSearch: value
     });
   };
-  const toggleItemGrid = value => {
-    const updated = selectedItemsGrid.includes(value) ? selectedItemsGrid.filter(v => v !== value) : [...selectedItemsGrid, value];
+  const onChangeShowTitle = value => {
     setAttributes({
-      selectedItemsGrid: updated
+      showTitle: value
     });
   };
-  const toggleItemFull = value => {
-    const updated = selectedItemsFull.includes(value) ? selectedItemsFull.filter(v => v !== value) : [...selectedItemsFull, value];
+  const toggleItemGrid = value => {
+    const updated = selectedItemsGrid.includes(value) ? selectedItemsGrid.filter(v => v !== value) : [...selectedItemsGrid, value];
+
+    //setAttributes({ selectedItemsGrid: updated });
     setAttributes({
-      selectedItemsGrid: updated
+      selectedItemsGrid: [...updated]
     });
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
@@ -155,6 +150,11 @@ const Edit = ({
             options: degreePrograms !== null && degreePrograms !== void 0 ? degreePrograms : [],
             onChange: onChangeDegreeProgram
           })
+        }), selectedFormat === "box" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Title', 'fau-studium-display'),
+          value: (_degreeProgram$toStri2 = degreeProgram?.toString?.()) !== null && _degreeProgram$toStri2 !== void 0 ? _degreeProgram$toStri2 : '',
+          checked: !!showTitle,
+          onChange: onChangeShowTitle
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ComboboxControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Language', 'fau-studium-display'),
           value: language,
@@ -174,14 +174,6 @@ const Edit = ({
           label: item.label,
           checked: selectedItemsGrid.includes(item.value),
           onChange: () => toggleItemGrid(item.value)
-        }, item.value))
-      }), selectedFormat === "full" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select items', 'fau-studium-display'),
-        initialOpen: true,
-        children: itemsFull.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.CheckboxControl, {
-          label: item.label,
-          checked: selectedItemsFull.includes(item.value),
-          onChange: () => toggleItemFull(item.value)
         }, item.value))
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_3___default()), {
