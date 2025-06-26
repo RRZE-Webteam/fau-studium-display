@@ -19,14 +19,16 @@ class Output
             $data = $this->get_localized_data($data, $lang);
         } else {
             $programs = $api->get_programs();
+            $data = $programs;
             //var_dump($programs);
-            $data = [];
+            /*$data = [];
             foreach($programs as $program) {
                 $programdata = $api->get_program($program['value']);
                 if (!empty($programdata)) {
                     $data[$program['value']] = $programdata;
                 }
-            }
+            }*/
+            //var_dump($data);
         }
 
         // Load the template and pass the sorted data

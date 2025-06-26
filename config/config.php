@@ -273,12 +273,12 @@ function get_labels ($lang = 'de') {
                 'en' => 'URL'
             ]
         ],
-        'department' => [
+        /*'department' => [
             'labels' => [
                 'de' => 'Department',
                 'en' => 'Department'
             ]
-        ],
+        ],*/
         'student_advice' => [
             'labels' => [
                 'de' => 'Zentrale Studienberatung',
@@ -403,6 +403,18 @@ function get_labels ($lang = 'de') {
             'labels' => [
                 'de' => 'Studiengebühren',
                 'en' => 'Degree program fees']
+        ],
+        'link' => [
+            'labels' => [
+                'de' => 'Webseite des Studiengangs',
+                'en' => 'Website of the degree program'
+            ]
+        ],
+        'department' => [
+            'labels' => [
+                'de' => 'Webseite des Departments/Instituts',
+                'en' => 'Department/Institute website'
+            ]
         ]
     ];
 
