@@ -5,6 +5,10 @@ defined('ABSPATH') || exit;
 //var_dump($data);
 //var_dump($atts);
 
+if (empty($atts['degreeProgram'])) {
+    return;
+}
+
 $number_of_students_raw = $data['number_of_students']['name'] ?? '';
 if (!empty($number_of_students_raw)) {
     $number_of_students_array = explode('-', $number_of_students_raw);

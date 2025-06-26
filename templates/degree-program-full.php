@@ -7,6 +7,10 @@ use function \FAU\StudiumDisplay\Config\get_labels;
 //var_dump($data);
 //var_dump($atts);
 
+if (empty($atts['degreeProgram'])) {
+    return;
+}
+
 $lang = $atts[ 'language' ] ?? 'de';
 $labels = get_labels($lang);
 //var_dump($labels);
@@ -332,10 +336,10 @@ if (!empty($data['subject_specific_advice']['link_text'])
                 <h2><?php _e('Student Advice', 'fau-studium-display'); ?></h2>
                 <ul>
                 <?php if (isset($student_advice)) {
-                    echo '<li>' . $student_advice . '</li>';
+                    echo '<li>' . wp_kses_post($student_advice) . '</li>';
                 }
                 if (isset($subject_specific_advice)) {
-                    echo '<li>' . $subject_specific_advice . '</li>';
+                    echo '<li>' . wp_kses_post($subject_specific_advice) . '</li>';
                 }
                 ?>
                 </ul>

@@ -263,6 +263,26 @@
             a {
                 color: var(--FAU_Col_FAU-Blau, #04316A);
                 text-decoration: none;
+                &:after {
+                    content: "";
+                    -webkit-mask-size: var(--icon-size-mask, 70%);
+                    mask-size: var(--icon-size-mask, 70%);
+                    -webkit-mask-repeat: no-repeat;
+                    mask-repeat: no-repeat;
+                    -webkit-mask-position: center;
+                    mask-position: center;
+                    display: inline-block;
+                    width: 1.2em;
+                    height: 1.2em;
+                    //position: relative;
+                    //top: 9px;
+                    //left: 8px;
+                    mask-image: url(../svg/arrow-right.svg);
+                    -webkit-mask-image: url(../svg/arrow-right.svg);
+                    background-color: var(--FAU_Col_FAU-Blau, #04316A);
+                    vertical-align: text-bottom;
+                    margin-left: 0.5em;
+                }
             }
         }
     }
@@ -326,6 +346,59 @@
             .program-subtitle {
                 font-size: var(--P-Body-Text-Small, 1rem);
             }
+        }
+    }
+
+    // Table
+    table.degree-program-table {
+        tr {
+            border-left: none;
+            border-right: none;
+            border-bottom: 1px solid var(--FAU_Col_Base-Schwarz_25, #BFBFBF);
+            &:nth-child(odd) td {
+                background-color: #fff;
+            }
+        }
+        th {
+            background-color: var(--FAU_Col_FAU-Blau, #04316A);
+            color: #fff;
+            font-size: unset;
+            letter-spacing: 0.02em;
+            display: none;
+            @media screen and (min-width: 768px) {
+                display: table-cell;
+            }
+        }
+        td {
+            padding: 16px 16px 0;
+            border-right: none;
+            font-size: unset;
+            display: block;
+            @media screen and (min-width: 768px) {
+                display: table-cell;
+            }
+            &.image-title {
+                padding-left: 0;
+                @media screen and (min-width: 768px) {
+                    display: grid;
+                    grid-template-columns: 80px 1fr;
+                    grid-column-gap: 16px;
+                }
+                img {
+                   aspect-ratio: 1/1;
+                   object-fit: cover;
+                   width: 80px;
+                   box-shadow: none;
+                }
+                .program-title {
+                   display: block;
+                   align-self: center;
+                   color: var(--FAU_Col_FAU-Blau, #04316A);
+                }
+            }
+        }
+        .label {
+            font-weight: bold;
         }
     }
 }
