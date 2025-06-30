@@ -88,12 +88,13 @@ class Main
             [],
             FAU_STUDIUM_DISPLAY_PLUGIN_VERSION
         );
-        /*wp_register_script(
-            'fau-studium-display-sc',
-            plugins_url('assets/js/fau-studium-display.js', FAU_STUDIUM_DISPLAY_PLUGIN_PATH),
+        wp_register_script(
+            'fau-studium-display-script',
+            plugins_url('assets/js/fau-studium-display.min.js', FAU_STUDIUM_DISPLAY_PLUGIN_FILE),
+            //FAU_STUDIUM_DISPLAY_PLUGIN_URL . 'src/js/fau-studium-display.js',
             ['jquery'],
             FAU_STUDIUM_DISPLAY_PLUGIN_VERSION
-        );*/
+        );
     }
 
 }
