@@ -455,6 +455,7 @@
 }
 .fau-studium-display .program-search input[type=submit] {
   margin-bottom: 0;
+  margin-right: 0;
 }
 .fau-studium-display .program-search .search-title,
 .fau-studium-display .program-search div[class^=filter-] {
@@ -473,6 +474,9 @@
   border-radius: var(--border-radius-buttons, 3px);
   color: var(--color-Text, #222222);
   margin-bottom: 0;
+}
+.fau-studium-display .program-search div[class^=filter-] button.checklist-toggle .dashicons {
+  vertical-align: text-bottom;
 }
 .fau-studium-display .program-search div[class^=filter-] button.checklist-toggle:hover, .fau-studium-display .program-search div[class^=filter-] button.checklist-toggle:focus, .fau-studium-display .program-search div[class^=filter-] button.checklist-toggle:active {
   background: var(--color-ghostbutton-hover-bg, #04316a);
@@ -515,17 +519,43 @@
     position: absolute;
     z-index: 1;
     width: 100%;
-    box-shadow: 0 3px 12px 0 #ebebeb;
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4509803922);
   }
 }
 .fau-studium-display .program-search .filter-subject-groups {
   clear: left;
 }
+.fau-studium-display .program-search .extended-search-toggle .filter-count {
+  display: inline-block;
+  margin-left: 0.5em;
+  color: var(--color-button-bg, #004a9f);
+  background-color: var(--color-button-text, #fff);
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.55;
+  border-radius: 50%;
+  font-size: 0.7em;
+  position: relative;
+  top: -0.1em;
+}
+.fau-studium-display .program-search .extended-search-toggle .dashicons {
+  vertical-align: text-bottom;
+}
 .fau-studium-display .program-search .extended-search {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--width-gutter-half, 15px);
+}
+.js-enabled .fau-studium-display .program-search .extended-search {
+  display: none;
+}
+.fau-studium-display .program-search .extended-search .flex-wrapper {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .fau-studium-display .program-search .extended-search .flex-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--width-gutter-half, 15px);
+  }
 }
 .fau-studium-display .program-search .settings-area {
   width: 100%;
@@ -534,10 +564,13 @@
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.fau-studium-display .program-search .settings-area .filter-reset a {
+.fau-studium-display .program-search .settings-area .reset-link {
+  align-self: center;
+}
+.fau-studium-display .program-search .settings-area .reset-link a {
   text-decoration-thickness: 0.1rem;
 }
-.fau-studium-display .program-search .settings-area .filter-reset a:hover, .fau-studium-display .program-search .settings-area .filter-reset a:focus, .fau-studium-display .program-search .settings-area .filter-reset a:active {
+.fau-studium-display .program-search .settings-area .reset-link a:hover, .fau-studium-display .program-search .settings-area .reset-link a:focus, .fau-studium-display .program-search .settings-area .reset-link a:active {
   text-decoration-thickness: 0.2rem;
 }
 .fau-studium-display .program-search .settings-area a > svg.rrze-elements-icon {

@@ -2,6 +2,8 @@
 
 defined('ABSPATH') || exit;
 
+use FAU\StudiumDisplay\Utils;
+
 use function FAU\StudiumDisplay\Config\get_output_fields;
 use function FAU\StudiumDisplay\Config\get_labels;
 
@@ -68,6 +70,10 @@ foreach ($data as $program) {
 ?>
 
 <section class="fau-studium-display degree-program-grid">
+
+    <?php if (isset($atts['showSearch']) && $atts['showSearch'] == '1') :
+        echo Utils::renderSearchForm();
+    endif; ?>
 
     <?php if (!empty($program_grid)) : ?>
 

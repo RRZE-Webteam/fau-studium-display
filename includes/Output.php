@@ -30,7 +30,7 @@ class Output
             //var_dump($data);
             if (!empty($_GET)) {
                 //$data = http_build_query($_GET);
-                $data = Utils::filter_programs($programs, $_GET);
+                $data = Utils::filterPrograms($programs, $_GET);
             } else {
                 $data = $programs;
             }

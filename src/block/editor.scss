@@ -1,6 +1,21 @@
 @use "../../assets/css/fau-studium-display";
 
-.wp-block-fau-studium-display .fau-studium-display a {
-    cursor: not-allowed;
-    pointer-events: none;
+.wp-block-fau-studium-display .fau-studium-display {
+    a, input, textarea, button, select {
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    div[class^=filter-] .checklist {
+        display: none;
+    }
+    div.extended-search {
+        display: none;
+    }
+    ul.degree-program-grid {
+        padding-left: 0;
+    }
+    form.program-search {
+        margin-bottom: 1rem;
+    }
 }
+

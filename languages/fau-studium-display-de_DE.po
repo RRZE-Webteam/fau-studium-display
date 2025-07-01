@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: FAU Studium Display\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-12 12:41+0000\n"
-"PO-Revision-Date: 2025-06-26 09:41+0000\n"
+"PO-Revision-Date: 2025-07-01 13:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch\n"
 "Language: de_DE\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Loco-Version: 2.8.0; wp-6.8.1; php-8.3.14\n"
 "X-Domain: fau-studium-display"
 
-#: templates/degree-program-box.php:27 templates/degree-program-full.php:33
+#: templates/degree-program-box.php:31 templates/degree-program-full.php:37
 msgid "%s semesters"
 msgstr "%s Semester"
 
@@ -23,37 +23,45 @@ msgstr "%s Semester"
 msgid "-- Please select --"
 msgstr "-- Bitte auswählen --"
 
-#: templates/degree-program-full.php:80
+#: templates/degree-program-full.php:84
 msgid "1st semester"
 msgstr "1. Semester"
 
-#: templates/degree-program-full.php:343
+#: templates/degree-program-full.php:376
 msgid "Additional Information"
 msgstr "Weitere Informationen"
 
-#: templates/degree-program-box.php:21 templates/degree-program-full.php:27
-#: templates/degree-program-full.php:266
+#: templates/degree-program-box.php:25 templates/degree-program-full.php:31
+#: templates/degree-program-full.php:280
 msgid "Admission Requirements"
 msgstr "Zulassungsvoraussetzungen"
 
-#: templates/degree-program-full.php:263
+#: templates/degree-program-full.php:277
 msgid "Admission Requirements and Application"
 msgstr "Zulassungsvoraussetzungen und Bewerbung"
 
-#: templates/degree-program-full.php:275
+#: includes/Utils.php:67
+msgid "Advanced filters"
+msgstr "Erweiterte Filter"
+
+#: templates/degree-program-full.php:289
 msgid "Application Deadline"
 msgstr "Bewerbungsfrist"
+
+#: includes/Utils.php:23
+msgid "Area of study"
+msgstr "Fächergruppe"
 
 #: build/block/block.json src/block/block.json
 msgctxt "block title"
 msgid "FAU-Studium Display"
 msgstr "FAU-Studium Display"
 
-#: templates/degree-program-full.php:289
+#: templates/degree-program-full.php:303
 msgid "Content-related admission requirements"
 msgstr "Inhaltliche Zugangsvoraussetzungen"
 
-#: templates/degree-program-box.php:16 templates/degree-program-full.php:22
+#: templates/degree-program-box.php:20 templates/degree-program-full.php:26
 msgid "Degree"
 msgstr "Abschluss"
 
@@ -65,11 +73,15 @@ msgstr "Studiengang"
 msgid "Degree Programs"
 msgstr "Studiengänge"
 
-#: templates/degree-program-full.php:294
+#: includes/Utils.php:14
+msgid "Degrees"
+msgstr "Abschlüsse"
+
+#: templates/degree-program-full.php:308
 msgid "Details and notes"
 msgstr "Details und Anmerkungen"
 
-#: templates/degree-program-full.php:333
+#: templates/degree-program-full.php:366
 msgid "Downloads"
 msgstr "Downloads"
 
@@ -77,11 +89,12 @@ msgstr "Downloads"
 msgid "English"
 msgstr "Englisch"
 
-#: templates/degree-program-box.php:72 templates/degree-program-full.php:205
+#: templates/degree-program-box.php:76 templates/degree-program-full.php:219
 msgid "Fact Sheet"
 msgstr "Steckbrief"
 
-#: templates/degree-program-box.php:35 templates/degree-program-full.php:41
+#: includes/Utils.php:22 templates/degree-program-box.php:39
+#: templates/degree-program-full.php:45
 msgid "Faculty"
 msgstr "Fakultät"
 
@@ -106,7 +119,7 @@ msgstr "Allgemeine Einstellungen"
 msgid "German"
 msgstr "Deutsch"
 
-#: templates/degree-program-full.php:306
+#: templates/degree-program-full.php:321
 msgid "German language skills"
 msgstr "Deutschkenntnisse"
 
@@ -114,7 +127,7 @@ msgstr "Deutschkenntnisse"
 msgid "Grid"
 msgstr "Kacheln"
 
-#: templates/degree-program-full.php:83
+#: templates/degree-program-full.php:87
 msgid "Higher semesters"
 msgstr "Höhere Semester"
 
@@ -131,7 +144,7 @@ msgstr "Infobox"
 msgid "Language"
 msgstr "Sprache"
 
-#: templates/degree-program-full.php:284
+#: templates/degree-program-full.php:298
 msgid "Language skills"
 msgstr "Sprachkenntnisse"
 
@@ -139,38 +152,46 @@ msgstr "Sprachkenntnisse"
 msgid "List"
 msgstr "Liste"
 
-#: templates/degree-program-box.php:50 templates/degree-program-full.php:56
+#: templates/degree-program-box.php:54 templates/degree-program-full.php:60
 msgid "Location"
 msgstr "Studienort"
 
-#: templates/degree-program-full.php:87
+#: templates/degree-program-full.php:91
 msgid "Master"
 msgstr "Master"
 
-#: templates/degree-program-full.php:303
+#: templates/degree-program-full.php:318
 msgid "More Information for International Applicants"
 msgstr "Weitere Hinweise zur Bewerbung für Internationale Bewerber"
 
-#: templates/degree-program-grid.php:80
+#: templates/degree-program-grid.php:80 templates/degree-program-table.php:75
 msgid "No degree programs found."
 msgstr "Keine Studiengänge gefunden."
 
-#: templates/degree-program-full.php:91 templates/degree-program-full.php:92
+#: templates/degree-program-full.php:95 templates/degree-program-full.php:96
 msgid "not possible"
 msgstr "nicht möglich"
 
-#: templates/degree-program-box.php:44 templates/degree-program-full.php:50
+#: templates/degree-program-box.php:48 templates/degree-program-full.php:54
 msgid "Number of Students"
 msgstr "Größe"
 
-#: templates/degree-program-full.php:323
+#: templates/degree-program-full.php:356
 msgid "Organizational"
 msgstr "Organisatorisch"
+
+#: includes/Utils.php:32
+msgid "Please enter search term..."
+msgstr "Bitte Suchbegriff eingeben..."
 
 #. Description of the plugin
 #: fau-studium-display.php
 msgid "Plugin for displaying the degree program information on websites."
 msgstr "Plugin zur Darstellung von Studiengangsinformationen"
+
+#: includes/Utils.php:71
+msgid "Reset all filters"
+msgstr "Alle Filter zurücksetzen"
 
 #: includes/Main.php:74
 msgid "RRZE"
@@ -180,6 +201,10 @@ msgstr "RRZE"
 #: fau-studium-display.php
 msgid "RRZE Webteam"
 msgstr "RRZE Webteam"
+
+#: includes/Utils.php:31 includes/Utils.php:33
+msgid "Search"
+msgstr "Suche"
 
 #: build/block/index.js:171
 msgid "Select items"
@@ -193,23 +218,40 @@ msgstr "Suche anzeigen"
 msgid "Show Title"
 msgstr "Titel anzeigen"
 
-#: templates/degree-program-box.php:60 templates/degree-program-full.php:66
+#: templates/degree-program-box.php:64 templates/degree-program-full.php:70
 msgid "Special Features"
 msgstr "Besondere Hinweise"
 
-#: templates/degree-program-box.php:54 templates/degree-program-full.php:60
+#: includes/Utils.php:16 templates/degree-program-box.php:58
+#: templates/degree-program-full.php:64
 msgid "Special ways to study"
 msgstr "Besondere Studienformen"
 
-#: templates/degree-program-box.php:26 templates/degree-program-full.php:32
+#: templates/degree-program-box.php:30 templates/degree-program-full.php:36
 msgid "Standard Duration"
 msgstr "Regelstudienzeit"
 
-#: templates/degree-program-box.php:39 templates/degree-program-full.php:45
+#: templates/degree-program-box.php:43 templates/degree-program-full.php:49
 msgid "Start of Degree Program"
 msgstr "Studienbeginn"
 
-#: templates/degree-program-full.php:92
+#: includes/Utils.php:20
+msgid "Start of degree program"
+msgstr "Studienbeginn"
+
+#: templates/degree-program-full.php:336
+msgid "Student Advice"
+msgstr "Studienberatung"
+
+#: includes/Utils.php:21
+msgid "Study location"
+msgstr "Studienort"
+
+#: includes/Utils.php:15
+msgid "Subject groups"
+msgstr "Fächergruppen"
+
+#: templates/degree-program-full.php:96
 msgid "Summer semester"
 msgstr "Sommersemester"
 
@@ -217,18 +259,22 @@ msgstr "Sommersemester"
 msgid "Table"
 msgstr "Tabelle"
 
-#: templates/degree-program-box.php:31 templates/degree-program-full.php:37
+#: templates/degree-program-box.php:35 templates/degree-program-full.php:41
 msgid "Teaching Language"
 msgstr "Unterrichtssprache"
 
-#: templates/degree-program-full.php:319
+#: includes/Utils.php:19
+msgid "Teaching language"
+msgstr "Unterrichtssprache"
+
+#: templates/degree-program-full.php:352
 msgid "Useful Links"
 msgstr "Nützliche Links"
 
-#: templates/degree-program-full.php:91
+#: templates/degree-program-full.php:95
 msgid "Winter semester"
 msgstr "Wintersemester"
 
-#: templates/degree-program-full.php:258
+#: templates/degree-program-full.php:272
 msgid "Your Path to University Admission"
 msgstr "Dein Weg zum Studienplatz"

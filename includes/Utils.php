@@ -8,11 +8,14 @@ class Utils
 {
     public static function renderSearchForm(): string
     {
+        $getParams = Utils::array_map_recursive('sanitize_text_field', $_GET);
         $api = new API();
-        $filters = [
+        $filters_default = [
             ['key' => 'degree', 'label' => __('Degrees', 'fau-studium-display'), 'data' => $api->get_degrees(true)],
             ['key' => 'subject_group', 'label' => __('Subject groups', 'fau-studium-display'), 'data' => $api->get_subject_groups()],
             ['key' => 'attribute', 'label' => __('Special ways to study', 'fau-studium-display'), 'data' => $api->get_attributes()],
+        ];
+        $filters_extended = [
             ['key' => 'teaching_language', 'label' => __('Teaching language', 'fau-studium-display'), 'data' => $api->get_teaching_languages()],
             ['key' => 'start', 'label' => __('Start of degree program', 'fau-studium-display'), 'data' => $api->get_start_semesters()],
             ['key' => 'location', 'label' => __('Study location', 'fau-studium-display'), 'data' => $api->get_study_locations()],
@@ -21,91 +24,108 @@ class Utils
         ];
 
         $output = '<form method="get" class="program-search" action="' . esc_url(get_permalink()) . '">';
-        $search = !empty($_REQUEST['search']) ? sanitize_text_field($_REQUEST['search']) : '';
+        $search = !empty($getParams['search']) ? sanitize_text_field($getParams['search']) : '';
 
         // Search input
         $output .= '<div class="search-title">'
-                   . '<label for="fau_studium_search" class="label">' . __('Search', 'fau-studium-display') . '</label>'
+                   . '<label for="fau_studium_search" class="label sr-only">' . __('Search', 'fau-studium-display') . '</label>'
                    . '<input type="text" name="search" id="fau_studium_search" value="' . $search . '" placeholder="' . __('Please enter search term...', 'fau-studium-display') . '" />'
                    . '<input type="submit" value="' . __('Search', 'fau-studium-display') . '" />'
                    . '</div>';
 
-        // Filter sections
-        foreach ($filters as $filter) {
+        // Filter sections default
+        foreach ($filters_default as $filter) {
+            $filter_active = !empty($getParams[$filter['key']]);
             $output .= self::renderChecklistSection(
                 $filter['key'],
                 $filter['label'],
                 $filter['data'],
-                !empty($_REQUEST[$filter['key']]) ? array_map('sanitize_text_field', $_REQUEST[$filter['key']]) : []
+                $filter_active ? array_map('sanitize_text_field', $getParams[$filter['key']]) : [],
+                $filter_active ? '<span class="filter-count">' . count($getParams[$filter['key']]) . '</span>' : '',
             );
         }
 
-        // Reset link
-        $layout = 'table';
-        $output .= '<div class="settings-area"><div class="filter-reset">'
-                   . '<a href="' . get_permalink() . '?display=' . $layout . '">&#9747; ' . __('Reset all filters', 'fau-studium-display') . '</a>'
+        // Settings links + Filter sections extended
+        $filters_extended_count = 0;
+        $filters_extended_html = '';
+        foreach ($filters_extended as $filter) {
+            $filter_active = !empty($getParams[$filter['key']]);
+            if ($filter_active) {
+                $filters_extended_count += count($getParams[$filter['key']]);
+            }
+            $filters_extended_html .= self::renderChecklistSection(
+                $filter['key'],
+                $filter['label'],
+                $filter['data'],
+                $filter_active ? array_map('sanitize_text_field', $getParams[$filter['key']]) : [],
+                $filter_active ? '<span class="filter-count">' . count($getParams[$filter['key']]) . '</span>' : '',
+            );
+        }
+
+        $output .= '<div class="settings-area">'
+                   . '<button type="button" class="extended-search-toggle">'
+                   . __('Advanced filters', 'fau-studium-display')
+                   . ($filters_extended_count > 0 ? '<span class="filter-count">' . $filters_extended_count . '</span>' : '')
+                   . '<span class="dashicons dashicons-arrow-down-alt2" aria-hidden="true"></span></button>'
+                   . '<div class="reset-link">'
+                   . '<a href="' . get_permalink() . '">&#9747; ' . __('Reset all filters', 'fau-studium-display') . '</a>'
                    . '</div></div>';
+
+        $output .= '<div class="extended-search"><div class="flex-wrapper">' . $filters_extended_html . '</div></div>';
 
         $output .= '</form>';
         return $output;
     }
 
-    public static function filter_programs($programs, $filter) {
-        //var_dump($filter);
+    public static function filterPrograms($programs, $filter) {
         $programs_filtered = [];
+
         foreach ($programs as $program) {
-            if (!empty($filter['search'])) {
-                if (!str_contains(strtolower($program['title']), strtolower($filter['search']))) {
-                    continue;
-                }
+
+            // Text search
+            if (!empty($filter['search']) && !str_contains(strtolower($program['title']), strtolower($filter['search']))) {
+                continue;
             }
-            if (!empty($filter['degree'])) {
-                $degree_matched = false;
-                foreach ($filter['degree'] as $degree) {
-                    if (isset($program['degree']['parent']['name']) && $program['degree']['parent']['name'] == $degree) {
-                        $degree_matched = true;
-                        break;
+
+            // Attribute search
+            $filterMap = [
+                'degree'            => fn($program, $value) => !empty($program['degree']['parent']['name']) && $program['degree']['parent']['name'] === $value,
+                'subject_group'     => fn($program, $value) => !empty($program['subject_groups']) && in_array($value, $program['subject_groups']),
+                'attribute'         => fn($program, $value) => !empty($program['attributes']) && in_array($value, $program['attributes']),
+                'teaching_language' => fn($program, $value) => !empty($program['teaching_language']) && $program['teaching_language'] === $value,
+                'start'             => fn($program, $value) => !empty($program['start']) && in_array($value, $program['start']),
+                'location'          => fn($program, $value) => !empty($program['location']) && in_array($value, $program['location']),
+                'faculty'           => fn($program, $value) => !empty($program['faculty']) && in_array($value, array_column($program['faculty'], 'name')),
+                'area'              => fn($program, $value) => !empty($program['area_of_study']) && in_array($value, array_column($program['area_of_study'], 'name')),
+            ];
+
+            foreach ($filterMap as $key => $matcher) {
+                if (!empty($filter[$key])) {
+                    $matched = false;
+                    foreach ($filter[$key] as $value) {
+                        if ($matcher($program, $value)) {
+                            $matched = true;
+                            break;
+                        }
+                    }
+                    if (!$matched) {
+                        continue 2;
                     }
                 }
-                if (!$degree_matched) {
-                    continue;
-                }
             }
-            if (!empty($filter['subject_group'])) {
-                $group_matched = false;
-                foreach ($filter['subject_group'] as $subject_group) {
-                    if (!empty($program['subject_groups']) && in_array($subject_group, $program['subject_groups'])) {
-                        $group_matched = true;
-                        break;
-                    }
-                }
-                if (!$group_matched) {
-                    continue;
-                }
-            }
-            if (!empty($filter['attribute'])) {
-                $attribute_matched = false;
-                foreach ($filter['attribute'] as $attribute) {
-                    if (!empty($program['attributes']) && in_array($attribute, $program['attributes'])) {
-                        $attribute_matched = true;
-                        break;
-                    }
-                }
-                if (!$attribute_matched) {
-                    continue;
-                }
-            }
+
             $programs_filtered[] = $program;
         }
+
         return $programs_filtered;
     }
 
-    private static function renderChecklistSection(string $name, string $label, array $options, array $selected): string
+    private static function renderChecklistSection(string $name, string $label, array $options, array $selected, string $filterCount = ''): string
     {
         $output = '<div class="filter-' . esc_attr($name) . '">';
         $output .= '<button type="button" class="checklist-toggle">'
-                   . $label . '<span class="dashicons dashicons-arrow-down-alt2" aria-hidden="true"></span></button>';
-        $output .= '<div class="checklist" style="display: none;">';
+                   . $label . $filterCount . '<span class="dashicons dashicons-arrow-down-alt2" aria-hidden="true"></span></button>';
+        $output .= '<div class="checklist">';
         foreach ($options as $option) {
             $checked = in_array($option, $selected);
             $output .= '<label><input type="checkbox" name="' . esc_attr($name) . '[]" value="' . esc_attr($option) . '" '
@@ -113,5 +133,18 @@ class Utils
         }
         $output .= '</div></div>';
         return $output;
+    }
+
+    public static function array_map_recursive($callback, $array) {
+        $new = array();
+        if( is_array($array) ) foreach ($array as $key => $val) {
+            if (is_array($val)) {
+                $new[$key] = self::array_map_recursive($callback, $val);
+            } else {
+                $new[$key] = call_user_func($callback, $val);
+            }
+        }
+        else $new = call_user_func($callback, $array);
+        return $new;
     }
 }
