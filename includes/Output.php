@@ -55,6 +55,25 @@ class Output
             }
         }
 
+        // Save IDs of active degree programs to transient
+        //print "<pre>"; var_dump(function_exists('get_current_screen') && get_current_screen()->is_block_editor() == 1); print "</pre>";  exit;
+        if (function_exists('get_current_screen') && get_current_screen()->is_block_editor() == 1) {
+            $transient_name = 'fau_studium_degree_programs_sync';
+            $degree_programs = get_transient($transient_name);
+            if (!$degree_programs) {
+                $degree_programs = [$lang => []];
+            }
+
+            foreach ($data as $program) {
+                if (!in_array($program['id'], $degree_programs[$lang])) {
+                    $degree_programs[$lang][] = $program['id'];
+                }
+            }
+            set_transient($transient_name, $degree_programs, DAY_IN_SECONDS);
+            //$sync = new Sync();
+            //$sync->do_sync();
+        }
+
         // Load the template and pass the sorted data
         $template_dir = FAU_STUDIUM_DISPLAY_PLUGIN_PATH . 'templates/';
         $template = new Template($template_dir);

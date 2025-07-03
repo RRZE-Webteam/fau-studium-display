@@ -19,7 +19,7 @@ class Main
         add_action('init', [$this, 'createBlocks']);
         add_filter('block_categories_all', [$this, 'rrzeBlockCategory'], 10, 2);
 
-        CPT::init();
+        new CPT();
     }
 
 

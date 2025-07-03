@@ -153,4 +153,22 @@ class Utils
         else $new = call_user_func($callback, $array);
         return $new;
     }
+
+    public static function arrayToHtmlList($data) {
+        if (is_object($data)) {
+            $data = get_object_vars($data);
+        }
+        if (is_array($data)) {
+            $html = "<ul style='margin-left: 2em;'>";
+            foreach ($data as $key => $value) {
+                $html .= "<li><strong>" . htmlspecialchars((string)$key) . ":</strong> ";
+                $html .= self::arrayToHtmlList($value);
+                $html .= "</li>";
+            }
+            $html .= "</ul>";
+            return $html;
+        } else {
+            return '<span style="display: inline-block; margin-left: 2em;">' . htmlspecialchars((string)$data) . '</span>';
+        }
+    }
 }

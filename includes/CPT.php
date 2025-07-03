@@ -8,13 +8,15 @@ class CPT
 {
     const POST_TYPE = 'degree-program';
 
-    public static function init()
+    public function __construct()
     {
-        add_action( 'init', [__CLASS__, 'register_post_type'] );
-        add_action( 'save_post', [__CLASS__, 'save_post'], 10, 3 );
+        add_action( 'init', [$this, 'register_post_type'] );
+        add_action('add_meta_boxes', [$this, 'render_metabox']);
+        add_action('admin_menu', [$this, 'disable_new_posts']);
+
     }
 
-    public static function register_post_type()
+    public function register_post_type()
     {
         $settings = get_option('fau-studium-display-settings');
         $slug = (isset($settings['slug']) && $settings['slug'] != '') ? $settings['slug'] : 'degree-program';
@@ -37,11 +39,39 @@ class CPT
         register_post_type(self::POST_TYPE, $args);
     }
 
-    public static function save_post($post_id, $post, $update) {
-        // Save active degree programs in transient
-        if ( !has_block( 'fau-studium/display' ) ) {
-            return;
-        }
-
+    public function render_metabox()
+    {
+        add_meta_box(
+            'degree_program_metabox',
+            'Post Meta',
+            [$this, 'degree_program_metabox'],
+            'degree-program',
+            'normal',
+            'high'
+        );
     }
+
+    public function degree_program_metabox($post)
+    {
+        $aPostMeta = get_post_meta($post->ID);
+
+        foreach ($aPostMeta as $key => $aEntry) {
+            //var_dump($aEntry[0]);
+            $val = (is_serialized($aEntry[0]) ? unserialize($aEntry[0]) : $aEntry[0]);
+
+            echo '<span><strong>' . $key . ':</strong></span><br />' . Utils::arrayToHtmlList($val) . "<hr>";
+        }
+    }
+
+    public function disable_new_posts()
+    {
+        global $submenu;
+
+        unset($submenu['edit.php?post_type=degree-program'][10]);
+
+        if (isset($_GET['post_type']) && $_GET['post_type'] == 'degree-program') {
+            echo '<style type="text/css">.page-title-action {display:none;}</style>';
+        }
+    }
+
 }
