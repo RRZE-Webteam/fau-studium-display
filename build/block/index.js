@@ -8,7 +8,7 @@
   \******************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"fau-studium/display","version":"1.0.3","title":"FAU-Studium Display","category":"rrze","description":"","example":{},"attributes":{"degreeProgram":{"type":"number","default":0},"language":{"type":"string","default":"de"},"format":{"type":"string","default":"full"},"showSearch":{"type":"boolean","default":false},"showTitle":{"type":"boolean","default":false},"selectedItemsGrid":{"type":"array","default":[]}},"supports":{"html":false},"textdomain":"fau-studium-display","editorScript":"file:./index.js","editorStyle":"file:./index.css","viewScript":"file:./view.js","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"fau-studium/display","version":"1.0.3","title":"FAU-Studium Display","category":"rrze","description":"","example":{},"attributes":{"degreeProgram":{"type":"number","default":0},"selectedFaculties":{"type":"array","default":[]},"selectedDegrees":{"type":"array","default":[]},"selectedSpecialWays":{"type":"array","default":[]},"language":{"type":"string","default":"de"},"format":{"type":"string","default":"full"},"showSearch":{"type":"boolean","default":false},"showTitle":{"type":"boolean","default":false},"selectedItemsGrid":{"type":"array","default":[]}},"supports":{"html":false},"textdomain":"fau-studium-display","editorScript":"file:./index.js","editorStyle":"file:./index.css","viewScript":"file:./view.js","render":"file:./render.php"}');
 
 /***/ }),
 
@@ -63,8 +63,23 @@ const Edit = ({
     var _fauStudiumData$items;
     return (_fauStudiumData$items = fauStudiumData?.itemsGridOptions) !== null && _fauStudiumData$items !== void 0 ? _fauStudiumData$items : [];
   });
+  const [faculties] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(() => {
+    var _fauStudiumData$facul;
+    return (_fauStudiumData$facul = fauStudiumData?.facultiesOptions) !== null && _fauStudiumData$facul !== void 0 ? _fauStudiumData$facul : [];
+  });
+  const [degrees] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(() => {
+    var _fauStudiumData$degre2;
+    return (_fauStudiumData$degre2 = fauStudiumData?.degreesOptions) !== null && _fauStudiumData$degre2 !== void 0 ? _fauStudiumData$degre2 : [];
+  });
+  const [specialWays] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(() => {
+    var _fauStudiumData$speci;
+    return (_fauStudiumData$speci = fauStudiumData?.specialWaysOptions) !== null && _fauStudiumData$speci !== void 0 ? _fauStudiumData$speci : [];
+  });
   const {
-    selectedItemsGrid = []
+    selectedItemsGrid = [],
+    selectedFaculties = [],
+    selectedDegrees = [],
+    selectedSpecialWays = []
   } = attributes;
   const [selectedFormat, setSelectedFormat] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(format);
   const onChangeFormat = value => {
@@ -104,10 +119,26 @@ const Edit = ({
   };
   const toggleItemGrid = value => {
     const updated = selectedItemsGrid.includes(value) ? selectedItemsGrid.filter(v => v !== value) : [...selectedItemsGrid, value];
-
-    //setAttributes({ selectedItemsGrid: updated });
     setAttributes({
       selectedItemsGrid: [...updated]
+    });
+  };
+  const toggleFaculties = value => {
+    const updated = selectedFaculties.includes(value) ? selectedFaculties.filter(v => v !== value) : [...selectedFaculties, value];
+    setAttributes({
+      selectedFaculties: [...updated]
+    });
+  };
+  const toggleDegrees = value => {
+    const updated = selectedDegrees.includes(value) ? selectedDegrees.filter(v => v !== value) : [...selectedDegrees, value];
+    setAttributes({
+      selectedDegrees: [...updated]
+    });
+  };
+  const toggleSpecialWays = value => {
+    const updated = selectedSpecialWays.includes(value) ? selectedSpecialWays.filter(v => v !== value) : [...selectedSpecialWays, value];
+    setAttributes({
+      selectedSpecialWays: [...updated]
     });
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
@@ -167,6 +198,28 @@ const Edit = ({
           }],
           onChange: onChangeLanguage
         })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Filter Programs', 'fau-studium-display'),
+        initialOpen: true,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Faculties', 'fau-studium-display')
+        }), faculties.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.CheckboxControl, {
+          label: item.label,
+          checked: selectedFaculties.includes(item.value),
+          onChange: () => toggleFaculties(item.value)
+        }, item.value)), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Degrees', 'fau-studium-display')
+        }), degrees.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.CheckboxControl, {
+          label: item.label,
+          checked: selectedDegrees.includes(item.value),
+          onChange: () => toggleDegrees(item.value)
+        }, item.value)), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Special ways to study', 'fau-studium-display')
+        }), specialWays.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.CheckboxControl, {
+          label: item.label,
+          checked: selectedSpecialWays.includes(item.value),
+          onChange: () => toggleSpecialWays(item.value)
+        }, item.value))]
       }), selectedFormat === "grid" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select items', 'fau-studium-display'),
         initialOpen: true,

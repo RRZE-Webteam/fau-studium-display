@@ -6,7 +6,7 @@ defined('ABSPATH') || exit;
 
 class Utils
 {
-    public static function renderSearchForm(): string
+    public static function renderSearchForm($hide_filter = []): string
     {
         $getParams = Utils::array_map_recursive('sanitize_text_field', $_GET);
         $api = new API();
@@ -35,6 +35,9 @@ class Utils
 
         // Filter sections default
         foreach ($filters_default as $filter) {
+            if (in_array($filter['key'], $hide_filter)) {
+                continue;
+            }
             $filter_active = !empty($getParams[$filter['key']]);
             $output .= self::renderChecklistSection(
                 $filter['key'],
@@ -49,6 +52,9 @@ class Utils
         $filters_extended_count = 0;
         $filters_extended_html = '';
         foreach ($filters_extended as $filter) {
+            if (in_array($filter['key'], $hide_filter)) {
+                continue;
+            }
             $filter_active = !empty($getParams[$filter['key']]);
             if ($filter_active) {
                 $filters_extended_count += count($getParams[$filter['key']]);

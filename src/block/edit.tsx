@@ -20,6 +20,9 @@ interface DegreeProgramOption {
 
 interface BlockAttributes {
     degreeProgram: number;
+    selectedFaculties: string[];
+    selectedDegrees: string[];
+    selectedSpecialWays: string[];
     language: string;
     format: string;
     showSearch : boolean;
@@ -35,7 +38,10 @@ const Edit = ({
     const { degreeProgram, language, format = 'full', showSearch, showTitle = false } = attributes;
     const [degreePrograms, setDegreePrograms] = useState(() => fauStudiumData?.degreePrograms ?? []);
     const [itemsGrid, setItemsGrid] = useState(() => fauStudiumData?.itemsGridOptions ?? []);
-    const { selectedItemsGrid = [] } = attributes;
+    const [faculties] = useState(() => fauStudiumData?.facultiesOptions ?? []);
+    const [degrees] = useState(() => fauStudiumData?.degreesOptions ?? []);
+    const [specialWays] = useState(() => fauStudiumData?.specialWaysOptions ?? []);
+    const { selectedItemsGrid = [], selectedFaculties = [], selectedDegrees = [], selectedSpecialWays = [],  } = attributes;
     const [selectedFormat, setSelectedFormat] = useState<string>(format);
 
     const onChangeFormat = (value: string | null | undefined) => {
@@ -73,8 +79,34 @@ const Edit = ({
             ? selectedItemsGrid.filter((v: string) => v !== value)
             : [...selectedItemsGrid, value];
 
-        //setAttributes({ selectedItemsGrid: updated });
         setAttributes({ selectedItemsGrid: [...updated] });
+
+    };
+
+    const toggleFaculties = (value: string) => {
+        const updated = selectedFaculties.includes(value)
+            ? selectedFaculties.filter((v: string) => v !== value)
+            : [...selectedFaculties, value];
+
+        setAttributes({ selectedFaculties: [...updated] });
+
+    };
+
+    const toggleDegrees = (value: string) => {
+        const updated = selectedDegrees.includes(value)
+            ? selectedDegrees.filter((v: string) => v !== value)
+            : [...selectedDegrees, value];
+
+        setAttributes({ selectedDegrees: [...updated] });
+
+    };
+
+    const toggleSpecialWays = (value: string) => {
+        const updated = selectedSpecialWays.includes(value)
+            ? selectedSpecialWays.filter((v: string) => v !== value)
+            : [...selectedSpecialWays, value];
+
+        setAttributes({ selectedSpecialWays: [...updated] });
 
     };
 
@@ -137,6 +169,42 @@ const Edit = ({
                         onChange={onChangeLanguage}
                     />
 
+                </PanelBody>
+
+                <PanelBody title={__('Filter Programs', 'fau-studium-display')} initialOpen={true}>
+                    <h3>{__('Faculties', 'fau-studium-display')}</h3>
+                    {faculties.map((item: { label: string; value: string }) => (
+                        <CheckboxControl
+                            key={item.value}
+                            label={item.label}
+                            checked={selectedFaculties.includes(item.value)}
+                            onChange={() => toggleFaculties(item.value)}
+                        />
+                    ))}
+
+                    <hr />
+
+                    <h3>{__('Degrees', 'fau-studium-display')}</h3>
+                    {degrees.map((item: { label: string; value: string }) => (
+                        <CheckboxControl
+                            key={item.value}
+                            label={item.label}
+                            checked={selectedDegrees.includes(item.value)}
+                            onChange={() => toggleDegrees(item.value)}
+                        />
+                    ))}
+
+                    <hr />
+
+                    <h3>{__('Special ways to study', 'fau-studium-display')}</h3>
+                    {specialWays.map((item: { label: string; value: string }) => (
+                        <CheckboxControl
+                            key={item.value}
+                            label={item.label}
+                            checked={selectedSpecialWays.includes(item.value)}
+                            onChange={() => toggleSpecialWays(item.value)}
+                        />
+                    ))}
                 </PanelBody>
 
                 {(selectedFormat === "grid") && (

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-01T12:56:43+00:00\n"
+"POT-Creation-Date: 2025-07-02T07:57:55+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: fau-studium-display\n"
@@ -42,11 +42,12 @@ msgstr ""
 msgid "Degree Programs"
 msgstr ""
 
-#: includes/Main.php:74
+#: includes/Main.php:102
 msgid "RRZE"
 msgstr ""
 
 #: includes/Utils.php:14
+#: build/block/index.js:204
 msgid "Degrees"
 msgstr ""
 
@@ -57,6 +58,7 @@ msgstr ""
 #: includes/Utils.php:16
 #: templates/degree-program-box.php:58
 #: templates/degree-program-full.php:64
+#: build/block/index.js:210
 msgid "Special ways to study"
 msgstr ""
 
@@ -227,64 +229,72 @@ msgstr ""
 msgid "Additional Information"
 msgstr ""
 
-#: templates/degree-program-grid.php:80
+#: templates/degree-program-grid.php:86
 #: templates/degree-program-table.php:75
 msgid "No degree programs found."
 msgstr ""
 
-#: build/block/index.js:117
+#: build/block/index.js:148
 msgid "General Settings"
 msgstr ""
 
-#: build/block/index.js:120
+#: build/block/index.js:151
 msgid "Format"
 msgstr ""
 
-#: build/block/index.js:123
+#: build/block/index.js:154
 msgid "Full"
 msgstr ""
 
-#: build/block/index.js:128
+#: build/block/index.js:159
 msgid "Infobox"
 msgstr ""
 
-#: build/block/index.js:131
+#: build/block/index.js:162
 msgid "Grid"
 msgstr ""
 
-#: build/block/index.js:134
+#: build/block/index.js:165
 msgid "Table"
 msgstr ""
 
-#: build/block/index.js:137
+#: build/block/index.js:168
 msgid "List"
 msgstr ""
 
-#: build/block/index.js:143
+#: build/block/index.js:174
 msgid "Show Search"
 msgstr ""
 
-#: build/block/index.js:148
-msgid "Degree Program"
-msgstr ""
-
-#: build/block/index.js:154
+#: build/block/index.js:178
 msgid "Show Title"
 msgstr ""
 
-#: build/block/index.js:159
+#: build/block/index.js:183
 msgid "Language"
 msgstr ""
 
-#: build/block/index.js:162
+#: build/block/index.js:186
 msgid "German"
 msgstr ""
 
-#: build/block/index.js:165
+#: build/block/index.js:189
 msgid "English"
 msgstr ""
 
-#: build/block/index.js:171
+#: build/block/index.js:195
+msgid "Filter Programs"
+msgstr ""
+
+#: build/block/index.js:198
+msgid "Faculties"
+msgstr ""
+
+#: build/block/index.js:217
+msgid "Degree Program"
+msgstr ""
+
+#: build/block/index.js:224
 msgid "Select items"
 msgstr ""
 

@@ -16,6 +16,18 @@ declare const fauStudiumData: {
         label: string;
         value: string;
     }[];
+    facultiesOptions: {
+        label: string;
+        value: string;
+    }[];
+    degreesOptions: {
+        label: string;
+        value: string;
+    }[];
+    specialWaysOptions: {
+        label: string;
+        value: string;
+    }[];
 };
 
 declare module '*.json' {

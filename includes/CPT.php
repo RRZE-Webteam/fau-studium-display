@@ -10,10 +10,11 @@ class CPT
 
     public static function init()
     {
-        add_action('init', [__CLASS__, 'registerPostType']);
+        add_action( 'init', [__CLASS__, 'register_post_type'] );
+        add_action( 'save_post', [__CLASS__, 'save_post'], 10, 3 );
     }
 
-    public static function registerPostType()
+    public static function register_post_type()
     {
         $settings = get_option('fau-studium-display-settings');
         $slug = (isset($settings['slug']) && $settings['slug'] != '') ? $settings['slug'] : 'degree-program';
@@ -34,5 +35,13 @@ class CPT
         ];
 
         register_post_type(self::POST_TYPE, $args);
+    }
+
+    public static function save_post($post_id, $post, $update) {
+        // Save active degree programs in transient
+        if ( !has_block( 'fau-studium/display' ) ) {
+            return;
+        }
+
     }
 }

@@ -12,6 +12,18 @@
 			"type": "number",
 			"default": 0
 		},
+		"selectedFaculties": {
+			"type": "array",
+			"default": []
+		},
+		"selectedDegrees": {
+			"type": "array",
+			"default": []
+		},
+		"selectedSpecialWays": {
+			"type": "array",
+			"default": []
+		},
 		"language": {
 			"type": "string",
 			"default": "de"

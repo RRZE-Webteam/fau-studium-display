@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: FAU Studium Display\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-12 12:41+0000\n"
-"PO-Revision-Date: 2025-07-01 13:09+0000\n"
+"PO-Revision-Date: 2025-07-02 08:04+0000\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch (Sie)\n"
 "Language: de_DE_formal\n"
@@ -68,7 +68,7 @@ msgstr "Inhaltliche Zugangsvoraussetzungen"
 msgid "Degree"
 msgstr "Abschluss"
 
-#: build/block/index.js:148 build/block/index.js:1
+#: build/block/index.js:217 build/block/index.js:1
 msgid "Degree Program"
 msgstr "Studiengang"
 
@@ -76,7 +76,7 @@ msgstr "Studiengang"
 msgid "Degree Programs"
 msgstr "Studiengänge"
 
-#: includes/Utils.php:14
+#: includes/Utils.php:14 build/block/index.js:204 build/block/index.js:1
 msgid "Degrees"
 msgstr "Abschlüsse"
 
@@ -88,13 +88,17 @@ msgstr "Details und Anmerkungen"
 msgid "Downloads"
 msgstr "Downloads"
 
-#: build/block/index.js:165 build/block/index.js:1
+#: build/block/index.js:189 build/block/index.js:1
 msgid "English"
 msgstr "Englisch"
 
 #: templates/degree-program-box.php:76 templates/degree-program-full.php:219
 msgid "Fact Sheet"
 msgstr "Steckbrief"
+
+#: build/block/index.js:198 build/block/index.js:1
+msgid "Faculties"
+msgstr "Fakultäten"
 
 #: includes/Utils.php:22 templates/degree-program-box.php:39
 #: templates/degree-program-full.php:45
@@ -106,19 +110,23 @@ msgstr "Fakultät"
 msgid "FAU Studium Display"
 msgstr "FAU Studium Display"
 
-#: build/block/index.js:120 build/block/index.js:1
+#: build/block/index.js:195 build/block/index.js:1
+msgid "Filter Programs"
+msgstr "Studiengänge filtern"
+
+#: build/block/index.js:151 build/block/index.js:1
 msgid "Format"
 msgstr "Format"
 
-#: build/block/index.js:123 build/block/index.js:1
+#: build/block/index.js:154 build/block/index.js:1
 msgid "Full"
 msgstr "Seite"
 
-#: build/block/index.js:117 build/block/index.js:1
+#: build/block/index.js:148 build/block/index.js:1
 msgid "General Settings"
 msgstr "Allgemeine Einstellungen"
 
-#: build/block/index.js:162 build/block/index.js:1
+#: build/block/index.js:186 build/block/index.js:1
 msgid "German"
 msgstr "Deutsch"
 
@@ -126,7 +134,7 @@ msgstr "Deutsch"
 msgid "German language skills"
 msgstr "Deutschkenntnisse"
 
-#: build/block/index.js:131 build/block/index.js:1
+#: build/block/index.js:162 build/block/index.js:1
 msgid "Grid"
 msgstr "Kacheln"
 
@@ -139,11 +147,11 @@ msgstr "Höhere Semester"
 msgid "https://github.com/RRZE-Webteam/fau-studium-display"
 msgstr "https://github.com/RRZE-Webteam/fau-studium-display"
 
-#: build/block/index.js:128 build/block/index.js:1
+#: build/block/index.js:159 build/block/index.js:1
 msgid "Infobox"
 msgstr "Infobox"
 
-#: build/block/index.js:159 build/block/index.js:1
+#: build/block/index.js:183 build/block/index.js:1
 msgid "Language"
 msgstr "Sprache"
 
@@ -151,7 +159,7 @@ msgstr "Sprache"
 msgid "Language skills"
 msgstr "Sprachkenntnisse"
 
-#: build/block/index.js:137 build/block/index.js:1
+#: build/block/index.js:168 build/block/index.js:1
 msgid "List"
 msgstr "Liste"
 
@@ -167,7 +175,7 @@ msgstr "Master"
 msgid "More Information for International Applicants"
 msgstr "Weitere Hinweise zur Bewerbung für Internationale Bewerber"
 
-#: templates/degree-program-grid.php:80 templates/degree-program-table.php:75
+#: templates/degree-program-grid.php:86 templates/degree-program-table.php:75
 msgid "No degree programs found."
 msgstr "Keine Studiengänge gefunden."
 
@@ -196,7 +204,7 @@ msgstr "Plugin zur Darstellung von Studiengangsinformationen"
 msgid "Reset all filters"
 msgstr "Alle Filter zurücksetzen"
 
-#: includes/Main.php:74
+#: includes/Main.php:102
 msgid "RRZE"
 msgstr "RRZE"
 
@@ -209,15 +217,15 @@ msgstr "RRZE Webteam"
 msgid "Search"
 msgstr "Suche"
 
-#: build/block/index.js:171 build/block/index.js:1
+#: build/block/index.js:224 build/block/index.js:1
 msgid "Select items"
-msgstr "Auswählen"
+msgstr "Elemente auswählen"
 
-#: build/block/index.js:143 build/block/index.js:1
+#: build/block/index.js:174 build/block/index.js:1
 msgid "Show Search"
 msgstr "Suche anzeigen"
 
-#: build/block/index.js:154 build/block/index.js:1
+#: build/block/index.js:178 build/block/index.js:1
 msgid "Show Title"
 msgstr "Titel anzeigen"
 
@@ -226,7 +234,8 @@ msgid "Special Features"
 msgstr "Besondere Hinweise"
 
 #: includes/Utils.php:16 templates/degree-program-box.php:58
-#: templates/degree-program-full.php:64
+#: templates/degree-program-full.php:64 build/block/index.js:210
+#: build/block/index.js:1
 msgid "Special ways to study"
 msgstr "Besondere Studienformen"
 
@@ -258,7 +267,7 @@ msgstr "Fächergruppen"
 msgid "Summer semester"
 msgstr "Sommersemester"
 
-#: build/block/index.js:134 build/block/index.js:1
+#: build/block/index.js:165 build/block/index.js:1
 msgid "Table"
 msgstr "Tabelle"
 
