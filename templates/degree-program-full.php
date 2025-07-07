@@ -2,7 +2,7 @@
 
 defined('ABSPATH') || exit;
 
-use function \FAU\StudiumDisplay\Config\get_labels;
+use function \Fau\DegreeProgram\Display\Config\get_labels;
 
 //var_dump($data);
 //var_dump($atts);

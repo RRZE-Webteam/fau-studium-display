@@ -1,11 +1,11 @@
 <?php
 
-namespace FAU\StudiumDisplay;
+namespace Fau\DegreeProgram\Display;
 
 defined('ABSPATH') || exit;
 
-use function FAU\StudiumDisplay\Config\get_labels;
-use function FAU\StudiumDisplay\Config\get_output_fields;
+use function Fau\DegreeProgram\Display\Config\get_labels;
+use function Fau\DegreeProgram\Display\Config\get_output_fields;
 
 class Main
 {
@@ -23,7 +23,10 @@ class Main
     }
 
 
-    public function onLoaded() {}
+    public function onLoaded() {
+        $settings = new Settings($this->pluginFile);
+        $settings->onLoaded();
+    }
 
 
     function createBlocks(): void {
@@ -112,16 +115,16 @@ class Main
     {
         wp_register_style(
             'fau-studium-display',
-            FAU_STUDIUM_DISPLAY_PLUGIN_URL . 'assets/css/fau-studium-display.css',
+            plugin()->getUrl() . 'assets/css/fau-studium-display.css',
             [],
-            FAU_STUDIUM_DISPLAY_PLUGIN_VERSION
+            plugin()->getVersion()
         );
         wp_register_script(
             'fau-studium-display-script',
-            plugins_url('assets/js/fau-studium-display.min.js', FAU_STUDIUM_DISPLAY_PLUGIN_FILE),
+            plugins_url('assets/js/fau-studium-display.min.js', plugin()->getFile()),
             //FAU_STUDIUM_DISPLAY_PLUGIN_URL . 'src/js/fau-studium-display.js',
             ['jquery'],
-            FAU_STUDIUM_DISPLAY_PLUGIN_VERSION
+            plugin()->getVersion()
         );
     }
 

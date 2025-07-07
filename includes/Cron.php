@@ -1,6 +1,6 @@
 <?php
 
-namespace FAU\StudiumDisplay;
+namespace Fau\DegreeProgram\Display;
 
 class Cron
 {

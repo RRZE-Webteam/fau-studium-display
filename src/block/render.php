@@ -1,6 +1,6 @@
 <?php
 
-use FAU\StudiumDisplay\Output;
+use Fau\DegreeProgram\Display\Output;
 
 //var_dump($attributes);
 

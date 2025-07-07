@@ -2,10 +2,10 @@
 
 defined('ABSPATH') || exit;
 
-use FAU\StudiumDisplay\Utils;
+use Fau\DegreeProgram\Display\Utils;
 
-use function FAU\StudiumDisplay\Config\get_output_fields;
-use function FAU\StudiumDisplay\Config\get_labels;
+use function Fau\DegreeProgram\Display\Config\get_output_fields;
+use function Fau\DegreeProgram\Display\Config\get_labels;
 
 //print "<pre>"; var_dump($data);print "</pre>";
 //print "<pre>"; var_dump($atts);print "</pre>";
@@ -37,7 +37,7 @@ foreach ($data as $program) {
 
     $table_content = '';
 
-    $table_content .= '<td class="image-title">' . $program['teaser_image']['rendered'] . '<span class="program-title">' . $program['title'] . ' (' . $program[ 'degree' ][ 'abbreviation' ] . ')</span></td>';
+    $table_content .= '<td class="image-title">' . $program['teaser_image']['rendered'] . '<a class="program-title">' . $program['title'] . ' (' . $program[ 'degree' ][ 'abbreviation' ] . ')</a></td>';
 
     $table_content .= '<td class="program-degree"><span class="label">' . $labels['degree'] . ': </span>' . $program['degree']['name']. '</td>';
 

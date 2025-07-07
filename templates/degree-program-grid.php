@@ -2,10 +2,10 @@
 
 defined('ABSPATH') || exit;
 
-use FAU\StudiumDisplay\Utils;
+use Fau\DegreeProgram\Display\Utils;
 
-use function FAU\StudiumDisplay\Config\get_output_fields;
-use function FAU\StudiumDisplay\Config\get_labels;
+use function Fau\DegreeProgram\Display\Config\get_output_fields;
+use function Fau\DegreeProgram\Display\Config\get_labels;
 
 //print "<pre>"; var_dump($data);print "</pre>";
 //print "<pre>"; var_dump($atts);print "</pre>";

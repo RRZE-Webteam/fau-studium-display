@@ -1,6 +1,6 @@
 <?php
 
-namespace FAU\StudiumDisplay\Config;
+namespace Fau\DegreeProgram\Display\Config;
 
 defined('ABSPATH') || exit;
 
