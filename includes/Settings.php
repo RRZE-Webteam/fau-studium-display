@@ -17,6 +17,7 @@ class Settings {
     public function onLoaded() {
         add_action('admin_menu', [$this,'adminMenu']);
         add_action('admin_init', [$this,'adminInit']);
+        add_action('wp_ajax_program_search', [$this,'ajaxProgramSearch']);
         $this->title = plugin()->getName();
         $this->slug = plugin()->getSlug();
         $this->options = get_option('fau-studium-display', '');
@@ -45,6 +46,7 @@ class Settings {
             </form>
         </div>
         <?php
+        wp_enqueue_script('fau-studium-display-admin-ajax');
     }
 
     public function adminInit() {
@@ -66,22 +68,23 @@ class Settings {
         );
 
         add_settings_section(
-            'fau-studium-display-layout',
-            __('Layout', 'fau-studium-display'),
+            'fau-studium-display-import-programs',
+            __('Import', 'fau-studium-display'),
             '',
             $this->slug
         );
 
         add_settings_field(
-            'show-errors',
-            __('Show Errors', 'fau-studium-display'),
-            [$this, 'radioCallback'],
+            'search',
+            __('Search for degree programs to import', 'fau-studium-display'),
+            [$this, 'importProgramsCallback'],
             $this->slug,
-            'fau-studium-display-layout'
+            'fau-studium-display-import-programs'
         );
     }
 
-    public function textCallback() {
+    public function textCallback(): void
+    {
         
         if (API::isUsingNetworkKey()) {
             echo '<p>' . esc_html__('The API key is being used from the network installation.', 'fau-studium-display') . '</p>';
@@ -93,10 +96,63 @@ class Settings {
         }
     }
 
-    public function radioCallback() {
-        $value = $this->options[ 'show-errors' ] ?? '';
-        echo '<input type="checkbox" id="show-errors" name="fau-studium-display[show-errors]" value="on" ' . checked($value, 'on', false) . '><label for="show-errors">'.__('Show errors in frontend', 'fau-studium-display').'</label></p>';
-        echo '<p class="description">' . __('If not checked, the shortcode will not show anything in case of error.', 'fau-studium-display') . '</p>';
+    public function importProgramsCallback() {
+        $facultyOptions = Utils::get_faculty_options();
+        $degreeOptions = Utils::get_degree_options();
+
+        echo '<div class="" style="display:flex; flex-direction: row; flex-wrap: wrap; column-gap: 2em;">'
+             . '<div class="">'
+            . '<h4>' . __('Select Faculty', 'fau-studium-display') . '</h4>';
+        foreach ($facultyOptions as $facultyOption) {
+            echo '<label><input type="checkbox" name="faculty[]" value="' . $facultyOption['value'] . '">' . $facultyOption['label'] . '</label><br />';
+        }
+        echo '</div><div class="">'
+            . '<h4>' . __('Select Degree', 'fau-studium-display') . '</h4>';
+        foreach ($degreeOptions as $degreeOption) {
+            echo '<label><input type="checkbox" name="degree[]" value="' . $degreeOption['value'] . '">' . $degreeOption['label'] . '</label><br />';
+        }
+        echo '</div><div class="">'
+             . '<h4>' . __('Select Language', 'fau-studium-display') . '</h4>';
+        $languages = [
+            'de' => __('German', 'fau-studium-display'),
+            'en' => __('English', 'fau-studium-display'),
+        ];
+        foreach ($languages as $value => $label) {
+            echo '<label><input type="radio" name="language" value="' . $value . '">' . $label . '</label><br />';
+        }
+        echo '</div></div>';
+        echo '<button id="mein-button">Test</button>';
+        echo '<div id="degree-program-results"></div>';
+
+        //var_dump($_REQUEST);
     }
+
+    function ajaxProgramSearch() {
+        // Prüfe Berechtigungen, z.B.:
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error('Keine Berechtigung');
+        }
+        check_ajax_referer('fau_studium_display_admin_ajax_nonce');
+
+        $faculties = $_POST[ 'faculties' ] ?? [];
+        $degrees = $_POST[ 'degrees' ] ?? [];
+        $language = $_POST[ 'language' ] ?? 'de';
+
+        if (!is_array($faculties) || !is_array($degrees) || (!in_array($language, ['de', 'en']))) {
+            wp_send_json_error('Ungültige Daten');
+        }
+
+        $response = ['message' => ''];
+
+        $atts['lang'] = $language;
+        $atts['selectedFaculties'] = $faculties;
+        $atts['selectedDegrees'] = $degrees;
+        //$programs = (new Data)->get_data($atts);
+        //$api = new API();
+        //$programs = $api->get_programs('', false, $language);
+        //$response['message'] = serialize($programs);
+        wp_send_json_success($response);
+    }
+
 
 }

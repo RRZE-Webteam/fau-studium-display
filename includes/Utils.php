@@ -171,4 +171,51 @@ class Utils
             return '<span style="display: inline-block; margin-left: 2em;">' . htmlspecialchars((string)$data) . '</span>';
         }
     }
+
+    public static function get_degree_options() {
+        $api = new API();
+        $degrees = $api->get_degrees();
+        $degreeOptions = [];
+        foreach ($degrees as $degree) {
+            $degreeOptions[] = [
+                'label' => $degree,
+                'value' => $degree,
+            ];
+        }
+        return $degreeOptions;
+    }
+
+    public static function get_faculty_options() {
+        $api = new API();
+        $faculties = $api->get_faculties();
+        $facultyOptions = [];
+        foreach ($faculties as $faculty) {
+            $facultyOptions[] = [
+                'label' => $faculty,
+                'value' => $faculty,
+            ];
+        }
+        $attributes = $api->get_attributes();
+        $attributes_formatted = [];
+        foreach ($attributes as $attribute) {
+            $attributes_formatted[] = [
+                'label' => $attribute,
+                'value' => $attribute,
+            ];
+        }
+        return $facultyOptions;
+    }
+
+    public static function get_attribute_options() {
+        $api = new API();
+        $attributes = $api->get_attributes();
+        $attributeOptions = [];
+        foreach ($attributes as $attribute) {
+            $attributeOptions[] = [
+                'label' => $attribute,
+                'value' => $attribute,
+            ];
+        }
+        return $attributeOptions;
+    }
 }

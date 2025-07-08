@@ -127,7 +127,7 @@ function main()
     // Check if the instance is not already created.
     if (null === $instance) {
         // Add a new instance of the Main class.
-        $instance = new Main(plugin()->getFile());
+        $instance = (new Main(plugin()->getFile()))->onLoaded();
     }
 
     // Return the main instance of the Main class.

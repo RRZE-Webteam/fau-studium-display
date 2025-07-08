@@ -16,6 +16,7 @@ class Main
         $this->pluginFile = $pluginFile;
 
         add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
+        add_action('admin_enqueue_scripts', [$this, 'enqueueAdminScripts']);
         add_action('init', [$this, 'createBlocks']);
         add_filter('block_categories_all', [$this, 'rrzeBlockCategory'], 10, 2);
 
@@ -23,7 +24,8 @@ class Main
     }
 
 
-    public function onLoaded() {
+    public function onLoaded()
+    {
         $settings = new Settings($this->pluginFile);
         $settings->onLoaded();
     }
@@ -37,30 +39,9 @@ class Main
         // get degree program lists for combobox
         $api = new API();
         $degree_programs = $api->get_programs('id_title', true);
-        $faculties = $api->get_faculties();
-        $faculties_formatted = [];
-        foreach ($faculties as $faculty) {
-            $faculties_formatted[] = [
-                'label' => $faculty,
-                'value' => $faculty,
-            ];
-        }
-        $degrees = $api->get_degrees();
-        $degrees_formatted = [];
-        foreach ($degrees as $degree) {
-            $degrees_formatted[] = [
-                'label' => $degree,
-                'value' => $degree,
-            ];
-        }
-        $attributes = $api->get_attributes();
-        $attributes_formatted = [];
-        foreach ($attributes as $attribute) {
-            $attributes_formatted[] = [
-                'label' => $attribute,
-                'value' => $attribute,
-            ];
-        }
+        $facultyOptions = Utils::get_faculty_options();
+        $degreeOptions = Utils::get_degree_options();
+        $attributeOptions = Utils::get_attribute_options();
 
         // get format "grid" display options from config
         $labels = get_labels('de');
@@ -75,9 +56,9 @@ class Main
 
         wp_localize_script($script_handle, 'fauStudiumData', [
             'degreePrograms' => $degree_programs,
-            'facultiesOptions' => $faculties_formatted,
-            'specialWaysOptions' => $attributes_formatted,
-            'degreesOptions' => $degrees_formatted,
+            'facultiesOptions' => $facultyOptions,
+            'specialWaysOptions' => $attributeOptions,
+            'degreesOptions' => $degreeOptions,
             'itemsGridOptions' => $items_grid_formatted,
         ]);
 
@@ -122,10 +103,22 @@ class Main
         wp_register_script(
             'fau-studium-display-script',
             plugins_url('assets/js/fau-studium-display.min.js', plugin()->getFile()),
-            //FAU_STUDIUM_DISPLAY_PLUGIN_URL . 'src/js/fau-studium-display.js',
             ['jquery'],
             plugin()->getVersion()
         );
+    }
+
+    public function enqueueAdminScripts(): void {
+        wp_register_script(
+            'fau-studium-display-admin-ajax',
+            plugins_url('assets/js/fau-studium-display-admin-ajax.min.js', plugin()->getFile()),
+            ['jquery'],
+            plugin()->getVersion()
+        );
+        wp_localize_script('fau-studium-display-admin-ajax', 'program_ajax', [
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'nonce'    => wp_create_nonce('fau_studium_display_admin_ajax_nonce')
+        ]);
     }
 
 }
