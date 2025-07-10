@@ -26,7 +26,7 @@ class Data
                 $filterBlock['attribute'] = $atts['selectedSpecialWays'];
             }
 
-            // Filter from $_GET parameters
+        /*    // Filter from $_GET parameters
             $getParams = isset($_GET) ? Utils::array_map_recursive('sanitize_text_field', $_GET) : [];
             $getParams = array_filter($getParams);
 
@@ -49,10 +49,12 @@ class Data
             } else {
                 $data = $programs;
             }
+        */
+            $data = Utils::filterPrograms($programs, $filterBlock);
         }
 
         // Save IDs of active degree programs to transient
-        if (function_exists('get_current_screen') && get_current_screen()->is_block_editor() == 1) {
+        /*if (function_exists('get_current_screen') && get_current_screen()->is_block_editor() == 1) {
             $transient_name = 'fau_studium_degree_programs_sync';
             $degree_programs = get_transient($transient_name);
             if (!$degree_programs) {
@@ -68,18 +70,40 @@ class Data
             set_transient($transient_name, $degree_programs, DAY_IN_SECONDS);
             //$sync = new Sync();
             //$sync->do_sync();
-        }
+        }*/
 
         return $data;
     }
 
     public function get_single_program($program_id, $lang) {
-        $api = new API();
 
-        $program = get_post($program_id);
-        if (!$program) {
-            $program = $api->get_program($program_id, $lang);
-        }
+        // check if the program exists as CPT
+        /*$program_imported = get_posts([
+           'post_type'      => 'degree-program',
+           'post_status'    => 'publish',
+           'meta_key'       => 'id',
+           'meta_value' => $program_id
+        ]);
+        if (!empty($program_imported)) {
+            switch ($lang) {
+                case 'en':
+                    $translations = get_post_meta($program_imported[0]->ID, 'translations', true);
+                    return $translations['en'];
+                case 'de':
+                default:
+                    $data = [];
+                    $post_meta = get_post_meta($program_imported[0]->ID, '', true);
+                    foreach ($post_meta as $key => $value) {
+                        $data[$key] = is_serialized($value[0]) ? unserialize($value[0]) : $value[0];
+                    }
+                    return $data;
+            }
+        }*/
+
+        // if not, fetch from API
+        // TODO: Neue Datenstruktur!
+        $api = new API();
+        $program = $api->get_program($program_id, $lang);
 
         return $program;
     }

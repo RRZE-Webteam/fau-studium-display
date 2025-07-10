@@ -172,9 +172,22 @@ class Utils
         }
     }
 
-    public static function get_degree_options() {
+    public static function get_program_options() {
         $api = new API();
-        $degrees = $api->get_degrees();
+        $data = $api->get_programs(false);
+        $degreeProgramOptions = array_map(
+            fn($item) => [
+                'label' => $item[ 'title' ] . ' (' . $item[ 'degree' ][ 'abbreviation' ] . ')',
+                'value' => (string)$item[ 'id' ],
+            ],
+            $data
+        );
+        return $degreeProgramOptions;
+    }
+
+    public static function get_degree_options($parents = false) {
+        $api = new API();
+        $degrees = $api->get_degrees($parents);
         $degreeOptions = [];
         foreach ($degrees as $degree) {
             $degreeOptions[] = [

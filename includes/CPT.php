@@ -43,8 +43,17 @@ class CPT
     {
         add_meta_box(
             'degree_program_metabox',
-            'Post Meta',
+            'Post Meta German',
             [$this, 'degree_program_metabox'],
+            'degree-program',
+            'normal',
+            'high'
+        );
+
+        add_meta_box(
+            'degree_program_metabox_english',
+            'Post Meta English',
+            [$this, 'degree_program_metabox_english'],
             'degree-program',
             'normal',
             'high'
@@ -56,10 +65,21 @@ class CPT
         $aPostMeta = get_post_meta($post->ID);
 
         foreach ($aPostMeta as $key => $aEntry) {
-            //var_dump($aEntry[0]);
+            if (str_starts_with($key, '_')) continue;
             $val = (is_serialized($aEntry[0]) ? unserialize($aEntry[0]) : $aEntry[0]);
 
-            echo '<span><strong>' . $key . ':</strong></span><br />' . Utils::arrayToHtmlList($val) . "<hr>";
+            echo '<span><strong>' . $key . ':</strong></span><br />' . Utils::arrayToHtmlList($val) . '<hr>';
+        }
+    }
+
+    public function degree_program_metabox_english($post)
+    {
+        $translations = get_post_meta($post->ID, 'translations', true);
+        $en = $translations['en'];
+        foreach ($en as $key => $value) {
+            $value_formatted = (is_serialized($value) ? unserialize($value) : $value);
+
+            echo '<span><strong>' . $key . ':</strong></span><br />' . Utils::arrayToHtmlList($value_formatted) . '<hr>';
         }
     }
 

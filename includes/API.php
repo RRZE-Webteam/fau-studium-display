@@ -22,28 +22,14 @@ class API
         return false;
     }
 
-    public function get_programs($format = '', $show_empty = false, $lang = 'de') {
-        $transient_name = 'fau_studium_degree_programs_list' . ($format ? '_' . $format : '') . '_' . $lang;
+    public function get_programs($show_empty = false) {
+        $transient_name = 'fau_studium_degree_programs_list';
         $degree_programs = get_transient($transient_name);
-        //$degree_programs = false;
+        $degree_programs = false;
         if (false === $degree_programs) {
             $response = wp_remote_get($this->api_url);
             if (!is_wp_error($response)) {
-                $data = json_decode(wp_remote_retrieve_body($response), true);
-                foreach ($data as $k => $v) {
-                    $data[$k] = $this->get_localized_data($v, $lang);
-                }
-                if ($format === 'id_title') {
-                    $degree_programs = array_map(
-                        fn($item) => [
-                            'label' => $item[ 'title' ] . ' (' . $item[ 'degree' ][ 'abbreviation' ] . ')',
-                            'value' => (string)$item[ 'id' ],
-                        ],
-                        $data
-                    );
-                } else {
-                    $degree_programs = $data;
-                }
+                $degree_programs = json_decode(wp_remote_retrieve_body($response), true);
                 set_transient($transient_name, $degree_programs, DAY_IN_SECONDS);
             } else {
                 $degree_programs = [];
@@ -59,26 +45,33 @@ class API
         return $degree_programs;
     }
 
-    public function get_program($id, $lang) {
-        $transient_name = 'fau_studium_degree_program_' . $id . '_' . $lang;
-        $degree_program = get_transient($transient_name);
+    public function get_program($program_id, $lang) {
+        $transient_name = 'fau_studium_degree_program_' . $program_id;
+        //$degree_program = get_transient($transient_name);
         $degree_program = false;
         if (false === $degree_program || isset( $degree_program['code'])) {
-            $response = wp_remote_get($this->api_url.'/'.$id);
-            if (!is_wp_error($response)) {
-                $degree_program = json_decode(wp_remote_retrieve_body($response), true);
-                $degree_program = $this->get_localized_data($degree_program, $lang);
-                set_transient($transient_name, $degree_program, DAY_IN_SECONDS);
-            } else {
-                $degree_program = [];
+            $response = wp_remote_get($this->api_url.'/'.$program_id);
+            if (is_wp_error($response)) {
+                return [];
             }
+            $data = json_decode(wp_remote_retrieve_body($response), true);
+            set_transient($transient_name, $degree_program, DAY_IN_SECONDS);
+            switch ($lang) {
+                case 'en':
+                    $degree_program = $data['translations']['en'];
+                    break;
+                case 'de':
+                default:
+                    $degree_program = $data;
+            }
+
         }
 
         return $degree_program;
     }
 
     public function get_degrees($parents = false) {
-        $transient_name = 'fau_studium_degrees';
+        $transient_name = 'fau_studium_degrees' . ($parents ? '_parents' : '');
         $degrees = get_transient($transient_name);
         if (false === $degrees) {
             $degrees = [];

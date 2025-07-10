@@ -37,10 +37,9 @@ class Main
         wp_set_script_translations( $script_handle, 'fau-studium-display', plugin_dir_path( __DIR__ ) . 'languages' );
 
         // get degree program lists for combobox
-        $api = new API();
-        $degree_programs = $api->get_programs('id_title', true);
+        $degree_programs = Utils::get_program_options();
         $facultyOptions = Utils::get_faculty_options();
-        $degreeOptions = Utils::get_degree_options();
+        $degreeOptions = Utils::get_degree_options(true);
         $attributeOptions = Utils::get_attribute_options();
 
         // get format "grid" display options from config
@@ -109,13 +108,19 @@ class Main
     }
 
     public function enqueueAdminScripts(): void {
+        wp_register_style(
+            'fau-studium-display-admin',
+            plugin()->getUrl() . 'assets/css/fau-studium-display-admin.css',
+            [],
+            plugin()->getVersion()
+        );
         wp_register_script(
-            'fau-studium-display-admin-ajax',
-            plugins_url('assets/js/fau-studium-display-admin-ajax.min.js', plugin()->getFile()),
+            'fau-studium-display-admin',
+            plugins_url('assets/js/fau-studium-display-admin.min.js', plugin()->getFile()),
             ['jquery'],
             plugin()->getVersion()
         );
-        wp_localize_script('fau-studium-display-admin-ajax', 'program_ajax', [
+        wp_localize_script('fau-studium-display-admin', 'program_ajax', [
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce'    => wp_create_nonce('fau_studium_display_admin_ajax_nonce')
         ]);

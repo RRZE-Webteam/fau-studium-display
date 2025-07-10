@@ -1,0 +1,60 @@
+.settings_page_fau-studium-display {
+
+    .button-disabled {
+        pointer-events: none;
+    }
+
+    #degree-search-button {
+        margin-top: 1em;
+    }
+
+    span.dashicons.search-spinner {
+        font-size: 2em;
+        width: 1em;
+        height: 1em;
+        overflow: hidden;
+        color: inherit;
+        margin-left: .25em;
+    }
+
+    #degree-program-results {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding-top: 20px;
+
+        .program-item {
+            background: #fff;
+            box-shadow: 0px 4px 6px var(--color-ContentBorders, #dfe6ec);
+            border-radius: 4px;
+            padding: 1em;
+            flex: 0 0 320px;
+
+            .program-title {
+                font-weight: bold;
+                margin-bottom: 1em;
+            }
+            .add-degree-program {
+                span.dashicons {
+                    vertical-align: middle;
+                }
+            }
+            span.dashicons.sync-ok {
+                width: 1em;
+                color: #46B450;
+                font-size: 2em;
+                overflow: hidden;
+            }
+        }
+    }
+
+    .dashicons.spin {
+        animation: dashicons-spin 1s infinite linear;
+    }
+
+    @keyframes dashicons-spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+}
