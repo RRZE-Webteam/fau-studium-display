@@ -42,12 +42,30 @@ class Main
         $degreeOptions = Utils::get_degree_options(true);
         $attributeOptions = Utils::get_attribute_options();
 
-        // get format "grid" display options from config
+        // get display options from config
         $labels = get_labels('de');
+
         $items_grid = get_output_fields('grid');
         $items_grid_formatted = [];
         foreach ($items_grid as $item) {
             $items_grid_formatted[] = [
+                'label' => $labels[$item] ?? $item,
+                'value' => $item,
+            ];
+        }
+        $items_table = get_output_fields('table');
+        $items_table_formatted = [];
+        foreach ($items_table as $item) {
+            $items_table_formatted[] = [
+                'label' => $labels[$item] ?? $item,
+                'value' => $item,
+            ];
+        }
+
+        $items_full = get_output_fields('full');
+        $items_full_formatted = [];
+        foreach ($items_full as $item) {
+            $items_full_formatted[] = [
                 'label' => $labels[$item] ?? $item,
                 'value' => $item,
             ];
@@ -59,6 +77,8 @@ class Main
             'specialWaysOptions' => $attributeOptions,
             'degreesOptions' => $degreeOptions,
             'itemsGridOptions' => $items_grid_formatted,
+            'itemsTableOptions' => $items_table_formatted,
+            'itemsFullOptions' => $items_full_formatted,
         ]);
 
     }

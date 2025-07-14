@@ -11,8 +11,11 @@ class Data
         if (isset($atts['format']) && in_array($atts['format'], ['full', 'box'])) {
             $data = $this->get_single_program((int)$atts['degreeProgram'], $lang);
         } else {
-            $api = new API();
-            $programs = $api->get_programs('', false, $lang);
+
+            $programs = $this->get_programs($lang);
+
+            //$api = new API();
+            //$programs = $api->get_programs('', false, $lang);
 
             // Filter from block settings
             $filterBlock = [];
@@ -78,7 +81,7 @@ class Data
     public function get_single_program($program_id, $lang) {
 
         // check if the program exists as CPT
-        /*$program_imported = get_posts([
+        $program_imported = get_posts([
            'post_type'      => 'degree-program',
            'post_status'    => 'publish',
            'meta_key'       => 'id',
@@ -98,17 +101,42 @@ class Data
                     }
                     return $data;
             }
-        }*/
+        }
 
         // if not, fetch from API
-        // TODO: Neue Datenstruktur!
         $api = new API();
-        $program = $api->get_program($program_id, $lang);
-
-        return $program;
+        $program = $api->get_program($program_id);
+        return $api->get_localized_data($program, $lang);
     }
 
-    public function get_program_list() {
+    public function get_programs($lang = 'de') {
+        $programs_imported = get_posts([
+            'post_type'      => 'degree-program',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+        ]);
 
+        $data = [];
+        if (!empty($programs_imported)) {
+            switch ($lang) {
+                case 'en':
+                    foreach ($programs_imported as $program) {
+                        $data[$program->ID] = get_post_meta($program->ID, 'translations', true);
+                    }
+                    return $data;
+                case 'de':
+                default:
+                    foreach ($programs_imported as $program) {
+                        $post_meta = get_post_meta($program->ID, '', true);
+                        foreach ($post_meta as $key => $value) {
+                            if ($key == 'translations') continue;
+                            $data[$program->ID][$key] = is_serialized($value[0]) ? unserialize($value[0]) : $value[0];
+                        }
+
+                    }
+                    return $data;
+            }
+        }
+        return $data;
     }
 }

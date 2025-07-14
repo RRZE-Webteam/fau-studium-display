@@ -75,4 +75,34 @@ jQuery(document).ready(function($) {
             }
         });
     })
+
+    $('#degree-program-results').on('click', 'a.delete-degree-program', function(e) {
+        e.preventDefault();
+        let $this = $(this);
+        let task = $this.data('task');
+        $this.addClass('button-disabled');
+        $this.parent().find('a.add-degree-program button').remove();
+        $this.find('span.dashicons-trash').removeClass('dashicons-trash').addClass('dashicons-update').addClass('spin');
+console.log($this.data());
+        $.ajax({
+            url: program_ajax.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'program_delete',
+                _ajax_nonce: program_ajax.nonce,
+                post_id: $this.data('post_id'),
+            },
+            success: function(response) {
+                if (response.success) {
+                    $this.find('span.dashicons-update').removeClass('spin');
+                    $this.after('<span class="dashicons dashicons-yes sync-ok" title="Deleted">Deleted</span>');
+                } else {
+                    console.log('Fehler: ' + response.data);
+                }
+            },
+            error: function() {
+                console.log('AJAX-Fehler');
+            }
+        });
+    });
 });

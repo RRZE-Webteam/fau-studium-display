@@ -35,7 +35,7 @@ const Edit = ({
                   setAttributes,
               }: BlockEditProps<BlockAttributes>) => {
     const blockProps = useBlockProps();
-    const { degreeProgram, language, format = 'full', showSearch, showTitle = false } = attributes;
+    const { degreeProgram, language, format = 'full', showSearch, showTitle = true } = attributes;
     const [degreePrograms, setDegreePrograms] = useState(() => fauStudiumData?.degreePrograms ?? []);
     const [itemsGrid, setItemsGrid] = useState(() => fauStudiumData?.itemsGridOptions ?? []);
     const [faculties] = useState(() => fauStudiumData?.facultiesOptions ?? []);

@@ -45,7 +45,7 @@ class API
         return $degree_programs;
     }
 
-    public function get_program($program_id, $lang) {
+    public function get_program($program_id) {
         $transient_name = 'fau_studium_degree_program_' . $program_id;
         //$degree_program = get_transient($transient_name);
         $degree_program = false;
@@ -54,16 +54,8 @@ class API
             if (is_wp_error($response)) {
                 return [];
             }
-            $data = json_decode(wp_remote_retrieve_body($response), true);
+            $degree_program = json_decode(wp_remote_retrieve_body($response), true);
             set_transient($transient_name, $degree_program, DAY_IN_SECONDS);
-            switch ($lang) {
-                case 'en':
-                    $degree_program = $data['translations']['en'];
-                    break;
-                case 'de':
-                default:
-                    $degree_program = $data;
-            }
 
         }
 
@@ -226,7 +218,7 @@ class API
         return $areas_of_studys;
     }
 
-    private function get_localized_data($data, $lang = 'de') {
+    public function get_localized_data($data, $lang = 'de') {
         if ($lang == 'de') {
             unset($data['translations']);
         } elseif ($lang == 'en') {

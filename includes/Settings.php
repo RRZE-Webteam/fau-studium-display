@@ -19,6 +19,7 @@ class Settings {
         add_action('admin_init', [$this,'adminInit']);
         add_action('wp_ajax_program_search', [$this,'ajaxProgramSearch']);
         add_action('wp_ajax_program_sync', [$this,'ajaxProgramSync']);
+        add_action('wp_ajax_program_delete', [$this,'ajaxProgramDelete']);
         $this->title = plugin()->getName();
         $this->slug = plugin()->getSlug();
         $this->options = get_option('fau-studium-display', '');
@@ -48,7 +49,7 @@ class Settings {
         </div>
         <?php
         wp_enqueue_style('fau-studium-display-admin');
-        wp_enqueue_script('fau-studium-display-admin-ajax');
+        wp_enqueue_script('fau-studium-display-admin');
     }
 
     public function adminInit() {
@@ -148,6 +149,8 @@ class Settings {
         $atts['selectedDegrees'] = $degrees;
         $data = new Data();
         $programs = $data->get_data($atts);
+        $api = new API();
+        $programs = $api->get_programs();
 
         $output = '';
         foreach ($programs as $program) {
@@ -157,9 +160,9 @@ class Settings {
                 'post_status'    => 'publish',
                 'meta_query'     => [
                     ['key'       => 'id',
-                     'meta_value' => $program['id']],
+                     'value' => $program['id']],
                     ['key'       => 'lang',
-                     'meta_value' => $language,]
+                     'value' => $language,]
                 ],
             ]);
             if (empty($programs_imported)) {
@@ -169,6 +172,7 @@ class Settings {
                     'label' => __('Add', 'fau-studium-display'),
                     'icon'  => 'dashicons-plus',
                 ];
+                $button_delete = [];
             } else {
                 $button = [
                     'task' => 'update',
@@ -176,10 +180,18 @@ class Settings {
                     'label' => __('Update', 'fau-studium-display'),
                     'icon'  => 'dashicons-update',
                 ];
+                $button_delete = [
+                    'task' => 'delete',
+                    'post_id' => $programs_imported[0]->ID,
+                    'label' => __('Delete', 'fau-studium-display'),
+                    'icon'  => 'dashicons-trash',
+                ];
             }
-            $output .= '<div class="program-item">'
+            $output .= '<div class="program-item ' . $button['task'] . '-program">'
                 . '<div class="program-title">' . $program['title']. ' (' . $program['degree']['abbreviation'] . ')</div>'
-                . '<a class="add-degree-program button" data-id="' . $program['id'] . '" data-task="' . $button['task'] . '" data-post_id="' . $button['post_id'] . '"><span class="dashicons ' . $button['icon'] . '"></span> ' . $button['label'] . '</a>'
+                . '<div class="program-buttons"><a class="add-degree-program button" data-id="' . $program['id'] . '" data-task="' . $button['task'] . '" data-post_id="' . $button['post_id'] . '"><span class="dashicons ' . $button['icon'] . '"></span> ' . $button['label'] . '</a>'
+                . (!empty($button_delete) ? '<a class="delete-degree-program button" data-id="' . $program['id'] . '" data-task="' . $button_delete['task'] . '" data-post_id="' . $button['post_id'] . '"><span class="dashicons ' . $button_delete['icon'] . '"></span> ' . $button_delete['label'] . '</a>' : '')
+                . '</div>'
                 . '</div>';
         }
 
@@ -187,10 +199,10 @@ class Settings {
         wp_send_json_success($response);
     }
 
-    function ajaxProgramSync() {
-        //wp_send_json_success('1');
+    public function ajaxProgramSync() {
+
         if (!current_user_can('manage_options')) {
-            //wp_send_json_error('Keine Berechtigung');
+            wp_send_json_error('Keine Berechtigung');
         }
         check_ajax_referer('fau_studium_display_admin_ajax_nonce');
 
@@ -199,6 +211,21 @@ class Settings {
 
         $sync = new Sync();
         $result = $sync->sync_program($program_id, $post_id);
+
+        wp_send_json_success();
+    }
+
+    public function ajaxProgramDelete() {
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error('Keine Berechtigung');
+        }
+        check_ajax_referer('fau_studium_display_admin_ajax_nonce');
+
+        if (empty($_POST[ 'post_id' ])) {
+            wp_send_json_error('Post ID existiert nicht.');
+        }
+
+        wp_delete_post( $_POST[ 'post_id' ], true );
 
         wp_send_json_success();
     }

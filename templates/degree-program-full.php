@@ -13,7 +13,7 @@ if (empty($atts['degreeProgram'])) {
 
 $lang = $atts[ 'language' ] ?? 'de';
 $labels = get_labels($lang);
-//var_dump($labels);
+//print "<pre>"; var_dump($labels); print "</pre>";
 
 $number_of_students_raw = $data['number_of_students']['name'] ?? '';
 if (!empty($number_of_students_raw)) {
@@ -23,51 +23,51 @@ if (!empty($number_of_students_raw)) {
 
 $facts = [
     'degree' => [
-        'label' => __('Degree', 'fau-studium-display'),
+        'label' => $labels['degree'] ?? 'degree',
         'value' => $data['degree']['name'] ?? '',
         'itemprop' => 'educationalCredentialAwarded'
     ],
     'admission_requirements' => [
-        'label' => __('Admission Requirements', 'fau-studium-display'),
+        'label' => $labels['admission_requirements'] ?? 'admission_requirements',
         'value' => $data['admission_requirement_link']['name'] ?? '',
         'itemprop' => 'programPrerequisites'
     ],
     'standard_duration' => [
-        'label' => __('Standard Duration', 'fau-studium-display'),
+        'label' => $labels['standard_duration'] ?? 'standard_duration',
         'value' => (!empty($data['standard_duration']) ? sprintf(__('%s semesters', 'fau-studium-display'), $data['standard_duration']): ''),
         'itemprop' => 'timeToComplete'
     ],
     'teaching_language' => [
-        'label' => __('Teaching Language', 'fau-studium-display'),
+        'label' => $labels['teaching_language'] ?? 'teaching_language',
         'value' => $data['teaching_language'] ?? ''
     ],
     'faculty' => [
-        'label' => __('Faculty', 'fau-studium-display'),
+        'label' => $labels['faculty'] ?? 'faculty',
         'value' => $facts['faculty']['value'] = !empty($data['faculty']) ? implode(', ', array_column($data['faculty'], 'name')) : ''
     ],
     'start' => [
-        'label' => __('Start of Degree Program', 'fau-studium-display'),
+        'label' => $labels['start'] ?? 'start',
         'value' => !empty($data['start']) ? implode(', ', $data['start']) : '',
         //'itemprop' => 'startDate'
     ],
     'number_of_students' => [
-        'label' => __('Number of Students', 'fau-studium-display'),
+        'label' => $labels['number_of_students'] ?? 'number_of_students',
         'value' => $data['number_of_students']['name'] ?? '',
         'itemprop' => 'maximumEnrollment',
         'itemprop_content' => $number_of_students ?? ''
     ],
     'location' => [
-        'label' => __('Location', 'fau-studium-display'),
+        'label' => $labels['location'] ?? 'location',
         'value' => $data['location']['name'] ?? '',
     ],
-    'attribute' => [
-        'label' => __('Special ways to study', 'fau-studium-display'),
+    'attributes' => [
+        'label' => $labels['attributes'] ?? 'attributes',
         'value' => isset($data['attributes']) ? implode(', ', $data['attributes']) : '',
     ]
 ];
 
 $special_features = [
-    'label' => __('Special Features', 'fau-studium-display'),
+    'label' => $labels['special_features'] ?? 'special_features',
     'value' => $data['content']['special_features']['description'] ?? ''
 ];
 
@@ -269,15 +269,15 @@ if (!empty($data['subject_specific_advice']['link_text'])
 
             <div class="program-admission width-small">
 
-                <h2><?php _e('Your Path to University Admission', 'fau-studium-display'); ?></h2>
+                <h2><?php echo ($labels['path_to_admission'] ?? 'path_to_admission'); ?></h2>
 
                 <!-- Admission – General -->
 
                 <div class="program-admission-general">
-                    <h3><?php _e('Admission Requirements and Application', 'fau-studium-display'); ?></h3>
+                    <h3><?php echo( $labels['admission_requirement_application'] ?? 'admission_requirement_application'); ?></h3>
 
                     <?php if (!empty($admission_requirements)) { ?>
-                        <h4><?php _e('Admission Requirements', 'fau-studium-display'); ?></h4>
+                        <h4><?php echo ($labels['admission_requirements'] ?? 'admission_requirements'); ?></h4>
                         <ul>
                         <?php foreach ($admission_requirements as $requirement) { ?>
                             <li><?php echo wp_kses_post($requirement); ?></li>
@@ -286,7 +286,7 @@ if (!empty($data['subject_specific_advice']['link_text'])
                     <?php } ?>
 
                     <?php if (!empty($deadlines)) { ?>
-                        <h4><?php _e('Application Deadline', 'fau-studium-display'); ?></h4>
+                        <h4><?php echo $labels['application_deadline'] ?? 'application_deadline'; ?></h4>
                         <ul>
                         <?php foreach ($deadlines as $deadline) { ?>
                             <li><?php echo strip_tags($deadline); ?></li>
@@ -295,17 +295,17 @@ if (!empty($data['subject_specific_advice']['link_text'])
                     <?php } ?>
 
                     <?php if (!empty($language_skills)) { ?>
-                        <h4><?php _e('Language skills', 'fau-studium-display'); ?></h4>
+                        <h4><?php echo $labels['language_skills'] ?? 'language_skills'; ?></h4>
                         <p><?php echo strip_tags($language_skills); ?></p>
                     <?php } ?>
 
                     <?php if (!empty($content_related_master_requirements)) { ?>
-                        <h4><?php _e('Content-related admission requirements', 'fau-studium-display'); ?></h4>
+                        <h4><?php echo $labels['content_related_master_requirements'] ?? 'content_related_master_requirements'; ?></h4>
                         <?php echo wp_kses_post($content_related_master_requirements); ?>
                     <?php } ?>
 
                     <?php if (!empty($admission_details)) { ?>
-                        <h4><?php _e('Details and notes', 'fau-studium-display'); ?></h4>
+                        <h4><?php echo $labels['details_and_notes'] ?? 'details_and_notes'; ?></h4>
                         <?php echo wp_kses_post($admission_details); ?>
                     <?php } ?>
                 </div>
@@ -315,10 +315,10 @@ if (!empty($data['subject_specific_advice']['link_text'])
                 <?php if (!empty($internationals_admission_requirements)) { ?>
                 <div class="program-admission-internationals">
                     <div class="icon-globe"></div>
-                    <h3><?php _e('More Information for International Applicants', 'fau-studium-display'); ?></h3>
+                    <h3><?php echo $labels['more_info_for_international_applicants'] ?? 'more_info_for_international_applicants'; ?></h3>
 
                     <?php if (!empty($internationals_admission_requirements['german_language_skills'])) { ?>
-                        <h4><?php _e('German language skills', 'fau-studium-display'); ?></h4>
+                        <h4><?php echo $labels['german_language_skills'] ??'german_language_skills'; ?></h4>
                         <?php echo wp_kses_post($internationals_admission_requirements['german_language_skills']); ?>
                     <?php } ?>
 
@@ -333,7 +333,7 @@ if (!empty($data['subject_specific_advice']['link_text'])
         <?php if (isset($student_advice) || isset($subject_specific_advice)) { ?>
 
             <div class="student-advice width-small">
-                <h2><?php _e('Student Advice', 'fau-studium-display'); ?></h2>
+                <h2><?php echo $labels['student_advice'] ?? 'student_advice'; ?></h2>
                 <ul>
                 <?php if (isset($student_advice)) {
                     echo '<li>' . wp_kses_post($student_advice) . '</li>';
@@ -349,11 +349,11 @@ if (!empty($data['subject_specific_advice']['link_text'])
         <!-- Useful links -->
 
         <div class="useful-links width-medium">
-            <h2><?php _e('Useful Links', 'fau-studium-display'); ?></h2>
+            <h2><?php echo $labels['useful_links'] ?? 'useful_links'; ?></h2>
 
             <?php if (!empty($links_organizational)) { ?>
                 <div class="useful-links-organizational">
-                    <h3><?php _e('Organizational', 'fau-studium-display'); ?></h3>
+                    <h3><?php echo $labels['organizational'] ?? 'organizational'; ?></h3>
                     <ul>
                     <?php foreach ($links_organizational as $link) { ?>
                         <li><?php echo wp_kses_post($link); ?></li>
@@ -363,7 +363,7 @@ if (!empty($data['subject_specific_advice']['link_text'])
 
             <?php if (!empty($links_downloads)) { ?>
                 <div class="useful-links-downloads">
-                    <h3><?php _e('Downloads', 'fau-studium-display'); ?></h3>
+                    <h3><?php echo $labels['downloads'] ?? 'downloads'; ?></h3>
                     <ul>
                         <?php foreach ($links_downloads as $link) { ?>
                             <li><?php echo wp_kses_post($link); ?></li>
@@ -373,7 +373,7 @@ if (!empty($data['subject_specific_advice']['link_text'])
 
             <?php if (!empty($links_additional)) { ?>
                 <div class="useful-links-additional">
-                    <h3><?php _e('Additional Information', 'fau-studium-display'); ?></h3>
+                    <h3><?php echo $labels['additional_information'] ?? 'additional_information'; ?></h3>
                     <ul>
                         <?php foreach ($links_additional as $link) { ?>
                             <li><?php echo wp_kses_post($link); ?></li>

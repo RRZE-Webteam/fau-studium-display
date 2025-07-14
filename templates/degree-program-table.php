@@ -12,6 +12,9 @@ use function Fau\DegreeProgram\Display\Config\get_labels;
 //print_r($atts);
 //exit;
 
+if (empty($data))
+    return;
+
 $lang = $atts['language'] ?? 'de';
 $labels = get_labels($lang);
 //var_dump($labels); exit;

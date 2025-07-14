@@ -84,7 +84,9 @@ function get_output_fields($format = '') {
             'degree',
             'start',
             'location',
-            'admission_requirements'
+            'admission_requirements',
+            'german_language_skills_for_international_students',
+            'application_deadline',
         ],
         'list' => [
             'title'
@@ -231,6 +233,12 @@ function get_labels ($lang = 'de') {
                 'en' => 'Admission requirements link'
             ]
         ],
+        'admission_requirement_application' => [
+            'labels' => [
+                'de' => 'Zulassungsvoraussetzungen und Bewerbung',
+                'en' => 'Admission Requirements and Application'
+            ]
+        ],
         'details_and_notes' => [
             'labels' => [
                 'de' => 'Details und Anmerkungen',
@@ -280,6 +288,12 @@ function get_labels ($lang = 'de') {
             ]
         ],*/
         'student_advice' => [
+            'labels' => [
+                'de' => 'Studienberatung',
+                'en' => 'Student advice'
+            ]
+        ],
+        'main_student_advice' => [
             'labels' => [
                 'de' => 'Zentrale Studienberatung',
                 'en' => 'Student advice center'
@@ -345,6 +359,12 @@ function get_labels ($lang = 'de') {
                 'en' => 'Notes for international applicants'
             ]
         ],
+        'more_info_for_international_applicants' => [
+            'labels' => [
+                'de' => 'Ergänzende Hinweise zur Bewerbung für internationale Bewerber',
+                'en' => 'More Information for International Applicants'
+            ]
+        ],
         'student_initiatives' => [
             'labels' => [
                 'de' => 'Studentische Initiativen',
@@ -367,6 +387,12 @@ function get_labels ($lang = 'de') {
             'labels' => [
                 'de' => 'Voraussetzungen für Master',
                 'en' => 'Content related master requirements'
+            ]
+        ],
+        'application_deadline' => [
+            'labels' => [
+                'de' => 'Bewerbungsfrist',
+                'en' => 'Application deadline'
             ]
         ],
         'application_deadline_winter_semester' => [
@@ -393,6 +419,12 @@ function get_labels ($lang = 'de') {
                 'en' => 'Language skills at humanities faculty'
             ]
         ],
+        'german_language_skills' => [
+            'labels' => [
+                'de' => 'Deutschkenntnisse',
+                'en' => 'German language skills'
+            ]
+        ],
         'german_language_skills_for_international_students' => [
             'labels' => [
                 'de' => 'Deutschkenntnisse für internationale Studierende',
@@ -414,6 +446,48 @@ function get_labels ($lang = 'de') {
             'labels' => [
                 'de' => 'Webseite des Departments/Instituts',
                 'en' => 'Department/Institute website'
+            ]
+        ],
+        'path_to_admission' => [
+            'labels' => [
+                'de' => 'Dein Weg zum Studienplatz',
+                'en' => 'Your Path to University Admission'
+            ]
+        ],
+        'useful_links' => [
+            'labels' => [
+                'de' => 'Nützliche Links',
+                'en' => 'Useful Links'
+            ]
+        ],
+        'organizational' => [
+            'labels' => [
+                'de' => 'Organisatorisch',
+                'en' => 'Organizational'
+            ]
+        ],
+        'downloads' => [
+            'labels' => [
+                'de' => 'Downloads',
+                'en' => 'Downloads'
+            ]
+        ],
+        'additional_information' => [
+            'labels' => [
+                'de' => 'Weitere Informationen',
+                'en' => 'Additional Information'
+            ]
+        ],
+        'special_features' => [
+            'labels' => [
+                'de' => 'Besondere Hinweise',
+                'en' => 'Special Features'
+            ]
+        ],
+        'fact_sheet' => [
+            'labels' => [
+                'de' => 'Steckbrief',
+                'en' => 'Fact Sheet'
             ]
         ]
     ];

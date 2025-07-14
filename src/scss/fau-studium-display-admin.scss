@@ -29,12 +29,24 @@
             border-radius: 4px;
             padding: 1em;
             flex: 0 0 320px;
-
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            &.add-program {
+                border: 2px solid #2271b1;
+            }
             .program-title {
                 font-weight: bold;
                 margin-bottom: 1em;
             }
             .add-degree-program {
+                span.dashicons {
+                    vertical-align: middle;
+                }
+            }
+            .delete-degree-program {
+                //color: #dc3232;
+                margin-left: 1em;
                 span.dashicons {
                     vertical-align: middle;
                 }

@@ -24,12 +24,24 @@
   border-radius: 4px;
   padding: 1em;
   flex: 0 0 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.settings_page_fau-studium-display #degree-program-results .program-item.add-program {
+  border: 2px solid #2271b1;
 }
 .settings_page_fau-studium-display #degree-program-results .program-item .program-title {
   font-weight: bold;
   margin-bottom: 1em;
 }
 .settings_page_fau-studium-display #degree-program-results .program-item .add-degree-program span.dashicons {
+  vertical-align: middle;
+}
+.settings_page_fau-studium-display #degree-program-results .program-item .delete-degree-program {
+  margin-left: 1em;
+}
+.settings_page_fau-studium-display #degree-program-results .program-item .delete-degree-program span.dashicons {
   vertical-align: middle;
 }
 .settings_page_fau-studium-display #degree-program-results .program-item span.dashicons.sync-ok {
