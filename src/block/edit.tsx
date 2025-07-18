@@ -28,6 +28,7 @@ interface BlockAttributes {
     showSearch : boolean;
     showTitle : boolean;
     selectedItemsGrid: string[];
+    selectedItemsFull: string[];
 }
 
 const Edit = ({
@@ -38,10 +39,13 @@ const Edit = ({
     const { degreeProgram, language, format = 'full', showSearch, showTitle = true } = attributes;
     const [degreePrograms, setDegreePrograms] = useState(() => fauStudiumData?.degreePrograms ?? []);
     const [itemsGrid, setItemsGrid] = useState(() => fauStudiumData?.itemsGridOptions ?? []);
+    const [itemsFull, setItemsFull] = useState(() => fauStudiumData?.itemsFullOptions ?? []);
     const [faculties] = useState(() => fauStudiumData?.facultiesOptions ?? []);
     const [degrees] = useState(() => fauStudiumData?.degreesOptions ?? []);
     const [specialWays] = useState(() => fauStudiumData?.specialWaysOptions ?? []);
-    const { selectedItemsGrid = [], selectedFaculties = [], selectedDegrees = [], selectedSpecialWays = [],  } = attributes;
+    const {selectedItemsGrid = ["teaser_image", "title", "subtitle", "degree", "start", "admission_requirements", "area_of_study"]} = attributes;
+    const {selectedItemsFull = ["teaser_image", "title", "subtitle", "degree", "start", "admission_requirements", "area_of_study"]} = attributes;
+    const {selectedFaculties = [], selectedDegrees = [], selectedSpecialWays = []} = attributes;
     const [selectedFormat, setSelectedFormat] = useState<string>(format);
 
     const onChangeFormat = (value: string | null | undefined) => {
@@ -80,6 +84,15 @@ const Edit = ({
             : [...selectedItemsGrid, value];
 
         setAttributes({ selectedItemsGrid: [...updated] });
+
+    };
+
+    const toggleItemFull = (value: string) => {
+        const updated = selectedItemsFull.includes(value)
+            ? selectedItemsFull.filter((v: string) => v !== value)
+            : [...selectedItemsFull, value];
+
+        setAttributes({ selectedItemsFull: [...updated] });
 
     };
 
@@ -215,6 +228,19 @@ const Edit = ({
                                 label={item.label}
                                 checked={selectedItemsGrid.includes(item.value)}
                                 onChange={() => toggleItemGrid(item.value)}
+                            />
+                        ))}
+                    </PanelBody>
+                )}
+
+                {(selectedFormat === "full") && (
+                    <PanelBody title={__('Select items', 'fau-studium-display')} initialOpen={true}>
+                        {itemsFull.map((item: { label: string; value: string }) => (
+                            <CheckboxControl
+                                key={item.value}
+                                label={item.label}
+                                checked={selectedItemsFull.includes(item.value)}
+                                onChange={() => toggleItemFull(item.value)}
                             />
                         ))}
                     </PanelBody>

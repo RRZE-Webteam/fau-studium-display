@@ -51,3 +51,4 @@ node_modules
 package-lock.json
 *.po~
 *.pot~
+/composer.lock

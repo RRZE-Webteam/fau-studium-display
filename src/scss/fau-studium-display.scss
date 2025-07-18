@@ -206,26 +206,19 @@
         }
 
         .student-advice {
-            ul {
-                margin: 0;
-                padding: 0;
-            }
-            li {
-                list-style-type: none;
-                display: inline-block;
-                margin-right: 32px;
-                border: 1px solid var(--color-content-borders, #dfe6ec);
-                padding: 0;
-                &:last-child {
-                    margin-right: 0;
-                }
-            }
-            a {
-                padding: 16px 24px;
+            background-color: #1f4c7a;
+            .link-title {
                 display: block;
-                text-decoration: none;
                 font-weight: bold;
                 font-size: var(--P-Body-Text, 1.125rem);
+            }
+            .link-description {
+
+            }
+            a {
+                padding: 16px;
+                display: block;
+                text-decoration: none;
                 &:active, &:hover, &:focus {
                     background-color: var(--color-button-hover-bg, #041e42);
                     border-color: var(--color-button-hover-bg, #041e42);

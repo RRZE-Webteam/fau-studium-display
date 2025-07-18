@@ -10,53 +10,62 @@ function get_output_fields($format = '') {
             'teaser_image',
             'title',
             'subtitle',
-            'standard_duration',
-            'start',
-            'number_of_students',
-            'teaching_language',
-            'attributes',
-            'degree',
-            'faculty',
-            'location',
-            'subject_groups',
-            'videos',
+            'entry_text',
+            'fact_sheet',
+            //'degree',
+            //'admission_requirements',
+            //'admission_requirement_link',
+            //'standard_duration',
+            //'teaching_language',
+            //'faculty',
+            //'start',
+            //'number_of_students',
+            //'location',
+            //'attributes',
             'content.about',
             'content.structure',
             'content.specializations',
             'content.qualities_and_skills',
             'content.why_should_study',
             'content.career_prospects',
-            'admission_requirements',
-            'admission_requirement_link',
-            'details_and_notes',
-            'start_of_semester',
-            'semester_dates',
-            'examinations_office',
-            'examination_regulations',
-            'module_handbook',
-            'url',
-            'department',
+            'content.special_features',
+            'content.testimonials',
+            'videos',
+            'admission_requirements_application',
+            'admission_requirements_application_internationals',
             'student_advice',
             'subject_specific_advice',
-            'service_centers',
-            'info_brochure',
-            'semester_fee',
-            'abroad_opportunities',
-            'keywords',
-            'area_of_study',
-            'combinations',
-            'limited_combinations',
-            'notes_for_international_applicants',
-            'student_initiatives',
-            'apply_now_link',
-            'entry_text',
-            'content_related_master_requirements',
-            'application_deadline_winter_semester',
-            'application_deadline_summer_semester',
-            'language_skills',
-            'language_skills_humanities_faculty',
-            'german_language_skills_for_international_students',
-            'degree_program_fees'
+            'links.organizational',
+            'links.downloads',
+            'links.additional_information'
+
+            //'subject_groups',
+            //'details_and_notes',
+            //'start_of_semester',
+            //'semester_dates',
+            //'examinations_office',
+            //'examination_regulations',
+            //'module_handbook',
+            //'url',
+            //'department',
+            //'service_centers',
+            //'info_brochure',
+            //'semester_fee',
+            //'abroad_opportunities',
+            //'keywords',
+            //'area_of_study',
+            //'combinations',
+            //'limited_combinations',
+            //'notes_for_international_applicants',
+            //'student_initiatives',
+            //'apply_now_link',
+            //'content_related_master_requirements',
+            //'application_deadline_winter_semester',
+            //'application_deadline_summer_semester',
+            //'language_skills',
+            //'language_skills_humanities_faculty',
+            //'german_language_skills_for_international_students',
+            //'degree_program_fees'
         ],
         'box' => [
             'title',
@@ -99,7 +108,7 @@ function get_output_fields($format = '') {
     return $output_fields;
 }
 
-function get_labels ($lang = 'de') {
+function get_labels ($lang = 'de', $task = 'labels') {
     $labels = [
         'featured_image' => [
             'labels' => [
@@ -221,6 +230,18 @@ function get_labels ($lang = 'de') {
                 'en' => 'Content: Career prospects'
             ]
         ],
+        'content.special_features' => [
+            'labels' => [
+                'de' => 'Inhalt: Besondere Hinweise',
+                'en' => 'Content: Special features'
+            ]
+        ],
+        'content.testimonials' => [
+            'labels' => [
+                'de' => 'Inhalt: Erfahrungsberichte',
+                'en' => 'Content: Testimonials'
+            ]
+        ],
         'admission_requirements' => [
             'labels' => [
                 'de' => 'Zugangsvoraussetzungen',
@@ -233,10 +254,16 @@ function get_labels ($lang = 'de') {
                 'en' => 'Admission requirements link'
             ]
         ],
-        'admission_requirement_application' => [
+        'admission_requirements_application' => [
             'labels' => [
                 'de' => 'Zulassungsvoraussetzungen und Bewerbung',
                 'en' => 'Admission Requirements and Application'
+            ]
+        ],
+        'admission_requirements_application_internationals' => [
+            'labels' => [
+                'de' => 'Ergänzende Hinweise zur Bewerbung für Internationale',
+                'en' => 'More Information for International Applicants'
             ]
         ],
         'details_and_notes' => [
@@ -297,13 +324,21 @@ function get_labels ($lang = 'de') {
             'labels' => [
                 'de' => 'Zentrale Studienberatung',
                 'en' => 'Student advice center'
-            ]
+            ],
+            'description' => [
+                'de' => 'Die Zentrale Studienberatung ist deine Anlaufstelle für alle Fragen rund ums Studium und den Studieneinstieg.',
+                'en' => 'Die Zentrale Studienberatung ist deine Anlaufstelle für alle Fragen rund ums Studium und den Studieneinstieg.', // ToDo: Übersetzung
+            ],
         ],
         'subject_specific_advice' => [
             'labels' => [
                 'de' => 'Spezifische Studienberatung',
                 'en' => 'Specific Student Advice'
-            ]
+            ],
+            'description' => [
+                'de' => 'Die Studien-Servcie-Center und Studienfachberater unterstützen dich bei der Planung deines Studiums.',
+                'en' => 'Die Studien-Servcie-Center und Studienfachberater unterstützen dich bei der Planung deines Studiums.', // ToDo: Übersetzung
+            ],
         ],
         'service_centers' => [
             'labels' => [
@@ -466,16 +501,34 @@ function get_labels ($lang = 'de') {
                 'en' => 'Organizational'
             ]
         ],
+        'links.organizational' => [
+            'labels' => [
+                'de' => 'Links: Organisatorisch',
+                'en' => 'Links: Organizational'
+            ]
+        ],
         'downloads' => [
             'labels' => [
                 'de' => 'Downloads',
                 'en' => 'Downloads'
             ]
         ],
+        'links.downloads' => [
+            'labels' => [
+                'de' => 'Links: Downloads',
+                'en' => 'Links: Downloads'
+            ]
+        ],
         'additional_information' => [
             'labels' => [
                 'de' => 'Weitere Informationen',
                 'en' => 'Additional Information'
+            ]
+        ],
+        'links.additional_information' => [
+            'labels' => [
+                'de' => 'Links: Weitere Informationen',
+                'en' => 'Links: Additional Information'
             ]
         ],
         'special_features' => [
@@ -489,21 +542,35 @@ function get_labels ($lang = 'de') {
                 'de' => 'Steckbrief',
                 'en' => 'Fact Sheet'
             ]
-        ]
+        ],
     ];
 
     $labels_out = [];
-    $lang_alt = $lang == 'de' ? 'en' : 'de';
-    foreach ($labels as $key => $translations) {
-        if (!empty($translations[ 'labels' ][ $lang ])) { // return selected translation
-            $labels_out[  $key ] = $labels[ $key ][ 'labels' ][ $lang ];
-            continue;
+    $lang_alt   = $lang == 'de' ? 'en' : 'de';
+    if ($task == 'description') {
+        foreach ($labels as $key => $translations) {
+            if ( ! empty($translations[ 'description' ][ $lang ])) { // return selected translation
+                $labels_out[ $key ] = $translations[ 'description' ][ $lang ];
+                continue;
+            }
+            if ( ! empty($translations[ 'description' ][ $lang_alt ])) { // return alternative language
+                $labels_out[ $key ] = $translations[ 'description' ][ $lang_alt ];
+                continue;
+            }
+            $labels_out[ $key ] = $key; // return key if no translation is found
         }
-        if (!empty($translations[ 'labels' ][ $lang_alt ])) { // return alternative language
-            $labels_out[  $key ] = $labels[ $key ][ 'labels' ][ $lang_alt ];
-            continue;
+    } else {
+        foreach ($labels as $key => $translations) {
+            if ( ! empty($translations[ 'labels' ][ $lang ])) { // return selected translation
+                $labels_out[ $key ] = $translations[ 'labels' ][ $lang ];
+                continue;
+            }
+            if ( ! empty($translations[ 'labels' ][ $lang_alt ])) { // return alternative language
+                $labels_out[ $key ] = $translations[ 'labels' ][ $lang_alt ];
+                continue;
+            }
+            $labels_out[ $key ] = $key; // return key if no translation is found
         }
-        $labels_out[  $key ] = $key; // return key if no translation is found
     }
 
     return $labels_out;

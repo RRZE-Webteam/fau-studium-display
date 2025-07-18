@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-02T07:57:55+00:00\n"
+"POT-Creation-Date: 2025-07-18T11:05:49+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: fau-studium-display\n"
@@ -34,20 +34,196 @@ msgstr ""
 msgid "RRZE Webteam"
 msgstr ""
 
-#: includes/API.php:39
+#. translators: 1: Server WordPress version number, 2: Required WordPress version number.
+#: fau-studium-display.php:189
+msgid "The server is running WordPress version %1$s. The plugin requires at least WordPress version %2$s."
+msgstr ""
+
+#. translators: 1: Server PHP version number, 2: Required PHP version number.
+#: fau-studium-display.php:199
+msgid "The server is running PHP version %1$s. The plugin requires at least PHP version %2$s."
+msgstr ""
+
+#. translators: 1: The plugin name, 2: The error string.
+#: fau-studium-display.php:214
+msgid "Plugins: %1$s: %2$s"
+msgstr ""
+
+#: includes/API.php:40
 msgid "-- Please select --"
 msgstr ""
 
-#: includes/CPT.php:22
+#: includes/CPT.php:25
 msgid "Degree Programs"
 msgstr ""
 
-#: includes/Main.php:102
+#: includes/Main.php:105
 msgid "RRZE"
 msgstr ""
 
+#: includes/Settings.php:27
+#: includes/Settings_alt.php:32
+msgid "Settings"
+msgstr ""
+
+#: includes/Settings.php:39
+#: includes/Settings.php:71
+msgid "API"
+msgstr ""
+
+#: includes/Settings.php:40
+#: includes/Settings.php:86
+msgid "Sync"
+msgstr ""
+
+#: includes/Settings.php:41
+#: includes/Settings.php:107
+#: includes/Settings_alt.php:26
+msgid "Layout"
+msgstr ""
+
+#: includes/Settings.php:78
+#: includes/Settings_alt.php:50
+msgid "DIP Edu API Key"
+msgstr ""
+
+#: includes/Settings.php:79
+#: includes/Settings_alt.php:146
+msgid "API Key can be obtained from the API-Service at <a href=\"https://api.fau.de/pub/v1/edu/__doc\">https://api.fau.de/pub/v1/edu/__doc</a>."
+msgstr ""
+
+#: includes/Settings.php:92
+msgid "Search for degree programs to import or sync"
+msgstr ""
+
+#: includes/Settings.php:99
+#: includes/Settings.php:272
+#: includes/Settings_alt.php:175
+#: includes/Utils.php:31
+#: includes/Utils.php:33
+msgid "Search"
+msgstr ""
+
+#: includes/Settings.php:113
+#: includes/Settings_alt.php:57
+msgid "Section \"Apply now\""
+msgstr ""
+
+#: includes/Settings.php:120
+#: includes/Settings_alt.php:60
+msgid "Title"
+msgstr ""
+
+#: includes/Settings.php:123
+msgid "Apply now!"
+msgstr ""
+
+#: includes/Settings.php:127
+#: includes/Settings_alt.php:63
+msgid "Text"
+msgstr ""
+
+#: includes/Settings.php:130
+msgid "on campo, the FAU application portal"
+msgstr ""
+
+#: includes/Settings.php:134
+#: includes/Settings_alt.php:66
+msgid "Link Text"
+msgstr ""
+
+#: includes/Settings.php:141
+#: includes/Settings_alt.php:69
+msgid "Link URL"
+msgstr ""
+
+#: includes/Settings.php:148
+#: includes/Settings.php:175
+#: includes/Settings_alt.php:72
+#: includes/Settings_alt.php:77
+msgid "Image"
+msgstr ""
+
+#: includes/Settings.php:156
+#: includes/Settings.php:183
+#: includes/Settings.php:210
+#: includes/Settings.php:231
+msgid "Add or Upload File"
+msgstr ""
+
+#: includes/Settings.php:168
+#: includes/Settings_alt.php:74
+msgid "Section \"More Information for International Applicants\""
+msgstr ""
+
+#: includes/Settings.php:195
+msgid "Section \"Student Advice\""
+msgstr ""
+
+#: includes/Settings.php:202
+msgid "Image for Student Advice Center"
+msgstr ""
+
+#: includes/Settings.php:223
+msgid "Image for Specific Student Advice"
+msgstr ""
+
+#: includes/Settings.php:253
+#: includes/Settings_alt.php:156
+msgid "Select Faculty"
+msgstr ""
+
+#: includes/Settings.php:258
+#: includes/Settings_alt.php:161
+msgid "Select Degree"
+msgstr ""
+
+#: includes/Settings.php:263
+#: includes/Settings_alt.php:166
+msgid "Select Language"
+msgstr ""
+
+#: includes/Settings.php:265
+#: includes/Settings_alt.php:168
+#: build/block/index.js:208
+msgid "German"
+msgstr ""
+
+#: includes/Settings.php:266
+#: includes/Settings_alt.php:169
+#: build/block/index.js:211
+msgid "English"
+msgstr ""
+
+#: includes/Settings.php:317
+#: includes/Settings_alt.php:220
+msgid "Add"
+msgstr ""
+
+#: includes/Settings.php:325
+#: includes/Settings_alt.php:228
+msgid "Update"
+msgstr ""
+
+#: includes/Settings.php:331
+#: includes/Settings_alt.php:234
+msgid "Delete"
+msgstr ""
+
+#: includes/Settings_alt.php:25
+msgid "Import"
+msgstr ""
+
+#: includes/Settings_alt.php:51
+msgid "Search for degree programs to import"
+msgstr ""
+
+#: includes/Settings_alt.php:142
+msgid "The API key is being used from the network installation."
+msgstr ""
+
 #: includes/Utils.php:14
-#: build/block/index.js:204
+#: build/block/index.js:226
 msgid "Degrees"
 msgstr ""
 
@@ -56,9 +232,7 @@ msgid "Subject groups"
 msgstr ""
 
 #: includes/Utils.php:16
-#: templates/degree-program-box.php:58
-#: templates/degree-program-full.php:64
-#: build/block/index.js:210
+#: build/block/index.js:232
 msgid "Special ways to study"
 msgstr ""
 
@@ -75,8 +249,6 @@ msgid "Study location"
 msgstr ""
 
 #: includes/Utils.php:22
-#: templates/degree-program-box.php:39
-#: templates/degree-program-full.php:45
 msgid "Faculty"
 msgstr ""
 
@@ -84,217 +256,115 @@ msgstr ""
 msgid "Area of study"
 msgstr ""
 
-#: includes/Utils.php:31
-#: includes/Utils.php:33
-msgid "Search"
-msgstr ""
-
 #: includes/Utils.php:32
 msgid "Please enter search term..."
 msgstr ""
 
-#: includes/Utils.php:67
+#: includes/Utils.php:73
 msgid "Advanced filters"
 msgstr ""
 
-#: includes/Utils.php:71
+#: includes/Utils.php:77
 msgid "Reset all filters"
 msgstr ""
 
-#: templates/degree-program-box.php:20
-#: templates/degree-program-full.php:26
-msgid "Degree"
-msgstr ""
-
-#: templates/degree-program-box.php:25
-#: templates/degree-program-full.php:31
-#: templates/degree-program-full.php:280
-msgid "Admission Requirements"
-msgstr ""
-
-#: templates/degree-program-box.php:30
-#: templates/degree-program-full.php:36
-msgid "Standard Duration"
-msgstr ""
-
-#: templates/degree-program-box.php:31
-#: templates/degree-program-full.php:37
+#: templates/degree-program-box.php:37
+#: templates/degree-program-full.php:67
 msgid "%s semesters"
 msgstr ""
 
-#: templates/degree-program-box.php:35
-#: templates/degree-program-full.php:41
-msgid "Teaching Language"
+#: templates/degree-program-full.php:11
+msgid "Please select a degree program."
 msgstr ""
 
-#: templates/degree-program-box.php:43
-#: templates/degree-program-full.php:49
-msgid "Start of Degree Program"
-msgstr ""
-
-#: templates/degree-program-box.php:48
-#: templates/degree-program-full.php:54
-msgid "Number of Students"
-msgstr ""
-
-#: templates/degree-program-box.php:54
-#: templates/degree-program-full.php:60
-msgid "Location"
-msgstr ""
-
-#: templates/degree-program-box.php:64
-#: templates/degree-program-full.php:70
-msgid "Special Features"
-msgstr ""
-
-#: templates/degree-program-box.php:76
-#: templates/degree-program-full.php:219
+#: templates/degree-program-full.php:113
 msgid "Fact Sheet"
 msgstr ""
 
-#: templates/degree-program-full.php:84
+#: templates/degree-program-full.php:162
 msgid "1st semester"
 msgstr ""
 
-#: templates/degree-program-full.php:87
+#: templates/degree-program-full.php:165
 msgid "Higher semesters"
 msgstr ""
 
-#: templates/degree-program-full.php:91
+#: templates/degree-program-full.php:168
 msgid "Master"
 msgstr ""
 
-#: templates/degree-program-full.php:95
+#: templates/degree-program-full.php:174
 msgid "Winter semester"
 msgstr ""
 
-#: templates/degree-program-full.php:95
-#: templates/degree-program-full.php:96
+#: templates/degree-program-full.php:174
+#: templates/degree-program-full.php:175
 msgid "not possible"
 msgstr ""
 
-#: templates/degree-program-full.php:96
+#: templates/degree-program-full.php:175
 msgid "Summer semester"
 msgstr ""
 
-#: templates/degree-program-full.php:272
-msgid "Your Path to University Admission"
-msgstr ""
-
-#: templates/degree-program-full.php:277
-msgid "Admission Requirements and Application"
-msgstr ""
-
-#: templates/degree-program-full.php:289
-msgid "Application Deadline"
-msgstr ""
-
-#: templates/degree-program-full.php:298
-msgid "Language skills"
-msgstr ""
-
-#: templates/degree-program-full.php:303
-msgid "Content-related admission requirements"
-msgstr ""
-
-#: templates/degree-program-full.php:308
-msgid "Details and notes"
-msgstr ""
-
-#: templates/degree-program-full.php:318
-msgid "More Information for International Applicants"
-msgstr ""
-
-#: templates/degree-program-full.php:321
-msgid "German language skills"
-msgstr ""
-
-#: templates/degree-program-full.php:336
-msgid "Student Advice"
-msgstr ""
-
-#: templates/degree-program-full.php:352
-msgid "Useful Links"
-msgstr ""
-
-#: templates/degree-program-full.php:356
-msgid "Organizational"
-msgstr ""
-
-#: templates/degree-program-full.php:366
-msgid "Downloads"
-msgstr ""
-
-#: templates/degree-program-full.php:376
-msgid "Additional Information"
-msgstr ""
-
 #: templates/degree-program-grid.php:86
-#: templates/degree-program-table.php:75
+#: templates/degree-program-table.php:85
 msgid "No degree programs found."
 msgstr ""
 
-#: build/block/index.js:148
+#: build/block/index.js:163
 msgid "General Settings"
 msgstr ""
 
-#: build/block/index.js:151
+#: build/block/index.js:166
 msgid "Format"
 msgstr ""
 
-#: build/block/index.js:154
+#: build/block/index.js:169
 msgid "Full"
 msgstr ""
 
-#: build/block/index.js:159
+#: build/block/index.js:174
 msgid "Infobox"
 msgstr ""
 
-#: build/block/index.js:162
+#: build/block/index.js:177
 msgid "Grid"
 msgstr ""
 
-#: build/block/index.js:165
+#: build/block/index.js:180
 msgid "Table"
 msgstr ""
 
-#: build/block/index.js:168
+#: build/block/index.js:183
 msgid "List"
 msgstr ""
 
-#: build/block/index.js:174
+#: build/block/index.js:189
 msgid "Show Search"
 msgstr ""
 
-#: build/block/index.js:178
-msgid "Show Title"
-msgstr ""
-
-#: build/block/index.js:183
-msgid "Language"
-msgstr ""
-
-#: build/block/index.js:186
-msgid "German"
-msgstr ""
-
-#: build/block/index.js:189
-msgid "English"
-msgstr ""
-
-#: build/block/index.js:195
-msgid "Filter Programs"
-msgstr ""
-
-#: build/block/index.js:198
-msgid "Faculties"
-msgstr ""
-
-#: build/block/index.js:217
+#: build/block/index.js:194
 msgid "Degree Program"
 msgstr ""
 
-#: build/block/index.js:224
+#: build/block/index.js:200
+msgid "Show Title"
+msgstr ""
+
+#: build/block/index.js:205
+msgid "Language"
+msgstr ""
+
+#: build/block/index.js:217
+msgid "Filter Programs"
+msgstr ""
+
+#: build/block/index.js:220
+msgid "Faculties"
+msgstr ""
+
+#: build/block/index.js:239
+#: build/block/index.js:247
 msgid "Select items"
 msgstr ""
 
