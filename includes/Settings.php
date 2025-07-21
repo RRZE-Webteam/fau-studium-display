@@ -49,30 +49,31 @@ class Settings
         }
         echo '</h2>';
 
-        switch ($active_tab) {
-            case 'api':
-                cmb2_metabox_form($this->slug.'_api', $this->slug);
-                break;
-            case 'sync':
-                cmb2_metabox_form($this->slug.'_sync', $this->slug);
-                break;
-            case 'layout':
-            default:
-                cmb2_metabox_form($this->slug.'_layout', $this->slug);
-                break;
+        $metabox_args = [
+            'save_button'   => __('Save changes', 'fau-studium-display'),
+        ];
+
+        if (!array_key_exists($active_tab, $tabs)) {
+            $active_tab = 'layout'; // Fallback
         }
+
+        cmb2_metabox_form(
+            $this->slug . '_' . $active_tab,
+            $this->slug . '_' . $active_tab,
+            $metabox_args
+        );
 
         echo '</div>';
     }
     
     public function register_settings() {
-        $api_options = new_cmb2_box(array(
+        $api_options = new_cmb2_box([
             'id' => $this->slug.'_api',
             'title' => __('API', 'fau-studium-display'),
-            'object_types' => array('options-page'),
+            'object_types' => ['options-page'],
             'option_key' => $this->slug.'_api',
             'parent_slug' => $this->slug,
-        ));
+        ]);
         $api_options->add_field([
             'id' => 'dip-edu-api-key',
             'name' => esc_html__('DIP Edu API Key', 'fau-studium-display'),
@@ -80,20 +81,20 @@ class Settings
             'type' => 'text',
             'default' => '',
         ]);
-//Search for degree programs to import
+        //Search for degree programs to import
         $sync_options = new_cmb2_box([
             'id' => $this->slug.'_sync',
             'title' => __('Sync', 'fau-studium-display'),
-            'object_types' => array('options-page'),
+            'object_types' => ['options-page'],
             'option_key' => $this->slug.'_sync',
             'parent_slug' => $this->slug,
         ]);
-        $sync_options->add_field( array(
+        $sync_options->add_field( [
             'name' => __('Search for degree programs to import or sync', 'fau-studium-display'),
             //'desc' => __('', 'fau-studium-display'),
             'type' => 'title',
             'id'   => 'apply_now_heading'
-        ) );
+        ]);
         $sync_options->add_field([
             'id' => 'sync-settings',
             'name' => esc_html__('Search', 'fau-studium-display'),
@@ -105,16 +106,16 @@ class Settings
         $layout_options = new_cmb2_box([
             'id' => $this->slug.'_layout',
             'title' => __('Layout', 'fau-studium-display'),
-            'object_types' => array('options-page'),
+            'object_types' => ['options-page'],
             'option_key' => $this->slug.'_layout',
             'parent_slug' => $this->slug,
         ]);
-        $layout_options->add_field( array(
+        $layout_options->add_field( [
             'name' => __('Section "Apply now"', 'fau-studium-display'),
             //'desc' => __('', 'fau-studium-display'),
             'type' => 'title',
             'id'   => 'apply_now_heading'
-        ) );
+        ] );
         $layout_options->add_field([
             'id' => 'apply-now-title',
             'name' => esc_html__('Title', 'fau-studium-display'),
@@ -152,9 +153,9 @@ class Settings
            'options' => [
                'url' => false, // Hide the text input for the url
            ],
-           'text'    => array(
+           'text'    => [
                'add_upload_file_text' => __('Add or Upload File', 'fau-studium-display'),
-           ),
+           ],
            'query_args' => [
                'type' => [
                 	'image/gif',
@@ -164,12 +165,12 @@ class Settings
            ],
            'preview_size' => 'large',
         ]);
-        $layout_options->add_field( array(
+        $layout_options->add_field( [
             'name' => __('Section "More Information for International Applicants"', 'fau-studium-display'),
             //'desc' => __('', 'fau-studium-display'),
             'type' => 'title',
             'id'   => 'internationals_heading'
-        ) );
+        ] );
         $layout_options->add_field([
            'id' => 'internationals-image',
            'name' => esc_html__('Image', 'fau-studium-display'),
@@ -179,9 +180,9 @@ class Settings
            'options' => [
                'url' => false, // Hide the text input for the url
            ],
-           'text'    => array(
+           'text'    => [
                'add_upload_file_text' => __('Add or Upload File', 'fau-studium-display'),
-           ),
+           ],
            'query_args' => [
                'type' => [
                    'image/gif',
@@ -189,16 +190,16 @@ class Settings
                    'image/png',
                ],
            ],
-           'preview_size' => 'large',
+           'preview_size' => 'medium',
        ]);
-        $layout_options->add_field( array(
+        $layout_options->add_field( [
             'name' => __('Section "Student Advice"', 'fau-studium-display'),
             //'desc' => __('', 'fau-studium-display'),
             'type' => 'title',
             'id'   => 'student_advice_heading'
-        ) );
+        ] );
         $layout_options->add_field([
-           'id' => 'general-student-advice-general-image',
+           'id' => 'general-student-advice-image',
            'name' => esc_html__('Image for Student Advice Center', 'fau-studium-display'),
            //'desc' => __('', 'fau-studium-display'),
            'type' => 'file',
@@ -206,9 +207,9 @@ class Settings
            'options' => [
                'url' => false, // Hide the text input for the url
            ],
-           'text'    => array(
+           'text'    => [
                'add_upload_file_text' => __('Add or Upload File', 'fau-studium-display'),
-           ),
+           ],
            'query_args' => [
                'type' => [
                    'image/gif',
@@ -216,10 +217,10 @@ class Settings
                    'image/png',
                ],
            ],
-           'preview_size' => 'large',
+           'preview_size' => 'medium',
         ]);
         $layout_options->add_field([
-           'id' => 'specific-student-advice-specific-image',
+           'id' => 'specific-student-advice-image',
            'name' => esc_html__('Image for Specific Student Advice', 'fau-studium-display'),
            //'desc' => __('', 'fau-studium-display'),
            'type' => 'file',
@@ -227,9 +228,9 @@ class Settings
            'options' => [
                'url' => false, // Hide the text input for the url
            ],
-           'text'    => array(
+           'text'    => [
                'add_upload_file_text' => __('Add or Upload File', 'fau-studium-display'),
-           ),
+           ],
            'query_args' => [
                'type' => [
                    'image/gif',
@@ -237,7 +238,7 @@ class Settings
                    'image/png',
                ],
            ],
-           'preview_size' => 'large',
+           'preview_size' => 'medium',
        ]);
 
         wp_enqueue_style('fau-studium-display-admin');

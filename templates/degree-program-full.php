@@ -231,6 +231,7 @@ if (in_array('admission_requirements_application', $items)) {
 }
 
 // More Information for International Applicants
+//var_dump(cmb2_get_option('fau-studium-display_layout', 'apply-now-image'));
 if (in_array('admission_requirements_application_internationals', $items)) {
     $internationals_admission_requirements = [];
     if (!empty($data['german_language_skills_for_international_students']['link_text'])
@@ -251,19 +252,54 @@ if (in_array('admission_requirements_application_internationals', $items)) {
                  . '<p>'. $internationals_admission_requirements['german_language_skills'] . '</p>';
         }
 
+        $admission_requirements_application_internationals_img = cmb2_get_option('fau-studium-display_layout', 'internationals-image_id');
+        if (!empty($admission_requirements_application_internationals_img)) {
+            $admission_requirements_application_internationals .= wp_get_attachment_image((int)$admission_requirements_application_internationals_img, 'full');
+        }
+
         $admission_requirements_application_internationals .= '</div>';
    }
 } else {
     $admission_requirements_application_internationals = '';
 }
 
+// Apply now!
+if (in_array('apply_now_link', $items)) {
+    $apply_now_title = cmb2_get_option('fau-studium-display_layout', 'apply-now-title');
+    $apply_now_text = cmb2_get_option('fau-studium-display_layout', 'apply-now-text');
+    $apply_now_link_text = cmb2_get_option('fau-studium-display_layout', 'apply-now-link-text');
+    $apply_now_link_url = cmb2_get_option('fau-studium-display_layout', 'apply-now-link-url');
+    $apply_now_image_id = cmb2_get_option('fau-studium-display_layout', 'apply-now-image_id');
+    if (!empty($apply_now_title) && !empty($apply_now_text) && !empty($apply_now_link_text) && !empty($apply_now_link_url) && !empty($apply_now_image_id)) {
+        $apply_now = '<div class="program-apply-now width-medium">'
+            . wp_get_attachment_image((int)$apply_now_image_id, 'full')
+            . '<div class="apply-now-wrapper">'
+            . '<span class="apply-now-title">' . $apply_now_title . '</span>'
+            . '<span class="apply-now-text">' . $apply_now_text . '</span>'
+            . '<a class="apply-now-link" href="' . $apply_now_link_url . '">' . $apply_now_link_text . '<span class="icon-arrow-right"</span></a>'
+            . '</div>'
+            . '</div>';
+    } else {
+        $apply_now = '';
+    }
+} else {
+    $apply_now = '';
+}
+
 // Button Student Advice
 if (in_array('student_advice', $items)
     && !empty($data['student_advice']['link_text'])
     && !empty($data['student_advice']['link_url'])) {
-        $student_advice = '<a href="' . $data['student_advice']['link_url'] . '">'
+        $student_advice_img = cmb2_get_option('fau-studium-display_layout', 'general-student-advice-image_id');
+        $student_advice = '<div class="advice-wrapper">';
+        if (!empty($student_advice_img)) {
+            $student_advice .= wp_get_attachment_image((int)$student_advice_img, 'full');
+        }
+        $student_advice .= '<a href="' . $data['student_advice']['link_url'] . '">'
             . '<span class="link-title">'. $data['student_advice']['link_text'] . '</span>'
-            . '<span class="link-description">'. $descriptions['main_student_advice'] . '</span></a>';
+            . '<span class="link-description">'. $descriptions['main_student_advice'] . '</span>'
+            . '<span class="icon-arrow-right"></span></a>';
+        $student_advice .= '</div>';
 } else {
     $student_advice = '';
 }
@@ -272,9 +308,16 @@ if (in_array('student_advice', $items)
 if (in_array('subject_specific_advice', $items)
     && !empty($data['subject_specific_advice']['link_text'])
     && !empty($data['subject_specific_advice']['link_url'])) {
-    $subject_specific_advice = '<a href="' . $data['subject_specific_advice']['link_url'] . '">'
-                      . '<span class="link-title">'. $data['subject_specific_advice']['link_text'] . '</span>'
-                      . '<span class="link-description">'. $descriptions['subject_specific_advice'] . '</span></a>';
+        $subject_specific_advice_img = cmb2_get_option('fau-studium-display_layout', 'specific-student-advice-image_id');
+        $subject_specific_advice = '<div class="advice-wrapper">';
+        if (!empty($subject_specific_advice_img)) {
+            $subject_specific_advice .= wp_get_attachment_image((int)$subject_specific_advice_img, 'full');
+        }
+        $subject_specific_advice .= '<a href="' . $data['subject_specific_advice']['link_url'] . '">'
+            . '<span class="link-title">'. $data['subject_specific_advice']['link_text'] . '</span>'
+            . '<span class="link-description">'. $descriptions['subject_specific_advice'] . '</span>'
+            . '<span class="icon-arrow-right"></span></a>';
+    $subject_specific_advice .= '</div>';
 } else {
     $subject_specific_advice = '';
 }
@@ -421,10 +464,13 @@ if (in_array('links.additional_information', $items)) {
             . '</div>';
         }
 
+        // Apply now CTA
+        echo $apply_now;
+
         // Student advice
         if (!empty($student_advice . $subject_specific_advice)) {
             // ToDo: Bilder
-            echo '<div class="student-advice width-large">[alert color="#1f4c7a"]'
+            echo '<div class="student-advice width-large">[alert color="#04316A"]'
                 . '<h2>' . ($labels['student_advice'] ?? 'student_advice') . '</h2>'
                 . '[columns][column]' . $student_advice . '[/column]'
                 . '[column]' . $subject_specific_advice . '[/column]'
@@ -433,7 +479,7 @@ if (in_array('links.additional_information', $items)) {
 
         // Useful Links
         if (!empty($useful_links)) {
-            echo '<div class="useful-links width-medium">'
+            echo '<div class="useful-links width-large">'
                 . '<h2>' . ($labels['useful_links'] ?? 'useful_links') . '</h2>'
                 . $useful_links
                 . '</div>';

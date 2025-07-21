@@ -61,5 +61,9 @@
     transform: rotate(360deg);
   }
 }
+.settings_page_fau-studium-display form#fau-studium-display_layout input[name=submit-cmb] {
+  margin-top: 20px;
+  margin-left: 20px;
+}
 
 /*# sourceMappingURL=fau-studium-display-admin.css.map */
