@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-18T11:05:49+00:00\n"
+"POT-Creation-Date: 2025-07-22T15:18:38+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: fau-studium-display\n"
@@ -62,164 +62,135 @@ msgid "RRZE"
 msgstr ""
 
 #: includes/Settings.php:27
-#: includes/Settings_alt.php:32
 msgid "Settings"
 msgstr ""
 
 #: includes/Settings.php:39
-#: includes/Settings.php:71
+#: includes/Settings.php:72
 msgid "API"
 msgstr ""
 
 #: includes/Settings.php:40
-#: includes/Settings.php:86
+#: includes/Settings.php:87
 msgid "Sync"
 msgstr ""
 
 #: includes/Settings.php:41
-#: includes/Settings.php:107
-#: includes/Settings_alt.php:26
+#: includes/Settings.php:108
 msgid "Layout"
 msgstr ""
 
-#: includes/Settings.php:78
-#: includes/Settings_alt.php:50
-msgid "DIP Edu API Key"
+#: includes/Settings.php:53
+msgid "Save changes"
 msgstr ""
 
 #: includes/Settings.php:79
-#: includes/Settings_alt.php:146
+msgid "DIP Edu API Key"
+msgstr ""
+
+#: includes/Settings.php:80
 msgid "API Key can be obtained from the API-Service at <a href=\"https://api.fau.de/pub/v1/edu/__doc\">https://api.fau.de/pub/v1/edu/__doc</a>."
 msgstr ""
 
-#: includes/Settings.php:92
+#: includes/Settings.php:93
 msgid "Search for degree programs to import or sync"
 msgstr ""
 
-#: includes/Settings.php:99
-#: includes/Settings.php:272
-#: includes/Settings_alt.php:175
+#: includes/Settings.php:100
+#: includes/Settings.php:273
 #: includes/Utils.php:31
 #: includes/Utils.php:33
 msgid "Search"
 msgstr ""
 
-#: includes/Settings.php:113
-#: includes/Settings_alt.php:57
+#: includes/Settings.php:114
 msgid "Section \"Apply now\""
 msgstr ""
 
-#: includes/Settings.php:120
-#: includes/Settings_alt.php:60
+#: includes/Settings.php:121
 msgid "Title"
 msgstr ""
 
-#: includes/Settings.php:123
+#: includes/Settings.php:124
 msgid "Apply now!"
 msgstr ""
 
-#: includes/Settings.php:127
-#: includes/Settings_alt.php:63
+#: includes/Settings.php:128
 msgid "Text"
 msgstr ""
 
-#: includes/Settings.php:130
+#: includes/Settings.php:131
 msgid "on campo, the FAU application portal"
 msgstr ""
 
-#: includes/Settings.php:134
-#: includes/Settings_alt.php:66
+#: includes/Settings.php:135
 msgid "Link Text"
 msgstr ""
 
-#: includes/Settings.php:141
-#: includes/Settings_alt.php:69
+#: includes/Settings.php:142
 msgid "Link URL"
 msgstr ""
 
-#: includes/Settings.php:148
-#: includes/Settings.php:175
-#: includes/Settings_alt.php:72
-#: includes/Settings_alt.php:77
+#: includes/Settings.php:149
+#: includes/Settings.php:176
 msgid "Image"
 msgstr ""
 
-#: includes/Settings.php:156
-#: includes/Settings.php:183
-#: includes/Settings.php:210
-#: includes/Settings.php:231
+#: includes/Settings.php:157
+#: includes/Settings.php:184
+#: includes/Settings.php:211
+#: includes/Settings.php:232
 msgid "Add or Upload File"
 msgstr ""
 
-#: includes/Settings.php:168
-#: includes/Settings_alt.php:74
+#: includes/Settings.php:169
 msgid "Section \"More Information for International Applicants\""
 msgstr ""
 
-#: includes/Settings.php:195
+#: includes/Settings.php:196
 msgid "Section \"Student Advice\""
 msgstr ""
 
-#: includes/Settings.php:202
+#: includes/Settings.php:203
 msgid "Image for Student Advice Center"
 msgstr ""
 
-#: includes/Settings.php:223
+#: includes/Settings.php:224
 msgid "Image for Specific Student Advice"
 msgstr ""
 
-#: includes/Settings.php:253
-#: includes/Settings_alt.php:156
+#: includes/Settings.php:254
 msgid "Select Faculty"
 msgstr ""
 
-#: includes/Settings.php:258
-#: includes/Settings_alt.php:161
+#: includes/Settings.php:259
 msgid "Select Degree"
 msgstr ""
 
-#: includes/Settings.php:263
-#: includes/Settings_alt.php:166
+#: includes/Settings.php:264
 msgid "Select Language"
 msgstr ""
 
-#: includes/Settings.php:265
-#: includes/Settings_alt.php:168
+#: includes/Settings.php:266
 #: build/block/index.js:208
 msgid "German"
 msgstr ""
 
-#: includes/Settings.php:266
-#: includes/Settings_alt.php:169
+#: includes/Settings.php:267
 #: build/block/index.js:211
 msgid "English"
 msgstr ""
 
-#: includes/Settings.php:317
-#: includes/Settings_alt.php:220
+#: includes/Settings.php:318
 msgid "Add"
 msgstr ""
 
-#: includes/Settings.php:325
-#: includes/Settings_alt.php:228
+#: includes/Settings.php:326
 msgid "Update"
 msgstr ""
 
-#: includes/Settings.php:331
-#: includes/Settings_alt.php:234
+#: includes/Settings.php:332
 msgid "Delete"
-msgstr ""
-
-#: includes/Settings_alt.php:25
-msgid "Import"
-msgstr ""
-
-#: includes/Settings_alt.php:51
-msgid "Search for degree programs to import"
-msgstr ""
-
-#: includes/Settings_alt.php:142
-msgid "The API key is being used from the network installation."
 msgstr ""
 
 #: includes/Utils.php:14
@@ -281,29 +252,45 @@ msgstr ""
 msgid "Fact Sheet"
 msgstr ""
 
-#: templates/degree-program-full.php:162
+#: templates/degree-program-full.php:150
+msgid "Videos"
+msgstr ""
+
+#: templates/degree-program-full.php:166
 msgid "1st semester"
 msgstr ""
 
-#: templates/degree-program-full.php:165
+#: templates/degree-program-full.php:169
 msgid "Higher semesters"
 msgstr ""
 
-#: templates/degree-program-full.php:168
+#: templates/degree-program-full.php:172
 msgid "Master"
 msgstr ""
 
-#: templates/degree-program-full.php:174
+#: templates/degree-program-full.php:178
 msgid "Winter semester"
 msgstr ""
 
-#: templates/degree-program-full.php:174
-#: templates/degree-program-full.php:175
+#: templates/degree-program-full.php:178
+#: templates/degree-program-full.php:179
 msgid "not possible"
 msgstr ""
 
-#: templates/degree-program-full.php:175
+#: templates/degree-program-full.php:179
 msgid "Summer semester"
+msgstr ""
+
+#: templates/degree-program-full.php:456
+msgid "Program Overview"
+msgstr ""
+
+#: templates/degree-program-full.php:469
+msgid "Admission and Application"
+msgstr ""
+
+#: templates/degree-program-full.php:490
+msgid "We're Here to Help with All Your Study-Related Questions"
 msgstr ""
 
 #: templates/degree-program-grid.php:86

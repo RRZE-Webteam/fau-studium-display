@@ -244,8 +244,8 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'admission_requirements' => [
             'labels' => [
-                'de' => 'Zugangsvoraussetzungen',
-                'en' => 'Admission requirements'
+                'de' => 'Zugang',
+                'en' => 'Admission'
             ]
         ],
         'admission_requirement_link' => [
