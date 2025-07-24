@@ -17,29 +17,32 @@
         margin-left: .25em;
     }
 
+    #degree-program-imported,
     #degree-program-results {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        padding-top: 20px;
-
         .program-item {
             background: #fff;
-            box-shadow: 0px 4px 6px var(--color-ContentBorders, #dfe6ec);
-            border-radius: 4px;
-            padding: 1em;
-            flex: 0 0 320px;
+            border-bottom: 1px solid #e9e9e9;
+            padding: 1em 0;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             justify-content: space-between;
-            &.add-program {
-                border: 2px solid #2271b1;
+            align-items: center;
+            &:last-child {
+                border-bottom: none;
+            }
+            &:hover {
+                background-color: #F9F9F9;
             }
             .program-title {
                 font-weight: bold;
-                margin-bottom: 1em;
+                flex: 70% 0 1;
             }
-            .add-degree-program {
+            .program-buttons {
+                flex: 30% 0 1;
+            }
+            .update-degree-program,
+            .add-degree-program,
+            .delete-degree-program {
                 span.dashicons {
                     vertical-align: middle;
                 }
@@ -47,9 +50,6 @@
             .delete-degree-program {
                 //color: #dc3232;
                 margin-left: 1em;
-                span.dashicons {
-                    vertical-align: middle;
-                }
             }
             span.dashicons.sync-ok {
                 width: 1em;
@@ -57,6 +57,12 @@
                 font-size: 2em;
                 overflow: hidden;
             }
+        }
+    }
+    #degree-program-results {
+        margin-top: 20px;
+        .program-item:first-child {
+            border-top: 1px solid #e9e9e9;
         }
     }
 
@@ -69,10 +75,18 @@
         100% { transform: rotate(360deg); }
     }
 
-    form#fau-studium-display_layout {
-        input[name="submit-cmb"] {
-            margin-top: 20px;
-            margin-left: 20px;
+    form {
+        &#fau-studium-display_api,
+        &#fau-studium-display_layout {
+            input[name="submit-cmb"] {
+                margin-top: 20px;
+                margin-left: 20px;
+            }
+        }
+        &#fau-studium-display_sync {
+            input[name="submit-cmb"] {
+                display: none;
+            }
         }
     }
 

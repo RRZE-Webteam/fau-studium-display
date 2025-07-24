@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-22T15:18:38+00:00\n"
+"POT-Creation-Date: 2025-07-24T15:02:29+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: fau-studium-display\n"
@@ -61,140 +61,72 @@ msgstr ""
 msgid "RRZE"
 msgstr ""
 
-#: includes/Settings.php:27
+#: includes/Settings.php:40
 msgid "Settings"
 msgstr ""
 
-#: includes/Settings.php:39
-#: includes/Settings.php:72
+#: includes/Settings.php:52
+#: includes/Settings.php:85
 msgid "API"
 msgstr ""
 
-#: includes/Settings.php:40
-#: includes/Settings.php:87
+#: includes/Settings.php:53
+#: includes/Settings.php:100
 msgid "Sync"
 msgstr ""
 
-#: includes/Settings.php:41
-#: includes/Settings.php:108
-msgid "Layout"
-msgstr ""
-
-#: includes/Settings.php:53
+#: includes/Settings.php:66
 msgid "Save changes"
 msgstr ""
 
-#: includes/Settings.php:79
+#: includes/Settings.php:92
 msgid "DIP Edu API Key"
 msgstr ""
 
-#: includes/Settings.php:80
+#: includes/Settings.php:93
 msgid "API Key can be obtained from the API-Service at <a href=\"https://api.fau.de/pub/v1/edu/__doc\">https://api.fau.de/pub/v1/edu/__doc</a>."
 msgstr ""
 
-#: includes/Settings.php:93
-msgid "Search for degree programs to import or sync"
+#: includes/Settings.php:106
+msgid "Sync and manage degree programs"
 msgstr ""
 
-#: includes/Settings.php:100
-#: includes/Settings.php:273
+#: includes/Settings.php:113
+msgid "Import"
+msgstr ""
+
+#: includes/Settings.php:120
+msgid "Manage Imported"
+msgstr ""
+
+#: includes/Settings.php:274
+msgid "Select Faculty"
+msgstr ""
+
+#: includes/Settings.php:279
+msgid "Select Degree"
+msgstr ""
+
+#: includes/Settings.php:293
 #: includes/Utils.php:31
 #: includes/Utils.php:33
 msgid "Search"
 msgstr ""
 
-#: includes/Settings.php:114
-msgid "Section \"Apply now\""
-msgstr ""
-
-#: includes/Settings.php:121
-msgid "Title"
-msgstr ""
-
-#: includes/Settings.php:124
-msgid "Apply now!"
-msgstr ""
-
-#: includes/Settings.php:128
-msgid "Text"
-msgstr ""
-
-#: includes/Settings.php:131
-msgid "on campo, the FAU application portal"
-msgstr ""
-
-#: includes/Settings.php:135
-msgid "Link Text"
-msgstr ""
-
-#: includes/Settings.php:142
-msgid "Link URL"
-msgstr ""
-
-#: includes/Settings.php:149
-#: includes/Settings.php:176
-msgid "Image"
-msgstr ""
-
-#: includes/Settings.php:157
-#: includes/Settings.php:184
-#: includes/Settings.php:211
-#: includes/Settings.php:232
-msgid "Add or Upload File"
-msgstr ""
-
-#: includes/Settings.php:169
-msgid "Section \"More Information for International Applicants\""
-msgstr ""
-
-#: includes/Settings.php:196
-msgid "Section \"Student Advice\""
-msgstr ""
-
-#: includes/Settings.php:203
-msgid "Image for Student Advice Center"
-msgstr ""
-
-#: includes/Settings.php:224
-msgid "Image for Specific Student Advice"
-msgstr ""
-
-#: includes/Settings.php:254
-msgid "Select Faculty"
-msgstr ""
-
-#: includes/Settings.php:259
-msgid "Select Degree"
-msgstr ""
-
-#: includes/Settings.php:264
-msgid "Select Language"
-msgstr ""
-
-#: includes/Settings.php:266
-#: build/block/index.js:208
-msgid "German"
-msgstr ""
-
-#: includes/Settings.php:267
-#: build/block/index.js:211
-msgid "English"
-msgstr ""
-
-#: includes/Settings.php:318
-msgid "Add"
-msgstr ""
-
-#: includes/Settings.php:326
+#: includes/Settings.php:300
 msgid "Update"
 msgstr ""
 
-#: includes/Settings.php:332
+#: includes/Settings.php:304
 msgid "Delete"
 msgstr ""
 
+#: includes/Settings.php:362
+msgid "Add"
+msgstr ""
+
 #: includes/Utils.php:14
-#: build/block/index.js:226
+#: build/block/index.js:242
 msgid "Degrees"
 msgstr ""
 
@@ -203,7 +135,7 @@ msgid "Subject groups"
 msgstr ""
 
 #: includes/Utils.php:16
-#: build/block/index.js:232
+#: build/block/index.js:248
 msgid "Special ways to study"
 msgstr ""
 
@@ -240,60 +172,60 @@ msgid "Reset all filters"
 msgstr ""
 
 #: templates/degree-program-box.php:37
-#: templates/degree-program-full.php:67
+#: templates/degree-program-full.php:70
 msgid "%s semesters"
 msgstr ""
 
-#: templates/degree-program-full.php:11
+#: templates/degree-program-full.php:13
 msgid "Please select a degree program."
 msgstr ""
 
-#: templates/degree-program-full.php:113
+#: templates/degree-program-full.php:116
 msgid "Fact Sheet"
 msgstr ""
 
-#: templates/degree-program-full.php:150
+#: templates/degree-program-full.php:153
 msgid "Videos"
 msgstr ""
 
-#: templates/degree-program-full.php:166
+#: templates/degree-program-full.php:169
 msgid "1st semester"
 msgstr ""
 
-#: templates/degree-program-full.php:169
+#: templates/degree-program-full.php:172
 msgid "Higher semesters"
 msgstr ""
 
-#: templates/degree-program-full.php:172
+#: templates/degree-program-full.php:175
 msgid "Master"
 msgstr ""
 
-#: templates/degree-program-full.php:178
+#: templates/degree-program-full.php:181
 msgid "Winter semester"
 msgstr ""
 
-#: templates/degree-program-full.php:178
-#: templates/degree-program-full.php:179
+#: templates/degree-program-full.php:181
+#: templates/degree-program-full.php:182
 msgid "not possible"
 msgstr ""
 
-#: templates/degree-program-full.php:179
+#: templates/degree-program-full.php:182
 msgid "Summer semester"
 msgstr ""
 
-#: templates/degree-program-full.php:456
+#: templates/degree-program-full.php:459
 msgid "Program Overview"
 msgstr ""
 
-#: templates/degree-program-full.php:469
+#: templates/degree-program-full.php:472
 msgid "Admission and Application"
 msgstr ""
 
-#: templates/degree-program-full.php:490
+#: templates/degree-program-full.php:493
 msgid "We're Here to Help with All Your Study-Related Questions"
 msgstr ""
 
-#: templates/degree-program-grid.php:86
+#: templates/degree-program-grid.php:92
 #: templates/degree-program-table.php:85
 msgid "No degree programs found."
 msgstr ""
@@ -342,17 +274,25 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
+#: build/block/index.js:208
+msgid "German"
+msgstr ""
+
+#: build/block/index.js:211
+msgid "English"
+msgstr ""
+
 #: build/block/index.js:217
+#: build/block/index.js:225
+msgid "Select items"
+msgstr ""
+
+#: build/block/index.js:233
 msgid "Filter Programs"
 msgstr ""
 
-#: build/block/index.js:220
+#: build/block/index.js:236
 msgid "Faculties"
-msgstr ""
-
-#: build/block/index.js:239
-#: build/block/index.js:247
-msgid "Select items"
 msgstr ""
 
 #: build/block/block.json

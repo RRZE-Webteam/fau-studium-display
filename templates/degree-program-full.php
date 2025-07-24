@@ -2,7 +2,9 @@
 
 defined('ABSPATH') || exit;
 
+use function Fau\DegreeProgram\Display\Config\get_constants;
 use function \Fau\DegreeProgram\Display\Config\get_labels;
+use function Fau\DegreeProgram\Display\plugin;
 
 //var_dump($data);
 //var_dump($atts);
@@ -16,6 +18,7 @@ $items = $atts['selectedItemsFull'] ?? [];
 $lang = $atts[ 'language' ] ?? 'de';
 $labels = get_labels($lang);
 $descriptions = get_labels($lang, 'description');
+$constants = get_constants($lang);
 //print "<pre>"; var_dump($labels); print "</pre>";
 
 $number_of_students_raw = $data['number_of_students']['name'] ?? '';
@@ -269,14 +272,14 @@ if (in_array('admission_requirements_application_internationals', $items)) {
 
 // Apply now!
 if (in_array('apply_now_link', $items)) {
-    $apply_now_title = cmb2_get_option('fau-studium-display_layout', 'apply-now-title');
-    $apply_now_text = cmb2_get_option('fau-studium-display_layout', 'apply-now-text');
-    $apply_now_link_text = cmb2_get_option('fau-studium-display_layout', 'apply-now-link-text');
-    $apply_now_link_url = cmb2_get_option('fau-studium-display_layout', 'apply-now-link-url');
-    $apply_now_image_id = cmb2_get_option('fau-studium-display_layout', 'apply-now-image_id');
-    if (!empty($apply_now_title) && !empty($apply_now_text) && !empty($apply_now_link_text) && !empty($apply_now_link_url) && !empty($apply_now_image_id)) {
+    $apply_now_title = $constants['apply-now-title'];
+    $apply_now_text = $constants['apply-now-text'];
+    $apply_now_link_text = $constants['apply-now-link-text'];
+    $apply_now_link_url = $constants['apply-now-link-url'];
+    $apply_now_image = $constants['apply-now-image'];
+    if (!empty($apply_now_title) && !empty($apply_now_text) && !empty($apply_now_link_text) && !empty($apply_now_link_url) && !empty($apply_now_image)) {
         $apply_now = '<div class="program-apply-now width-medium">'
-            . wp_get_attachment_image((int)$apply_now_image_id, 'full')
+            . '<img src="' . $apply_now_image . '"  alt=""/>'
             . '<div class="apply-now-wrapper">'
             . '<div class="apply-now-title-text"><span class="apply-now-title">' . $apply_now_title . '</span>'
             . '<span class="apply-now-text">' . $apply_now_text . '</span></div>'
@@ -294,10 +297,10 @@ if (in_array('apply_now_link', $items)) {
 if (in_array('student_advice', $items)
     && !empty($data['student_advice']['link_text'])
     && !empty($data['student_advice']['link_url'])) {
-        $student_advice_img = cmb2_get_option('fau-studium-display_layout', 'general-student-advice-image_id');
+        $student_advice_img = $constants['general-student-advice-image'] ?? '';
         $student_advice = '<div class="advice-wrapper">';
         if (!empty($student_advice_img)) {
-            $student_advice .= wp_get_attachment_image((int)$student_advice_img, 'full');
+            $student_advice .= '<img src="' . $student_advice_img . '"  alt=""/>';
         }
         $student_advice .= '<a href="' . $data['student_advice']['link_url'] . '">'
             . '<span class="link-title">'. $data['student_advice']['link_text'] . '</span>'
@@ -312,10 +315,10 @@ if (in_array('student_advice', $items)
 if (in_array('subject_specific_advice', $items)
     && !empty($data['subject_specific_advice']['link_text'])
     && !empty($data['subject_specific_advice']['link_url'])) {
-        $subject_specific_advice_img = cmb2_get_option('fau-studium-display_layout', 'specific-student-advice-image_id');
+        $subject_specific_advice_img = $constants['specific-student-advice-image'] ?? '';
         $subject_specific_advice = '<div class="advice-wrapper">';
         if (!empty($subject_specific_advice_img)) {
-            $subject_specific_advice .= wp_get_attachment_image((int)$subject_specific_advice_img, 'full');
+            $subject_specific_advice .= '<img src="' . $subject_specific_advice_img . '"  alt=""/>';
         }
         $subject_specific_advice .= '<a href="' . $data['subject_specific_advice']['link_url'] . '">'
             . '<span class="link-title">'. $data['subject_specific_advice']['link_text'] . '</span>'

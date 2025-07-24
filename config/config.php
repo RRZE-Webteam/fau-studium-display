@@ -2,6 +2,8 @@
 
 namespace Fau\DegreeProgram\Display\Config;
 
+use function Fau\DegreeProgram\Display\plugin;
+
 defined('ABSPATH') || exit;
 
 function get_output_fields($format = '') {
@@ -574,4 +576,57 @@ function get_labels ($lang = 'de', $task = 'labels') {
     }
 
     return $labels_out;
+}
+
+function get_constants($lang = 'de') {
+    $constants = [
+        'apply-now-title' => [
+            'de' => 'Bewirb dich jetzt!',
+            'en' => 'Apply now!'
+        ],
+        'apply-now-text' => [
+            'de' => 'auf campo, dem Bewerbungsportal der FAU',
+            'en' => 'on campo, the FAU application portal'
+        ],
+        'apply-now-link-text' => [
+            'de' => 'Jetzt auf campo bewerben/anmelden',
+            'en' => 'Apply/Register now on campo'
+        ],
+        'apply-now-link-url' => [
+            'de' => 'https://www.campo.fau.de',
+            'en' => 'https://www.campo.fau.de'
+        ],
+        'apply-now-image' => [
+            'de' => plugin()->getUrl() . 'assets/img/apply-now.jpg',
+            'en' => plugin()->getUrl() . 'assets/img/apply-now.jpg'
+        ],
+        'internationals-image' => [
+            'de' => plugin()->getUrl() . 'assets/img/internationals.jpg',
+            'en' => plugin()->getUrl() . 'assets/img/internationals.jpg'
+        ],
+        'general-student-advice-image' => [
+            'de' => plugin()->getUrl() . 'assets/img/student-advice.jpg',
+            'en' => plugin()->getUrl() . 'assets/img/student-advice.jpg'
+        ],
+        'specific-student-advice-image' => [
+            'de' => plugin()->getUrl() . 'assets/img/student-advice.jpg',
+            'en' => plugin()->getUrl() . 'assets/img/student-advice.jpg'
+        ]
+    ];
+
+    $constants_out = [];
+    $lang_alt = $lang == 'de' ? 'en' : 'de';
+    foreach ($constants as $key => $translations) {
+        if ( ! empty($translations[ $lang ])) { // return selected translation
+            $constants_out[ $key ] = $translations[ $lang ];
+            continue;
+        }
+        if ( ! empty($translations[ $lang_alt ])) { // return alternative language
+            $constants_out[ $key ] = $translations[ $lang_alt ];
+            continue;
+        }
+        $constants_out[ $key ] = $key;
+    }
+
+    return $constants_out;
 }

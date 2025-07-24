@@ -9,7 +9,6 @@ use function Fau\DegreeProgram\Display\Config\get_labels;
 
 //print "<pre>"; var_dump($data);print "</pre>";
 //print "<pre>"; var_dump($atts);print "</pre>";
-//print_r($atts);
 //exit;
 
 $items = $atts['selectedItemsGrid'] ?? [];
@@ -24,7 +23,7 @@ foreach ($data as $program) {
 
     $grid_content = '';
 
-    if (in_array('teaser_image', $items)) {
+    if (in_array('teaser_image', $items) && !empty($program['teaser_image']['rendered'])) {
         $grid_content .= '<div class="teaser-image">' . $program['teaser_image']['rendered'] . '</div>';
     }
 
@@ -60,11 +59,18 @@ foreach ($data as $program) {
     $grid_content .= '</div>';
 
     //print "<pre>"; var_dump($program); print "</pre>";
-    $program_grid .= sprintf('<li><a href="%s">%s</a></li>',
-        $program['link'],
-        $grid_content
+    if (!empty($program['link'])) {
+        $program_grid .= sprintf(
+            '<li><a href="%s">%s</a></li>',
+            $program[ 'link' ],
+            $grid_content
         );
-
+    } else {
+        $program_grid .= sprintf(
+            '<li>%s</li>',
+            $grid_content
+        );
+    }
 }
 
 ?>

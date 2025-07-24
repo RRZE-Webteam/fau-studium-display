@@ -9,16 +9,29 @@ class Settings
     private string $title;
     private string $slug;
 
+    private array $programs = array();
+
     public function __construct($pluginFile) {
         $this->pluginFile = $pluginFile;
         $this->title = plugin()->getName();
         $this->slug = plugin()->getSlug();
+        $this->programs = get_posts([
+            'post_type'      => 'degree-program',
+            'posts_per_page' => -1,
+            'post_status'    => 'publish',
+            'orderby'        => 'title',
+            'order'          => 'ASC',
+        ]);
     }
 
     public function onLoaded() {
         add_action('admin_menu', [$this, 'add_settings_page']);
         add_action('cmb2_admin_init', [$this, 'register_settings']);
         add_action('cmb2_render_sync-search', [$this, 'render_sync_search' ], 10, 5);
+        add_action('cmb2_render_sync-imported', [$this, 'render_sync_imported' ], 10, 5);
+        add_action('wp_ajax_program_search', [$this,'ajaxProgramSearch']);
+        add_action('wp_ajax_program_sync', [$this,'ajaxProgramSync']);
+        add_action('wp_ajax_program_delete', [$this,'ajaxProgramDelete']);
     }
 
 
@@ -38,7 +51,7 @@ class Settings
         $tabs = [
             'api' => __('API', 'fau-studium-display'),
             'sync' => __('Sync', 'fau-studium-display'),
-            'layout' => __('Layout', 'fau-studium-display'),
+            //'layout' => __('Layout', 'fau-studium-display'),
         ];
 
         echo '<div class="wrap cmb2-options-page">';
@@ -90,20 +103,27 @@ class Settings
             'parent_slug' => $this->slug,
         ]);
         $sync_options->add_field( [
-            'name' => __('Search for degree programs to import or sync', 'fau-studium-display'),
+            'name' => __('Sync and manage degree programs', 'fau-studium-display'),
             //'desc' => __('', 'fau-studium-display'),
             'type' => 'title',
             'id'   => 'apply_now_heading'
         ]);
         $sync_options->add_field([
-            'id' => 'sync-settings',
-            'name' => esc_html__('Search', 'fau-studium-display'),
+            'id' => 'sync-search',
+            'name' => esc_html__('Import', 'fau-studium-display'),
             //'desc' => '',
             'type' => 'sync-search',
             'default' => '',
         ]);
+        $sync_options->add_field([
+            'id' => 'sync-imported',
+            'name' => esc_html__('Manage Imported', 'fau-studium-display'),
+            //'desc' => '',
+            'type' => 'sync-imported',
+            'default' => '',
+        ]);
 
-        $layout_options = new_cmb2_box([
+        /*$layout_options = new_cmb2_box([
             'id' => $this->slug.'_layout',
             'title' => __('Layout', 'fau-studium-display'),
             'object_types' => ['options-page'],
@@ -239,7 +259,7 @@ class Settings
                ],
            ],
            'preview_size' => 'medium',
-       ]);
+       ]);*/
 
         wp_enqueue_style('fau-studium-display-admin');
         wp_enqueue_script('fau-studium-display-admin');
@@ -260,18 +280,45 @@ class Settings
         foreach ($degreeOptions as $degreeOption) {
             echo '<label><input type="checkbox" name="degree[]" value="' . $degreeOption['value'] . '">' . $degreeOption['label'] . '</label><br />';
         }
-        echo '</div><div class="">'
+        /*echo '</div><div class="">'
              . '<h4>' . __('Select Language', 'fau-studium-display') . '</h4>';
         $languages = [
             'de' => __('German', 'fau-studium-display'),
             'en' => __('English', 'fau-studium-display'),
         ];
         foreach ($languages as $value => $label) {
-            echo '<label><input type="radio" name="language" value="' . $value . '">' . $label . '</label><br />';
-        }
+            echo '<label><input type="radio" name="language" value="' . $value . '"' . ($value == 'de' ? ' checked="checked"' : '') . '>' . $label . '</label><br />';
+        }*/
         echo '</div></div>';
         echo '<button id="degree-search-button" class="button">' . __('Search', 'fau-studium-display') . '</button>';
         echo '<div id="degree-program-results"></div>';
+    }
+
+    public function render_sync_imported() {
+        $buttons = [
+            'update' => [
+                'label' => __('Update', 'fau-studium-display'),
+                'icon'  => 'dashicons-update',
+            ],
+            'delete' => [
+                'label' => __('Delete', 'fau-studium-display'),
+                'icon'  => 'dashicons-trash',
+            ]
+        ];
+        echo '<div id="degree-program-imported">';
+        foreach ($this->programs as $program) {
+            $title = $program->post_title;
+            $program_id = get_post_meta($program->ID, 'id', true);
+            echo '<div class="program-item">'
+                . '<div class="program-title">' . $title . '</div>'
+                . '<div class="program-buttons">';
+            foreach ($buttons as $task => $button) {
+                echo '<a class="' . $task . '-degree-program button" data-id="' . $program_id . '" data-task="' . $task . '" data-post_id="' . $program->ID . '"><span class="dashicons ' . $button['icon'] . '"></span> ' . $button['label'] . '</a>';
+            }
+            echo '</div></div>';
+        }
+
+        echo '</div>';
     }
 
 
@@ -284,13 +331,11 @@ class Settings
 
         $faculties = $_POST[ 'faculties' ] ?? [];
         $degrees = $_POST[ 'degrees' ] ?? [];
-        $language = $_POST[ 'language' ] ?? 'de';
 
-        if (!is_array($faculties) || !is_array($degrees) || (!in_array($language, ['de', 'en']))) {
+        if (!is_array($faculties) || !is_array($degrees)) {
             wp_send_json_error('Ungültige Daten');
         }
 
-        $atts['language'] = $language;
         $atts['selectedFaculties'] = $faculties;
         $atts['selectedDegrees'] = $degrees;
         $data = new Data();
@@ -298,46 +343,23 @@ class Settings
         $api = new API();
         $programs = $api->get_programs();
 
+        global $wpdb;
+        $imported_ids = $wpdb->get_col( "
+            SELECT pm.meta_value
+            FROM {$wpdb->postmeta} pm
+            INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+            WHERE pm.meta_key = 'id'
+            AND p.post_type = 'degree-program'
+            AND p.post_status = 'publish'
+        " );
+
         $output = '';
         foreach ($programs as $program) {
-            $programs_imported = get_posts([
-                   'post_type'      => 'degree-program',
-                   'posts_per_page' => -1,
-                   'post_status'    => 'publish',
-                   'meta_query'     => [
-                       ['key'       => 'id',
-                        'value' => $program['id']],
-                       ['key'       => 'lang',
-                        'value' => $language,]
-                   ],
-               ]);
-            if (empty($programs_imported)) {
-                $button = [
-                    'task' => 'add',
-                    'post_id' => '0',
-                    'label' => __('Add', 'fau-studium-display'),
-                    'icon'  => 'dashicons-plus',
-                ];
-                $button_delete = [];
-            } else {
-                $button = [
-                    'task' => 'update',
-                    'post_id' => $programs_imported[0]->ID,
-                    'label' => __('Update', 'fau-studium-display'),
-                    'icon'  => 'dashicons-update',
-                ];
-                $button_delete = [
-                    'task' => 'delete',
-                    'post_id' => $programs_imported[0]->ID,
-                    'label' => __('Delete', 'fau-studium-display'),
-                    'icon'  => 'dashicons-trash',
-                ];
-            }
-            $output .= '<div class="program-item ' . $button['task'] . '-program">'
+            if (in_array($program['id'], $imported_ids)) continue;
+
+            $output .= '<div class="program-item add-program">'
                        . '<div class="program-title">' . $program['title']. ' (' . $program['degree']['abbreviation'] . ')</div>'
-                       . '<div class="program-buttons"><a class="add-degree-program button" data-id="' . $program['id'] . '" data-task="' . $button['task'] . '" data-post_id="' . $button['post_id'] . '"><span class="dashicons ' . $button['icon'] . '"></span> ' . $button['label'] . '</a>'
-                       . (!empty($button_delete) ? '<a class="delete-degree-program button" data-id="' . $program['id'] . '" data-task="' . $button_delete['task'] . '" data-post_id="' . $button['post_id'] . '"><span class="dashicons ' . $button_delete['icon'] . '"></span> ' . $button_delete['label'] . '</a>' : '')
-                       . '</div>'
+                       . '<div class="program-buttons"><a class="add-degree-program button" data-id="' . $program['id'] . '" data-task="add" data-post_id="0"><span class="dashicons dashicons-plus"></span> ' . __('Add', 'fau-studium-display') . '</a></div>'
                        . '</div>';
         }
 

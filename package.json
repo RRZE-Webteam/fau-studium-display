@@ -17,7 +17,7 @@
     "@types/wordpress__blocks": "^12.5.16",
     "@types/wordpress__components": "^23.0.12",
     "@types/wordpress__element": "^2.4.1",
-    "@wordpress/scripts": "^30.7.0",
+    "@wordpress/scripts": "^30.20.0",
     "sass": "^1.85.0",
     "typescript": "^5.8.3"
   },

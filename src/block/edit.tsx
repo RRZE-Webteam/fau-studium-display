@@ -184,6 +184,32 @@ const Edit = ({
 
                 </PanelBody>
 
+                {(selectedFormat === "grid") && (
+                    <PanelBody title={__('Select items', 'fau-studium-display')} initialOpen={true}>
+                        {itemsGrid.map((item: { label: string; value: string }) => (
+                            <CheckboxControl
+                                key={item.value}
+                                label={item.label}
+                                checked={selectedItemsGrid.includes(item.value)}
+                                onChange={() => toggleItemGrid(item.value)}
+                            />
+                        ))}
+                    </PanelBody>
+                )}
+
+                {(selectedFormat === "full") && (
+                    <PanelBody title={__('Select items', 'fau-studium-display')} initialOpen={true}>
+                        {itemsFull.map((item: { label: string; value: string }) => (
+                            <CheckboxControl
+                                key={item.value}
+                                label={item.label}
+                                checked={selectedItemsFull.includes(item.value)}
+                                onChange={() => toggleItemFull(item.value)}
+                            />
+                        ))}
+                    </PanelBody>
+                )}
+
                 <PanelBody title={__('Filter Programs', 'fau-studium-display')} initialOpen={true}>
                     <h3>{__('Faculties', 'fau-studium-display')}</h3>
                     {faculties.map((item: { label: string; value: string }) => (
@@ -219,32 +245,6 @@ const Edit = ({
                         />
                     ))}
                 </PanelBody>
-
-                {(selectedFormat === "grid") && (
-                    <PanelBody title={__('Select items', 'fau-studium-display')} initialOpen={true}>
-                        {itemsGrid.map((item: { label: string; value: string }) => (
-                            <CheckboxControl
-                                key={item.value}
-                                label={item.label}
-                                checked={selectedItemsGrid.includes(item.value)}
-                                onChange={() => toggleItemGrid(item.value)}
-                            />
-                        ))}
-                    </PanelBody>
-                )}
-
-                {(selectedFormat === "full") && (
-                    <PanelBody title={__('Select items', 'fau-studium-display')} initialOpen={true}>
-                        {itemsFull.map((item: { label: string; value: string }) => (
-                            <CheckboxControl
-                                key={item.value}
-                                label={item.label}
-                                checked={selectedItemsFull.includes(item.value)}
-                                onChange={() => toggleItemFull(item.value)}
-                            />
-                        ))}
-                    </PanelBody>
-                )}
 
             </InspectorControls>
 

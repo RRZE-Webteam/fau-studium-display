@@ -121,7 +121,8 @@ class Data
             switch ($lang) {
                 case 'en':
                     foreach ($programs_imported as $program) {
-                        $data[$program->ID] = get_post_meta($program->ID, 'translations', true);
+                        $translations = get_post_meta($program->ID, 'translations', true);
+                        $data[$program->ID] = $translations['en'];
                     }
                     return $data;
                 case 'de':

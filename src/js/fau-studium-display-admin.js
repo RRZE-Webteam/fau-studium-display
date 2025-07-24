@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
         let selectedDegrees = $('input[name="degree[]"]:checked').map(function() {
             return $(this).val();
         }).get();
-        let language = $('input[name="language"]:checked').val();
+        //let language = $('input[name="language"]:checked').val();
 
         $.ajax({
             url: program_ajax.ajax_url,
@@ -22,19 +22,22 @@ jQuery(document).ready(function($) {
                 _ajax_nonce: program_ajax.nonce,
                 faculties: selectedFaculties,
                 degrees: selectedDegrees,
-                language: language,
+                //language: language,
             },
             success: function(response) {
                 if (response.success) {
                     $('div#degree-program-results').html(response.data.message);
-                    $this.removeClass('button-disabled');
-                    $('span.search-spinner').remove();
                 } else {
-                    console.log('Fehler: ' + response.data);
+                    $this.removeClass('button-disabled');
                 }
+                $this.removeClass('button-disabled');
+                $('span.search-spinner').remove();
             },
-            error: function() {
-                console.log('AJAX-Fehler');
+            error: function(response) {
+                $this.removeClass('button-disabled');
+                $('span.search-spinner').remove();
+                //console.log('AJAX-Fehler');
+                //console.log(response);
             }
         });
     });
@@ -59,7 +62,7 @@ jQuery(document).ready(function($) {
                 post_id: $this.data('post_id'),
             },
             success: function(response) {
-                console.log(response);
+//                console.log(response);
                 if (response.success) {
                     $this.find('span.dashicons-update').removeClass('spin');
                     if (task === 'add') {
@@ -67,10 +70,19 @@ jQuery(document).ready(function($) {
                     }
                     $this.after('<span class="dashicons dashicons-yes sync-ok" title="Sync OK">Sync OK</span>');
                 } else {
+                    $this.find('span.dashicons-update').removeClass('spin');
+                    if (task === 'add') {
+                        $this.find('span.dashicons-update').removeClass('dashicons-update').addClass('dashicons-plus');
+                    }
+                    $this.after('<span class="dashicons dashicons-no sync-error" title="Sync Error">Sync Error</span>');
                     console.log('Fehler: ' + response.data);
                 }
             },
             error: function() {
+                $this.find('span.dashicons-update').removeClass('spin');
+                if (task === 'add') {
+                    $this.find('span.dashicons-update').removeClass('dashicons-update').addClass('dashicons-plus');
+                }
                 console.log('AJAX-Fehler');
             }
         });
@@ -83,7 +95,7 @@ jQuery(document).ready(function($) {
         $this.addClass('button-disabled');
         $this.parent().find('a.add-degree-program button').remove();
         $this.find('span.dashicons-trash').removeClass('dashicons-trash').addClass('dashicons-update').addClass('spin');
-console.log($this.data());
+//console.log($this.data());
         $.ajax({
             url: program_ajax.ajax_url,
             type: 'POST',
