@@ -67,7 +67,7 @@ class Settings
         ];
 
         if (!array_key_exists($active_tab, $tabs)) {
-            $active_tab = 'layout'; // Fallback
+            $active_tab = 'sync'; // Fallback
         }
 
         cmb2_metabox_form(
@@ -305,7 +305,7 @@ class Settings
                 'icon'  => 'dashicons-trash',
             ]
         ];
-        echo '<div id="degree-program-imported">';
+        echo '<div id="degree-programs-imported">';
         foreach ($this->programs as $program) {
             $title = $program->post_title;
             $program_id = get_post_meta($program->ID, 'id', true);
@@ -359,7 +359,7 @@ class Settings
 
             $output .= '<div class="program-item add-program">'
                        . '<div class="program-title">' . $program['title']. ' (' . $program['degree']['abbreviation'] . ')</div>'
-                       . '<div class="program-buttons"><a class="add-degree-program button" data-id="' . $program['id'] . '" data-task="add" data-post_id="0"><span class="dashicons dashicons-plus"></span> ' . __('Add', 'fau-studium-display') . '</a></div>'
+                       . '<div class="program-buttons"><a class="add-degree-program button" data-id="' . $program['id'] . '" data-task="sync" data-post_id="0"><span class="dashicons dashicons-plus"></span> ' . __('Add', 'fau-studium-display') . '</a></div>'
                        . '</div>';
         }
 

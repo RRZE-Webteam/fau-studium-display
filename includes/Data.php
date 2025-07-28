@@ -6,10 +6,10 @@ class Data
 {
     public function get_data($atts) {
 
-        $lang = $atts['language'] == 'en' ? 'en' : 'de';
+        $lang = !empty($atts['language']) && $atts['language'] == 'en' ? 'en' : 'de';
 
         if (isset($atts['format']) && in_array($atts['format'], ['full', 'box'])) {
-            $data = $this->get_single_program((int)$atts['degreeProgram'], $lang);
+            $data = $this->get_single_program((int)$atts['degreeProgram'], $lang, $atts['post_id'] ?? '');
         } else {
 
             $programs = $this->get_programs($lang);
@@ -78,29 +78,35 @@ class Data
         return $data;
     }
 
-    public function get_single_program($program_id, $lang) {
+    public function get_single_program($program_id, $lang, $post_id = '') {
 
         // check if the program exists as CPT
-        $program_imported = get_posts([
-           'post_type'      => 'degree-program',
-           'post_status'    => 'publish',
-           'meta_key'       => 'id',
-           'meta_value' => $program_id
-        ]);
-        if (!empty($program_imported)) {
+        if (empty($post_id)) {
+            $program_imported = get_posts([
+                'post_type'      => 'degree-program',
+                'post_status'    => 'publish',
+                'meta_key'       => 'id',
+                'meta_value' => $program_id
+            ]);
+            $post_id = $program_imported[0]->ID;
+        }
+
+        if (!empty($post_id)) {
             switch ($lang) {
                 case 'en':
-                    $translations = get_post_meta($program_imported[0]->ID, 'translations', true);
-                    return $translations['en'];
+                    $translations = get_post_meta($post_id, 'translations', true);
+                    $data = $translations['en'];
+                    break;
                 case 'de':
                 default:
                     $data = [];
-                    $post_meta = get_post_meta($program_imported[0]->ID, '', true);
+                    $post_meta = get_post_meta($post_id, '', true);
                     foreach ($post_meta as $key => $value) {
                         $data[$key] = is_serialized($value[0]) ? unserialize($value[0]) : $value[0];
                     }
-                    return $data;
             }
+            $data['_thumbnail_rendered'] = get_the_post_thumbnail($post_id, 'full');
+            return $data;
         }
 
         // if not, fetch from API

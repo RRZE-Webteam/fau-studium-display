@@ -140,7 +140,8 @@
             //padding: 32px;
         }
 
-        img.attachment-fau-featured {
+        img.attachment-fau-featured,
+        img.wp-post-image {
             aspect-ratio: 2.35/1;
             object-fit: cover;
             width: 100%;

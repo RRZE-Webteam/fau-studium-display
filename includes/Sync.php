@@ -43,14 +43,21 @@ class Sync
         $title = esc_attr($program['title'] . ' (' . $program['degree']['abbreviation'] . ')');
 
         //var_dump($program_id, $program['id'], $existing_ids); exit;
-        return (wp_insert_post([
+        $result = wp_insert_post([
            'ID' => $post_id,
            'post_title' => $title,
            'post_status' => 'publish',
            'post_type' => 'degree-program',
            'post_name' => sanitize_title($title),
            'meta_input' => $program
-        ]));
+        ]);
+
+        if ( !is_wp_error($result) && $result > 0 && !empty($program['featured_image']['url'])) {
+            $attachment_id = Utils::import_image_from_url($program['featured_image']['url'], $result);
+            set_post_thumbnail($result, $attachment_id);
+        }
+
+        return $result;
     }
 
 }

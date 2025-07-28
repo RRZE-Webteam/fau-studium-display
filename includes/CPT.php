@@ -13,6 +13,9 @@ class CPT
         add_action( 'init', [$this, 'register_post_type'] );
         add_action('add_meta_boxes', [$this, 'render_metabox']);
         add_action('admin_menu', [$this, 'disable_new_posts']);
+        //add_filter('single_template', [__CLASS__, 'include_single_template']);
+        //add_filter('archive_template', [__CLASS__, 'include_archive_template']);
+        add_filter('the_content', [$this, 'replace_content_with_cpt_content']);
 
     }
 
@@ -43,7 +46,7 @@ class CPT
     {
         add_meta_box(
             'degree_program_metabox',
-            'Post Meta German',
+            __('Post Meta German', 'fau-studium-display'),
             [$this, 'degree_program_metabox'],
             'degree-program',
             'normal',
@@ -52,7 +55,7 @@ class CPT
 
         add_meta_box(
             'degree_program_metabox_english',
-            'Post Meta English',
+            __('Post Meta English', 'fau-studium-display'),
             [$this, 'degree_program_metabox_english'],
             'degree-program',
             'normal',
@@ -92,6 +95,112 @@ class CPT
         if (isset($_GET['post_type']) && $_GET['post_type'] == 'degree-program') {
             echo '<style type="text/css">.page-title-action {display:none;}</style>';
         }
+    }
+
+    public static function include_single_template($template_path)
+    {
+        global $post;
+
+        if (!($post->post_type == 'degree-program')) {
+            return $template_path;
+        }
+
+        $template_path = plugin()->getPath() . 'templates/single-degree-program.php';
+
+        wp_enqueue_style('fau-studium-display');
+
+        return $template_path;
+    }
+
+    public static function include_archive_template($template_path)
+    {
+        global $post;
+        if ($post->post_type == 'degree-program' && is_archive()) {
+            if ($theme_file = locate_template(array('archive-degree-program.php'))) {
+                $template_path = $theme_file;
+            } else {
+                $template_path = plugin()->getPath() . '/templates/archive-degree-program.php';
+            }
+        }
+
+        wp_enqueue_style('fau-studium-display');
+
+        return $template_path;
+    }
+
+    function replace_content_with_cpt_content($content) {
+        if (is_singular('degree-program')) {
+            global $post;
+            $atts = [
+                'format' => 'full',
+                'degreeProgram' => $post->ID,
+                'post_id' => $post->ID,
+                'selectedItemsFull' => [
+                    'standard_duration',
+                    'start',
+                    'number_of_students',
+                    'teaching_language',
+                    'attributes',
+                    'degree',
+                    'faculty',
+                    'location',
+                    'subject_groups',
+                    'videos',
+                    'content.structure',
+                    'content.specializations',
+                    'content.qualities_and_skills',
+                    'content.why_should_study',
+                    'content.career_prospects',
+                    'admission_requirement_link',
+                    'details_and_notes',
+                    'start_of_semester',
+                    'semester_dates',
+                    'examinations_office',
+                    'examination_regulations',
+                    'module_handbook',
+                    'url',
+                    'department',
+                    'student_advice',
+                    'subject_specific_advice',
+                    'service_centers',
+                    'info_brochure',
+                    'semester_fee',
+                    'abroad_opportunities',
+                    'keywords',
+                    'area_of_study',
+                    'combinations',
+                    'limited_combinations',
+                    'notes_for_international_applicants',
+                    'student_initiatives',
+                    'apply_now_link',
+                    'content_related_master_requirements',
+                    'application_deadline_winter_semester',
+                    'application_deadline_summer_semester',
+                    'language_skills',
+                    'language_skills_humanities_faculty',
+                    'german_language_skills_for_international_students',
+                    'degree_program_fees',
+                    'content.about',
+                    'content.special_features',
+                    'content.testimonials',
+                    'admission_requirements',
+                    'fact_sheet',
+                    'teaser_image',
+                    'title',
+                    'subtitle',
+                    'entry_text',
+                    'admission_requirements_application',
+                    'admission_requirements_application_internationals',
+                    'links.organizational',
+                    'links.downloads',
+                    'links.additional_information'
+                ]
+            ];
+            $output = new Output();
+            $content = $output->renderOutput($atts);
+        }
+
+        return $content;
     }
 
 }

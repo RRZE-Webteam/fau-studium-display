@@ -44,56 +44,20 @@ jQuery(document).ready(function($) {
 
     $('#degree-program-results').on('click', 'a.add-degree-program', function(e) {
         e.preventDefault();
-
-        let $this = $(this);
-        let task = $this.data('task');
-        $this.addClass('button-disabled');
-        if (task === 'add') {
-            $this.find('span.dashicons-plus').removeClass('dashicons-plus').addClass('dashicons-update');
-        }
-        $this.find('span.dashicons-update').addClass('spin');
-        $.ajax({
-            url: program_ajax.ajax_url,
-            type: 'POST',
-            data: {
-                action: 'program_sync',
-                _ajax_nonce: program_ajax.nonce,
-                program_id: $this.data('id'),
-                post_id: $this.data('post_id'),
-            },
-            success: function(response) {
-//                console.log(response);
-                if (response.success) {
-                    $this.find('span.dashicons-update').removeClass('spin');
-                    if (task === 'add') {
-                        $this.find('span.dashicons-update').removeClass('dashicons-update').addClass('dashicons-plus');
-                    }
-                    $this.after('<span class="dashicons dashicons-yes sync-ok" title="Sync OK">Sync OK</span>');
-                } else {
-                    $this.find('span.dashicons-update').removeClass('spin');
-                    if (task === 'add') {
-                        $this.find('span.dashicons-update').removeClass('dashicons-update').addClass('dashicons-plus');
-                    }
-                    $this.after('<span class="dashicons dashicons-no sync-error" title="Sync Error">Sync Error</span>');
-                    console.log('Fehler: ' + response.data);
-                }
-            },
-            error: function() {
-                $this.find('span.dashicons-update').removeClass('spin');
-                if (task === 'add') {
-                    $this.find('span.dashicons-update').removeClass('dashicons-update').addClass('dashicons-plus');
-                }
-                console.log('AJAX-Fehler');
-            }
-        });
+        sync_degree_program($(this));
     })
 
-    $('#degree-program-results').on('click', 'a.delete-degree-program', function(e) {
+    $('#degree-programs-imported').on('click', 'a.update-degree-program', function(e) {
+        e.preventDefault();
+        sync_degree_program($(this));
+    })
+
+    $('#degree-programs-imported').on('click', 'a.delete-degree-program', function(e) {
         e.preventDefault();
         let $this = $(this);
         let task = $this.data('task');
         $this.addClass('button-disabled');
-        $this.parent().find('a.add-degree-program button').remove();
+        $this.parent().find('a.sync-degree-program button').remove();
         $this.find('span.dashicons-trash').removeClass('dashicons-trash').addClass('dashicons-update').addClass('spin');
 //console.log($this.data());
         $.ajax({
@@ -118,50 +82,52 @@ jQuery(document).ready(function($) {
         });
     });
 
-    // Media Upload
-    $( 'body' ).on( 'click', '.rudr-upload', function( event ){
-        event.preventDefault(); // prevent default link click and page refresh
+    function sync_degree_program($button) {
+        let task = $button.data('task');
+        $button.addClass('button-disabled');
 
-        const button = $(this)
-        const imageId = button.next().next().val();
+        if (task === 'add') {
+            $button.find('span.dashicons-plus')
+                .removeClass('dashicons-plus')
+                .addClass('dashicons-update');
+        }
 
-        const customUploader = wp.media({
-            title: 'Insert image', // modal window title
-            library : {
-                // uploadedTo : wp.media.view.settings.post.id, // attach to the current post?
-                type : 'image'
+        $button.find('span.dashicons-update').addClass('spin');
+
+        $.ajax({
+            url: program_ajax.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'program_sync',
+                _ajax_nonce: program_ajax.nonce,
+                program_id: $button.data('id'),
+                post_id: $button.data('post_id'),
             },
-            button: {
-                text: 'Use this image' // button label text
+            success: function(response) {
+                $button.find('span.dashicons-update').removeClass('spin');
+                if (task === 'add') {
+                    $button.find('span.dashicons-update')
+                        .removeClass('dashicons-update')
+                        .addClass('dashicons-plus');
+                }
+
+                if (response.success) {
+                    $button.after('<span class="dashicons dashicons-yes sync-ok" title="Sync OK">Sync OK</span>');
+                } else {
+                    $button.after('<span class="dashicons dashicons-no sync-error" title="Sync Error">Sync Error</span>');
+                    console.log('Fehler: ' + response.data);
+                }
             },
-            multiple: false
-        }).on( 'select', function() { // it also has "open" and "close" events
-            const attachment = customUploader.state().get( 'selection' ).first().toJSON();
-            button.removeClass( 'button' ).html( '<img src="' + attachment.url + '">'); // add image instead of "Upload Image"
-            button.next().show(); // show "Remove image" link
-            button.next().next().val( attachment.id ); // Populate the hidden field with image ID
-        })
-
-        // already selected images
-        customUploader.on( 'open', function() {
-
-            if( imageId ) {
-                const selection = customUploader.state().get( 'selection' )
-                attachment = wp.media.attachment( imageId );
-                attachment.fetch();
-                selection.add( attachment ? [attachment] : [] );
+            error: function() {
+                $button.find('span.dashicons-update').removeClass('spin');
+                if (task === 'add') {
+                    $button.find('span.dashicons-update')
+                        .removeClass('dashicons-update')
+                        .addClass('dashicons-plus');
+                }
+                console.log('AJAX-Fehler');
             }
+        });
+    }
 
-        })
-
-        customUploader.open()
-
-    });
-    // on remove button click
-    $( 'body' ).on( 'click', '.rudr-remove', function( event ){
-        event.preventDefault();
-        const button = $(this);
-        button.next().val( '' ); // emptying the hidden field
-        button.hide().prev().addClass( 'button' ).html( 'Upload image' ); // replace the image with text
-    });
 });

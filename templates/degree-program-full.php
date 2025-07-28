@@ -7,7 +7,7 @@ use function \Fau\DegreeProgram\Display\Config\get_labels;
 use function Fau\DegreeProgram\Display\plugin;
 
 //var_dump($data);
-//var_dump($atts);
+//print "<pre>"; print_r($atts); print "</pre>";
 
 if (empty($atts['degreeProgram'])) {
     print '<div class="components-placeholder is-large">' . __('Please select a degree program.', 'fau-studium-display') . '</div>';
@@ -30,6 +30,13 @@ if (!empty($number_of_students_raw)) {
 /*
  * Build items
  */
+
+// Thumbnail
+if (in_array('teaser_image', $items)) {
+    $thumbnail = !empty($data[ '_thumbnail_rendered' ]) ? $data[ '_thumbnail_rendered' ] : $data[ 'featured_image' ][ 'rendered' ];
+} else {
+    $thumbnail = '';
+}
 
 // Title
 if (in_array('title', $items) && ! empty($data[ 'title' ])) {
@@ -436,11 +443,8 @@ if (in_array('links.additional_information', $items)) {
 
 ?>
 <section class="fau-studium-display degree-program-full" itemtype="https://schema.org/EducationalOccupationalProgram" itemscope>
-    <?php
 
-    if (in_array('teaser_image', $items)) {
-        echo $data['featured_image']['rendered'];
-    } ?>
+    <?php echo $thumbnail; ?>
 
     <div class="program-content">
 

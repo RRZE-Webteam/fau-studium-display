@@ -154,7 +154,8 @@
   margin: 0 auto -64px;
 }
 
-.fau-studium-display.degree-program-full img.attachment-fau-featured {
+.fau-studium-display.degree-program-full img.attachment-fau-featured,
+.fau-studium-display.degree-program-full img.wp-post-image {
   aspect-ratio: 2.35/1;
   -o-object-fit: cover;
      object-fit: cover;

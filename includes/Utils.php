@@ -231,4 +231,50 @@ class Utils
         }
         return $attributeOptions;
     }
+
+    public static function import_image_from_url($image_url, $post_id)
+    {
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+        require_once(ABSPATH . 'wp-admin/includes/file.php');
+        require_once(ABSPATH . 'wp-admin/includes/media.php');
+
+        // Prüfen, ob URL gültig ist
+        if (empty($image_url) || ! filter_var($image_url, FILTER_VALIDATE_URL)) {
+            return new \WP_Error('invalid_url', 'Ungültige Bild-URL');
+        }
+
+        // Temporäre Datei holen
+        $tmp = download_url($image_url);
+
+        if (is_wp_error($tmp)) {
+            return $tmp; // Fehler beim Herunterladen
+        }
+
+        $filename = basename(parse_url($image_url, PHP_URL_PATH));
+        $attachments = get_posts([
+             'post_type'  => 'attachment',
+             'name'       => sanitize_title(pathinfo($filename, PATHINFO_FILENAME)),
+             'post_status'=> 'inherit',
+             'posts_per_page' => 1,
+         ]);
+
+        if (!empty($attachments)) {
+            return $attachments[0]->ID;
+        }
+
+        // Dateinamen aus URL extrahieren
+        $file_array               = [];
+        $file_array[ 'name' ]     = $filename;
+        $file_array[ 'tmp_name' ] = $tmp;
+
+        // Datei in die Mediathek hochladen
+        $attachment_id = media_handle_sideload($file_array, $post_id);
+
+        // Bei Fehler temporäre Datei löschen
+        if (is_wp_error($attachment_id)) {
+            @unlink($file_array[ 'tmp_name' ]);
+        }
+
+        return $attachment_id;
+    }
 }
