@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: FAU Studium Display\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-12 12:41+0000\n"
-"PO-Revision-Date: 2025-07-24 15:05+0000\n"
+"PO-Revision-Date: 2025-07-29 15:37+0000\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch\n"
 "Language: de_DE\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Loco-Version: 2.8.0; wp-6.8.1; php-8.3.14\n"
 "X-Domain: fau-studium-display"
 
-#: templates/degree-program-box.php:37 templates/degree-program-full.php:70
+#: templates/degree-program-box.php:37 templates/degree-program-full.php:77
 msgid "%s semesters"
 msgstr "%s Semester"
 
@@ -23,7 +23,7 @@ msgstr "%s Semester"
 msgid "-- Please select --"
 msgstr "-- Bitte auswählen --"
 
-#: templates/degree-program-full.php:169
+#: templates/degree-program-full.php:176
 msgid "1st semester"
 msgstr "1. Semester"
 
@@ -31,7 +31,7 @@ msgstr "1. Semester"
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: templates/degree-program-full.php:472
+#: templates/degree-program-full.php:496
 msgid "Admission and Application"
 msgstr "Zulassung und Bewerbung"
 
@@ -64,7 +64,7 @@ msgstr "FAU-Studium Display"
 msgid "Degree Program"
 msgstr "Studiengang"
 
-#: includes/CPT.php:25
+#: includes/CPT.php:27
 msgid "Degree Programs"
 msgstr "Studiengänge"
 
@@ -84,7 +84,7 @@ msgstr "DIP Edu API Key"
 msgid "English"
 msgstr "Englisch"
 
-#: templates/degree-program-full.php:116
+#: templates/degree-program-full.php:123
 msgid "Fact Sheet"
 msgstr "Steckbrief"
 
@@ -125,7 +125,7 @@ msgstr "Deutsch"
 msgid "Grid"
 msgstr "Kacheln"
 
-#: templates/degree-program-full.php:172
+#: templates/degree-program-full.php:179
 msgid "Higher semesters"
 msgstr "Höhere Semester"
 
@@ -154,7 +154,7 @@ msgstr "Liste"
 msgid "Manage Imported"
 msgstr "Importierte Studiengänge verwalten"
 
-#: templates/degree-program-full.php:175
+#: templates/degree-program-full.php:182
 msgid "Master"
 msgstr "Master"
 
@@ -162,7 +162,7 @@ msgstr "Master"
 msgid "No degree programs found."
 msgstr "Keine Studiengänge gefunden."
 
-#: templates/degree-program-full.php:181 templates/degree-program-full.php:182
+#: templates/degree-program-full.php:188 templates/degree-program-full.php:189
 msgid "not possible"
 msgstr "nicht möglich"
 
@@ -184,7 +184,15 @@ msgstr "Plugin zur Darstellung von Studiengangsinformationen"
 msgid "Plugins: %1$s: %2$s"
 msgstr "Plugins: %1$s: %2$s"
 
-#: templates/degree-program-full.php:459
+#: includes/CPT.php:57
+msgid "Post Meta English"
+msgstr "Post-Meta-Daten deutsch"
+
+#: includes/CPT.php:48
+msgid "Post Meta German"
+msgstr "Post-Meta-Daten englisch"
+
+#: templates/degree-program-full.php:483
 msgid "Program Overview"
 msgstr "Studiengang im Detail"
 
@@ -241,6 +249,10 @@ msgstr "Besondere Studienformen"
 msgid "Start of degree program"
 msgstr "Studienbeginn"
 
+#: templates/degree-program-full.php:535
+msgid "Studies"
+msgstr "Studium"
+
 #: includes/Utils.php:21
 msgid "Study location"
 msgstr "Studienort"
@@ -249,7 +261,7 @@ msgstr "Studienort"
 msgid "Subject groups"
 msgstr "Fächergruppen"
 
-#: templates/degree-program-full.php:182
+#: templates/degree-program-full.php:189
 msgid "Summer semester"
 msgstr "Sommersemester"
 
@@ -291,14 +303,14 @@ msgstr ""
 msgid "Update"
 msgstr "Aktualisieren"
 
-#: templates/degree-program-full.php:153
+#: templates/degree-program-full.php:160
 msgid "Videos"
 msgstr "Videos"
 
-#: templates/degree-program-full.php:493
+#: templates/degree-program-full.php:517
 msgid "We're Here to Help with All Your Study-Related Questions"
 msgstr "Wir helfen Dir bei Fragen rund ums Studium"
 
-#: templates/degree-program-full.php:181
+#: templates/degree-program-full.php:188
 msgid "Winter semester"
 msgstr "Wintersemester"

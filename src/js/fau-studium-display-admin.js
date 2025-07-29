@@ -57,7 +57,7 @@ jQuery(document).ready(function($) {
         let $this = $(this);
         let task = $this.data('task');
         $this.addClass('button-disabled');
-        $this.parent().find('a.sync-degree-program button').remove();
+        $this.parent().find('a.update-degree-program').remove();
         $this.find('span.dashicons-trash').removeClass('dashicons-trash').addClass('dashicons-update').addClass('spin');
 //console.log($this.data());
         $.ajax({

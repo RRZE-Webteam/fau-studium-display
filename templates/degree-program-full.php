@@ -437,6 +437,31 @@ if (in_array('links.additional_information', $items)) {
     }
 }
 
+// Advantages @FAU
+if (in_array('benefits', $items)) {
+
+    $benefits_fau_image = $constants[ 'benefits-fau-image' ];
+    $benefits_fau = '<h2>' . __('Studies', 'fau-studium-display') . '</h2>';
+    $benefits_fau .= '<div class="fau-big-teaser">'
+        . '<div class="fau-big-teaser__content">'
+        . '<h3 class="fau-big-teaser__headline">' . $constants[ 'benefits-fau-title' ] . '</h3>'
+        . '<p class="fau-big-teaser__teaser-text">' . $constants[ 'benefits-fau-text' ] . '</p>'
+        . '<a href="' . $constants[ 'benefits-fau-link-url' ] . '" class="wp-block-buttons is-layout-flex">' . $constants[ 'benefits-fau-link-text' ] . '</a>'
+        . '</div>'
+        . '<div class="fau-big-teaser__image">'
+        . '<img src="' . $benefits_fau_image . '" alt="" />'
+        . '</div>'
+        . '</div>';
+    $benefits_fau .= '<div class="features-fau">';
+    $benefits_fau .= '[columns]';
+    for ($i = 1; $i <= 4; $i++) {
+        $benefits_fau .= '[column]<span class="icon-' . $constants[ 'features-' . $i . '-icon' ] . '"></span>' . $constants[ 'features-' . $i . '-text' ] . '[/column]';
+    }
+    $benefits_fau .= '[/columns]</div>';
+} else {
+    $benefits_fau = '';
+}
+
 /*
  * HTML Output
  */
@@ -507,9 +532,12 @@ if (in_array('links.additional_information', $items)) {
                      . $useful_links
                      . '</div>';
             }
+
+            echo '</div>';
         }
 
-
+        //
+        echo $benefits_fau;
 
         ?>
 

@@ -40,7 +40,8 @@ function get_output_fields($format = '') {
             'subject_specific_advice',
             'links.organizational',
             'links.downloads',
-            'links.additional_information'
+            'links.additional_information',
+            'benefits'
 
             //'subject_groups',
             //'details_and_notes',
@@ -545,6 +546,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Fact Sheet'
             ]
         ],
+        'benefits' => [
+            'labels' => [
+                'de' => 'Deine Vorteile an der FAU',
+                'en' => 'Your Benefits at FAU'
+            ]
+        ]
     ];
 
     $labels_out = [];
@@ -611,7 +618,60 @@ function get_constants($lang = 'de') {
         'specific-student-advice-image' => [
             'de' => plugin()->getUrl() . 'assets/img/student-advice.jpg',
             'en' => plugin()->getUrl() . 'assets/img/student-advice.jpg'
-        ]
+        ],
+        'benefits-fau-title' => [
+            'de' => 'Deine Vorteile an der FAU',
+            'en' => 'Deine Vorteile an der FAU'
+        ],
+        'benefits-fau-text' => [
+            'de' => 'Die FAU bietet Ihnen mit über 270 Studiengängen eine inspirierende Lernumgebung, studentische Gemeinschaft und zahlreiche Möglichkeiten, Ihre Leidenschaft zu entdecken.',
+            'en' => 'Die FAU bietet Ihnen mit über 270 Studiengängen eine inspirierende Lernumgebung, studentische Gemeinschaft und zahlreiche Möglichkeiten, Ihre Leidenschaft zu entdecken.'
+        ],
+        'benefits-fau-link-text' => [
+            'de' => 'Mehr erfahren',
+            'en' => 'Mehr erfahren'
+        ],
+        'benefits-fau-link-url' => [
+            'de' => 'https://fau.de',
+            'en' => 'https://fau.eu'
+        ],
+        'benefits-fau-image' => [
+            'de' => plugin()->getUrl() . 'assets/img/benefits-fau.png',
+            'en' => plugin()->getUrl() . 'assets/img/benefits-fau.png'
+        ],
+        'features-1-text' => [
+            'de' => 'Breites Studienangebot',
+            'en' => 'Breites Studienangebot',
+        ],
+        'features-1-icon' => [
+            'de' => 'circle-check',
+            'en' => 'circle-check',
+        ],
+        'features-2-text' => [
+            'de' => 'Internationale Partnerschaften mit anderen Hochschulen',
+            'en' => 'Internationale Partnerschaften mit anderen Hochschulen',
+        ],
+        'features-2-icon' => [
+            'de' => 'circle-check',
+            'en' => 'circle-check',
+        ],
+        'features-3-text' => [
+            'de' => 'Enge Verknüpfung mit der Wirtschaft',
+            'en' => 'Enge Verknüpfung mit der Wirtschaft',
+        ],
+        'features-3-icon' => [
+            'de' => 'circle-check',
+            'en' => 'circle-check',
+        ],
+        'features-4-text' => [
+            'de' => 'Duales Bachelorstudium möglich',
+            'en' => 'Duales Bachelorstudium möglich',
+        ],
+        'features-4-icon' => [
+            'de' => 'circle-check',
+            'en' => 'circle-check',
+        ],
+
     ];
 
     $constants_out = [];

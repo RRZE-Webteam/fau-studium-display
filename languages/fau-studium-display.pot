@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-24T15:02:29+00:00\n"
+"POT-Creation-Date: 2025-07-29T15:36:32+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: fau-studium-display\n"
@@ -53,8 +53,16 @@ msgstr ""
 msgid "-- Please select --"
 msgstr ""
 
-#: includes/CPT.php:25
+#: includes/CPT.php:27
 msgid "Degree Programs"
+msgstr ""
+
+#: includes/CPT.php:48
+msgid "Post Meta German"
+msgstr ""
+
+#: includes/CPT.php:57
+msgid "Post Meta English"
 msgstr ""
 
 #: includes/Main.php:105
@@ -172,7 +180,7 @@ msgid "Reset all filters"
 msgstr ""
 
 #: templates/degree-program-box.php:37
-#: templates/degree-program-full.php:70
+#: templates/degree-program-full.php:77
 msgid "%s semesters"
 msgstr ""
 
@@ -180,49 +188,53 @@ msgstr ""
 msgid "Please select a degree program."
 msgstr ""
 
-#: templates/degree-program-full.php:116
+#: templates/degree-program-full.php:123
 msgid "Fact Sheet"
 msgstr ""
 
-#: templates/degree-program-full.php:153
+#: templates/degree-program-full.php:160
 msgid "Videos"
 msgstr ""
 
-#: templates/degree-program-full.php:169
+#: templates/degree-program-full.php:176
 msgid "1st semester"
 msgstr ""
 
-#: templates/degree-program-full.php:172
+#: templates/degree-program-full.php:179
 msgid "Higher semesters"
 msgstr ""
 
-#: templates/degree-program-full.php:175
+#: templates/degree-program-full.php:182
 msgid "Master"
 msgstr ""
 
-#: templates/degree-program-full.php:181
+#: templates/degree-program-full.php:188
 msgid "Winter semester"
 msgstr ""
 
-#: templates/degree-program-full.php:181
-#: templates/degree-program-full.php:182
+#: templates/degree-program-full.php:188
+#: templates/degree-program-full.php:189
 msgid "not possible"
 msgstr ""
 
-#: templates/degree-program-full.php:182
+#: templates/degree-program-full.php:189
 msgid "Summer semester"
 msgstr ""
 
-#: templates/degree-program-full.php:459
+#: templates/degree-program-full.php:483
 msgid "Program Overview"
 msgstr ""
 
-#: templates/degree-program-full.php:472
+#: templates/degree-program-full.php:496
 msgid "Admission and Application"
 msgstr ""
 
-#: templates/degree-program-full.php:493
+#: templates/degree-program-full.php:517
 msgid "We're Here to Help with All Your Study-Related Questions"
+msgstr ""
+
+#: templates/degree-program-full.php:535
+msgid "Studies"
 msgstr ""
 
 #: templates/degree-program-grid.php:92

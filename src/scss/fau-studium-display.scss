@@ -1,3 +1,5 @@
+@import "fau-big-teaser";
+
 .fau-studium-display {
 
     // Box
@@ -128,7 +130,7 @@
                 }
             }
         }
-        h3 {
+        h3:not(.fau-big-teaser__headline) {
             padding: 0;
             margin-bottom: 1em;
         }
@@ -553,6 +555,44 @@
                         margin-left: 0.5em;
                     }
                 }
+            }
+        }
+        .fau-big-teaser {
+            padding-top: 0;
+        }
+        .features-fau {
+            .icon-circle-check {
+                width: 60px;
+                height: 60px;
+                display: block;
+                //position: absolute;
+                //top: -24px;
+                //left: 16px;
+                background-color: #fff;
+                margin-bottom: .5em;
+                &:after {
+                    content: "";
+                    //-webkit-mask-size: var(--icon-size-mask, 70%);
+                    //mask-size: var(--icon-size-mask, 70%);
+                    -webkit-mask-size: 100%;
+                    mask-size: 100%;
+                    -webkit-mask-repeat: no-repeat;
+                    mask-repeat: no-repeat;
+                    -webkit-mask-position: center;
+                    mask-position: center;
+                    display: inline-block;
+                    width: 60px;
+                    height: 60px;
+                    //position: relative;
+                    //top: 9px;
+                    //left: 8px;
+                    mask-image: url(../svg/circle-check.svg);
+                    -webkit-mask-image: url(../svg/circle-check.svg);
+                    background-color: var(--FAU_Col_FAU-Blau, #04316A);
+                }
+            }
+            .column p {
+                font-weight: bold;
             }
         }
     }

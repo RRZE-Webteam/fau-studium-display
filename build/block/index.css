@@ -2,6 +2,139 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/block/editor.scss ***!
   \**********************************************************************************************************************************************************************************************************************************************/
 @charset "UTF-8";
+.fau-big-teaser {
+  display: flex;
+  max-width: var(--wide-max-width);
+  margin: 0 auto;
+  gap: var(--Spacing-10x, 2.5rem);
+  padding: var(--Spacing-8x, 2rem) var(--Spacing-10x, 2.5rem);
+  box-sizing: content-box;
+}
+
+.fau-big-teaser__content {
+  min-width: 0;
+  flex-basis: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.fau-big-teaser__content h2.fau-big-teaser__headline,
+.fau-big-teaser__content h3.fau-big-teaser__headline,
+.fau-big-teaser__content h4.fau-big-teaser__headline,
+.fau-big-teaser__content h5.fau-big-teaser__headline,
+.fau-big-teaser__content h6.fau-big-teaser__headline {
+  font-size: var(--H-Heading-Big-Teaser, 40px);
+  background-color: var(--FAU-Col-FAU-Weiss-100, #fff);
+  margin: 0;
+  max-width: calc(100% + 16rem);
+  min-width: calc(100% + 5.5rem);
+  padding: var(--Spacing-6x, 1.5rem) var(--Spacing-8x, 2rem) var(--Spacing-6x, 1.5rem) 0;
+  box-sizing: border-box;
+  position: relative;
+  width: -moz-max-content;
+  width: max-content;
+  z-index: 1;
+}
+
+.fau-big-teaser__content p.fau-big-teaser__teaser-text {
+  padding: var(--Spacing-2x, 0.5rem) 0 var(--Spacing-4x, 1rem) 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.fau-big-teaser__content .wp-block-buttons.is-layout-flex {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.fau-big-teaser__image {
+  flex-basis: 0;
+  flex-grow: 1;
+}
+
+.fau-big-teaser__image img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3/2;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.is-style-dark .fau-big-teaser .fau-big-teaser__content h2.fau-big-teaser__headline,
+.is-style-dark .fau-big-teaser .fau-big-teaser__content h3.fau-big-teaser__headline,
+.is-style-dark .fau-big-teaser .fau-big-teaser__content h4.fau-big-teaser__headline,
+.is-style-dark .fau-big-teaser .fau-big-teaser__content h5.fau-big-teaser__headline,
+.is-style-dark .fau-big-teaser .fau-big-teaser__content h6.fau-big-teaser__headline {
+  background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+
+@media screen and (max-width: 1199px) {
+  .fau-big-teaser__content h2.fau-big-teaser__headline,
+  .fau-big-teaser__content h3.fau-big-teaser__headline,
+  .fau-big-teaser__content h4.fau-big-teaser__headline,
+  .fau-big-teaser__content h5.fau-big-teaser__headline,
+  .fau-big-teaser__content h6.fau-big-teaser__headline {
+    max-width: calc(100% + 12rem);
+  }
+  .fau-big-teaser__image img {
+    aspect-ratio: 1/1;
+  }
+}
+@media screen and (max-width: 899px) {
+  .fau-big-teaser {
+    flex-direction: column-reverse;
+    gap: unset;
+  }
+  .fau-big-teaser__content h2.fau-big-teaser__headline,
+  .fau-big-teaser__content h3.fau-big-teaser__headline,
+  .fau-big-teaser__content h4.fau-big-teaser__headline,
+  .fau-big-teaser__content h5.fau-big-teaser__headline,
+  .fau-big-teaser__content h6.fau-big-teaser__headline {
+    margin-top: -3.3rem;
+    width: 90%;
+    max-width: unset;
+    min-width: unset;
+    margin-left: auto;
+    margin-right: auto;
+    padding: var(--Spacing-4x, 1rem) var(--Spacing-6x, 1.5rem) 0 var(--Spacing-6x, 1.5rem);
+    font-size: 2rem;
+  }
+  .fau-big-teaser__content p.fau-big-teaser__teaser-text {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: var(--Spacing-4x, 1rem) var(--Spacing-6x, 1.5rem) var(--Spacing-2x, 0.5rem) var(--Spacing-6x, 1.5rem);
+  }
+  .fau-big-teaser__content .wp-block-buttons.is-layout-flex {
+    width: 90%;
+    margin: 0 auto;
+    padding: 0 var(--Spacing-6x, 1.5rem);
+  }
+  .fau-big-teaser__image img {
+    aspect-ratio: 3/2;
+  }
+}
+@media (max-width: 393px) {
+  .fau-big-teaser {
+    padding: unset;
+  }
+  .fau-big-teaser__content h2.fau-big-teaser__headline,
+  .fau-big-teaser__content h3.fau-big-teaser__headline,
+  .fau-big-teaser__content h4.fau-big-teaser__headline,
+  .fau-big-teaser__content h5.fau-big-teaser__headline,
+  .fau-big-teaser__content h6.fau-big-teaser__headline {
+    width: calc(100% - 1rem);
+    padding: var(--Spacing-4x, 1rem) var(--Spacing-3x) var(--Spacing-3x) var(--Spacing-3x);
+    font-size: 1.625rem;
+  }
+  .fau-big-teaser__content p.fau-big-teaser__teaser-text,
+  .fau-big-teaser__content .wp-block-buttons.is-layout-flex {
+    width: calc(100% - 1rem);
+    padding: 0 var(--Spacing-3x) var(--Spacing-3x) var(--Spacing-3x);
+  }
+}
 .fau-studium-display.degree-program-box, .fau-studium-display.degree-program-full .fact-sheet {
   background-color: var(--FAU_Col_FAU-Dunkelblau_12_5, #DFE2E7);
   padding: 40px 16px 24px;
@@ -143,7 +276,7 @@
     display: inline-block;
   }
 }
-.fau-studium-display.degree-program-full h3 {
+.fau-studium-display.degree-program-full h3:not(.fau-big-teaser__headline) {
   padding: 0;
   margin-bottom: 1em;
 }
@@ -612,6 +745,38 @@
   background-color: #fff;
   vertical-align: text-bottom;
   margin-left: 0.5em;
+}
+
+.fau-studium-display.degree-program-full .fau-big-teaser {
+  padding-top: 0;
+}
+
+.fau-studium-display.degree-program-full .features-fau .icon-circle-check {
+  width: 60px;
+  height: 60px;
+  display: block;
+  background-color: #fff;
+  margin-bottom: 0.5em;
+}
+
+.fau-studium-display.degree-program-full .features-fau .icon-circle-check:after {
+  content: "";
+  -webkit-mask-size: 100%;
+  mask-size: 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNjQwIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIHY3LjAuMCBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIENvcHlyaWdodCAyMDI1IEZvbnRpY29ucywgSW5jLi0tPjxwYXRoIGQ9Ik0zMjAgMTEyQzQzNC45IDExMiA1MjggMjA1LjEgNTI4IDMyMEM1MjggNDM0LjkgNDM0LjkgNTI4IDMyMCA1MjhDMjA1LjEgNTI4IDExMiA0MzQuOSAxMTIgMzIwQzExMiAyMDUuMSAyMDUuMSAxMTIgMzIwIDExMnpNMzIwIDU3NkM0NjEuNCA1NzYgNTc2IDQ2MS40IDU3NiAzMjBDNTc2IDE3OC42IDQ2MS40IDY0IDMyMCA2NEMxNzguNiA2NCA2NCAxNzguNiA2NCAzMjBDNjQgNDYxLjQgMTc4LjYgNTc2IDMyMCA1NzZ6TTQwNC40IDI3Ni43QzQxMS40IDI2NS41IDQwOCAyNTAuNyAzOTYuOCAyNDMuNkMzODUuNiAyMzYuNSAzNzAuOCAyNDAgMzYzLjcgMjUxLjJMMzAyLjMgMzQ5LjVMMjc1LjMgMzEzLjVDMjY3LjMgMzAyLjkgMjUyLjMgMzAwLjcgMjQxLjcgMzA4LjdDMjMxLjEgMzE2LjcgMjI4LjkgMzMxLjcgMjM2LjkgMzQyLjNMMjg0LjkgNDA2LjNDMjg5LjYgNDEyLjYgMjk3LjIgNDE2LjIgMzA1LjEgNDE1LjlDMzEzIDQxNS42IDMyMC4yIDQxMS40IDMyNC40IDQwNC42TDQwNC40IDI3Ni42eiIvPjwvc3ZnPg==);
+  -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNjQwIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIHY3LjAuMCBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIENvcHlyaWdodCAyMDI1IEZvbnRpY29ucywgSW5jLi0tPjxwYXRoIGQ9Ik0zMjAgMTEyQzQzNC45IDExMiA1MjggMjA1LjEgNTI4IDMyMEM1MjggNDM0LjkgNDM0LjkgNTI4IDMyMCA1MjhDMjA1LjEgNTI4IDExMiA0MzQuOSAxMTIgMzIwQzExMiAyMDUuMSAyMDUuMSAxMTIgMzIwIDExMnpNMzIwIDU3NkM0NjEuNCA1NzYgNTc2IDQ2MS40IDU3NiAzMjBDNTc2IDE3OC42IDQ2MS40IDY0IDMyMCA2NEMxNzguNiA2NCA2NCAxNzguNiA2NCAzMjBDNjQgNDYxLjQgMTc4LjYgNTc2IDMyMCA1NzZ6TTQwNC40IDI3Ni43QzQxMS40IDI2NS41IDQwOCAyNTAuNyAzOTYuOCAyNDMuNkMzODUuNiAyMzYuNSAzNzAuOCAyNDAgMzYzLjcgMjUxLjJMMzAyLjMgMzQ5LjVMMjc1LjMgMzEzLjVDMjY3LjMgMzAyLjkgMjUyLjMgMzAwLjcgMjQxLjcgMzA4LjdDMjMxLjEgMzE2LjcgMjI4LjkgMzMxLjcgMjM2LjkgMzQyLjNMMjg0LjkgNDA2LjNDMjg5LjYgNDEyLjYgMjk3LjIgNDE2LjIgMzA1LjEgNDE1LjlDMzEzIDQxNS42IDMyMC4yIDQxMS40IDMyNC40IDQwNC42TDQwNC40IDI3Ni42eiIvPjwvc3ZnPg==);
+  background-color: var(--FAU_Col_FAU-Blau, #04316A);
+}
+
+.fau-studium-display.degree-program-full .features-fau .column p {
+  font-weight: bold;
 }
 
 .fau-studium-display ul.degree-program-grid {

@@ -44,7 +44,7 @@ const Edit = ({
     const [degrees] = useState(() => fauStudiumData?.degreesOptions ?? []);
     const [specialWays] = useState(() => fauStudiumData?.specialWaysOptions ?? []);
     const {selectedItemsGrid = ["teaser_image", "title", "subtitle", "degree", "start", "admission_requirements", "area_of_study"]} = attributes;
-    const {selectedItemsFull = ["teaser_image", "title", "subtitle", "degree", "start", "admission_requirements", "area_of_study"]} = attributes;
+    const {selectedItemsFull = ["teaser_image", "title", "subtitle", "entry_text", "fact_sheet", "content.about", "content.structure", "content.specializations", "content.qualities_and_skills", "content.why_should_study", "content.career_prospects", "content.special_features", "content.testimonials", "videos", "admission_requirements_application", "admission_requirements_application_internationals", "apply_now_link", "student_advice", "subject_specific_advice", "links.organizational", "links.downloads", "links.additional_information", "benefits"]} = attributes;
     const {selectedFaculties = [], selectedDegrees = [], selectedSpecialWays = []} = attributes;
     const [selectedFormat, setSelectedFormat] = useState<string>(format);
 
