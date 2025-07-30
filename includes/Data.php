@@ -10,8 +10,8 @@ class Data
 
         if (isset($atts['format']) && in_array($atts['format'], ['full', 'box'])) {
             $data = $this->get_single_program((int)$atts['degreeProgram'], $lang, $atts['post_id'] ?? '');
-        } else {
 
+        } else {
             $programs = $this->get_programs($lang);
 
             //$api = new API();
@@ -29,31 +29,11 @@ class Data
                 $filterBlock['attribute'] = $atts['selectedSpecialWays'];
             }
 
-        /*    // Filter from $_GET parameters
+            // Filter from $_GET parameters respecting block presets
             $getParams = isset($_GET) ? Utils::array_map_recursive('sanitize_text_field', $_GET) : [];
             $getParams = array_filter($getParams);
-
-            // Intersect with $_GET params: if specified, only values present in block settings are allowed in $_GET
-            foreach (['faculty', 'degree', 'attribute'] as $key) {
-                if (!empty($filterBlock[$key]) && !empty($getParams[$key])) {
-                    $getParams[$key] = array_unique(array_merge($getParams[$key], $filterBlock[$key]));
-                    foreach ($getParams[$key] as $k => $v) {
-                        if (!in_array($v, $filterBlock[$key])) {
-                            unset($getParams[$key][$k]);
-                        }
-                    }
-                }
-            }
-
-            if (!empty($getParams)) {
-                $data = Utils::filterPrograms($programs, $getParams);
-            } elseif (!empty($filterBlock)) {
-                $data = Utils::filterPrograms($programs, $filterBlock);
-            } else {
-                $data = $programs;
-            }
-        */
-            $data = Utils::filterPrograms($programs, $filterBlock);
+            $filter = array_merge($filterBlock, $getParams);
+            $data = Utils::filterPrograms($programs, $filter);
         }
 
         // Save IDs of active degree programs to transient

@@ -6,14 +6,17 @@ defined('ABSPATH') || exit;
 
 class Utils
 {
-    public static function renderSearchForm($hide_filter = []): string
+    public static function renderSearchForm($prefilter = []): string
     {
         $getParams = Utils::array_map_recursive('sanitize_text_field', $_GET);
         $api = new API();
+        $degrees = !empty($prefilter['degree']) ? $prefilter['degree'] : $api->get_degrees(true);
+        $subject_groups = !empty($prefilter['subject_group']) ? $prefilter['subject_group'] : $api->get_subject_groups();
+        $attributes = !empty($prefilter['attribute']) ? $prefilter['attribute'] : $api->get_attributes();
         $filters_default = [
-            ['key' => 'degree', 'label' => __('Degrees', 'fau-studium-display'), 'data' => $api->get_degrees(true)],
-            ['key' => 'subject_group', 'label' => __('Subject groups', 'fau-studium-display'), 'data' => $api->get_subject_groups()],
-            ['key' => 'attribute', 'label' => __('Special ways to study', 'fau-studium-display'), 'data' => $api->get_attributes()],
+            ['key' => 'degree', 'label' => __('Degrees', 'fau-studium-display'), 'data' => $degrees],
+            ['key' => 'subject_group', 'label' => __('Subject groups', 'fau-studium-display'), 'data' => $subject_groups],
+            ['key' => 'attribute', 'label' => __('Special ways to study', 'fau-studium-display'), 'data' => $attributes],
         ];
         $filters_extended = [
             ['key' => 'teaching_language', 'label' => __('Teaching language', 'fau-studium-display'), 'data' => $api->get_teaching_languages()],
@@ -35,7 +38,8 @@ class Utils
 
         // Filter sections default
         foreach ($filters_default as $filter) {
-            if (in_array($filter['key'], $hide_filter)) {
+            // Don't show filters with only one option
+            if (count($filter['data']) < 2) {
                 continue;
             }
             $filter_active = !empty($getParams[$filter['key']]);
@@ -52,9 +56,6 @@ class Utils
         $filters_extended_count = 0;
         $filters_extended_html = '';
         foreach ($filters_extended as $filter) {
-            if (in_array($filter['key'], $hide_filter)) {
-                continue;
-            }
             $filter_active = !empty($getParams[$filter['key']]);
             if ($filter_active) {
                 $filters_extended_count += count($getParams[$filter['key']]);

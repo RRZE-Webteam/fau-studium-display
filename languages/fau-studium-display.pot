@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-29T15:36:32+00:00\n"
+"POT-Creation-Date: 2025-07-30T10:13:04+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: fau-studium-display\n"
@@ -69,67 +69,120 @@ msgstr ""
 msgid "RRZE"
 msgstr ""
 
-#: includes/Settings.php:40
+#: includes/Settings.php:46
 msgid "Settings"
 msgstr ""
 
-#: includes/Settings.php:52
-#: includes/Settings.php:85
+#: includes/Settings.php:58
+#: includes/Settings.php:91
 msgid "API"
 msgstr ""
 
-#: includes/Settings.php:53
-#: includes/Settings.php:100
+#: includes/Settings.php:59
+#: includes/Settings.php:106
 msgid "Sync"
 msgstr ""
 
-#: includes/Settings.php:66
+#: includes/Settings.php:60
+#: includes/Settings.php:134
+msgid "Layout"
+msgstr ""
+
+#: includes/Settings.php:72
 msgid "Save changes"
 msgstr ""
 
-#: includes/Settings.php:92
+#: includes/Settings.php:98
 msgid "DIP Edu API Key"
 msgstr ""
 
-#: includes/Settings.php:93
+#: includes/Settings.php:99
 msgid "API Key can be obtained from the API-Service at <a href=\"https://api.fau.de/pub/v1/edu/__doc\">https://api.fau.de/pub/v1/edu/__doc</a>."
 msgstr ""
 
-#: includes/Settings.php:106
+#: includes/Settings.php:112
 msgid "Sync and manage degree programs"
 msgstr ""
 
-#: includes/Settings.php:113
+#: includes/Settings.php:119
 msgid "Import"
 msgstr ""
 
-#: includes/Settings.php:120
+#: includes/Settings.php:126
 msgid "Manage Imported"
 msgstr ""
 
-#: includes/Settings.php:274
+#: includes/Settings.php:140
+msgid "Archive View"
+msgstr ""
+
+#: includes/Settings.php:141
+msgid "What format should the list view use?"
+msgstr ""
+
+#: includes/Settings.php:147
+#: build/block/index.js:189
+msgid "Show Search"
+msgstr ""
+
+#: includes/Settings.php:152
+msgid "Archive Format"
+msgstr ""
+
+#: includes/Settings.php:155
+#: build/block/index.js:177
+msgid "Grid"
+msgstr ""
+
+#: includes/Settings.php:156
+#: build/block/index.js:180
+msgid "Table"
+msgstr ""
+
+#: includes/Settings.php:169
+msgid "Show/Hide Grid Items"
+msgstr ""
+
+#: includes/Settings.php:174
+#: includes/Settings.php:194
+msgid "Select / Deselect All"
+msgstr ""
+
+#: includes/Settings.php:177
+msgid "Single View"
+msgstr ""
+
+#: includes/Settings.php:178
+msgid "Select the elements to be shown in single view"
+msgstr ""
+
+#: includes/Settings.php:189
+msgid "Show/Hide Single Items"
+msgstr ""
+
+#: includes/Settings.php:207
 msgid "Select Faculty"
 msgstr ""
 
-#: includes/Settings.php:279
+#: includes/Settings.php:212
 msgid "Select Degree"
 msgstr ""
 
-#: includes/Settings.php:293
+#: includes/Settings.php:226
 #: includes/Utils.php:31
 #: includes/Utils.php:33
 msgid "Search"
 msgstr ""
 
-#: includes/Settings.php:300
+#: includes/Settings.php:233
 msgid "Update"
 msgstr ""
 
-#: includes/Settings.php:304
+#: includes/Settings.php:237
 msgid "Delete"
 msgstr ""
 
-#: includes/Settings.php:362
+#: includes/Settings.php:359
 msgid "Add"
 msgstr ""
 
@@ -221,20 +274,20 @@ msgstr ""
 msgid "Summer semester"
 msgstr ""
 
-#: templates/degree-program-full.php:483
+#: templates/degree-program-full.php:444
+msgid "Studies"
+msgstr ""
+
+#: templates/degree-program-full.php:488
 msgid "Program Overview"
 msgstr ""
 
-#: templates/degree-program-full.php:496
+#: templates/degree-program-full.php:501
 msgid "Admission and Application"
 msgstr ""
 
-#: templates/degree-program-full.php:517
+#: templates/degree-program-full.php:522
 msgid "We're Here to Help with All Your Study-Related Questions"
-msgstr ""
-
-#: templates/degree-program-full.php:535
-msgid "Studies"
 msgstr ""
 
 #: templates/degree-program-grid.php:92
@@ -258,20 +311,8 @@ msgstr ""
 msgid "Infobox"
 msgstr ""
 
-#: build/block/index.js:177
-msgid "Grid"
-msgstr ""
-
-#: build/block/index.js:180
-msgid "Table"
-msgstr ""
-
 #: build/block/index.js:183
 msgid "List"
-msgstr ""
-
-#: build/block/index.js:189
-msgid "Show Search"
 msgstr ""
 
 #: build/block/index.js:194

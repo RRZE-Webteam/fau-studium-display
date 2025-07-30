@@ -25,7 +25,7 @@ class API
     public function get_programs($show_empty = false) {
         $transient_name = 'fau_studium_degree_programs_list';
         $degree_programs = get_transient($transient_name);
-        $degree_programs = false;
+        //$degree_programs = false;
         if (false === $degree_programs) {
             $response = wp_remote_get($this->api_url);
             if (!is_wp_error($response)) {
@@ -47,8 +47,8 @@ class API
 
     public function get_program($program_id) {
         $transient_name = 'fau_studium_degree_program_' . $program_id;
-        //$degree_program = get_transient($transient_name);
-        $degree_program = false;
+        $degree_program = get_transient($transient_name);
+        //$degree_program = false;
         if (false === $degree_program || isset( $degree_program['code'])) {
             $response = wp_remote_get($this->api_url.'/'.$program_id);
             if (is_wp_error($response)) {

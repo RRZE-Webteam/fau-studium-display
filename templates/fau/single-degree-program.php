@@ -9,12 +9,16 @@
 use Fau\DegreeProgram\Display\Output;
 use function Fau\DegreeProgram\Display\Config\get_output_fields;
 
-$output_fields = get_output_fields();
+$output_fields = cmb2_get_option('fau-studium-display_layout', 'single_items' );
+if (!$output_fields) {
+    $output_fields_all = get_output_fields();
+    $output_fields = $output_fields_all['full'];
+}
 $atts = [
     'format' => 'full',
     'degreeProgram' => $post->ID,
     'post_id' => $post->ID,
-    'selectedItemsFull' => $output_fields['full'],
+    'selectedItemsFull' => $output_fields,
 ];
 $output = new Output();
 $content = $output->renderOutput($atts);

@@ -82,5 +82,94 @@
 .settings_page_fau-studium-display form#fau-studium-display_sync input[name=submit-cmb] {
   display: none;
 }
+.settings_page_fau-studium-display .cmb2-toggle {
+  display: inline-flex; /* 1 */
+  align-items: center; /* 1 */
+  flex-wrap: wrap; /* 2 */
+  position: relative; /* 3 */
+  gap: 1ch; /* 4 */
+}
+.settings_page_fau-studium-display .Toggle__display {
+  --offset: 0.25em;
+  --diameter: 1.8em;
+  display: inline-flex; /* 1 */
+  align-items: center; /* 1 */
+  justify-content: space-around; /* 1 */
+  width: calc(var(--diameter) * 2 + var(--offset) * 2); /* 2 */
+  height: calc(var(--diameter) + var(--offset) * 2); /* 2 */
+  box-sizing: content-box; /* 2 */
+  border: 0.1em solid rgba(0, 0, 0, 0.2); /* 3 */
+  position: relative; /* 4 */
+  border-radius: 100vw; /* 5 */
+  background-color: #fbe4e2; /* 6 */
+  transition: 250ms;
+  cursor: pointer;
+}
+.settings_page_fau-studium-display .Toggle__display::before {
+  content: "";
+  width: var(--diameter); /* 1 */
+  height: var(--diameter); /* 1 */
+  border-radius: 50%; /* 1 */
+  box-sizing: border-box; /* 2 */
+  border: 0.1px solid rgba(0, 0, 0, 0.2); /* 2 */
+  position: absolute; /* 3 */
+  z-index: 2; /* 3 */
+  top: 50%; /* 3 */
+  left: var(--offset); /* 3 */
+  transform: translate(0, -50%); /* 3 */
+  background-color: #fff; /* 4 */
+  transition: inherit;
+}
+@media (prefers-reduced-motion: reduce) {
+  .settings_page_fau-studium-display .Toggle__display {
+    transition-duration: 0ms;
+  }
+}
+.settings_page_fau-studium-display .Toggle__input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+.settings_page_fau-studium-display .Toggle__input:focus + .Toggle__display {
+  outline: 1px dotted #212121; /* 1 */
+  outline: 1px auto -webkit-focus-ring-color; /* 1 */
+}
+.settings_page_fau-studium-display .Toggle__input:focus:not(:focus-visible) + .Toggle__display {
+  outline: 0; /* 1 */
+}
+.settings_page_fau-studium-display .Toggle__input:checked + .Toggle__display {
+  background-color: #e3f5eb; /* 1 */
+}
+.settings_page_fau-studium-display .Toggle__input:checked + .Toggle__display::before {
+  transform: translate(100%, -50%); /* 1 */
+}
+.settings_page_fau-studium-display .Toggle__input:disabled + .Toggle__display {
+  opacity: 0.6; /* 1 */
+  filter: grayscale(40%); /* 1 */
+  cursor: not-allowed; /* 1 */
+}
+.settings_page_fau-studium-display [dir=rtl] .Toggle__display::before {
+  left: auto; /* 1 */
+  right: var(--offset); /* 1 */
+}
+.settings_page_fau-studium-display [dir=rtl] .Toggle__input:checked + .Toggle__display::before {
+  transform: translate(-100%, -50%); /* 1 */
+}
+.settings_page_fau-studium-display .Toggle__icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  color: inherit;
+  fill: currentcolor;
+  vertical-align: middle;
+}
+.settings_page_fau-studium-display .Toggle__icon--cross {
+  color: #e74c3c;
+  font-size: 85%; /* 1 */
+}
+.settings_page_fau-studium-display .Toggle__icon--checkmark {
+  color: #1fb978;
+}
 
 /*# sourceMappingURL=fau-studium-display-admin.css.map */

@@ -12,7 +12,9 @@ use function Fau\DegreeProgram\Display\Config\get_labels;
 //print_r($atts);
 //exit;
 
-if (empty($data))
+$show_search = isset($atts['showSearch']) && $atts['showSearch'] == '1';
+
+if (empty($data) && !$show_search)
     return;
 
 $lang = $atts['language'] ?? 'de';
@@ -64,14 +66,12 @@ foreach ($data as $program) {
 <section class="fau-studium-display degree-program-table">
 
     <?php if (isset($atts['showSearch']) && $atts['showSearch'] == '1') :
-        $hide_filter = [];
-        foreach (['faculty' => 'selectedFaculties', 'degree' => 'selectedDegrees', 'attribute' => 'selectedSpecialWays'] as $k => $v) {
-            if (!empty($atts[$v]) && count($atts[$v]) < 2) {
-                // don't show filter if one option is already preselected in block settings (but show it if more than 1 option is preselected)
-                $hide_filter[] = $k;
-            }
-        }
-        echo Utils::renderSearchForm($hide_filter);
+
+        $prefilter = array_map(function ($v) use ($atts) {
+            return $atts[ $v ];
+        }, ['faculty' => 'selectedFaculties', 'degree' => 'selectedDegrees', 'attribute' => 'selectedSpecialWays']);
+        echo Utils::renderSearchForm($prefilter);
+
     endif; ?>
 
     <?php if (!empty($data)) : ?>

@@ -11,6 +11,10 @@ use function Fau\DegreeProgram\Display\Config\get_labels;
 //print "<pre>"; var_dump($atts);print "</pre>";
 //exit;
 
+$show_search = isset($atts['showSearch']) && $atts['showSearch'] == '1';
+if (empty($data) && !$show_search)
+    return;
+
 $items = $atts['selectedItemsGrid'] ?? [];
 $lang = $atts['language'] ?? 'de';
 $labels = get_labels($lang);
@@ -78,7 +82,12 @@ foreach ($data as $program) {
 <section class="fau-studium-display degree-program-grid">
 
     <?php if (isset($atts['showSearch']) && $atts['showSearch'] == '1') :
-        echo Utils::renderSearchForm();
+
+        $prefilter = array_map(function ($v) use ($atts) {
+            return $atts[ $v ];
+        }, ['faculty' => 'selectedFaculties', 'degree' => 'selectedDegrees', 'attribute' => 'selectedSpecialWays']);
+        echo Utils::renderSearchForm($prefilter);
+
     endif; ?>
 
     <?php if (!empty($program_grid)) : ?>

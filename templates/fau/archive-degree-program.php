@@ -9,10 +9,17 @@
 use Fau\DegreeProgram\Display\Output;
 use function Fau\DegreeProgram\Display\Config\get_output_fields;
 
-$output_fields = get_output_fields();
+$format = cmb2_get_option('fau-studium-display_layout', 'archive_view', 'grid');
+$output_fields = cmb2_get_option('fau-studium-display_layout', 'grid_items' );
+if (!$output_fields) {
+    $output_fields_all = get_output_fields();
+    $output_fields = $output_fields_all['grid'];
+}
+$show_search = cmb2_get_option('fau-studium-display_layout', 'archive_search', '');
 $atts = [
-    'format' => 'grid',
-    'selectedItemsGrid' => $output_fields['grid'],
+    'format' => $format,
+    'selectedItemsGrid' => $output_fields,
+    'showSearch' => ($show_search == 'on'),
 ];
 $output = new Output();
 $content = $output->renderOutput($atts);

@@ -2,6 +2,9 @@
 
 namespace Fau\DegreeProgram\Display;
 
+use function Fau\DegreeProgram\Display\Config\get_labels;
+use function Fau\DegreeProgram\Display\Config\get_output_fields;
+
 class Settings
 {
     protected string $pluginFile;
@@ -29,6 +32,9 @@ class Settings
         add_action('cmb2_admin_init', [$this, 'register_settings']);
         add_action('cmb2_render_sync-search', [$this, 'render_sync_search' ], 10, 5);
         add_action('cmb2_render_sync-imported', [$this, 'render_sync_imported' ], 10, 5);
+        if (!has_action('cmb2_render_toggle')) {
+            add_action( 'cmb2_render_toggle', [$this, 'render_toggle' ], 10, 5 );
+        }
         add_action('wp_ajax_program_search', [$this,'ajaxProgramSearch']);
         add_action('wp_ajax_program_sync', [$this,'ajaxProgramSync']);
         add_action('wp_ajax_program_delete', [$this,'ajaxProgramDelete']);
@@ -51,7 +57,7 @@ class Settings
         $tabs = [
             'api' => __('API', 'fau-studium-display'),
             'sync' => __('Sync', 'fau-studium-display'),
-            //'layout' => __('Layout', 'fau-studium-display'),
+            'layout' => __('Layout', 'fau-studium-display'),
         ];
 
         echo '<div class="wrap cmb2-options-page">';
@@ -123,7 +129,7 @@ class Settings
             'default' => '',
         ]);
 
-        /*$layout_options = new_cmb2_box([
+        $layout_options = new_cmb2_box([
             'id' => $this->slug.'_layout',
             'title' => __('Layout', 'fau-studium-display'),
             'object_types' => ['options-page'],
@@ -131,135 +137,62 @@ class Settings
             'parent_slug' => $this->slug,
         ]);
         $layout_options->add_field( [
-            'name' => __('Section "Apply now"', 'fau-studium-display'),
-            //'desc' => __('', 'fau-studium-display'),
+            'name' => __('Archive View', 'fau-studium-display'),
+            'desc' => __('What format should the list view use?', 'fau-studium-display'),
             'type' => 'title',
-            'id'   => 'apply_now_heading'
+            'id'   => 'archive_view_heading'
         ] );
         $layout_options->add_field([
-            'id' => 'apply-now-title',
-            'name' => esc_html__('Title', 'fau-studium-display'),
-            //'desc' => __('', 'fau-studium-display'),
-            'type' => 'text',
-            'default' => __('Apply now!', 'fau-studium-display'),
+            'id' => 'archive_search',
+            'name' => __('Show Search', 'fau-studium-display'),
+            'type' => 'toggle',
         ]);
         $layout_options->add_field([
-           'id' => 'apply-now-text',
-           'name' => esc_html__('Text', 'fau-studium-display'),
-           //'desc' => __('', 'fau-studium-display'),
-           'type' => 'textarea_small',
-           'default' => __('on campo, the FAU application portal', 'fau-studium-display'),
-        ]);
-        $layout_options->add_field([
-           'id' => 'apply-now-link-text',
-           'name' => esc_html__('Link Text', 'fau-studium-display'),
-           //'desc' => __('', 'fau-studium-display'),
-           'type' => 'text',
-           //'default' => __('', 'fau-studium-display'),
-        ]);
-        $layout_options->add_field([
-           'id' => 'apply-now-link-url',
-           'name' => esc_html__('Link URL', 'fau-studium-display'),
-           //'desc' => __('', 'fau-studium-display'),
-           'type' => 'text_url',
-           //'default' => __('', 'fau-studium-display'),
-        ]);
-        $layout_options->add_field([
-           'id' => 'apply-now-image',
-           'name' => esc_html__('Image', 'fau-studium-display'),
-           //'desc' => __('', 'fau-studium-display'),
-           'type' => 'file',
-           //'default' => '',
+           'id' => 'archive_view',
+           'name' => esc_html__('Archive Format', 'fau-studium-display'),
+           'type' => 'radio',
            'options' => [
-               'url' => false, // Hide the text input for the url
+               'grid' => __('Grid', 'fau-studium-display'),
+               'table' => __('Table', 'fau-studium-display'),
            ],
-           'text'    => [
-               'add_upload_file_text' => __('Add or Upload File', 'fau-studium-display'),
-           ],
-           'query_args' => [
-               'type' => [
-                	'image/gif',
-                	'image/jpeg',
-                	'image/png',
-               ],
-           ],
-           'preview_size' => 'large',
+           'default' => 'grid',
+        ]);
+        $output_fields = get_output_fields();
+        $labels = get_labels();
+        $grid_view_fields = $output_fields['grid'];
+        $grid_view_options = [];
+        foreach ($grid_view_fields as $archive_view_field) {
+            $grid_view_options[$archive_view_field] = $labels[$archive_view_field];
+        }
+        $layout_options->add_field([
+           'id' => 'grid_items',
+           'name' => esc_html__('Show/Hide Grid Items', 'fau-studium-display'),
+           //'desc' => __('', 'fau-studium-display'),
+           'type' => 'multicheck',
+           'options' => $grid_view_options,
+           'default' => $grid_view_fields,
+           'select_all_button' => __('Select / Deselect All', 'fau-studium-display'),
         ]);
         $layout_options->add_field( [
-            'name' => __('Section "More Information for International Applicants"', 'fau-studium-display'),
-            //'desc' => __('', 'fau-studium-display'),
+            'name' => __('Single View', 'fau-studium-display'),
+            'desc' => __('Select the elements to be shown in single view', 'fau-studium-display'),
             'type' => 'title',
-            'id'   => 'internationals_heading'
+            'id'   => 'single_view_heading'
         ] );
+        $single_view_fields = $output_fields['full'];
+        $single_view_options = [];
+        foreach ($single_view_fields as $single_view_field) {
+            $single_view_options[$single_view_field] = $labels[$single_view_field];
+        }
         $layout_options->add_field([
-           'id' => 'internationals-image',
-           'name' => esc_html__('Image', 'fau-studium-display'),
-           //'desc' => __('', 'fau-studium-display'),
-           'type' => 'file',
-           //'default' => '',
-           'options' => [
-               'url' => false, // Hide the text input for the url
-           ],
-           'text'    => [
-               'add_upload_file_text' => __('Add or Upload File', 'fau-studium-display'),
-           ],
-           'query_args' => [
-               'type' => [
-                   'image/gif',
-                   'image/jpeg',
-                   'image/png',
-               ],
-           ],
-           'preview_size' => 'medium',
-       ]);
-        $layout_options->add_field( [
-            'name' => __('Section "Student Advice"', 'fau-studium-display'),
+            'id' => 'single_items',
+            'name' => esc_html__('Show/Hide Single Items', 'fau-studium-display'),
             //'desc' => __('', 'fau-studium-display'),
-            'type' => 'title',
-            'id'   => 'student_advice_heading'
-        ] );
-        $layout_options->add_field([
-           'id' => 'general-student-advice-image',
-           'name' => esc_html__('Image for Student Advice Center', 'fau-studium-display'),
-           //'desc' => __('', 'fau-studium-display'),
-           'type' => 'file',
-           //'default' => '',
-           'options' => [
-               'url' => false, // Hide the text input for the url
-           ],
-           'text'    => [
-               'add_upload_file_text' => __('Add or Upload File', 'fau-studium-display'),
-           ],
-           'query_args' => [
-               'type' => [
-                   'image/gif',
-                   'image/jpeg',
-                   'image/png',
-               ],
-           ],
-           'preview_size' => 'medium',
+            'type' => 'multicheck',
+            'options' => $single_view_options,
+            'default' => $single_view_fields,
+            'select_all_button' => __('Select / Deselect All', 'fau-studium-display'),
         ]);
-        $layout_options->add_field([
-           'id' => 'specific-student-advice-image',
-           'name' => esc_html__('Image for Specific Student Advice', 'fau-studium-display'),
-           //'desc' => __('', 'fau-studium-display'),
-           'type' => 'file',
-           //'default' => '',
-           'options' => [
-               'url' => false, // Hide the text input for the url
-           ],
-           'text'    => [
-               'add_upload_file_text' => __('Add or Upload File', 'fau-studium-display'),
-           ],
-           'query_args' => [
-               'type' => [
-                   'image/gif',
-                   'image/jpeg',
-                   'image/png',
-               ],
-           ],
-           'preview_size' => 'medium',
-       ]);*/
 
         wp_enqueue_style('fau-studium-display-admin');
         wp_enqueue_script('fau-studium-display-admin');
@@ -319,6 +252,70 @@ class Settings
         }
 
         echo '</div>';
+    }
+
+    /*
+         * CMB2 Toggle
+         * Source: https://kittygiraudel.com/2021/04/05/an-accessible-toggle/
+         */
+    public function render_toggle( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
+        $field_name = $field->_name();
+
+        $return_value = 'on';
+
+        if ( $field->args( 'return_value' ) && ! empty( $field->args( 'return_value' ) ) ) {
+            $return_value = $field->args( 'return_value' );
+        }
+
+        $args = array(
+            'type'  => 'checkbox',
+            'id'    => $field_name,
+            'name'  => $field_name,
+            'desc'  => '',
+            'value' => $return_value,
+        );
+
+        echo '<label class="cmb2-toggle" for="' . esc_attr( $args['id'] ) . '">
+  <input type="checkbox" name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['id'] ) . '" value="' . esc_attr( $return_value ) . '" class="Toggle__input" ' . checked( $escaped_value, $return_value, false ) . ' />
+
+  <span class="Toggle__display" hidden>
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      class="Toggle__icon Toggle__icon--checkmark"
+      width="18"
+      height="14"
+      viewBox="0 0 18 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.08471 10.6237L2.29164 6.83059L1 8.11313L6.08471 13.1978L17 2.28255L15.7175 1L6.08471 10.6237Z"
+        fill="currentcolor"
+        stroke="currentcolor"
+      />
+    </svg>
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      class="Toggle__icon Toggle__icon--cross"
+      width="13"
+      height="13"
+      viewBox="0 0 13 13"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M11.167 0L6.5 4.667L1.833 0L0 1.833L4.667 6.5L0 11.167L1.833 13L6.5 8.333L11.167 13L13 11.167L8.333 6.5L13 1.833L11.167 0Z"
+        fill="currentcolor"
+      />
+    </svg>
+  </span>
+
+  <span class="screen-reader-text"> ' . esc_html($field->args['name']) . '</span>
+</label>';
+
+        $field_type_object->_desc( true, true );
     }
 
 
