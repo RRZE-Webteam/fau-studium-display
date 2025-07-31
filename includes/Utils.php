@@ -10,20 +10,22 @@ class Utils
     {
         $getParams = Utils::array_map_recursive('sanitize_text_field', $_GET);
         $api = new API();
-        $degrees = !empty($prefilter['degree']) ? $prefilter['degree'] : $api->get_degrees(true);
-        $subject_groups = !empty($prefilter['subject_group']) ? $prefilter['subject_group'] : $api->get_subject_groups();
-        $attributes = !empty($prefilter['attribute']) ? $prefilter['attribute'] : $api->get_attributes();
+        $degrees = !empty($prefilter['degree']) ? $prefilter['degree'] : $api->get_meta_list('degree_parents');
+        $subject_groups = !empty($prefilter['subject_group']) ? $prefilter['subject_group'] : $api->get_meta_list('subject_groups');
+        $attributes = !empty($prefilter['attribute']) ? $prefilter['attribute'] : $api->get_meta_list('attributes');
         $filters_default = [
             ['key' => 'degree', 'label' => __('Degrees', 'fau-studium-display'), 'data' => $degrees],
             ['key' => 'subject_group', 'label' => __('Subject groups', 'fau-studium-display'), 'data' => $subject_groups],
             ['key' => 'attribute', 'label' => __('Special ways to study', 'fau-studium-display'), 'data' => $attributes],
         ];
         $filters_extended = [
-            ['key' => 'teaching_language', 'label' => __('Teaching language', 'fau-studium-display'), 'data' => $api->get_teaching_languages()],
-            ['key' => 'start', 'label' => __('Start of degree program', 'fau-studium-display'), 'data' => $api->get_start_semesters()],
-            ['key' => 'location', 'label' => __('Study location', 'fau-studium-display'), 'data' => $api->get_study_locations()],
-            ['key' => 'faculty', 'label' => __('Faculty', 'fau-studium-display'), 'data' => $api->get_faculties()],
-            ['key' => 'area', 'label' => __('Area of study', 'fau-studium-display'), 'data' => $api->get_areas_of_study()],
+            ['key' => 'admission_requirements', 'label' => __('Admission requirements', 'fau-studium-display'), 'data' => $api->get_meta_list('admission_requirements')],
+            ['key' => 'start', 'label' => __('Start of degree program', 'fau-studium-display'), 'data' => $api->get_meta_list('start_semesters')],
+            ['key' => 'location', 'label' => __('Study location', 'fau-studium-display'), 'data' => $api->get_meta_list('study_locations')],
+            ['key' => 'teaching_language', 'label' => __('Teaching language', 'fau-studium-display'), 'data' => $api->get_meta_list('teaching_languages')],
+            ['key' => 'faculty', 'label' => __('Faculty', 'fau-studium-display'), 'data' => $api->get_meta_list('faculties')],
+            ['key' => 'german_language_skills', 'label' => __('German language skills for international students', 'fau-studium-display'), 'data' => $api->get_meta_list('german_language_skills')],
+            //['key' => 'area', 'label' => __('Area of study', 'fau-studium-display'), 'data' => $api->get_areas_of_study()],
         ];
 
         $output = '<form method="get" class="program-search" action="' . esc_url(get_permalink()) . '">';
@@ -188,7 +190,7 @@ class Utils
 
     public static function get_degree_options($parents = false) {
         $api = new API();
-        $degrees = $api->get_degrees($parents);
+        $degrees = $parents ? $api->get_meta_list('degree_parents') : $api->get_meta_list('degrees');
         $degreeOptions = [];
         foreach ($degrees as $degree) {
             $degreeOptions[] = [
@@ -201,7 +203,7 @@ class Utils
 
     public static function get_faculty_options() {
         $api = new API();
-        $faculties = $api->get_faculties();
+        $faculties = $api->get_meta_list('faculties');
         $facultyOptions = [];
         foreach ($faculties as $faculty) {
             $facultyOptions[] = [
@@ -209,20 +211,12 @@ class Utils
                 'value' => $faculty,
             ];
         }
-        $attributes = $api->get_attributes();
-        $attributes_formatted = [];
-        foreach ($attributes as $attribute) {
-            $attributes_formatted[] = [
-                'label' => $attribute,
-                'value' => $attribute,
-            ];
-        }
         return $facultyOptions;
     }
 
     public static function get_attribute_options() {
         $api = new API();
-        $attributes = $api->get_attributes();
+        $attributes = $api->get_meta_list('attributes');
         $attributeOptions = [];
         foreach ($attributes as $attribute) {
             $attributeOptions[] = [
