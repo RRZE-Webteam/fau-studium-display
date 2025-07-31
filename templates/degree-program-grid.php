@@ -63,6 +63,7 @@ foreach ($data as $program) {
     $grid_content .= '</div>';
 
     //print "<pre>"; var_dump($program); print "</pre>";
+    // ToDo: Link auf importierte Studiengänge, wenn vorhanden, sonst meinstudium
     if (!empty($program['link'])) {
         $program_grid .= sprintf(
             '<li><a href="%s">%s</a></li>',

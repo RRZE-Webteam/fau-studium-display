@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: FAU Studium Display\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-12 12:41+0000\n"
-"PO-Revision-Date: 2025-07-30 10:21+0000\n"
+"PO-Revision-Date: 2025-07-31 15:58+0000\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch (Sie)\n"
 "Language: de_DE_formal\n"
@@ -38,7 +38,11 @@ msgstr "Hinzufügen"
 msgid "Admission and Application"
 msgstr "Zulassung und Bewerbung"
 
-#: includes/Utils.php:73
+#: includes/Utils.php:22
+msgid "Admission requirements"
+msgstr "Zugangsvoraussetzung"
+
+#: includes/Utils.php:76
 msgid "Advanced filters"
 msgstr "Erweiterte Filter"
 
@@ -62,10 +66,6 @@ msgstr "Archiv-Format"
 msgid "Archive View"
 msgstr "Archiv-Ansicht"
 
-#: includes/Utils.php:23
-msgid "Area of study"
-msgstr "Fächergruppe"
-
 #: build/block/block.json src/block/block.json
 msgctxt "block title"
 msgid "FAU-Studium Display"
@@ -79,7 +79,7 @@ msgstr "Studiengang"
 msgid "Degree Programs"
 msgstr "Studiengänge"
 
-#: includes/Utils.php:14 build/block/index.js:242 build/block/index.js:1
+#: includes/Utils.php:17 build/block/index.js:242 build/block/index.js:1
 msgid "Degrees"
 msgstr "Abschlüsse"
 
@@ -103,7 +103,7 @@ msgstr "Steckbrief"
 msgid "Faculties"
 msgstr "Fakultäten"
 
-#: includes/Utils.php:22
+#: includes/Utils.php:26
 msgid "Faculty"
 msgstr "Fakultät"
 
@@ -131,6 +131,10 @@ msgstr "Allgemeine Einstellungen"
 #: build/block/index.js:208 build/block/index.js:1
 msgid "German"
 msgstr "Deutsch"
+
+#: includes/Utils.php:27
+msgid "German language skills for international students"
+msgstr "Deutschkenntnisse für internationale Studierende"
 
 #: includes/Settings.php:155 build/block/index.js:177 build/block/index.js:1
 msgid "Grid"
@@ -173,7 +177,7 @@ msgstr "Importierte Studiengänge verwalten"
 msgid "Master"
 msgstr "Master"
 
-#: templates/degree-program-grid.php:92 templates/degree-program-table.php:85
+#: templates/degree-program-grid.php:102 templates/degree-program-table.php:85
 msgid "No degree programs found."
 msgstr "Keine Studiengänge gefunden."
 
@@ -181,7 +185,7 @@ msgstr "Keine Studiengänge gefunden."
 msgid "not possible"
 msgstr "nicht möglich"
 
-#: includes/Utils.php:32
+#: includes/Utils.php:37
 msgid "Please enter search term..."
 msgstr "Bitte Suchbegriff eingeben..."
 
@@ -211,7 +215,7 @@ msgstr "Post-Meta-Daten englisch"
 msgid "Program Overview"
 msgstr "Studiengang im Detail"
 
-#: includes/Utils.php:77
+#: includes/Utils.php:80
 msgid "Reset all filters"
 msgstr "Alle Filter zurücksetzen"
 
@@ -228,7 +232,7 @@ msgstr "RRZE Webteam"
 msgid "Save changes"
 msgstr "Änderungen speichern"
 
-#: includes/Settings.php:226 includes/Utils.php:31 includes/Utils.php:33
+#: includes/Settings.php:226 includes/Utils.php:36 includes/Utils.php:38
 msgid "Search"
 msgstr "Suche"
 
@@ -278,11 +282,11 @@ msgstr "Detail-Elemente ein-/ausblenden"
 msgid "Single View"
 msgstr "Detail-Ansicht"
 
-#: includes/Utils.php:16 build/block/index.js:248 build/block/index.js:1
+#: includes/Utils.php:19 build/block/index.js:248 build/block/index.js:1
 msgid "Special ways to study"
 msgstr "Besondere Studienformen"
 
-#: includes/Utils.php:20
+#: includes/Utils.php:23
 msgid "Start of degree program"
 msgstr "Studienbeginn"
 
@@ -290,11 +294,11 @@ msgstr "Studienbeginn"
 msgid "Studies"
 msgstr "Studium"
 
-#: includes/Utils.php:21
+#: includes/Utils.php:24
 msgid "Study location"
 msgstr "Studienort"
 
-#: includes/Utils.php:15
+#: includes/Utils.php:18
 msgid "Subject groups"
 msgstr "Fächergruppen"
 
@@ -314,7 +318,7 @@ msgstr "Studiengänge synchronisieren und verwalten"
 msgid "Table"
 msgstr "Tabelle"
 
-#: includes/Utils.php:19
+#: includes/Utils.php:25
 msgid "Teaching language"
 msgstr "Unterrichtssprache"
 
