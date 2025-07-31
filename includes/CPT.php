@@ -67,7 +67,7 @@ class CPT
         $aPostMeta = get_post_meta($post->ID);
 
         foreach ($aPostMeta as $key => $aEntry) {
-            if (str_starts_with($key, '_')) continue;
+            if (str_starts_with($key, '_') || $key == 'translations') continue;
             $val = (is_serialized($aEntry[0]) ? unserialize($aEntry[0]) : $aEntry[0]);
 
             echo '<span><strong>' . $key . ':</strong></span><br />' . Utils::arrayToHtmlList($val) . '<hr>';

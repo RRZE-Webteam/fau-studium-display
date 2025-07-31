@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: FAU Studium Display\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-12 12:41+0000\n"
-"PO-Revision-Date: 2025-07-31 15:58+0000\n"
+"PO-Revision-Date: 2025-07-31 16:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch\n"
 "Language: de_DE\n"
@@ -202,11 +202,11 @@ msgstr "Plugins: %1$s: %2$s"
 
 #: includes/CPT.php:57
 msgid "Post Meta English"
-msgstr "Post-Meta-Daten deutsch"
+msgstr "Post-Meta-Daten englisch"
 
 #: includes/CPT.php:48
 msgid "Post Meta German"
-msgstr "Post-Meta-Daten englisch"
+msgstr "Post-Meta-Daten deutsch"
 
 #: templates/degree-program-full.php:488
 msgid "Program Overview"
