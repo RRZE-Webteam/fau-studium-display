@@ -616,8 +616,8 @@ function get_constants($lang = 'de') {
             'en' => plugin()->getUrl() . 'assets/img/student-advice.jpg'
         ],
         'specific-student-advice-image' => [
-            'de' => plugin()->getUrl() . 'assets/img/student-advice.jpg',
-            'en' => plugin()->getUrl() . 'assets/img/student-advice.jpg'
+            'de' => plugin()->getUrl() . 'assets/img/student-advice-specific.jpeg',
+            'en' => plugin()->getUrl() . 'assets/img/student-advice-specific.jpeg'
         ],
         'benefits-fau-title' => [
             'de' => 'Deine Vorteile an der FAU',

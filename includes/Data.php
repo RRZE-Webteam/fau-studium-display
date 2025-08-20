@@ -100,6 +100,8 @@ class Data
             'post_type'      => 'degree-program',
             'post_status'    => 'publish',
             'posts_per_page' => -1,
+            'orderby'        => 'title',
+            'order'          => 'ASC'
         ]);
 
         $data = [];

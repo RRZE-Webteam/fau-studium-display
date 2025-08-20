@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: FAU Studium Display\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-12 12:41+0000\n"
-"PO-Revision-Date: 2025-07-31 16:08+0000\n"
+"PO-Revision-Date: 2025-08-20 11:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch (Sie)\n"
 "Language: de_DE_formal\n"
@@ -241,12 +241,12 @@ msgid "Select / Deselect All"
 msgstr "Alle auswählen / abwählen"
 
 #: includes/Settings.php:212
-msgid "Select Degree"
-msgstr "Abschluss auswählen"
+msgid "Select Degree (optional)"
+msgstr "Abschluss auswählen (optional)"
 
 #: includes/Settings.php:207
-msgid "Select Faculty"
-msgstr "Fakultät auswählen"
+msgid "Select Faculty (optional)"
+msgstr "Fakultät auswählen (optional)"
 
 #: build/block/index.js:217 build/block/index.js:225 build/block/index.js:1
 msgid "Select items"

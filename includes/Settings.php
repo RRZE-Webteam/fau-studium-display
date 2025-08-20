@@ -204,12 +204,12 @@ class Settings
 
         echo '<div class="" style="display:flex; flex-direction: row; flex-wrap: wrap; column-gap: 2em;">'
              . '<div class="">'
-             . '<h4>' . __('Select Faculty', 'fau-studium-display') . '</h4>';
+             . '<h4>' . __('Select Faculty (optional)', 'fau-studium-display') . '</h4>';
         foreach ($facultyOptions as $facultyOption) {
             echo '<label><input type="checkbox" name="faculty[]" value="' . $facultyOption['value'] . '">' . $facultyOption['label'] . '</label><br />';
         }
         echo '</div><div class="">'
-             . '<h4>' . __('Select Degree', 'fau-studium-display') . '</h4>';
+             . '<h4>' . __('Select Degree (optional)', 'fau-studium-display') . '</h4>';
         foreach ($degreeOptions as $degreeOption) {
             echo '<label><input type="checkbox" name="degree[]" value="' . $degreeOption['value'] . '">' . $degreeOption['label'] . '</label><br />';
         }

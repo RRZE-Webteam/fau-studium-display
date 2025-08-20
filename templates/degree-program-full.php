@@ -245,7 +245,6 @@ if (in_array('admission_requirements_application', $items)) {
 }
 
 // More Information for International Applicants
-//var_dump(cmb2_get_option('fau-studium-display_layout', 'apply-now-image'));
 if (in_array('admission_requirements_application_internationals', $items)) {
     $internationals_admission_requirements = [];
     if (!empty($data['german_language_skills_for_international_students']['link_text'])
@@ -266,9 +265,13 @@ if (in_array('admission_requirements_application_internationals', $items)) {
                  . '<p>'. $internationals_admission_requirements['german_language_skills'] . '</p>';
         }
 
-        $admission_requirements_application_internationals_img = cmb2_get_option('fau-studium-display_layout', 'internationals-image_id');
+        /*$admission_requirements_application_internationals_img = cmb2_get_option('fau-studium-display_layout', 'internationals-image_id');
         if (!empty($admission_requirements_application_internationals_img)) {
             $admission_requirements_application_internationals .= wp_get_attachment_image((int)$admission_requirements_application_internationals_img, 'full');
+        }*/
+        $admission_requirements_application_internationals_img = $constants['internationals-image'] ?? '';
+        if (!empty($admission_requirements_application_internationals_img)) {
+            $admission_requirements_application_internationals .= '<img src="' . $admission_requirements_application_internationals_img . '"  alt=""/>';
         }
 
         $admission_requirements_application_internationals .= '</div>';
@@ -437,7 +440,7 @@ if (in_array('links.additional_information', $items)) {
     }
 }
 
-// Advantages @FAU
+// Benefits @FAU
 if (in_array('benefits', $items)) {
 
     $benefits_fau_image = $constants[ 'benefits-fau-image' ];
