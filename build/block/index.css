@@ -276,7 +276,7 @@
     display: inline-block;
   }
 }
-.fau-studium-display.degree-program-full h3:not(.fau-big-teaser__headline) {
+.fau-studium-display.degree-program-full h3:not(.fau-big-teaser__headline):not(.accordion-heading) {
   padding: 0;
   margin-bottom: 1em;
 }
@@ -352,31 +352,63 @@
 }
 
 .fau-studium-display.degree-program-full .program-videos {
-  background-color: var(--FAU_Col_FAU-Blau, #04316A);
   padding-top: 32px;
 }
 
 .fau-studium-display.degree-program-full .program-videos h2 {
-  color: #fff;
   margin-top: 0;
-}
-
-.fau-studium-display.degree-program-full .program-videos h2:before {
-  background-color: #fff;
+  margin-bottom: 0;
 }
 
 .fau-studium-display.degree-program-full .program-videos .elements-columns {
   margin: 0 16px;
 }
 
-.fau-studium-display.degree-program-full .program-admission {
+.fau-studium-display.degree-program-full .program-videos .rrze-video {
   margin-top: 0;
+  margin-bottom: 0;
 }
 
-.fau-studium-display.degree-program-full .program-admission h4 {
-  color: var(--FAU_Col_FAU-Blau, #04316A);
-  padding: 0;
-  margin-bottom: 1em;
+.fau-studium-display.degree-program-full .program-admission {
+  margin-top: 0;
+  /*.program-admission-internationals {
+      background-color: var(--FAU-Col-FAU-Blau-25, #c0cbda);
+      margin-top: 64px;
+      padding-top: 40px;
+      position: relative;
+      .icon-globe {
+          width: 48px;
+          height: 48px;
+          display: block;
+          position: absolute;
+          top: -24px;
+          left: 16px;
+          background-color: var(--FAU_Col_FAU-Blau, #04316A);
+          &:after {
+              content: "";
+              -webkit-mask-size: var(--icon-size-mask, 70%);
+              mask-size: var(--icon-size-mask, 70%);
+              -webkit-mask-repeat: no-repeat;
+              mask-repeat: no-repeat;
+              -webkit-mask-position: center;
+              mask-position: center;
+              display: inline-block;
+              width: 32px;
+              height: 32px;
+              position: relative;
+              top: 9px;
+              left: 8px;
+              mask-image: url(../svg/globe.svg);
+              -webkit-mask-image: url(../svg/globe.svg);
+              background-color: #fff;
+          }
+      }
+      img {
+          aspect-ratio: 3;
+          width: 100%;
+          object-fit: cover;
+      }
+  }*/
 }
 
 .fau-studium-display.degree-program-full .program-admission .program-admission-general,
@@ -392,47 +424,9 @@
   padding-top: 0;
 }
 
-.fau-studium-display.degree-program-full .program-admission .program-admission-internationals {
-  background-color: var(--FAU-Col-FAU-Blau-25, #c0cbda);
-  margin-top: 64px;
-  padding-top: 40px;
-  position: relative;
-}
-
-.fau-studium-display.degree-program-full .program-admission .program-admission-internationals .icon-globe {
-  width: 48px;
-  height: 48px;
-  display: block;
-  position: absolute;
-  top: -24px;
-  left: 16px;
-  background-color: var(--FAU_Col_FAU-Blau, #04316A);
-}
-
-.fau-studium-display.degree-program-full .program-admission .program-admission-internationals .icon-globe:after {
-  content: "";
-  -webkit-mask-size: var(--icon-size-mask, 70%);
-  mask-size: var(--icon-size-mask, 70%);
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  display: inline-block;
-  width: 32px;
-  height: 32px;
-  position: relative;
-  top: 9px;
-  left: 8px;
-  mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTM1MiAyNTZjMCAyMi4yLTEuMiA0My42LTMuMyA2NGwtMTg1LjMgMGMtMi4yLTIwLjQtMy4zLTQxLjgtMy4zLTY0czEuMi00My42IDMuMy02NGwxODUuMyAwYzIuMiAyMC40IDMuMyA0MS44IDMuMyA2NHptMjguOC02NGwxMjMuMSAwYzUuMyAyMC41IDguMSA0MS45IDguMSA2NHMtMi44IDQzLjUtOC4xIDY0bC0xMjMuMSAwYzIuMS0yMC42IDMuMi00MiAzLjItNjRzLTEuMS00My40LTMuMi02NHptMTEyLjYtMzJsLTExNi43IDBjLTEwLTYzLjktMjkuOC0xMTcuNC01NS4zLTE1MS42Yzc4LjMgMjAuNyAxNDIgNzcuNSAxNzEuOSAxNTEuNnptLTE0OS4xIDBsLTE3Ni42IDBjNi4xLTM2LjQgMTUuNS02OC42IDI3LTk0LjdjMTAuNS0yMy42IDIyLjItNDAuNyAzMy41LTUxLjVDMjM5LjQgMy4yIDI0OC43IDAgMjU2IDBzMTYuNiAzLjIgMjcuOCAxMy44YzExLjMgMTAuOCAyMyAyNy45IDMzLjUgNTEuNWMxMS42IDI2IDIwLjkgNTguMiAyNyA5NC43em0tMjA5IDBMMTguNiAxNjBDNDguNiA4NS45IDExMi4yIDI5LjEgMTkwLjYgOC40QzE2NS4xIDQyLjYgMTQ1LjMgOTYuMSAxMzUuMyAxNjB6TTguMSAxOTJsMTIzLjEgMGMtMi4xIDIwLjYtMy4yIDQyLTMuMiA2NHMxLjEgNDMuNCAzLjIgNjRMOC4xIDMyMEMyLjggMjk5LjUgMCAyNzguMSAwIDI1NnMyLjgtNDMuNSA4LjEtNjR6TTE5NC43IDQ0Ni42Yy0xMS42LTI2LTIwLjktNTguMi0yNy05NC42bDE3Ni42IDBjLTYuMSAzNi40LTE1LjUgNjguNi0yNyA5NC42Yy0xMC41IDIzLjYtMjIuMiA0MC43LTMzLjUgNTEuNUMyNzIuNiA1MDguOCAyNjMuMyA1MTIgMjU2IDUxMnMtMTYuNi0zLjItMjcuOC0xMy44Yy0xMS4zLTEwLjgtMjMtMjcuOS0zMy41LTUxLjV6TTEzNS4zIDM1MmMxMCA2My45IDI5LjggMTE3LjQgNTUuMyAxNTEuNkMxMTIuMiA0ODIuOSA0OC42IDQyNi4xIDE4LjYgMzUybDExNi43IDB6bTM1OC4xIDBjLTMwIDc0LjEtOTMuNiAxMzAuOS0xNzEuOSAxNTEuNmMyNS41LTM0LjIgNDUuMi04Ny43IDU1LjMtMTUxLjZsMTE2LjcgMHoiLz48L3N2Zz4=);
-  -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTM1MiAyNTZjMCAyMi4yLTEuMiA0My42LTMuMyA2NGwtMTg1LjMgMGMtMi4yLTIwLjQtMy4zLTQxLjgtMy4zLTY0czEuMi00My42IDMuMy02NGwxODUuMyAwYzIuMiAyMC40IDMuMyA0MS44IDMuMyA2NHptMjguOC02NGwxMjMuMSAwYzUuMyAyMC41IDguMSA0MS45IDguMSA2NHMtMi44IDQzLjUtOC4xIDY0bC0xMjMuMSAwYzIuMS0yMC42IDMuMi00MiAzLjItNjRzLTEuMS00My40LTMuMi02NHptMTEyLjYtMzJsLTExNi43IDBjLTEwLTYzLjktMjkuOC0xMTcuNC01NS4zLTE1MS42Yzc4LjMgMjAuNyAxNDIgNzcuNSAxNzEuOSAxNTEuNnptLTE0OS4xIDBsLTE3Ni42IDBjNi4xLTM2LjQgMTUuNS02OC42IDI3LTk0LjdjMTAuNS0yMy42IDIyLjItNDAuNyAzMy41LTUxLjVDMjM5LjQgMy4yIDI0OC43IDAgMjU2IDBzMTYuNiAzLjIgMjcuOCAxMy44YzExLjMgMTAuOCAyMyAyNy45IDMzLjUgNTEuNWMxMS42IDI2IDIwLjkgNTguMiAyNyA5NC43em0tMjA5IDBMMTguNiAxNjBDNDguNiA4NS45IDExMi4yIDI5LjEgMTkwLjYgOC40QzE2NS4xIDQyLjYgMTQ1LjMgOTYuMSAxMzUuMyAxNjB6TTguMSAxOTJsMTIzLjEgMGMtMi4xIDIwLjYtMy4yIDQyLTMuMiA2NHMxLjEgNDMuNCAzLjIgNjRMOC4xIDMyMEMyLjggMjk5LjUgMCAyNzguMSAwIDI1NnMyLjgtNDMuNSA4LjEtNjR6TTE5NC43IDQ0Ni42Yy0xMS42LTI2LTIwLjktNTguMi0yNy05NC42bDE3Ni42IDBjLTYuMSAzNi40LTE1LjUgNjguNi0yNyA5NC42Yy0xMC41IDIzLjYtMjIuMiA0MC43LTMzLjUgNTEuNUMyNzIuNiA1MDguOCAyNjMuMyA1MTIgMjU2IDUxMnMtMTYuNi0zLjItMjcuOC0xMy44Yy0xMS4zLTEwLjgtMjMtMjcuOS0zMy41LTUxLjV6TTEzNS4zIDM1MmMxMCA2My45IDI5LjggMTE3LjQgNTUuMyAxNTEuNkMxMTIuMiA0ODIuOSA0OC42IDQyNi4xIDE4LjYgMzUybDExNi43IDB6bTM1OC4xIDBjLTMwIDc0LjEtOTMuNiAxMzAuOS0xNzEuOSAxNTEuNmMyNS41LTM0LjIgNDUuMi04Ny43IDU1LjMtMTUxLjZsMTE2LjcgMHoiLz48L3N2Zz4=);
-  background-color: #fff;
-}
-
-.fau-studium-display.degree-program-full .program-admission .program-admission-internationals img {
-  aspect-ratio: 3;
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+.fau-studium-display.degree-program-full .program-admission .program-admission-general li,
+.fau-studium-display.degree-program-full .program-admission .program-admission-internationals li {
+  padding: 0;
 }
 
 .fau-studium-display.degree-program-full .program-apply-now {
@@ -751,7 +745,7 @@
   padding-top: 0;
 }
 
-.fau-studium-display.degree-program-full .features-fau .icon-circle-check {
+.fau-studium-display.degree-program-full .features-fau span[class^=icon-] {
   width: 60px;
   height: 60px;
   display: block;
@@ -759,7 +753,7 @@
   margin-bottom: 0.5em;
 }
 
-.fau-studium-display.degree-program-full .features-fau .icon-circle-check:after {
+.fau-studium-display.degree-program-full .features-fau span[class^=icon-]:after {
   content: "";
   -webkit-mask-size: 100%;
   mask-size: 100%;
@@ -773,6 +767,26 @@
   mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNjQwIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIHY3LjAuMCBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIENvcHlyaWdodCAyMDI1IEZvbnRpY29ucywgSW5jLi0tPjxwYXRoIGQ9Ik0zMjAgMTEyQzQzNC45IDExMiA1MjggMjA1LjEgNTI4IDMyMEM1MjggNDM0LjkgNDM0LjkgNTI4IDMyMCA1MjhDMjA1LjEgNTI4IDExMiA0MzQuOSAxMTIgMzIwQzExMiAyMDUuMSAyMDUuMSAxMTIgMzIwIDExMnpNMzIwIDU3NkM0NjEuNCA1NzYgNTc2IDQ2MS40IDU3NiAzMjBDNTc2IDE3OC42IDQ2MS40IDY0IDMyMCA2NEMxNzguNiA2NCA2NCAxNzguNiA2NCAzMjBDNjQgNDYxLjQgMTc4LjYgNTc2IDMyMCA1NzZ6TTQwNC40IDI3Ni43QzQxMS40IDI2NS41IDQwOCAyNTAuNyAzOTYuOCAyNDMuNkMzODUuNiAyMzYuNSAzNzAuOCAyNDAgMzYzLjcgMjUxLjJMMzAyLjMgMzQ5LjVMMjc1LjMgMzEzLjVDMjY3LjMgMzAyLjkgMjUyLjMgMzAwLjcgMjQxLjcgMzA4LjdDMjMxLjEgMzE2LjcgMjI4LjkgMzMxLjcgMjM2LjkgMzQyLjNMMjg0LjkgNDA2LjNDMjg5LjYgNDEyLjYgMjk3LjIgNDE2LjIgMzA1LjEgNDE1LjlDMzEzIDQxNS42IDMyMC4yIDQxMS40IDMyNC40IDQwNC42TDQwNC40IDI3Ni42eiIvPjwvc3ZnPg==);
   -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNjQwIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIHY3LjAuMCBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIENvcHlyaWdodCAyMDI1IEZvbnRpY29ucywgSW5jLi0tPjxwYXRoIGQ9Ik0zMjAgMTEyQzQzNC45IDExMiA1MjggMjA1LjEgNTI4IDMyMEM1MjggNDM0LjkgNDM0LjkgNTI4IDMyMCA1MjhDMjA1LjEgNTI4IDExMiA0MzQuOSAxMTIgMzIwQzExMiAyMDUuMSAyMDUuMSAxMTIgMzIwIDExMnpNMzIwIDU3NkM0NjEuNCA1NzYgNTc2IDQ2MS40IDU3NiAzMjBDNTc2IDE3OC42IDQ2MS40IDY0IDMyMCA2NEMxNzguNiA2NCA2NCAxNzguNiA2NCAzMjBDNjQgNDYxLjQgMTc4LjYgNTc2IDMyMCA1NzZ6TTQwNC40IDI3Ni43QzQxMS40IDI2NS41IDQwOCAyNTAuNyAzOTYuOCAyNDMuNkMzODUuNiAyMzYuNSAzNzAuOCAyNDAgMzYzLjcgMjUxLjJMMzAyLjMgMzQ5LjVMMjc1LjMgMzEzLjVDMjY3LjMgMzAyLjkgMjUyLjMgMzAwLjcgMjQxLjcgMzA4LjdDMjMxLjEgMzE2LjcgMjI4LjkgMzMxLjcgMjM2LjkgMzQyLjNMMjg0LjkgNDA2LjNDMjg5LjYgNDEyLjYgMjk3LjIgNDE2LjIgMzA1LjEgNDE1LjlDMzEzIDQxNS42IDMyMC4yIDQxMS40IDMyNC40IDQwNC42TDQwNC40IDI3Ni42eiIvPjwvc3ZnPg==);
   background-color: var(--FAU_Col_FAU-Blau, #04316A);
+}
+
+.fau-studium-display.degree-program-full .features-fau span.icon-handshake:after {
+  mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDQzMTZBIj48cGF0aCBkPSJNNDc1LTE2MHE0IDAgOC0ydDYtNGwzMjgtMzI4cTEyLTEyIDE3LjUtMjd0NS41LTMwcTAtMTYtNS41LTMwLjVUODE3LTYwN0w2NDctNzc3cS0xMS0xMi0yNS41LTE3LjVUNTkxLTgwMHEtMTUgMC0zMCA1LjVUNTM0LTc3N2wtMTEgMTEgNzQgNzVxMTUgMTQgMjIgMzJ0NyAzOHEwIDQyLTI4LjUgNzAuNVQ1MjctNTIycS0yMCAwLTM4LjUtN1Q0NTYtNTUwbC03NS03NC0xNzUgMTc1cS0zIDMtNC41IDYuNVQyMDAtNDM1cTAgOCA2IDE0LjV0MTQgNi41cTQgMCA4LTJ0Ni00bDEzNi0xMzYgNTYgNTYtMTM1IDEzNnEtMyAzLTQuNSA2LjVUMjg1LTM1MHEwIDggNiAxNHQxNCA2cTQgMCA4LTJ0Ni00bDEzNi0xMzUgNTYgNTYtMTM1IDEzNnEtMyAyLTQuNSA2dC0xLjUgOHEwIDggNiAxNHQxNCA2cTQgMCA3LjUtMS41dDYuNS00LjVsMTM2LTEzNSA1NiA1Ni0xMzYgMTM2cS0zIDMtNC41IDYuNVQ0NTQtMTgwcTAgOCA2LjUgMTR0MTQuNSA2Wm0tMSA4MHEtMzcgMC02NS41LTI0LjVUMzc1LTE2NnEtMzQtNS01Ny0yOHQtMjgtNTdxLTM0LTUtNTYuNS0yOC41VDIwNi0zMzZxLTM4LTUtNjItMzN0LTI0LTY2cTAtMjAgNy41LTM4LjVUMTQ5LTUwNmwyMzItMjMxIDEzMSAxMzFxMiAzIDYgNC41dDggMS41cTkgMCAxNS01LjV0Ni0xNC41cTAtNC0xLjUtOHQtNC41LTZMMzk4LTc3N3EtMTEtMTItMjUuNS0xNy41VDM0Mi04MDBxLTE1IDAtMzAgNS41VDI4NS03NzdMMTQ0LTYzNXEtOSA5LTE1IDIxdC04IDI0cS0yIDEyIDAgMjQuNXQ4IDIzLjVsLTU4IDU4cS0xNy0yMy0yNS01MC41VDQwLTU5MHEyLTI4IDE0LTU0LjVUODctNjkybDE0MS0xNDFxMjQtMjMgNTMuNS0zNXQ2MC41LTEycTMxIDAgNjAuNSAxMnQ1Mi41IDM1bDExIDExIDExLTExcTI0LTIzIDUzLjUtMzV0NjAuNS0xMnEzMSAwIDYwLjUgMTJ0NTIuNSAzNWwxNjkgMTY5cTIzIDIzIDM1IDUzdDEyIDYxcTAgMzEtMTIgNjAuNVQ4NzMtNDM3TDU0NS0xMTBxLTE0IDE0LTMyLjUgMjJUNDc0LTgwWm0tOTktNTYwWiIvPjwvc3ZnPg==);
+  -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDQzMTZBIj48cGF0aCBkPSJNNDc1LTE2MHE0IDAgOC0ydDYtNGwzMjgtMzI4cTEyLTEyIDE3LjUtMjd0NS41LTMwcTAtMTYtNS41LTMwLjVUODE3LTYwN0w2NDctNzc3cS0xMS0xMi0yNS41LTE3LjVUNTkxLTgwMHEtMTUgMC0zMCA1LjVUNTM0LTc3N2wtMTEgMTEgNzQgNzVxMTUgMTQgMjIgMzJ0NyAzOHEwIDQyLTI4LjUgNzAuNVQ1MjctNTIycS0yMCAwLTM4LjUtN1Q0NTYtNTUwbC03NS03NC0xNzUgMTc1cS0zIDMtNC41IDYuNVQyMDAtNDM1cTAgOCA2IDE0LjV0MTQgNi41cTQgMCA4LTJ0Ni00bDEzNi0xMzYgNTYgNTYtMTM1IDEzNnEtMyAzLTQuNSA2LjVUMjg1LTM1MHEwIDggNiAxNHQxNCA2cTQgMCA4LTJ0Ni00bDEzNi0xMzUgNTYgNTYtMTM1IDEzNnEtMyAyLTQuNSA2dC0xLjUgOHEwIDggNiAxNHQxNCA2cTQgMCA3LjUtMS41dDYuNS00LjVsMTM2LTEzNSA1NiA1Ni0xMzYgMTM2cS0zIDMtNC41IDYuNVQ0NTQtMTgwcTAgOCA2LjUgMTR0MTQuNSA2Wm0tMSA4MHEtMzcgMC02NS41LTI0LjVUMzc1LTE2NnEtMzQtNS01Ny0yOHQtMjgtNTdxLTM0LTUtNTYuNS0yOC41VDIwNi0zMzZxLTM4LTUtNjItMzN0LTI0LTY2cTAtMjAgNy41LTM4LjVUMTQ5LTUwNmwyMzItMjMxIDEzMSAxMzFxMiAzIDYgNC41dDggMS41cTkgMCAxNS01LjV0Ni0xNC41cTAtNC0xLjUtOHQtNC41LTZMMzk4LTc3N3EtMTEtMTItMjUuNS0xNy41VDM0Mi04MDBxLTE1IDAtMzAgNS41VDI4NS03NzdMMTQ0LTYzNXEtOSA5LTE1IDIxdC04IDI0cS0yIDEyIDAgMjQuNXQ4IDIzLjVsLTU4IDU4cS0xNy0yMy0yNS01MC41VDQwLTU5MHEyLTI4IDE0LTU0LjVUODctNjkybDE0MS0xNDFxMjQtMjMgNTMuNS0zNXQ2MC41LTEycTMxIDAgNjAuNSAxMnQ1Mi41IDM1bDExIDExIDExLTExcTI0LTIzIDUzLjUtMzV0NjAuNS0xMnEzMSAwIDYwLjUgMTJ0NTIuNSAzNWwxNjkgMTY5cTIzIDIzIDM1IDUzdDEyIDYxcTAgMzEtMTIgNjAuNVQ4NzMtNDM3TDU0NS0xMTBxLTE0IDE0LTMyLjUgMjJUNDc0LTgwWm0tOTktNTYwWiIvPjwvc3ZnPg==);
+}
+
+.fau-studium-display.degree-program-full .features-fau span.icon-join_left:after {
+  mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDQzMTZBIj48cGF0aCBkPSJNMzIwLTIwMHEtMTE3IDAtMTk4LjUtODEuNVQ0MC00ODBxMC0xMTcgODEuNS0xOTguNVQzMjAtNzYwcTI3IDAgNTIuNSA1dDQ5LjUgMTRxLTU4IDQ5LTkwIDExN3QtMzIgMTQ0cTAgNzYgMzIgMTQ0dDkwIDExN3EtMjQgOS00OS41IDE0dC01Mi41IDVabTMyMCAwcS0yNyAwLTUyLjUtNVQ1MzgtMjE5cTE3LTE0IDMyLTMwLjV0MjgtMzQuNXExMSAyIDIxIDN0MjEgMXE4MyAwIDE0MS41LTU4LjVUODQwLTQ4MHEwLTgzLTU4LjUtMTQxLjVUNjQwLTY4MHEtMTEgMC0yMSAxdC0yMSAzcS0xMy0xOC0yOC0zNC41VDUzOC03NDFxMjQtOSA0OS41LTE0dDUyLjUtNXExMTcgMCAxOTguNSA4MS41VDkyMC00ODBxMCAxMTctODEuNSAxOTguNVQ2NDAtMjAwWm0tMTYwLTUwcS01Ny0zOS04OC41LTEwMFQzNjAtNDgwcTAtNjkgMzEuNS0xMzBUNDgwLTcxMHE1NyAzOSA4OC41IDEwMFQ2MDAtNDgwcTAgNjktMzEuNSAxMzBUNDgwLTI1MFoiLz48L3N2Zz4=);
+  -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDQzMTZBIj48cGF0aCBkPSJNMzIwLTIwMHEtMTE3IDAtMTk4LjUtODEuNVQ0MC00ODBxMC0xMTcgODEuNS0xOTguNVQzMjAtNzYwcTI3IDAgNTIuNSA1dDQ5LjUgMTRxLTU4IDQ5LTkwIDExN3QtMzIgMTQ0cTAgNzYgMzIgMTQ0dDkwIDExN3EtMjQgOS00OS41IDE0dC01Mi41IDVabTMyMCAwcS0yNyAwLTUyLjUtNVQ1MzgtMjE5cTE3LTE0IDMyLTMwLjV0MjgtMzQuNXExMSAyIDIxIDN0MjEgMXE4MyAwIDE0MS41LTU4LjVUODQwLTQ4MHEwLTgzLTU4LjUtMTQxLjVUNjQwLTY4MHEtMTEgMC0yMSAxdC0yMSAzcS0xMy0xOC0yOC0zNC41VDUzOC03NDFxMjQtOSA0OS41LTE0dDUyLjUtNXExMTcgMCAxOTguNSA4MS41VDkyMC00ODBxMCAxMTctODEuNSAxOTguNVQ2NDAtMjAwWm0tMTYwLTUwcS01Ny0zOS04OC41LTEwMFQzNjAtNDgwcTAtNjkgMzEuNS0xMzBUNDgwLTcxMHE1NyAzOSA4OC41IDEwMFQ2MDAtNDgwcTAgNjktMzEuNSAxMzBUNDgwLTI1MFoiLz48L3N2Zz4=);
+}
+
+.fau-studium-display.degree-program-full .features-fau span.icon-language:after {
+  mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDQzMTZBIj48cGF0aCBkPSJNNDgwLTgwcS04MiAwLTE1NS0zMS41dC0xMjcuNS04NlExNDMtMjUyIDExMS41LTMyNVQ4MC00ODBxMC04MyAzMS41LTE1NS41dDg2LTEyN1EyNTItODE3IDMyNS04NDguNVQ0ODAtODgwcTgzIDAgMTU1LjUgMzEuNXQxMjcgODZxNTQuNSA1NC41IDg2IDEyN1Q4ODAtNDgwcTAgODItMzEuNSAxNTV0LTg2IDEyNy41cS01NC41IDU0LjUtMTI3IDg2VDQ4MC04MFptMC04MnEyNi0zNiA0NS03NXQzMS04M0g0MDRxMTIgNDQgMzEgODN0NDUgNzVabS0xMDQtMTZxLTE4LTMzLTMxLjUtNjguNVQzMjItMzIwSDIwNHEyOSA1MCA3Mi41IDg3dDk5LjUgNTVabTIwOCAwcTU2LTE4IDk5LjUtNTV0NzIuNS04N0g2MzhxLTkgMzgtMjIuNSA3My41VDU4NC0xNzhaTTE3MC00MDBoMTM2cS0zLTIwLTQuNS0zOS41VDMwMC00ODBxMC0yMSAxLjUtNDAuNVQzMDYtNTYwSDE3MHEtNSAyMC03LjUgMzkuNVQxNjAtNDgwcTAgMjEgMi41IDQwLjVUMTcwLTQwMFptMjE2IDBoMTg4cTMtMjAgNC41LTM5LjVUNTgwLTQ4MHEwLTIxLTEuNS00MC41VDU3NC01NjBIMzg2cS0zIDIwLTQuNSAzOS41VDM4MC00ODBxMCAyMSAxLjUgNDAuNVQzODYtNDAwWm0yNjggMGgxMzZxNS0yMCA3LjUtMzkuNVQ4MDAtNDgwcTAtMjEtMi41LTQwLjVUNzkwLTU2MEg2NTRxMyAyMCA0LjUgMzkuNVQ2NjAtNDgwcTAgMjEtMS41IDQwLjVUNjU0LTQwMFptLTE2LTI0MGgxMThxLTI5LTUwLTcyLjUtODdUNTg0LTc4MnExOCAzMyAzMS41IDY4LjVUNjM4LTY0MFptLTIzNCAwaDE1MnEtMTItNDQtMzEtODN0LTQ1LTc1cS0yNiAzNi00NSA3NXQtMzEgODNabS0yMDAgMGgxMThxOS0zOCAyMi41LTczLjVUMzc2LTc4MnEtNTYgMTgtOTkuNSA1NVQyMDQtNjQwWiIvPjwvc3ZnPg==);
+  -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDQzMTZBIj48cGF0aCBkPSJNNDgwLTgwcS04MiAwLTE1NS0zMS41dC0xMjcuNS04NlExNDMtMjUyIDExMS41LTMyNVQ4MC00ODBxMC04MyAzMS41LTE1NS41dDg2LTEyN1EyNTItODE3IDMyNS04NDguNVQ0ODAtODgwcTgzIDAgMTU1LjUgMzEuNXQxMjcgODZxNTQuNSA1NC41IDg2IDEyN1Q4ODAtNDgwcTAgODItMzEuNSAxNTV0LTg2IDEyNy41cS01NC41IDU0LjUtMTI3IDg2VDQ4MC04MFptMC04MnEyNi0zNiA0NS03NXQzMS04M0g0MDRxMTIgNDQgMzEgODN0NDUgNzVabS0xMDQtMTZxLTE4LTMzLTMxLjUtNjguNVQzMjItMzIwSDIwNHEyOSA1MCA3Mi41IDg3dDk5LjUgNTVabTIwOCAwcTU2LTE4IDk5LjUtNTV0NzIuNS04N0g2MzhxLTkgMzgtMjIuNSA3My41VDU4NC0xNzhaTTE3MC00MDBoMTM2cS0zLTIwLTQuNS0zOS41VDMwMC00ODBxMC0yMSAxLjUtNDAuNVQzMDYtNTYwSDE3MHEtNSAyMC03LjUgMzkuNVQxNjAtNDgwcTAgMjEgMi41IDQwLjVUMTcwLTQwMFptMjE2IDBoMTg4cTMtMjAgNC41LTM5LjVUNTgwLTQ4MHEwLTIxLTEuNS00MC41VDU3NC01NjBIMzg2cS0zIDIwLTQuNSAzOS41VDM4MC00ODBxMCAyMSAxLjUgNDAuNVQzODYtNDAwWm0yNjggMGgxMzZxNS0yMCA3LjUtMzkuNVQ4MDAtNDgwcTAtMjEtMi41LTQwLjVUNzkwLTU2MEg2NTRxMyAyMCA0LjUgMzkuNVQ2NjAtNDgwcTAgMjEtMS41IDQwLjVUNjU0LTQwMFptLTE2LTI0MGgxMThxLTI5LTUwLTcyLjUtODdUNTg0LTc4MnExOCAzMyAzMS41IDY4LjVUNjM4LTY0MFptLTIzNCAwaDE1MnEtMTItNDQtMzEtODN0LTQ1LTc1cS0yNiAzNi00NSA3NXQtMzEgODNabS0yMDAgMGgxMThxOS0zOCAyMi41LTczLjVUMzc2LTc4MnEtNTYgMTgtOTkuNSA1NVQyMDQtNjQwWiIvPjwvc3ZnPg==);
+}
+
+.fau-studium-display.degree-program-full .features-fau span.icon-school:after {
+  mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDQzMTZBIj48cGF0aCBkPSJNNDgwLTEyMCAyMDAtMjcydi0yNDBMNDAtNjAwbDQ0MC0yNDAgNDQwIDI0MHYzMjBoLTgwdi0yNzZsLTgwIDQ0djI0MEw0ODAtMTIwWm0wLTMzMiAyNzQtMTQ4LTI3NC0xNDgtMjc0IDE0OCAyNzQgMTQ4Wm0wIDI0MSAyMDAtMTA4di0xNTFMNDgwLTM2MCAyODAtNDcwdjE1MWwyMDAgMTA4Wm0wLTI0MVptMCA5MFptMCAwWiIvPjwvc3ZnPg==);
+  -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDQzMTZBIj48cGF0aCBkPSJNNDgwLTEyMCAyMDAtMjcydi0yNDBMNDAtNjAwbDQ0MC0yNDAgNDQwIDI0MHYzMjBoLTgwdi0yNzZsLTgwIDQ0djI0MEw0ODAtMTIwWm0wLTMzMiAyNzQtMTQ4LTI3NC0xNDgtMjc0IDE0OCAyNzQgMTQ4Wm0wIDI0MSAyMDAtMTA4di0xNTFMNDgwLTM2MCAyODAtNDcwdjE1MWwyMDAgMTA4Wm0wLTI0MVptMCA5MFptMCAwWiIvPjwvc3ZnPg==);
 }
 
 .fau-studium-display.degree-program-full .features-fau .column p {

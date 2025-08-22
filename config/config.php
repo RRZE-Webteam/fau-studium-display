@@ -640,36 +640,36 @@ function get_constants($lang = 'de') {
             'en' => plugin()->getUrl() . 'assets/img/benefits-fau.png'
         ],
         'features-1-text' => [
-            'de' => 'Breites Studienangebot',
-            'en' => 'Breites Studienangebot',
+            'de' => 'Mehr als 270 Studiengänge',
+            'en' => 'More than 270 degree programs',
         ],
         'features-1-icon' => [
-            'de' => 'circle-check',
-            'en' => 'circle-check',
+            'de' => 'school',
+            'en' => 'school',
         ],
         'features-2-text' => [
-            'de' => 'Internationale Partnerschaften mit anderen Hochschulen',
-            'en' => 'Internationale Partnerschaften mit anderen Hochschulen',
+            'de' => 'Internationale Partnerschaften',
+            'en' => 'International partnerships',
         ],
         'features-2-icon' => [
-            'de' => 'circle-check',
-            'en' => 'circle-check',
+            'de' => 'language',
+            'en' => 'language',
         ],
         'features-3-text' => [
             'de' => 'Enge Verknüpfung mit der Wirtschaft',
-            'en' => 'Enge Verknüpfung mit der Wirtschaft',
+            'en' => 'Close ties to industry',
         ],
         'features-3-icon' => [
-            'de' => 'circle-check',
-            'en' => 'circle-check',
+            'de' => 'handshake',
+            'en' => 'handshake',
         ],
         'features-4-text' => [
             'de' => 'Duales Bachelorstudium möglich',
-            'en' => 'Duales Bachelorstudium möglich',
+            'en' => "Cooperative bachelor's program available",
         ],
         'features-4-icon' => [
-            'de' => 'circle-check',
-            'en' => 'circle-check',
+            'de' => 'join_left',
+            'en' => 'join_left',
         ],
 
     ];
