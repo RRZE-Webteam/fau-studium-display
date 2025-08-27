@@ -22,6 +22,7 @@ $labels = get_labels($lang);
 
 $program_grid = '';
 foreach ($data as $program) {
+    //print "<pre>"; var_dump($program); echo "</pre>";
     if (empty($program))
         continue;
 

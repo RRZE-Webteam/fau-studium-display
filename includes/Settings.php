@@ -11,8 +11,8 @@ class Settings
     private array $tabs;
     private string $title;
     private string $slug;
-
     private array $programs = array();
+    private bool $fau_studium_active;
 
     public function __construct($pluginFile) {
         $this->pluginFile = $pluginFile;
@@ -25,6 +25,7 @@ class Settings
             'orderby'        => 'title',
             'order'          => 'ASC',
         ]);
+        $this->fau_studium_active = is_plugin_active('FAU-Studium/fau-degree-program.php');
     }
 
     public function onLoaded() {
@@ -54,11 +55,14 @@ class Settings
 
     public function render_settings_page() {
         $active_tab = $_GET['tab'] ?? 'layout';
-        $tabs = [
-            'api' => __('API', 'fau-studium-display'),
-            'sync' => __('Sync', 'fau-studium-display'),
-            'layout' => __('Layout', 'fau-studium-display'),
-        ];
+        if (!$this->fau_studium_active) {
+            $tabs = [
+                'api' => __('API', 'fau-studium-display'),
+                'sync' => __('Sync', 'fau-studium-display'),
+            ];
+        }
+        $tabs['layout'] = __('Layout', 'fau-studium-display');
+
 
         echo '<div class="wrap cmb2-options-page">';
         echo '<h1>' . get_admin_page_title() . '</h1>';
@@ -73,7 +77,7 @@ class Settings
         ];
 
         if (!array_key_exists($active_tab, $tabs)) {
-            $active_tab = 'sync'; // Fallback
+            $active_tab = 'layout';
         }
 
         cmb2_metabox_form(
@@ -86,49 +90,55 @@ class Settings
     }
     
     public function register_settings() {
-        $api_options = new_cmb2_box([
-            'id' => $this->slug.'_api',
-            'title' => __('API', 'fau-studium-display'),
-            'object_types' => ['options-page'],
-            'option_key' => $this->slug.'_api',
-            'parent_slug' => $this->slug,
-        ]);
-        $api_options->add_field([
-            'id' => 'dip-edu-api-key',
-            'name' => esc_html__('DIP Edu API Key', 'fau-studium-display'),
-            'desc' => wp_kses_post(__('API Key can be obtained from the API-Service at <a href="https://api.fau.de/pub/v1/edu/__doc">https://api.fau.de/pub/v1/edu/__doc</a>.', 'fau-studium-display')),
-            'type' => 'text',
-            'default' => '',
-        ]);
-        //Search for degree programs to import
-        $sync_options = new_cmb2_box([
-            'id' => $this->slug.'_sync',
-            'title' => __('Sync', 'fau-studium-display'),
-            'object_types' => ['options-page'],
-            'option_key' => $this->slug.'_sync',
-            'parent_slug' => $this->slug,
-        ]);
-        $sync_options->add_field( [
-            'name' => __('Sync and manage degree programs', 'fau-studium-display'),
-            //'desc' => __('', 'fau-studium-display'),
-            'type' => 'title',
-            'id'   => 'apply_now_heading'
-        ]);
-        $sync_options->add_field([
-            'id' => 'sync-search',
-            'name' => esc_html__('Import', 'fau-studium-display'),
-            //'desc' => '',
-            'type' => 'sync-search',
-            'default' => '',
-        ]);
-        $sync_options->add_field([
-            'id' => 'sync-imported',
-            'name' => esc_html__('Manage Imported', 'fau-studium-display'),
-            //'desc' => '',
-            'type' => 'sync-imported',
-            'default' => '',
-        ]);
-
+        if (!$this->fau_studium_active) {
+            $api_options = new_cmb2_box([
+                                            'id'           => $this->slug . '_api',
+                                            'title'        => __('API', 'fau-studium-display'),
+                                            'object_types' => ['options-page'],
+                                            'option_key'   => $this->slug . '_api',
+                                            'parent_slug'  => $this->slug,
+                                        ]);
+            $api_options->add_field([
+                                        'id'      => 'dip-edu-api-key',
+                                        'name'    => esc_html__('DIP Edu API Key', 'fau-studium-display'),
+                                        'desc'    => wp_kses_post(
+                                            __(
+                                                'API Key can be obtained from the API-Service at <a href="https://api.fau.de/pub/v1/edu/__doc">https://api.fau.de/pub/v1/edu/__doc</a>.',
+                                                'fau-studium-display'
+                                            )
+                                        ),
+                                        'type'    => 'text',
+                                        'default' => '',
+                                    ]);
+            //Search for degree programs to import
+            $sync_options = new_cmb2_box([
+                                             'id'           => $this->slug . '_sync',
+                                             'title'        => __('Sync', 'fau-studium-display'),
+                                             'object_types' => ['options-page'],
+                                             'option_key'   => $this->slug . '_sync',
+                                             'parent_slug'  => $this->slug,
+                                         ]);
+            $sync_options->add_field([
+                                         'name' => __('Sync and manage degree programs', 'fau-studium-display'),
+                                         //'desc' => __('', 'fau-studium-display'),
+                                         'type' => 'title',
+                                         'id'   => 'apply_now_heading'
+                                     ]);
+            $sync_options->add_field([
+                                         'id'      => 'sync-search',
+                                         'name'    => esc_html__('Import', 'fau-studium-display'),
+                                         //'desc' => '',
+                                         'type'    => 'sync-search',
+                                         'default' => '',
+                                     ]);
+            $sync_options->add_field([
+                                         'id'      => 'sync-imported',
+                                         'name'    => esc_html__('Manage Imported', 'fau-studium-display'),
+                                         //'desc' => '',
+                                         'type'    => 'sync-imported',
+                                         'default' => '',
+                                     ]);
+        }
         $layout_options = new_cmb2_box([
             'id' => $this->slug.'_layout',
             'title' => __('Layout', 'fau-studium-display'),

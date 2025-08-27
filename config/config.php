@@ -197,10 +197,22 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Videos'
             ]
         ],
+        'about' => [
+            'labels' => [
+                'de' => 'Worum geht es im Studiengang?',
+                'en' => 'What is the degree program about?'
+            ]
+        ],
         'content.about' => [
             'labels' => [
                 'de' => 'Inhalt: Worum geht es?',
                 'en' => 'Content: About'
+            ]
+        ],
+        'structure' => [
+            'labels' => [
+                'de' => 'Aufbau und Struktur',
+                'en' => 'Design and structure'
             ]
         ],
         'content.structure' => [
@@ -209,10 +221,22 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Content: Structure'
             ]
         ],
+        'specializations' => [
+            'labels' => [
+                'de' => 'Studienrichtungen und Schwerpunkte',
+                'en' => 'Fields of study and specializations'
+            ]
+        ],
         'content.specializations' => [
             'labels' => [
                 'de' => 'Inhalt: Schwerpunkte',
                 'en' => 'Content: Specializations'
+            ]
+        ],
+        'qualities_and_skills' => [
+            'labels' => [
+                'de' => 'Was sollte ich mitbringen?',
+                'en' => 'Which qualities and skills do I need?'
             ]
         ],
         'content.qualities_and_skills' => [
@@ -221,10 +245,22 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Content: Qualities and skills'
             ]
         ],
+        'why_should_study' => [
+            'labels' => [
+                'de' => 'Gute Gründe für ein Studium an der FAU',
+                'en' => 'Why should I study at FAU?'
+            ]
+        ],
         'content.why_should_study' => [
             'labels' => [
                 'de' => 'Inhalt: Warum FAU?',
                 'en' => 'Content: Why study at FAU?'
+            ]
+        ],
+        'career_prospects' => [
+            'labels' => [
+                'de' => 'Welche beruflichen Perspektiven stehen mir offen?',
+                'en' => 'Which career prospects are open to me?'
             ]
         ],
         'content.career_prospects' => [
@@ -233,10 +269,22 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Content: Career prospects'
             ]
         ],
+        'special_features' => [
+            'labels' => [
+                'de' => 'Besondere Hinweise',
+                'en' => 'Special features'
+            ]
+        ],
         'content.special_features' => [
             'labels' => [
                 'de' => 'Inhalt: Besondere Hinweise',
                 'en' => 'Content: Special features'
+            ]
+        ],
+        'testimonials' => [
+            'labels' => [
+                'de' => 'Erfahrungsberichte',
+                'en' => 'Testimonials'
             ]
         ],
         'content.testimonials' => [
@@ -336,7 +384,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
         'subject_specific_advice' => [
             'labels' => [
                 'de' => 'Spezifische Studienberatung',
-                'en' => 'Specific Student Advice'
+                'en' => 'Specific student advice'
             ],
             'description' => [
                 'de' => 'Die Studien-Servcie-Center und Studienfachberater unterstützen dich bei der Planung deines Studiums.',
@@ -534,12 +582,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Links: Additional Information'
             ]
         ],
-        'special_features' => [
+        /*'special_features' => [
             'labels' => [
                 'de' => 'Besondere Hinweise',
                 'en' => 'Special Features'
             ]
-        ],
+        ],*/
         'fact_sheet' => [
             'labels' => [
                 'de' => 'Steckbrief',
@@ -550,6 +598,18 @@ function get_labels ($lang = 'de', $task = 'labels') {
             'labels' => [
                 'de' => 'Deine Vorteile an der FAU',
                 'en' => 'Your Benefits at FAU'
+            ]
+        ],
+        'how_to_apply' => [
+            'labels' => [
+                'de' => 'So läuft die Bewerbung ab',
+                'en' => 'How to apply'
+            ]
+        ],
+        'how_to_apply_internationals' => [
+            'labels' => [
+                'de' => 'So läuft die Bewerbung für Internationale ab',
+                'en' => 'How to apply as an international student'
             ]
         ]
     ];
@@ -671,7 +731,75 @@ function get_constants($lang = 'de') {
             'de' => 'join_left',
             'en' => 'join_left',
         ],
-
+        // FAU-Studium Options
+        'notes_for_international_applicants' => [
+            'name' => 'Hinweise für internationale Bewerber',
+            'name_en' => 'Tips for international applicants',
+            'link_text' => 'Hinweise für Internationals',
+            'link_text_en' => 'Tips for internationals',
+            'link_url' => 'https://www.fau.de/education/international/aus-dem-ausland-an-die-fau/bewerbung-und-einschreibung-fuer-internationale-bewerberinnen-und-bewerber/',
+            'link_url_en' => 'https://www.fau.eu/education/international/from-abroad/application-and-enrolment/',
+        ],
+        'admission_requirement_link_text' => [
+            'de' => 'Tipps zur Bewerbung',
+            'en' => 'Tips for application',
+        ],
+        'start_of_semester' => [
+            'name' => 'Infos zum Semesterstart',
+            'name_en' => 'Start of the semester',
+            'link_text' => 'Infos zum Semesterstart',
+            'link_text_en' => 'Start of the semester',
+            'link_url' => 'https://www.fau.de/semesterstart/',
+            'link_url_en' => 'https://www.fau.eu/start-of-the-semester/',
+        ],
+        'semester_dates' => [
+            'name' => 'Semestertermine',
+            'name_en' => 'Semester dates',
+            'link_text' => 'Semestertermine',
+            'link_text_en' => 'Semester dates',
+            'link_url' => 'https://www.fau.de/education/studienorganisation/semestertermine/',
+            'link_url_en' => 'https://www.fau.eu/education/study-organisation/semester-dates/',
+        ],
+        'semester_fee' => [
+            'name' => 'Semesterbeitrag',
+            'name_en' => 'Semester fees',
+            'link_text' => 'Semesterbeitrag',
+            'link_text_en' => 'Semester fees',
+            'link_url' => 'https://www.fau.de/education/studienorganisation/rueckmeldung/',
+            'link_url_en' => 'https://www.fau.eu/education/study-organisation/re-registration/',
+        ],
+        'service_centers' => [
+            'name' => 'Beratungs- und Servicestellen',
+            'name_en' => 'Advice and services',
+            'link_text' => 'Beratungs- und Servicestellen',
+            'link_text_en' => 'Advice and services',
+            'link_url' => 'https://www.fau.de/education/beratungs-und-servicestellen/',
+            'link_url_en' => 'https://www.fau.eu/education/advice-and-services/',
+        ],
+        'abroad_opportunities' => [
+            'name' => 'Wege ins Ausland',
+            'name_en' => 'Going abroad',
+            'link_text' => 'Wege ins Ausland',
+            'link_text_en' => 'Going abroad',
+            'link_url' => 'https://www.fau.de/education/international/wege-ins-ausland/',
+            'link_url_en' => 'https://www.fau.eu/education/international/going-abroad/',
+        ],
+        'student_initiatives' => [
+            'name' => 'Studierendenvertretung der FAU',
+            'name_en' => 'Student Representatives at FAU',
+            'link_text' => 'Studierendenvertretung der FAU',
+            'link_text_en' => 'Student Representatives at FAU',
+            'link_url' => 'https://stuve.fau.de/',
+            'link_url_en' => 'https://stuve.fau.de/en/',
+        ],
+        'student_advice' => [
+            'name' => 'Zentrale Studienberatung',
+            'name_en' => 'Student Advice Center',
+            'link_text' => 'Zentrale Studienberatung ',
+            'link_text_en' => 'Student Advice Center',
+            'link_url' => 'https://ibz.fau.de',
+            'link_url_en' => 'https://ibz.fau.eu',
+        ],
     ];
 
     $constants_out = [];

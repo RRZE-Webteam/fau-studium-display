@@ -233,6 +233,44 @@
 
 .fau-studium-display.degree-program-full {
   margin-bottom: 32px;
+  /*.program-admission-internationals {
+      background-color: var(--FAU-Col-FAU-Blau-25, #c0cbda);
+      margin-top: 64px;
+      padding-top: 40px;
+      position: relative;
+      .icon-globe {
+          width: 48px;
+          height: 48px;
+          display: block;
+          position: absolute;
+          top: -24px;
+          left: 16px;
+          background-color: var(--FAU_Col_FAU-Blau, #04316A);
+          &:after {
+              content: "";
+              -webkit-mask-size: var(--icon-size-mask, 70%);
+              mask-size: var(--icon-size-mask, 70%);
+              -webkit-mask-repeat: no-repeat;
+              mask-repeat: no-repeat;
+              -webkit-mask-position: center;
+              mask-position: center;
+              display: inline-block;
+              width: 32px;
+              height: 32px;
+              position: relative;
+              top: 9px;
+              left: 8px;
+              mask-image: url(../svg/globe.svg);
+              -webkit-mask-image: url(../svg/globe.svg);
+              background-color: #fff;
+          }
+      }
+      img {
+          aspect-ratio: 3;
+          width: 100%;
+          object-fit: cover;
+      }
+  }*/
 }
 
 .fau-studium-display.degree-program-full .width-small {
@@ -346,6 +384,10 @@
   margin-top: 56px;
 }
 
+.fau-studium-display.degree-program-full .quicklinks {
+  margin-top: 3em;
+}
+
 .fau-studium-display.degree-program-full .program-details .accordion-heading .accordion-toggle {
   color: var(--FAU_Col_FAU-Blau, #04316A) !important;
   font-size: var(--H-Heading-4, 1.25rem);
@@ -370,62 +412,17 @@
 }
 
 .fau-studium-display.degree-program-full .program-admission {
-  margin-top: 0;
-  /*.program-admission-internationals {
-      background-color: var(--FAU-Col-FAU-Blau-25, #c0cbda);
-      margin-top: 64px;
-      padding-top: 40px;
-      position: relative;
-      .icon-globe {
-          width: 48px;
-          height: 48px;
-          display: block;
-          position: absolute;
-          top: -24px;
-          left: 16px;
-          background-color: var(--FAU_Col_FAU-Blau, #04316A);
-          &:after {
-              content: "";
-              -webkit-mask-size: var(--icon-size-mask, 70%);
-              mask-size: var(--icon-size-mask, 70%);
-              -webkit-mask-repeat: no-repeat;
-              mask-repeat: no-repeat;
-              -webkit-mask-position: center;
-              mask-position: center;
-              display: inline-block;
-              width: 32px;
-              height: 32px;
-              position: relative;
-              top: 9px;
-              left: 8px;
-              mask-image: url(../svg/globe.svg);
-              -webkit-mask-image: url(../svg/globe.svg);
-              background-color: #fff;
-          }
-      }
-      img {
-          aspect-ratio: 3;
-          width: 100%;
-          object-fit: cover;
-      }
-  }*/
-}
-
-.fau-studium-display.degree-program-full .program-admission .program-admission-general,
-.fau-studium-display.degree-program-full .program-admission .program-admission-internationals {
   background-color: var(--FAU-Col-FAU-Dunkelblau-12_5, #DFE2E7);
   padding: 16px;
 }
 
-.fau-studium-display.degree-program-full .program-admission .program-admission-general h3,
-.fau-studium-display.degree-program-full .program-admission .program-admission-internationals h3 {
+.fau-studium-display.degree-program-full .program-admission h3 {
   color: var(--FAU_Col_FAU-Blau, #04316A);
   margin-top: 0;
   padding-top: 0;
 }
 
-.fau-studium-display.degree-program-full .program-admission .program-admission-general li,
-.fau-studium-display.degree-program-full .program-admission .program-admission-internationals li {
+.fau-studium-display.degree-program-full .program-admission li {
   padding: 0;
 }
 

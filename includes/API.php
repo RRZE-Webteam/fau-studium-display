@@ -7,8 +7,8 @@ class API
     private $api_url;
 
     public function __construct() {
-        //$this->api_url = 'https://meinstudium.fau.de/wp-json/fau/v1/degree-program';
-        $this->api_url = 'http://localhost/wp/meinstudium/wp-json/fau/v1/degree-program';
+        $this->api_url = 'https://meinstudium.fau.de/wp-json/fau/v1/degree-program';
+        //$this->api_url = 'http://localhost/wp/meinstudium/wp-json/fau/v1/degree-program';
     }
 
     public static function isUsingNetworkKey()
@@ -26,7 +26,7 @@ class API
         $transient_name = 'fau_studium_degree_programs_list';
         $degree_programs = get_transient($transient_name);
         //$degree_programs = false;
-        if (false === $degree_programs) {
+        if (false === $degree_programs || '' === $degree_programs) {
             $response = wp_remote_get($this->api_url);
             if (!is_wp_error($response)) {
                 $degree_programs = json_decode(wp_remote_retrieve_body($response), true);

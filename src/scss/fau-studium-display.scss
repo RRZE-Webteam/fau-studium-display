@@ -107,11 +107,19 @@
             //padding: 0 32px;
             margin: 32px auto 0;
             @media screen and (min-width: 992px) {
-                padding: 0;
+                padding: 0 32px;
+                max-width: 1320px;
             }
         }
 
-        h2 {
+        .width-full {
+            position: relative;
+            width: 100vw;
+            left: 50%;
+            margin-left: -50vw;
+        }
+
+        h2, h2:first-child {
             color: var(--FAU-Col-FAU-Dunkelblau-100, #041E42);
             font-size: var(--P-Body-Text, 1.125rem);
             margin-top: 3em;
@@ -120,13 +128,17 @@
                 position: relative;
                 display: flex;
                 align-items: center;
+                max-width: 1000px;
+                margin-left: auto;
+                margin-right: auto;
                 &:before {
+                    background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
                     content: "";
-                    width: calc((100% - 1064px) / 2 - 10px);
-                    height: 2px;
-                    background-color: #000;
-                    margin-right: 10px;
-                    display: inline-block;
+                    height: .125rem;
+                    left: calc(-100vh - 1.5rem);
+                    position: absolute;
+                    top: calc(50% - .125rem);
+                    width: 100vh;
                 }
             }
         }
@@ -199,6 +211,10 @@
             }
         }
 
+        .quicklinks {
+            margin-top: 3em;
+        }
+
         .program-details {
             //margin-top: 32px;
             .accordion-heading .accordion-toggle {
@@ -228,26 +244,18 @@
             }
         }
         .program-admission {
-            margin-top: 0;
-            h4 {
-                //color: var(--FAU_Col_FAU-Blau, #04316A);
-                //padding: 0;
-                //margin-bottom: 1em;
+            background-color: var(--FAU-Col-FAU-Dunkelblau-12_5, #DFE2E7);
+            padding: 16px;
+            h3 {
+                color: var(--FAU_Col_FAU-Blau, #04316A);
+                //font-size: var(--H-Heading-5, 1.15rem);
+                margin-top: 0;
+                padding-top: 0;
             }
-            .program-admission-general,
-            .program-admission-internationals {
-                background-color: var(--FAU-Col-FAU-Dunkelblau-12_5, #DFE2E7);
-                padding: 16px;
-                h3 {
-                    color: var(--FAU_Col_FAU-Blau, #04316A);
-                    //font-size: var(--H-Heading-5, 1.15rem);
-                    margin-top: 0;
-                    padding-top: 0;
-                }
-                li {
-                    padding: 0;
-                }
+            li {
+                padding: 0;
             }
+        }
             /*.program-admission-internationals {
                 background-color: var(--FAU-Col-FAU-Blau-25, #c0cbda);
                 margin-top: 64px;
@@ -286,7 +294,6 @@
                     object-fit: cover;
                 }
             }*/
-        }
 
         .program-apply-now {
             background-color: var(--FAU_Col_FAU-Blau, #04316A);
@@ -408,9 +415,6 @@
             .student-advice {
                 padding: 0 16px;
                 margin-bottom: 32px;
-                @media screen and (min-width: 1200px) {
-                    padding: 0 32px;
-                }
 
                 .advice-wrapper {
                     position: relative;

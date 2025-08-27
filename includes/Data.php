@@ -60,7 +60,12 @@ class Data
 
     public function get_single_program($program_id, $lang, $post_id = '') {
 
-        // check if the program exists as CPT
+        // if on meinstudium.fau.de -> get local post type (studiengang)
+        if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+            return Utils::map_post_type_data($program_id, $lang);
+        }
+
+        // check if the program exists as imported CPT (degree-program)
         if (empty($post_id)) {
             $program_imported = get_posts([
                 'post_type'      => 'degree-program',

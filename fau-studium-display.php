@@ -22,6 +22,7 @@ namespace Fau\DegreeProgram\Display;
 defined('ABSPATH') || exit;
 
 require_once 'config/config.php';
+require_once 'vendor/autoload.php';
 
 /**
  * SPL Autoloader (PSR-4).
