@@ -371,6 +371,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Student advice'
             ]
         ],
+        'student_advice_more' => [
+            'labels' => [
+                'de' => 'Studienberatung und weitere Infos',
+                'en' => 'Student advice and more'
+            ]
+        ],
         'main_student_advice' => [
             'labels' => [
                 'de' => 'Zentrale Studienberatung',
@@ -731,75 +737,6 @@ function get_constants($lang = 'de') {
             'de' => 'join_left',
             'en' => 'join_left',
         ],
-        // FAU-Studium Options
-        'notes_for_international_applicants' => [
-            'name' => 'Hinweise für internationale Bewerber',
-            'name_en' => 'Tips for international applicants',
-            'link_text' => 'Hinweise für Internationals',
-            'link_text_en' => 'Tips for internationals',
-            'link_url' => 'https://www.fau.de/education/international/aus-dem-ausland-an-die-fau/bewerbung-und-einschreibung-fuer-internationale-bewerberinnen-und-bewerber/',
-            'link_url_en' => 'https://www.fau.eu/education/international/from-abroad/application-and-enrolment/',
-        ],
-        'admission_requirement_link_text' => [
-            'de' => 'Tipps zur Bewerbung',
-            'en' => 'Tips for application',
-        ],
-        'start_of_semester' => [
-            'name' => 'Infos zum Semesterstart',
-            'name_en' => 'Start of the semester',
-            'link_text' => 'Infos zum Semesterstart',
-            'link_text_en' => 'Start of the semester',
-            'link_url' => 'https://www.fau.de/semesterstart/',
-            'link_url_en' => 'https://www.fau.eu/start-of-the-semester/',
-        ],
-        'semester_dates' => [
-            'name' => 'Semestertermine',
-            'name_en' => 'Semester dates',
-            'link_text' => 'Semestertermine',
-            'link_text_en' => 'Semester dates',
-            'link_url' => 'https://www.fau.de/education/studienorganisation/semestertermine/',
-            'link_url_en' => 'https://www.fau.eu/education/study-organisation/semester-dates/',
-        ],
-        'semester_fee' => [
-            'name' => 'Semesterbeitrag',
-            'name_en' => 'Semester fees',
-            'link_text' => 'Semesterbeitrag',
-            'link_text_en' => 'Semester fees',
-            'link_url' => 'https://www.fau.de/education/studienorganisation/rueckmeldung/',
-            'link_url_en' => 'https://www.fau.eu/education/study-organisation/re-registration/',
-        ],
-        'service_centers' => [
-            'name' => 'Beratungs- und Servicestellen',
-            'name_en' => 'Advice and services',
-            'link_text' => 'Beratungs- und Servicestellen',
-            'link_text_en' => 'Advice and services',
-            'link_url' => 'https://www.fau.de/education/beratungs-und-servicestellen/',
-            'link_url_en' => 'https://www.fau.eu/education/advice-and-services/',
-        ],
-        'abroad_opportunities' => [
-            'name' => 'Wege ins Ausland',
-            'name_en' => 'Going abroad',
-            'link_text' => 'Wege ins Ausland',
-            'link_text_en' => 'Going abroad',
-            'link_url' => 'https://www.fau.de/education/international/wege-ins-ausland/',
-            'link_url_en' => 'https://www.fau.eu/education/international/going-abroad/',
-        ],
-        'student_initiatives' => [
-            'name' => 'Studierendenvertretung der FAU',
-            'name_en' => 'Student Representatives at FAU',
-            'link_text' => 'Studierendenvertretung der FAU',
-            'link_text_en' => 'Student Representatives at FAU',
-            'link_url' => 'https://stuve.fau.de/',
-            'link_url_en' => 'https://stuve.fau.de/en/',
-        ],
-        'student_advice' => [
-            'name' => 'Zentrale Studienberatung',
-            'name_en' => 'Student Advice Center',
-            'link_text' => 'Zentrale Studienberatung ',
-            'link_text_en' => 'Student Advice Center',
-            'link_url' => 'https://ibz.fau.de',
-            'link_url_en' => 'https://ibz.fau.eu',
-        ],
     ];
 
     $constants_out = [];
@@ -817,4 +754,137 @@ function get_constants($lang = 'de') {
     }
 
     return $constants_out;
+}
+
+function get_meinstudium_options($lang) {
+    $options = [
+        'notes_for_international_applicants' => [
+            'name' => [
+                'de' => 'Hinweise für internationale Bewerber',
+                'en' => 'Tips for international applicants'
+            ],
+            'link_text' => [
+                'de' => 'Hinweise für Internationals',
+                'en' => 'Tips for internationals'
+            ],
+            'link_url' => [
+                'de' => 'https://www.fau.de/education/international/aus-dem-ausland-an-die-fau/bewerbung-und-einschreibung-fuer-internationale-bewerberinnen-und-bewerber/',
+                'en' => 'https://www.fau.eu/education/international/from-abroad/application-and-enrolment/'
+            ],
+        ],
+        'admission_requirement' => [
+            'link_text' => [
+                'de' => 'Tipps zur Bewerbung',
+                'en' => 'Tips for application',
+            ]
+        ],
+        'start_of_semester' => [
+            'name' => [
+                'de' => 'Infos zum Semesterstart',
+                'en' => 'Start of the semester',
+            ],
+            'link_text' => [
+                'de' => 'Infos zum Semesterstart',
+                'en' => 'Start of the semester',
+            ],
+            'link_url' => [
+                'de' => 'https://www.fau.de/semesterstart/',
+                'en' => 'https://www.fau.eu/start-of-the-semester/',
+            ]
+        ],
+        'semester_dates' => [
+            'name' => [
+                'de' => 'Semestertermine',
+                'en' => 'Semester dates'
+            ],
+            'link_text' => [
+                'de' => 'Semestertermine',
+                'en' => 'Semester dates'
+            ],
+            'link_url' => [
+                'de' => 'https://www.fau.de/education/studienorganisation/semestertermine/',
+                'en' => 'https://www.fau.eu/education/study-organisation/semester-dates/'
+            ],
+        ],
+        'semester_fee' => [
+            'name' => [
+                'de' => 'Semesterbeitrag',
+                'en' => 'Semester fees'
+            ],
+            'link_text' => [
+                'de' => 'Semesterbeitrag',
+                'en' => 'Semester fees'
+            ],
+            'link_url' => [
+                'de' => 'https://www.fau.de/education/studienorganisation/rueckmeldung/',
+                'en' => 'https://www.fau.eu/education/study-organisation/re-registration/'
+            ],
+        ],
+        'service_centers' => [
+            'name' => [
+                'de' => 'Beratungs- und Servicestellen',
+                'en' => 'Advice and services'
+            ],
+            'link_text' => [
+                'de' => 'Beratungs- und Servicestellen',
+                'en' => 'Advice and services'
+            ],
+            'link_url' => [
+                'de' => 'https://www.fau.de/education/beratungs-und-servicestellen/',
+                'en' => 'https://www.fau.eu/education/advice-and-services/'
+            ],
+        ],
+        'abroad_opportunities' => [
+            'name' => [
+                'de' => 'Wege ins Ausland',
+                'en' => 'Going abroad'
+            ],
+            'link_text' => [
+                'de' => 'Wege ins Ausland',
+                'en' => 'Going abroad'
+            ],
+            'link_url' => [
+                'de' => 'https://www.fau.de/education/international/wege-ins-ausland/',
+                'en' => 'https://www.fau.eu/education/international/going-abroad/'
+            ],
+        ],
+        'student_initiatives' => [
+            'name' => [
+                'de' => 'Studierendenvertretung der FAU',
+                'en' => 'Student Representatives at FAU'
+            ],
+            'link_text' => [
+                'de' => 'Studierendenvertretung der FAU',
+                'en' => 'Student Representatives at FAU'
+            ],
+            'link_url' => [
+                'de' => 'https://stuve.fau.de/',
+                'en' => 'https://stuve.fau.de/en/'
+            ],
+        ],
+        'student_advice' => [
+            'name' => [
+                'de' => 'Zentrale Studienberatung',
+                'en' => 'Student Advice Center'
+            ],
+            'link_text' => [
+                'de' => 'Zentrale Studienberatung',
+                'en' => 'Student Advice Center'
+            ],
+            'link_url' => [
+                'de' => 'https://ibz.fau.de',
+                'en' => 'https://ibz.fau.eu'
+            ],
+        ],
+    ];
+
+    $options_out = [];
+    $lang_alt = $lang == 'de' ? 'en' : 'de';
+    foreach ($options as $key => $items) {
+        foreach ($items as $item => $translations) {
+            $options_out[$key][$item] = $translations[$lang] ?? $translations[$lang_alt] ?? '';
+        }
+    }
+
+    return $options_out;
 }

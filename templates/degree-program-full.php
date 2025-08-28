@@ -4,6 +4,7 @@ defined('ABSPATH') || exit;
 
 use function Fau\DegreeProgram\Display\Config\get_constants;
 use function \Fau\DegreeProgram\Display\Config\get_labels;
+use function \Fau\DegreeProgram\Display\Config\get_meinstudium_options;
 use function Fau\DegreeProgram\Display\plugin;
 
 //var_dump($data);
@@ -19,6 +20,7 @@ $lang = $atts[ 'language' ] ?? 'de';
 $labels = get_labels($lang);
 $descriptions = get_labels($lang, 'description');
 $constants = get_constants($lang);
+$meinstudium_options = get_meinstudium_options($lang);
 //print "<pre>"; var_dump($labels); print "</pre>";
 
 $number_of_students_raw = $data['number_of_students']['name'] ?? '';
@@ -147,7 +149,7 @@ if (in_array('content.about', $items)) {
     $content .= '<h3>' . ($labels['about'] ?? 'about') . '</h3>' . $data['content']['about']['description'];
 }
 // ToDo: Block statt Shortcode
-$content .= '[collapsibles style="light" hstart="3"]';
+/*$content .= '[collapsibles style="light" hstart="3"]';
 foreach ($content_fields as $field) {
     $field_name = str_replace('content.', '', $field);
     if (!empty($data['content'][$field_name]['description'])) {
@@ -156,21 +158,34 @@ foreach ($content_fields as $field) {
         $content .= '[/collapse]';
     }
 }
-$content .= '[/collapsibles]
-    </div></div>';
+$content .= '[/collapsibles]';*/
+$content_html = '<!-- wp:rrze-elements/collapsibles {"hstart":3,"expandLabel":"Alle ausklappen"} -->';
+foreach ($content_fields as $field) {
+    $field_name = str_replace('content.', '', $field);
+    if (!empty($data['content'][$field_name]['description'])) {
+        $content_html .= '<!-- wp:rrze-elements/collapse {"hstart":3,"title":"' . ($labels[$field_name] ?? $field_name) . '","jumpName":"' . sanitize_title($labels[$field_name] ?? $field_name) . '","isCustomJumpname":false} --><!-- wp:paragraph -->
+        ' . $data['content'][$field_name]['description']
+        . '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
+    }
+}
+$content_html .= '<!-- /wp:rrze-elements/collapsibles -->';
+$content .= do_blocks($content_html);
+$content .= '</div></div>';
+
 $quicklinks[0] = '<!-- wp:button -->
             <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $content_id . '">' . $content_title . '</a></div>
             <!-- /wp:button -->';
 
 // Videos
 if (in_array('videos', $items) && !empty($data['videos'])) {
-    $videos = '<div class="program-videos width-large">'
-              //. '<h2>' . __('Videos', 'fau-studium-display') . '</h2>'
-              . '[columns]';
-            foreach ($data['videos'] as $video) {
-                $videos .= '[column][fauvideo url="' . $video . '"][/column]';
-            }
-            $videos .= '[/columns]</div>';
+    $videos_html = '<div class="program-videos"><!-- wp:columns --><div class="wp-block-columns">';
+    foreach ($data['videos'] as $video) {
+        $videos_html .= '<!-- wp:column --><div class="wp-block-column">'
+        . '<!-- wp:rrze/rrze-video {"url":"' . $video . '"} /-->'
+        . '</div><!-- /wp:column -->';
+    }
+    $videos_html .= '</div><!-- /wp:columns --></div>';
+    $videos = do_blocks($videos_html);
 } else {
     $videos = '';
 }
@@ -289,44 +304,38 @@ if (in_array('admission_requirements_application', $items)) {
 }
 
 // Apply now!
+$apply_now = '';
 if (in_array('apply_now_link', $items)) {
     $apply_now_title = $constants['apply-now-title'];
     $apply_now_text = $constants['apply-now-text'];
     $apply_now_link_text = $constants['apply-now-link-text'];
     $apply_now_link_url = $constants['apply-now-link-url'];
     $apply_now_image = $constants['apply-now-image'];
-    if (!empty($apply_now_title) && !empty($apply_now_text) && !empty($apply_now_link_text) && !empty($apply_now_link_url) && !empty($apply_now_image)) {
+    if (!empty($apply_now_title.$apply_now_text.$apply_now_link_text.$apply_now_link_url.$apply_now_image)) {
         $apply_now = '<div class="program-apply-now width-medium">'
-            . '<img src="' . $apply_now_image . '"  alt=""/>'
-            . '<div class="apply-now-wrapper">'
-            . '<div class="apply-now-title-text"><span class="apply-now-title">' . $apply_now_title . '</span>'
-            . '<span class="apply-now-text">' . $apply_now_text . '</span></div>'
-            . '<a class="apply-now-link" href="' . $apply_now_link_url . '">' . $apply_now_link_text . '<span class="icon-arrow-right"</span></a>'
-            . '</div>'
-            . '</div>';
-    } else {
-        $apply_now = '';
+                      . do_blocks('<!-- wp:rrze-elements/cta {"url":"' . $apply_now_image . '","buttonUrl":"' . $apply_now_link_url . '","alt":"","title":"' . $apply_now_title . '","subtitle":"' . $apply_now_text . '","buttonText":"' . $apply_now_link_text . '"} /-->')
+                      . '</div>';
     }
-} else {
-    $apply_now = '';
 }
 
 // Button Student Advice
-if (in_array('student_advice', $items)
-    && !empty($data['student_advice']['link_text'])
-    && !empty($data['student_advice']['link_url'])) {
-        $student_advice_img = $constants['general-student-advice-image'] ?? '';
+$student_advice = '';
+if (in_array('student_advice', $items)) {
+    $student_advice_img = $constants['general-student-advice-image'] ?? '';
+    $student_advice_text = $descriptions['main_student_advice'] ?? '';
+    $student_advice_link_text = $meinstudium_options['student_advice']['link_text'] ?? '';
+    $student_advice_link_url = $meinstudium_options['student_advice']['link_url'] ?? '';
+    if (!empty($student_advice_img.$student_advice_text.$student_advice_link_text.$student_advice_link_url)) {
         $student_advice = '<div class="advice-wrapper">';
         if (!empty($student_advice_img)) {
             $student_advice .= '<img src="' . $student_advice_img . '"  alt=""/>';
         }
-        $student_advice .= '<a href="' . $data['student_advice']['link_url'] . '">'
-            . '<span class="link-title">'. $data['student_advice']['link_text'] . '</span>'
-            . '<span class="link-description">'. $descriptions['main_student_advice'] . '</span>'
-            . '<span class="icon-arrow-right"></span></a>';
+        $student_advice .= '<a href="' . $student_advice_link_url . '">'
+                           . '<span class="link-title">'. $student_advice_link_text . '</span>'
+                           . '<span class="link-description">'. $descriptions['main_student_advice'] . '</span>'
+                           . '<span class="icon-arrow-right"></span></a>';
         $student_advice .= '</div>';
-} else {
-    $student_advice = '';
+    }
 }
 
 // Button Subject Specific Student Advice
@@ -400,7 +409,7 @@ if (in_array('links.downloads', $items)) {
 }
 
 if (!empty($student_advice . $subject_specific_advice . $useful_links)) {
-    $student_advice_title = ($labels['student_advice'] ?? 'student_advice');
+    $student_advice_title = ($labels['student_advice_more'] ?? 'student_advice_more');
     $student_advice_id = sanitize_title($student_advice_title);
     $quicklinks[3] = '<!-- wp:button -->
             <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $student_advice_id . '">' . $student_advice_title . '</a></div>
@@ -509,7 +518,7 @@ if (in_array('benefits', $items)) {
 
         // Quicklinks
         echo '<div class="quicklinks width-large">';
-        echo do_blocks('<!-- wp:buttons --><div class="wp-block-buttons">' . implode('', $quicklinks) . '</div><!-- /wp:buttons -->');
+        echo do_blocks('<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"space-between","orientation":"horizontal"}} --><div class="wp-block-buttons">' . implode('', $quicklinks) . '</div><!-- /wp:buttons -->');
         echo '</div>';
 
         // Details / content
@@ -537,9 +546,11 @@ if (in_array('benefits', $items)) {
             // Student advice
             if (!empty($student_advice . $subject_specific_advice)) {
                 echo '<div class="student-advice width-large"><h3>' . __("We're Here to Help with All Your Study-Related Questions", 'fau-studium-display') . '</h3>'
-                     . '[columns][column]' . $student_advice . '[/column]'
-                     . '[column]' . $subject_specific_advice . '[/column]'
-                     . '[/columns]</div>';
+                     . do_blocks('<!-- wp:columns --><div class="wp-block-columns">'
+                         . '<!-- wp:column --><div class="wp-block-column">' . $student_advice . '</div><!-- /wp:column -->'
+                         . '<!-- wp:column --><div class="wp-block-column">' . $subject_specific_advice . '</div><!-- /wp:column -->'
+                         . '</div><!-- /wp:columns -->')
+                     . '</div>';
             }
 
             // Useful Links

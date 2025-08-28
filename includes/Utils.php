@@ -176,53 +176,116 @@ class Utils
     }
 
     public static function get_program_options() {
-        $api = new API();
-        $data = $api->get_programs(false);
-        $degreeProgramOptions = array_map(
-            fn($item) => [
-                'label' => $item[ 'title' ] . ' (' . $item[ 'degree' ][ 'abbreviation' ] . ')',
-                'value' => (string)$item[ 'id' ],
-            ],
-            $data
-        );
+        $degreeProgramOptions = [];
+        if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+            $degreePrograms = get_posts([
+                'posts_per_page' => -1,
+                'post_type'      => 'studiengang',
+                'post_status'    => 'publish',
+                'orderby'        => 'title',
+                'order'          => 'ASC',
+            ]);
+            foreach ($degreePrograms as $degreeProgram) {
+                $degreeTerm = get_the_terms( $degreeProgram->ID, 'abschluss' );
+                if ($degreeTerm && ! is_wp_error($degreeTerm)) {
+                    $degree = ' ( ' . $degreeTerm[0]->name . ')';
+                }
+                $degreeProgramOptions[] = [
+                    'label' => $degreeProgram->post_title . $degree,
+                    'value' => $degreeProgram->ID,
+                ];
+            }
+        } else {
+            $api = new API();
+            $data = $api->get_programs(false);
+            $degreeProgramOptions = array_map(
+                fn($item) => [
+                    'label' => $item[ 'title' ] . ' (' . $item[ 'degree' ][ 'abbreviation' ] . ')',
+                    'value' => (string)$item[ 'id' ],
+                ],
+                $data
+            );
+        }
         return $degreeProgramOptions;
     }
 
     public static function get_degree_options($parents = false) {
-        $api = new API();
-        $degrees = $parents ? $api->get_meta_list('degree_parents') : $api->get_meta_list('degrees');
         $degreeOptions = [];
-        foreach ($degrees as $degree) {
-            $degreeOptions[] = [
-                'label' => $degree,
-                'value' => $degree,
-            ];
+        if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+            $degree_terms = get_terms([
+                'taxonomy'      => 'abschluss',
+                'hide_empty' => true,
+            ]);
+            $child_degrees = array_filter( $degree_terms, function( $term ) {
+                return $term->parent != 0;
+            });
+            foreach($child_degrees as $degree) {
+                $degreeOptions[] = [
+                    'label' => $degree->name,
+                    'value' => $degree->name,
+                ];
+            }
+        } else {
+            $api           = new API();
+            $degrees       = $parents ? $api->get_meta_list('degree_parents') : $api->get_meta_list('degrees');
+            foreach ($degrees as $degree) {
+                $degreeOptions[] = [
+                    'label' => $degree,
+                    'value' => $degree,
+                ];
+            }
         }
         return $degreeOptions;
     }
 
     public static function get_faculty_options() {
-        $api = new API();
-        $faculties = $api->get_meta_list('faculties');
         $facultyOptions = [];
-        foreach ($faculties as $faculty) {
-            $facultyOptions[] = [
-                'label' => $faculty,
-                'value' => $faculty,
-            ];
+        if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+            $faculty_terms = get_terms([
+                'taxonomy'      => 'faculty',
+                'hide_empty' => true,
+            ]);
+            foreach($faculty_terms as $faculty) {
+                $facultyOptions[] = [
+                    'label' => $faculty->name,
+                    'value' => $faculty->name,
+                ];
+            }
+        } else {
+            $api = new API();
+            $faculties = $api->get_meta_list('faculties');
+            foreach ($faculties as $faculty) {
+                $facultyOptions[] = [
+                    'label' => $faculty,
+                    'value' => $faculty,
+                ];
+            }
         }
         return $facultyOptions;
     }
 
     public static function get_attribute_options() {
-        $api = new API();
-        $attributes = $api->get_meta_list('attributes');
         $attributeOptions = [];
-        foreach ($attributes as $attribute) {
-            $attributeOptions[] = [
-                'label' => $attribute,
-                'value' => $attribute,
-            ];
+        if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+            $attribute_terms = get_terms([
+               'taxonomy'      => 'attribute',
+               'hide_empty' => true,
+           ]);
+            foreach($attribute_terms as $attribute) {
+                $attributeOptions[] = [
+                    'label' => $attribute->name,
+                    'value' => $attribute->name,
+                ];
+            }
+        } else {
+            $api = new API();
+            $attributes = $api->get_meta_list('attributes');
+            foreach ($attributes as $attribute) {
+                $attributeOptions[] = [
+                    'label' => $attribute,
+                    'value' => $attribute,
+                ];
+            }
         }
         return $attributeOptions;
     }
@@ -442,7 +505,7 @@ class Utils
                     $data['examinations_office']['link_url'] = get_term_meta($examinations_office[0]->term_id, 'link_url',true);
                 }
                 if ($subject_specific_advice && ! is_wp_error($subject_specific_advice)) {
-                    $data['subject_specific_advice']['name'] = $subject_specific_advice[0]->name;
+                    $data['subject_specific_advice']['link_text'] = $subject_specific_advice[0]->name;
                     $data['subject_specific_advice']['link_url'] = get_term_meta($subject_specific_advice[0]->term_id, 'link_url',true);
                 }
                 if ($area_of_study && ! is_wp_error($area_of_study)) {
