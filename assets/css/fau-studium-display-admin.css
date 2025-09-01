@@ -47,16 +47,26 @@
 .settings_page_fau-studium-display #degree-program-results .program-item .delete-degree-program span.dashicons {
   vertical-align: middle;
 }
-.settings_page_fau-studium-display #degree-programs-imported .program-item .delete-degree-program,
-.settings_page_fau-studium-display #degree-program-results .program-item .delete-degree-program {
-  margin-left: 1em;
+.settings_page_fau-studium-display #degree-programs-imported .program-item .update-degree-program,
+.settings_page_fau-studium-display #degree-program-results .program-item .update-degree-program {
+  margin-right: 1em;
+}
+.settings_page_fau-studium-display #degree-programs-imported .program-item span.dashicons.sync-ok,
+.settings_page_fau-studium-display #degree-programs-imported .program-item span.dashicons.sync-error,
+.settings_page_fau-studium-display #degree-program-results .program-item span.dashicons.sync-ok,
+.settings_page_fau-studium-display #degree-program-results .program-item span.dashicons.sync-error {
+  width: 1em;
+  font-size: 2em;
+  overflow: hidden;
+  vertical-align: text-bottom;
 }
 .settings_page_fau-studium-display #degree-programs-imported .program-item span.dashicons.sync-ok,
 .settings_page_fau-studium-display #degree-program-results .program-item span.dashicons.sync-ok {
-  width: 1em;
   color: #46B450;
-  font-size: 2em;
-  overflow: hidden;
+}
+.settings_page_fau-studium-display #degree-programs-imported .program-item span.dashicons.sync-error,
+.settings_page_fau-studium-display #degree-program-results .program-item span.dashicons.sync-error {
+  color: #dc3232;
 }
 .settings_page_fau-studium-display #degree-program-results {
   margin-top: 20px;

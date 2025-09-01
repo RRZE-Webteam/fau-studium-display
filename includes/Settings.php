@@ -343,12 +343,11 @@ class Settings
             wp_send_json_error('Ungültige Daten');
         }
 
-        $atts['selectedFaculties'] = $faculties;
-        $atts['selectedDegrees'] = $degrees;
-        $data = new Data();
-        $programs = $data->get_data($atts);
+        $atts['faculty'] = $faculties;
+        $atts['degree'] = $degrees;
+
         $api = new API();
-        $programs = $api->get_programs();
+        $programs = $api->get_programs(false, $atts);
 
         global $wpdb;
         $imported_ids = $wpdb->get_col( "
@@ -399,6 +398,9 @@ class Settings
         if (empty($_POST[ 'post_id' ])) {
             wp_send_json_error('Post ID existiert nicht.');
         }
+
+        $program_id = get_post_meta( $_POST[ 'post_id' ], 'id', true );
+        delete_transient('fau_studium_degree_program_' . $program_id);
 
         wp_delete_post( $_POST[ 'post_id' ], true );
 

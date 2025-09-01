@@ -47,15 +47,25 @@
                     vertical-align: middle;
                 }
             }
+            .update-degree-program {
+                margin-right: 1em;
+            }
             .delete-degree-program {
                 //color: #dc3232;
-                margin-left: 1em;
+                //margin-left: 1em;
             }
-            span.dashicons.sync-ok {
+            span.dashicons.sync-ok,
+            span.dashicons.sync-error {
                 width: 1em;
-                color: #46B450;
                 font-size: 2em;
                 overflow: hidden;
+                vertical-align: text-bottom;
+            }
+            span.dashicons.sync-ok {
+                color: #46B450;
+            }
+            span.dashicons.sync-error {
+                color: #dc3232;;
             }
         }
     }

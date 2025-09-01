@@ -77,6 +77,9 @@ class CPT
     public function degree_program_metabox_english($post)
     {
         $translations = get_post_meta($post->ID, 'translations', true);
+        if (!array_key_exists('en', $translations)) {
+            echo __('No translations found', 'fau-studium-display');
+        }
         $en = $translations['en'];
         foreach ($en as $key => $value) {
             $value_formatted = (is_serialized($value) ? unserialize($value) : $value);

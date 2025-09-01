@@ -669,4 +669,34 @@ class Utils
         //print "<pre>"; print_r($data); print "</pre>"; exit;
         return $data;
     }
+
+    public static function set_large_transient( $base_key, $data, $expiration = DAY_IN_SECONDS, $chunk_length = 50 ) {
+        // Aufteilen in Chunks: 50 Elemente pro Chunk
+        $chunks = array_chunk( $data, $chunk_length, true );
+
+        // Anzahl der Chunks merken
+        set_transient( $base_key . '_count', count( $chunks ), $expiration );
+
+        // Einzelne Chunks speichern
+        foreach ( $chunks as $i => $chunk ) {
+            set_transient( $base_key . '_' . $i, $chunk, $expiration );
+        }
+    }
+
+    public static function get_large_transient( $base_key ) {
+        $count = get_transient( $base_key . '_count' );
+
+        if ( ! $count ) {
+            return false;
+        }
+
+        $data = [];
+        for ( $i = 0; $i < $count; $i++ ) {
+            $chunk = get_transient( $base_key . '_' . $i );
+            if ( $chunk !== false ) {
+                $data = array_replace($data, $chunk);
+            }
+        }
+        return $data;
+    }
 }

@@ -22,18 +22,47 @@ class API
         return false;
     }
 
-    public function get_programs($show_empty = false) {
+    public function get_programs($show_empty = false, $filter = []) {
         $transient_name = 'fau_studium_degree_programs_list';
-        $degree_programs = get_transient($transient_name);
+        $degree_programs = Utils::get_large_transient($transient_name);
         //$degree_programs = false;
         if (false === $degree_programs || '' === $degree_programs) {
-            $response = wp_remote_get($this->api_url);
+
+            $base_url = $this->api_url;
+            $page     = 1;
+            $degree_programs  = [];
+
+            $url      = add_query_arg(['per_page' => 100, 'page' => $page], $base_url);
+            $response = wp_remote_get($url);
+
             if (!is_wp_error($response)) {
-                $degree_programs = json_decode(wp_remote_retrieve_body($response), true);
-                set_transient($transient_name, $degree_programs, DAY_IN_SECONDS);
-            } else {
-                $degree_programs = [];
+                $headers       = wp_remote_retrieve_headers($response);
+                $total_pages   = isset($headers['x-wp-totalpages']) ? (int) $headers['x-wp-totalpages'] : 1;
+                $body          = wp_remote_retrieve_body($response);
+                $data          = json_decode($body, true);
+                $degree_programs       = $data;
+
+                for ($page = 2; $page <= $total_pages; $page++) {
+                    $url      = add_query_arg(['per_page' => 100, 'page' => $page], $base_url);
+                    $response = wp_remote_get($url);
+
+                    if (is_wp_error($response)) {
+                        break;
+                    }
+
+                    $body = wp_remote_retrieve_body($response);
+                    $data = json_decode($body, true);
+
+                    if (empty($data)) {
+                        break;
+                    }
+
+                    $degree_programs = array_merge($degree_programs, $data);
+                }
             }
+
+            Utils::set_large_transient($transient_name, $degree_programs, DAY_IN_SECONDS);
+
         }
         if ($show_empty) {
             $empty_option[ 0 ] = [
@@ -42,6 +71,11 @@ class API
             ];
             $degree_programs = array_merge($empty_option, $degree_programs);
         }
+
+        if (!empty($filter)) {
+            $degree_programs = Utils::filterPrograms($degree_programs, $filter);
+        }
+
         return $degree_programs;
     }
 
@@ -152,5 +186,9 @@ class API
             $data = $data['translations']['en'] ?? $data;
         }
         return $data;
+    }
+
+    public function filter_programs($programs, $filter = []) {
+
     }
 }
