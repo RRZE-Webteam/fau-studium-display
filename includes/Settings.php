@@ -55,14 +55,10 @@ class Settings
 
     public function render_settings_page() {
         $active_tab = $_GET['tab'] ?? 'layout';
-        if (!$this->fau_studium_active) {
-            $tabs = [
-                'api' => __('API', 'fau-studium-display'),
-                'sync' => __('Sync', 'fau-studium-display'),
-            ];
-        }
         $tabs['layout'] = __('Layout', 'fau-studium-display');
-
+        if (!$this->fau_studium_active) {
+            $tabs['sync'] = __('Sync', 'fau-studium-display');
+        }
 
         echo '<div class="wrap cmb2-options-page">';
         echo '<h1>' . get_admin_page_title() . '</h1>';
@@ -90,26 +86,72 @@ class Settings
     }
     
     public function register_settings() {
+        $layout_options = new_cmb2_box([
+                                           'id' => $this->slug.'_layout',
+                                           'title' => __('Layout', 'fau-studium-display'),
+                                           'object_types' => ['options-page'],
+                                           'option_key' => $this->slug.'_layout',
+                                           'parent_slug' => $this->slug,
+                                       ]);
+        $layout_options->add_field( [
+                                        'name' => __('Archive View', 'fau-studium-display'),
+                                        'desc' => __('What format should the list view use?', 'fau-studium-display'),
+                                        'type' => 'title',
+                                        'id'   => 'archive_view_heading'
+                                    ] );
+        $layout_options->add_field([
+                                       'id' => 'archive_search',
+                                       'name' => __('Show Search', 'fau-studium-display'),
+                                       'type' => 'toggle',
+                                   ]);
+        $layout_options->add_field([
+                                       'id' => 'archive_view',
+                                       'name' => esc_html__('Archive Format', 'fau-studium-display'),
+                                       'type' => 'radio',
+                                       'options' => [
+                                           'grid' => __('Grid', 'fau-studium-display'),
+                                           'table' => __('Table', 'fau-studium-display'),
+                                       ],
+                                       'default' => 'grid',
+                                   ]);
+        $output_fields = get_output_fields();
+        $labels = get_labels();
+        $grid_view_fields = $output_fields['grid'];
+        $grid_view_options = [];
+        foreach ($grid_view_fields as $archive_view_field) {
+            $grid_view_options[$archive_view_field] = $labels[$archive_view_field];
+        }
+        $layout_options->add_field([
+                                       'id' => 'grid_items',
+                                       'name' => esc_html__('Show/Hide Grid Items', 'fau-studium-display'),
+                                       //'desc' => __('', 'fau-studium-display'),
+                                       'type' => 'multicheck',
+                                       'options' => $grid_view_options,
+                                       'default' => $grid_view_fields,
+                                       'select_all_button' => __('Select / Deselect All', 'fau-studium-display'),
+                                   ]);
+        $layout_options->add_field( [
+                                        'name' => __('Single View', 'fau-studium-display'),
+                                        'desc' => __('Select the elements to be shown in single view', 'fau-studium-display'),
+                                        'type' => 'title',
+                                        'id'   => 'single_view_heading'
+                                    ] );
+        $single_view_fields = $output_fields['full'];
+        $single_view_options = [];
+        foreach ($single_view_fields as $single_view_field) {
+            $single_view_options[$single_view_field] = $labels[$single_view_field];
+        }
+        $layout_options->add_field([
+                                       'id' => 'single_items',
+                                       'name' => esc_html__('Show/Hide Single Items', 'fau-studium-display'),
+                                       //'desc' => __('', 'fau-studium-display'),
+                                       'type' => 'multicheck',
+                                       'options' => $single_view_options,
+                                       'default' => $single_view_fields,
+                                       'select_all_button' => __('Select / Deselect All', 'fau-studium-display'),
+                                   ]);
+
         if (!$this->fau_studium_active) {
-            $api_options = new_cmb2_box([
-                                            'id'           => $this->slug . '_api',
-                                            'title'        => __('API', 'fau-studium-display'),
-                                            'object_types' => ['options-page'],
-                                            'option_key'   => $this->slug . '_api',
-                                            'parent_slug'  => $this->slug,
-                                        ]);
-            $api_options->add_field([
-                                        'id'      => 'dip-edu-api-key',
-                                        'name'    => esc_html__('DIP Edu API Key', 'fau-studium-display'),
-                                        'desc'    => wp_kses_post(
-                                            __(
-                                                'API Key can be obtained from the API-Service at <a href="https://api.fau.de/pub/v1/edu/__doc">https://api.fau.de/pub/v1/edu/__doc</a>.',
-                                                'fau-studium-display'
-                                            )
-                                        ),
-                                        'type'    => 'text',
-                                        'default' => '',
-                                    ]);
             //Search for degree programs to import
             $sync_options = new_cmb2_box([
                                              'id'           => $this->slug . '_sync',
@@ -139,70 +181,6 @@ class Settings
                                          'default' => '',
                                      ]);
         }
-        $layout_options = new_cmb2_box([
-            'id' => $this->slug.'_layout',
-            'title' => __('Layout', 'fau-studium-display'),
-            'object_types' => ['options-page'],
-            'option_key' => $this->slug.'_layout',
-            'parent_slug' => $this->slug,
-        ]);
-        $layout_options->add_field( [
-            'name' => __('Archive View', 'fau-studium-display'),
-            'desc' => __('What format should the list view use?', 'fau-studium-display'),
-            'type' => 'title',
-            'id'   => 'archive_view_heading'
-        ] );
-        $layout_options->add_field([
-            'id' => 'archive_search',
-            'name' => __('Show Search', 'fau-studium-display'),
-            'type' => 'toggle',
-        ]);
-        $layout_options->add_field([
-           'id' => 'archive_view',
-           'name' => esc_html__('Archive Format', 'fau-studium-display'),
-           'type' => 'radio',
-           'options' => [
-               'grid' => __('Grid', 'fau-studium-display'),
-               'table' => __('Table', 'fau-studium-display'),
-           ],
-           'default' => 'grid',
-        ]);
-        $output_fields = get_output_fields();
-        $labels = get_labels();
-        $grid_view_fields = $output_fields['grid'];
-        $grid_view_options = [];
-        foreach ($grid_view_fields as $archive_view_field) {
-            $grid_view_options[$archive_view_field] = $labels[$archive_view_field];
-        }
-        $layout_options->add_field([
-           'id' => 'grid_items',
-           'name' => esc_html__('Show/Hide Grid Items', 'fau-studium-display'),
-           //'desc' => __('', 'fau-studium-display'),
-           'type' => 'multicheck',
-           'options' => $grid_view_options,
-           'default' => $grid_view_fields,
-           'select_all_button' => __('Select / Deselect All', 'fau-studium-display'),
-        ]);
-        $layout_options->add_field( [
-            'name' => __('Single View', 'fau-studium-display'),
-            'desc' => __('Select the elements to be shown in single view', 'fau-studium-display'),
-            'type' => 'title',
-            'id'   => 'single_view_heading'
-        ] );
-        $single_view_fields = $output_fields['full'];
-        $single_view_options = [];
-        foreach ($single_view_fields as $single_view_field) {
-            $single_view_options[$single_view_field] = $labels[$single_view_field];
-        }
-        $layout_options->add_field([
-            'id' => 'single_items',
-            'name' => esc_html__('Show/Hide Single Items', 'fau-studium-display'),
-            //'desc' => __('', 'fau-studium-display'),
-            'type' => 'multicheck',
-            'options' => $single_view_options,
-            'default' => $single_view_fields,
-            'select_all_button' => __('Select / Deselect All', 'fau-studium-display'),
-        ]);
 
         wp_enqueue_style('fau-studium-display-admin');
         wp_enqueue_script('fau-studium-display-admin');
@@ -384,9 +362,9 @@ class Settings
         $post_id = $_POST[ 'post_id' ] ?? '0';
 
         $sync = new Sync();
-        $result = $sync->sync_program($program_id, $post_id);
+        $sync->sync_program($program_id, $post_id);
 
-        wp_send_json_success();
+        wp_send_json_success($program_id, $post_id);
     }
 
     public function ajaxProgramDelete() {

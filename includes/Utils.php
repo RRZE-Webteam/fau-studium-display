@@ -339,9 +339,11 @@ class Utils
     public static function map_post_type_data($program_id, $lang = 'de') {
         $program = get_post($program_id);
         $program_meta = get_post_meta($program_id);
-        //var_dump(get_object_taxonomies( 'studiengang' ));
-        //var_dump(get_the_terms($program_id, 'abschluss' ));
+        //print "<pre>"; var_dump($program_id); print "</pre>";
         //print "<pre>"; var_dump($program_meta); print "</pre>";
+        if (empty($program_meta)) {
+            return [];
+        }
         $data =[
             'id' => $program->ID,
             'date' => $program->post_date,
@@ -698,5 +700,43 @@ class Utils
             }
         }
         return $data;
+    }
+
+    /**
+     * Weist einem Post einen Term einer Taxonomie zu (inkl. Parent).
+     *
+     * @param int    $post_id   ID des Posts
+     * @param string $taxonomy  Slug der Taxonomie
+     * @param string $term      Name des Child-Terms
+     * @param string $parent    Name des Parent-Terms
+     *
+     * @return int|WP_Error Term-ID des Child-Terms oder Fehler
+     */
+    public static function assign_post_term($post_id, $taxonomy, $term, $parent = null) {
+        $parent_id = false;
+
+        if (!empty($parent)) {
+            $parent_term = term_exists($parent, $taxonomy);
+            if (!$parent_term) {
+                $parent_term = wp_insert_term($parent, $taxonomy);
+            }
+            $parent_id = is_array($parent_term) ? $parent_term['term_id'] : false;
+        }
+
+        $child_term = term_exists($term, $taxonomy, ($parent_id ?? null));
+        if ($child_term === null) {
+            $args = [];
+            if ($parent_id) {
+                $args['parent'] = $parent_id;
+            }
+            $child_term = wp_insert_term($term, $taxonomy, $args);
+        }
+        $child_id = is_array($child_term) ? $child_term['term_id'] : false;
+
+        if ($child_id !== false) {
+            wp_set_object_terms($post_id, (int)$child_id, $taxonomy, true);
+        }
+
+        return $child_id;
     }
 }

@@ -22,14 +22,13 @@ $labels = get_labels($lang);
 
 $program_grid = '';
 foreach ($data as $program) {
-    //print "<pre>"; var_dump($program); echo "</pre>";
-    if (empty($program))
+    if (empty($program) || !isset($program['title']))
         continue;
 
     $grid_content = '';
 
-    if (in_array('teaser_image', $items) && !empty($program['teaser_image']['rendered'])) {
-        $grid_content .= '<div class="teaser-image">' . $program['teaser_image']['rendered'] . '</div>';
+    if (in_array('teaser_image', $items) && !empty($program['featured_image']['rendered'])) {
+        $grid_content .= '<div class="teaser-image">' . $program['featured_image']['rendered'] . '</div>';
     }
 
     $grid_content .= '<div class="program-content">';

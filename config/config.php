@@ -652,6 +652,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
 }
 
 function get_constants($lang = 'de') {
+    $mein_studium_options = get_meinstudium_options($lang);
     $constants = [
         'apply-now-title' => [
             'de' => 'Bewirb dich jetzt!',
@@ -736,6 +737,31 @@ function get_constants($lang = 'de') {
         'features-4-icon' => [
             'de' => 'join_left',
             'en' => 'join_left',
+        ],
+        'schema_termsPerYear' => [
+            'de' => '<meta itemprop="termsPerYear" content="2">',
+        ],
+        'schema_termDuration' => [
+            'de' => '<meta itemprop="termDuration" content="P6M">',
+        ],
+        'schema_provider' => [
+            'de' => '<div itemprop="provider" itemscope itemtype="https://schema.org/CollegeOrUniversity">'
+                    . '<meta itemprop="name" content="Friedrich-Alexander-Universität Erlangen-Nürnberg">'
+                    . '<meta itemprop="url" content="https://www.fau.de">'
+                    . '<div itemprop="address" itemscope="" itemtype="https://schema.org/PostalAddress">'
+                    . '<meta itemprop="streetAddress" content="Freyeslebenstr. 1">'
+                    . '<meta itemprop="postalCode" content="91058">'
+                    . '<meta itemprop="addressLocality" content="Erlangen">'
+                    . '<meta itemprop="addressCountry" content="DE">'
+                    . '</div>'
+                    . '</div>',
+        ],
+        'schema_offer' => [
+            'de' => '<div itemprop="offers" itemscope itemtype="https://schema.org/Offer">'
+                    //. '<meta itemprop="category" content="">'
+                    . '<meta itemprop="category" content="' . $mein_studium_options['semester_fee']['name'] . '">'
+                    . '<meta itemprop="url" content="' . $mein_studium_options['semester_fee']['link_url'] . '">'
+                    . '</div>',
         ],
     ];
 

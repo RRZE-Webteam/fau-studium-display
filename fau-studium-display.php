@@ -86,8 +86,20 @@ function activation()
  */
 function deactivation()
 {
-    // Use this if you need to perform tasks on deactivation.
-    // For example, you might want to clean up options or scheduled events.
+
+    $programs = get_posts([
+        'post_type' => 'degree-program',
+        'numberposts' => -1,
+        'post_status' => 'any'
+    ]);
+
+    foreach ($programs as $post) {
+        wp_delete_post($post->ID, true);
+    }
+
+    if (wp_next_scheduled('fau_studium_display_sync_programs')) {
+        wp_clear_scheduled_hook('fau_studium_display_sync_programs');
+    }
 }
 
 /**

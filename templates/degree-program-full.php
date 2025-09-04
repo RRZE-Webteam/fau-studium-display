@@ -28,6 +28,12 @@ if (!empty($number_of_students_raw)) {
     $number_of_students_array = explode('-', $number_of_students_raw);
     $number_of_students = $number_of_students_array[1];
 }
+$standard_duration = $data['standard_duration'] ?? '';
+if (!empty($standard_duration)) {
+    $standard_duration_years = floor((int)$standard_duration/2);
+    $standard_duration_months = $standard_duration % 2;
+    $standard_duration_iso = 'P'.$standard_duration_years.'Y'.($standard_duration_months > 0 ? $standard_duration_months . 'M' : '');
+}
 
 /*
  * Build items
@@ -42,9 +48,9 @@ if (in_array('teaser_image', $items)) {
 
 // Title
 if (in_array('title', $items) && ! empty($data[ 'title' ])) {
-    $title = '<h1 class="title" itemprop="name">' . esc_attr($data['title'] . ' (' . $data['degree']['abbreviation'] . ')') . '</h1>';
+    $title = '<h1 class="title"><span itemprop="name">' . esc_attr($data['title']) . '</span> (' . esc_attr($data['degree']['abbreviation'] . ')') . '</h1>';
 } else {
-    $title = '';
+    $title = '<meta name="title" itemprop="name" content="' . esc_attr($data['title']) . '">';
 }
 
 // Subtitle
@@ -52,6 +58,27 @@ if (in_array('subtitle', $items) && ! empty($data[ 'subtitle' ])) {
     $subtitle = '<p class="program-subtitle">' . $data['subtitle'] . '</p>';
 } else {
     $subtitle = '';
+}
+
+// Meta data
+$meta_data = $constants['schema_termsPerYear']
+           . $constants['schema_termDuration']
+           . $constants['schema_provider']
+           . $constants['schema_offer'];
+if (!empty($data['url'])) {
+    $meta_data .= '<meta itemprop="url" content="' . esc_url($data['url']) . '">';
+}
+if (!empty($data['content']['structure']['description'])) {
+    $meta_data .= '<div itemprop="hasCourseInstance" itemscope itemtype="https://schema.org/CourseInstance">'
+                  . '<meta itemprop="name" content="' . $labels['structure'] . '">'
+                  . '<meta itemprop="courseMode" content="Onsite">'
+                  . '<meta itemprop="courseWorkload" content="' . ($standard_duration_iso ?? 'P2Y') . '">'
+                  . '<meta itemprop="description" content="' . strip_tags($data['content']['structure']['description']) . '">'
+                  /*. '<div itemprop="courseSchedule" content="' . strip_tags($data['content']['structure']['description']) . '" itemscope itemtype="https://schema.org/courseSchedule">'
+                      . '<meta itemprop="repeatCount" content="' . ($standard_duration_years ?? 1) . '">'
+                      . '<meta itemprop="repeatFrequency" content="Yearly">'
+                  . '</div>'*/
+                  . '</div>';
 }
 
 // Entry Text
@@ -77,7 +104,8 @@ if (in_array('fact_sheet', $items)) {
         'standard_duration' => [
             'label' => $labels['standard_duration'] ?? 'standard_duration',
             'value' => (!empty($data['standard_duration']) ? sprintf(__('%s semesters', 'fau-studium-display'), $data['standard_duration']): ''),
-            'itemprop' => 'timeToComplete'
+            'itemprop' => 'timeToComplete',
+            'itemprop_content' => (!empty($data['standard_duration']) ? $standard_duration_iso : ''),
         ],
         'teaching_language' => [
             'label' => $labels['teaching_language'] ?? 'teaching_language',
@@ -146,24 +174,14 @@ $content_id = sanitize_title($content_title);
 $content = '<div class="width-large"><h2 id="' . $content_id . '">' . $content_title . '</h2>'
            . '<div class="program-details width-small">';
 if (in_array('content.about', $items)) {
-    $content .= '<h3>' . ($labels['about'] ?? 'about') . '</h3>' . $data['content']['about']['description'];
+    $content .= '<h3>' . ($labels['about'] ?? 'about') . '</h3><div itemprop="description">' . $data['content']['about']['description'] . '</div>';
 }
-// ToDo: Block statt Shortcode
-/*$content .= '[collapsibles style="light" hstart="3"]';
-foreach ($content_fields as $field) {
-    $field_name = str_replace('content.', '', $field);
-    if (!empty($data['content'][$field_name]['description'])) {
-        $content .= '[collapse title="' . ($labels[$field_name] ?? $field_name) . '"]';
-        $content .= $data['content'][$field_name]['description'];
-        $content .= '[/collapse]';
-    }
-}
-$content .= '[/collapsibles]';*/
+
 $content_html = '<!-- wp:rrze-elements/collapsibles {"hstart":3,"expandLabel":"Alle ausklappen"} -->';
 foreach ($content_fields as $field) {
     $field_name = str_replace('content.', '', $field);
     if (!empty($data['content'][$field_name]['description'])) {
-        $content_html .= '<!-- wp:rrze-elements/collapse {"hstart":3,"title":"' . ($labels[$field_name] ?? $field_name) . '","jumpName":"' . sanitize_title($labels[$field_name] ?? $field_name) . '","isCustomJumpname":false} --><!-- wp:paragraph -->
+        $content_html .= '<!-- wp:rrze-elements/collapse {"hstart":3,"title":"' . ($labels[$field_name] ?? $field_name) . '","jumpName":"' . sanitize_title($labels[$field_name] ?? $field_name) . '","isCustomJumpname":true} --><!-- wp:paragraph -->
         ' . $data['content'][$field_name]['description']
         . '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
     }
@@ -234,7 +252,7 @@ if (in_array('admission_requirements_application', $items)) {
         $language_skills[] = ($labels['german_language_skills_for_international_students'] ?? 'german_language_skills_for_international_students') . ': ' . $data['german_language_skills_for_international_students']['name'];
     }
 
-    $content_related_master_requirements = (/*in_array('content_related_master_requirements', $items) && */!empty($data['content_related_master_requirements'])) ? $data['content_related_master_requirements'] : '';
+    $content_related_master_requirements = (/*in_array('content_related_master_requirements', $items) && */!empty($data['content_related_master_requirements'])) ? '<div itemprop="programPrerequisites">' . $data['content_related_master_requirements'] . '</div>' : '';
 
     $admission_details = !empty($data['details_and_notes']) ? $data['details_and_notes'] : '';
 
@@ -264,7 +282,7 @@ if (in_array('admission_requirements_application', $items)) {
         if (!empty($deadlines)) {
             $admission_requirements_application .= '<h4>' . ($labels['application_deadline'] ?? 'application_deadline') . '</h4><ul>';
             foreach ($deadlines as $deadline) {
-                $admission_requirements_application .= '<li>' . strip_tags($deadline) . '</li>';
+                $admission_requirements_application .= '<li itemprop="applicationDeadline">' . strip_tags($deadline) . '</li>';
             }
             $admission_requirements_application .= '</ul>';
         }
@@ -497,19 +515,17 @@ if (in_array('benefits', $items)) {
  */
 
 ?>
-<section class="fau-studium-display degree-program-full" itemtype="https://schema.org/EducationalOccupationalProgram" itemscope>
+<section class="fau-studium-display degree-program-full" itemtype="https://schema.org/EducationalOccupationalProgram https://schema.org/Course" itemscope>
 
     <?php echo $thumbnail; ?>
 
     <div class="program-content">
 
-        <!-- Header -->
-        <?php if (!empty($title.$subtitle)) { ?>
-            <header class="program-header width-small">
-                <?php echo $title . $subtitle ?>
-            </header>
-        <?php }
+        <header class="program-header width-small">
+            <?php echo $title . $subtitle . $meta_data ?>
+        </header>
 
+        <?php
         // Entry text
         echo $entry_text;
 

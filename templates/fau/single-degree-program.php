@@ -16,7 +16,7 @@ if (!$output_fields) {
 }
 $atts = [
     'format' => 'full',
-    'degreeProgram' => $post->ID,
+    'degreeProgram' => $post->ID, // if used on meinstudium.fau.de
     'post_id' => $post->ID,
     'selectedItemsFull' => $output_fields,
 ];

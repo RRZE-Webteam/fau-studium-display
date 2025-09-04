@@ -11,6 +11,7 @@ class CPT
     public function __construct()
     {
         add_action( 'init', [$this, 'register_post_type'] );
+        add_action('init', [$this, 'register_taxonomies']);
         add_action('add_meta_boxes', [$this, 'render_metabox']);
         add_action('admin_menu', [$this, 'disable_new_posts']);
         add_filter('single_template', [__CLASS__, 'include_single_template']);
@@ -41,6 +42,32 @@ class CPT
         register_post_type(self::POST_TYPE, $args);
     }
 
+    public function register_taxonomies() {
+
+        $taxonomies = [
+            'degree' => __('Degrees', 'fau-studium-display'),
+            'subject_group' => __('Subject groups', 'fau-studium-display'),
+            'attribute' => __('Special ways to study', 'fau-studium-display'),
+            'admission_requirement' => __('Admission requirements', 'fau-studium-display'),
+            'start' => __('Start of degree program', 'fau-studium-display'),
+            'location' => __('Study location', 'fau-studium-display'),
+            'teaching_language' => __('Teaching language', 'fau-studium-display'),
+            'faculty' => __('Faculty', 'fau-studium-display'),
+            'german_language_skills' => __('German language skills', 'fau-studium-display'),
+        ];
+
+        foreach ($taxonomies as $taxonomy => $label) {
+            register_taxonomy($taxonomy, self::POST_TYPE, [
+                'label'        => $label,
+                'public'       => true,
+                //'show_ui'      => false,
+                'show_ui'      => true,
+                'show_in_rest' => true,
+                'hierarchical' => true
+            ]);
+        }
+    }
+
     public function render_metabox()
     {
         add_meta_box(
@@ -64,27 +91,27 @@ class CPT
 
     public function degree_program_metabox($post)
     {
-        $aPostMeta = get_post_meta($post->ID);
-
-        foreach ($aPostMeta as $key => $aEntry) {
-            if (str_starts_with($key, '_') || $key == 'translations') continue;
-            $val = (is_serialized($aEntry[0]) ? unserialize($aEntry[0]) : $aEntry[0]);
-
-            echo '<span><strong>' . $key . ':</strong></span><br />' . Utils::arrayToHtmlList($val) . '<hr>';
+        $aPostMeta = get_post_meta($post->ID, 'program_data_de', true);
+        //print "<pre>"; var_dump($aPostMeta); print "</pre>";
+        if (!isset($aPostMeta['title'])) {
+            echo __('No data available', 'fau-studium-display');
+            return;
+        }
+        foreach ($aPostMeta as $key => $value) {
+            echo '<span><strong>' . $key . ':</strong></span><br />' . Utils::arrayToHtmlList($value) . '<hr>';
         }
     }
 
     public function degree_program_metabox_english($post)
     {
-        $translations = get_post_meta($post->ID, 'translations', true);
-        if (!array_key_exists('en', $translations)) {
-            echo __('No translations found', 'fau-studium-display');
+        $aPostMeta = get_post_meta($post->ID, 'program_data_en', true);
+        //print "<pre>"; var_dump($aPostMeta); print "</pre>";
+        if (!isset($aPostMeta['title'])) {
+            echo __('No data available', 'fau-studium-display');
+            return;
         }
-        $en = $translations['en'];
-        foreach ($en as $key => $value) {
-            $value_formatted = (is_serialized($value) ? unserialize($value) : $value);
-
-            echo '<span><strong>' . $key . ':</strong></span><br />' . Utils::arrayToHtmlList($value_formatted) . '<hr>';
+        foreach ($aPostMeta as $key => $value) {
+            echo '<span><strong>' . $key . ':</strong></span><br />' . Utils::arrayToHtmlList($value) . '<hr>';
         }
     }
 
