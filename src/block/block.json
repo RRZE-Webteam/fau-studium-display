@@ -40,6 +40,10 @@
 			"type": "boolean",
 			"default": true
 		},
+		"linkTarget": {
+			"type": "string",
+			"default": "local"
+		},
 		"selectedItemsGrid": {
 			"type": "array",
 			"default": ["teaser_image", "title", "subtitle", "degree", "start", "admission_requirements", "area_of_study"]

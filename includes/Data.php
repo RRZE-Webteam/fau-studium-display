@@ -12,6 +12,7 @@ class Data
             $data = $this->get_single_program((int)$atts['degreeProgram'], $lang, $atts['post_id'] ?? '');
 
         } else {
+
             $programs = $this->get_programs($lang);
 
             //$api = new API();
@@ -51,10 +52,10 @@ class Data
             $program_imported = get_posts([
                 'post_type'      => 'degree-program',
                 'post_status'    => 'publish',
-                'meta_key'       => 'id',
+                'meta_key'       => 'program_id',
                 'meta_value' => $program_id
             ]);
-            $post_id = $program_imported[0]->ID;
+            $post_id = $program_imported[0]->ID ?? '';
         }
 
         if (!empty($post_id)) {
@@ -67,15 +68,15 @@ class Data
                     $data = get_post_meta($post_id, 'program_data_de', true);
             }
             $data['_thumbnail_rendered'] = get_the_post_thumbnail($post_id, 'full');
+            $data['post_id'] = $post_id;
             return $data;
         }
 
         // if not, fetch from API
         $api = new API();
         $program = $api->get_program($program_id);
-        // ToDo: Warum gibt es Mehrfach-Syncs, wenn ich im Editor eine Single-Ausgabe mit einem neuen Studiengang auswähle??? Schatten-Dom-Fun??
-        /*$sync = new Sync();
-        $sync->sync_program($program_id);*/
+        $sync = new Sync();
+        $sync->sync_program($program_id);
         return $api->get_localized_data($program, $lang);
     }
 

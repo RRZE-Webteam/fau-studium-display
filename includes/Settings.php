@@ -332,7 +332,7 @@ class Settings
             SELECT pm.meta_value
             FROM {$wpdb->postmeta} pm
             INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id
-            WHERE pm.meta_key = 'id'
+            WHERE pm.meta_key = 'program_id'
             AND p.post_type = 'degree-program'
             AND p.post_status = 'publish'
         " );
@@ -342,6 +342,7 @@ class Settings
             if (in_array($program['id'], $imported_ids)) continue;
 
             $output .= '<div class="program-item add-program">'
+                       . '<div class="program-check"><input' . '</div>'
                        . '<div class="program-title">' . $program['title']. ' (' . $program['degree']['abbreviation'] . ')</div>'
                        . '<div class="program-buttons"><a class="add-degree-program button" data-id="' . $program['id'] . '" data-task="sync" data-post_id="0"><span class="dashicons dashicons-plus"></span> ' . __('Add', 'fau-studium-display') . '</a></div>'
                        . '</div>';

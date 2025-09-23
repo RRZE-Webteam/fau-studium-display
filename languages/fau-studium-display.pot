@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-08-20T11:08:23+00:00\n"
+"POT-Creation-Date: 2025-09-23T16:09:22+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: fau-studium-display\n"
@@ -35,189 +35,194 @@ msgid "RRZE Webteam"
 msgstr ""
 
 #. translators: 1: Server WordPress version number, 2: Required WordPress version number.
-#: fau-studium-display.php:189
+#: fau-studium-display.php:202
 msgid "The server is running WordPress version %1$s. The plugin requires at least WordPress version %2$s."
 msgstr ""
 
 #. translators: 1: Server PHP version number, 2: Required PHP version number.
-#: fau-studium-display.php:199
+#: fau-studium-display.php:212
 msgid "The server is running PHP version %1$s. The plugin requires at least PHP version %2$s."
 msgstr ""
 
 #. translators: 1: The plugin name, 2: The error string.
-#: fau-studium-display.php:214
+#: fau-studium-display.php:227
 msgid "Plugins: %1$s: %2$s"
 msgstr ""
 
-#: includes/API.php:40
+#: includes/API.php:69
 msgid "-- Please select --"
 msgstr ""
 
-#: includes/CPT.php:27
+#: includes/CPT.php:28
 msgid "Degree Programs"
 msgstr ""
 
 #: includes/CPT.php:48
+#: includes/Utils.php:17
+#: build/block/index.js:264
+msgid "Degrees"
+msgstr ""
+
+#: includes/CPT.php:49
+#: includes/Utils.php:18
+msgid "Subject groups"
+msgstr ""
+
+#: includes/CPT.php:50
+#: includes/Utils.php:19
+#: build/block/index.js:270
+msgid "Special ways to study"
+msgstr ""
+
+#: includes/CPT.php:51
+#: includes/Utils.php:22
+msgid "Admission requirements"
+msgstr ""
+
+#: includes/CPT.php:52
+#: includes/Utils.php:23
+msgid "Start of degree program"
+msgstr ""
+
+#: includes/CPT.php:53
+#: includes/Utils.php:24
+msgid "Study location"
+msgstr ""
+
+#: includes/CPT.php:54
+#: includes/Utils.php:25
+msgid "Teaching language"
+msgstr ""
+
+#: includes/CPT.php:55
+#: includes/Utils.php:26
+msgid "Faculty"
+msgstr ""
+
+#: includes/CPT.php:56
+msgid "German language skills"
+msgstr ""
+
+#: includes/CPT.php:75
 msgid "Post Meta German"
 msgstr ""
 
-#: includes/CPT.php:57
+#: includes/CPT.php:84
 msgid "Post Meta English"
 msgstr ""
 
-#: includes/Main.php:105
+#: includes/CPT.php:97
+#: includes/CPT.php:110
+msgid "No data available"
+msgstr ""
+
+#: includes/Main.php:107
 msgid "RRZE"
 msgstr ""
 
-#: includes/Settings.php:46
+#: includes/Settings.php:47
 msgid "Settings"
 msgstr ""
 
 #: includes/Settings.php:58
 #: includes/Settings.php:91
-msgid "API"
-msgstr ""
-
-#: includes/Settings.php:59
-#: includes/Settings.php:106
-msgid "Sync"
+msgid "Layout"
 msgstr ""
 
 #: includes/Settings.php:60
-#: includes/Settings.php:134
-msgid "Layout"
+#: includes/Settings.php:158
+msgid "Sync"
 msgstr ""
 
 #: includes/Settings.php:72
 msgid "Save changes"
 msgstr ""
 
-#: includes/Settings.php:98
-msgid "DIP Edu API Key"
-msgstr ""
-
-#: includes/Settings.php:99
-msgid "API Key can be obtained from the API-Service at <a href=\"https://api.fau.de/pub/v1/edu/__doc\">https://api.fau.de/pub/v1/edu/__doc</a>."
-msgstr ""
-
-#: includes/Settings.php:112
-msgid "Sync and manage degree programs"
-msgstr ""
-
-#: includes/Settings.php:119
-msgid "Import"
-msgstr ""
-
-#: includes/Settings.php:126
-msgid "Manage Imported"
-msgstr ""
-
-#: includes/Settings.php:140
+#: includes/Settings.php:97
 msgid "Archive View"
 msgstr ""
 
-#: includes/Settings.php:141
+#: includes/Settings.php:98
 msgid "What format should the list view use?"
 msgstr ""
 
-#: includes/Settings.php:147
-#: build/block/index.js:189
+#: includes/Settings.php:104
+#: build/block/index.js:197
 msgid "Show Search"
 msgstr ""
 
-#: includes/Settings.php:152
+#: includes/Settings.php:109
 msgid "Archive Format"
 msgstr ""
 
-#: includes/Settings.php:155
-#: build/block/index.js:177
+#: includes/Settings.php:112
+#: build/block/index.js:185
 msgid "Grid"
 msgstr ""
 
-#: includes/Settings.php:156
-#: build/block/index.js:180
+#: includes/Settings.php:113
+#: build/block/index.js:188
 msgid "Table"
 msgstr ""
 
-#: includes/Settings.php:169
+#: includes/Settings.php:126
 msgid "Show/Hide Grid Items"
 msgstr ""
 
-#: includes/Settings.php:174
-#: includes/Settings.php:194
+#: includes/Settings.php:131
+#: includes/Settings.php:151
 msgid "Select / Deselect All"
 msgstr ""
 
-#: includes/Settings.php:177
+#: includes/Settings.php:134
+#: build/block/index.js:214
 msgid "Single View"
 msgstr ""
 
-#: includes/Settings.php:178
+#: includes/Settings.php:135
 msgid "Select the elements to be shown in single view"
 msgstr ""
 
-#: includes/Settings.php:189
+#: includes/Settings.php:146
 msgid "Show/Hide Single Items"
 msgstr ""
 
-#: includes/Settings.php:207
+#: includes/Settings.php:164
+msgid "Sync and manage degree programs"
+msgstr ""
+
+#: includes/Settings.php:171
+msgid "Import"
+msgstr ""
+
+#: includes/Settings.php:178
+msgid "Manage Imported"
+msgstr ""
+
+#: includes/Settings.php:195
 msgid "Select Faculty (optional)"
 msgstr ""
 
-#: includes/Settings.php:212
+#: includes/Settings.php:200
 msgid "Select Degree (optional)"
 msgstr ""
 
-#: includes/Settings.php:226
+#: includes/Settings.php:214
 #: includes/Utils.php:36
 #: includes/Utils.php:38
 msgid "Search"
 msgstr ""
 
-#: includes/Settings.php:233
+#: includes/Settings.php:221
 msgid "Update"
 msgstr ""
 
-#: includes/Settings.php:237
+#: includes/Settings.php:225
 msgid "Delete"
 msgstr ""
 
-#: includes/Settings.php:359
+#: includes/Settings.php:347
 msgid "Add"
-msgstr ""
-
-#: includes/Utils.php:17
-#: build/block/index.js:242
-msgid "Degrees"
-msgstr ""
-
-#: includes/Utils.php:18
-msgid "Subject groups"
-msgstr ""
-
-#: includes/Utils.php:19
-#: build/block/index.js:248
-msgid "Special ways to study"
-msgstr ""
-
-#: includes/Utils.php:22
-msgid "Admission requirements"
-msgstr ""
-
-#: includes/Utils.php:23
-msgid "Start of degree program"
-msgstr ""
-
-#: includes/Utils.php:24
-msgid "Study location"
-msgstr ""
-
-#: includes/Utils.php:25
-msgid "Teaching language"
-msgstr ""
-
-#: includes/Utils.php:26
-msgid "Faculty"
 msgstr ""
 
 #: includes/Utils.php:27
@@ -237,118 +242,127 @@ msgid "Reset all filters"
 msgstr ""
 
 #: templates/degree-program-box.php:37
-#: templates/degree-program-full.php:77
+#: templates/degree-program-full.php:106
 msgid "%s semesters"
 msgstr ""
 
-#: templates/degree-program-full.php:13
+#: templates/degree-program-full.php:14
 msgid "Please select a degree program."
 msgstr ""
 
-#: templates/degree-program-full.php:123
+#: templates/degree-program-full.php:153
 msgid "Fact Sheet"
 msgstr ""
 
-#: templates/degree-program-full.php:160
-msgid "Videos"
-msgstr ""
-
-#: templates/degree-program-full.php:176
-msgid "1st semester"
-msgstr ""
-
-#: templates/degree-program-full.php:179
-msgid "Higher semesters"
-msgstr ""
-
-#: templates/degree-program-full.php:182
-msgid "Master"
-msgstr ""
-
-#: templates/degree-program-full.php:188
-msgid "Winter semester"
-msgstr ""
-
-#: templates/degree-program-full.php:188
-#: templates/degree-program-full.php:189
-msgid "not possible"
-msgstr ""
-
-#: templates/degree-program-full.php:189
-msgid "Summer semester"
-msgstr ""
-
-#: templates/degree-program-full.php:444
-msgid "Studies"
-msgstr ""
-
-#: templates/degree-program-full.php:488
+#: templates/degree-program-full.php:172
 msgid "Program Overview"
 msgstr ""
 
-#: templates/degree-program-full.php:501
-msgid "Admission and Application"
+#: templates/degree-program-full.php:212
+#: templates/degree-program-full.php:213
+msgid "International Prospective Students"
 msgstr ""
 
-#: templates/degree-program-full.php:522
+#: templates/degree-program-full.php:227
+msgid "1st semester"
+msgstr ""
+
+#: templates/degree-program-full.php:230
+msgid "Higher semesters"
+msgstr ""
+
+#: templates/degree-program-full.php:233
+msgid "Master"
+msgstr ""
+
+#: templates/degree-program-full.php:239
+msgid "Winter semester"
+msgstr ""
+
+#: templates/degree-program-full.php:239
+#: templates/degree-program-full.php:240
+msgid "not possible"
+msgstr ""
+
+#: templates/degree-program-full.php:240
+msgid "Summer semester"
+msgstr ""
+
+#: templates/degree-program-full.php:490
+msgid "Studies"
+msgstr ""
+
+#: templates/degree-program-full.php:564
 msgid "We're Here to Help with All Your Study-Related Questions"
 msgstr ""
 
-#: templates/degree-program-grid.php:102
-#: templates/degree-program-table.php:85
+#: templates/degree-program-grid.php:108
+#: templates/degree-program-table.php:95
 msgid "No degree programs found."
 msgstr ""
 
-#: build/block/index.js:163
+#: build/block/index.js:171
 msgid "General Settings"
 msgstr ""
 
-#: build/block/index.js:166
+#: build/block/index.js:174
 msgid "Format"
 msgstr ""
 
-#: build/block/index.js:169
+#: build/block/index.js:177
 msgid "Full"
 msgstr ""
 
-#: build/block/index.js:174
+#: build/block/index.js:182
 msgid "Infobox"
 msgstr ""
 
-#: build/block/index.js:183
+#: build/block/index.js:191
 msgid "List"
 msgstr ""
 
-#: build/block/index.js:194
+#: build/block/index.js:202
 msgid "Degree Program"
 msgstr ""
 
-#: build/block/index.js:200
-msgid "Show Title"
-msgstr ""
-
-#: build/block/index.js:205
-msgid "Language"
-msgstr ""
-
 #: build/block/index.js:208
-msgid "German"
+msgid "Link Target"
 msgstr ""
 
 #: build/block/index.js:211
-msgid "English"
+msgid "None"
 msgstr ""
 
 #: build/block/index.js:217
-#: build/block/index.js:225
-msgid "Select items"
+msgid "MyStudies"
+msgstr ""
+
+#: build/block/index.js:222
+msgid "Show Title"
+msgstr ""
+
+#: build/block/index.js:227
+msgid "Language"
+msgstr ""
+
+#: build/block/index.js:230
+msgid "German"
 msgstr ""
 
 #: build/block/index.js:233
+msgid "English"
+msgstr ""
+
+#: build/block/index.js:239
+#: build/block/index.js:247
+msgid "Select items"
+msgstr ""
+
+#: build/block/index.js:255
 msgid "Filter Programs"
 msgstr ""
 
-#: build/block/index.js:236
+#: build/block/index.js:258
 msgid "Faculties"
 msgstr ""
 

@@ -89,7 +89,7 @@ class Utils
     public static function filterPrograms($programs, $filter) {
         $programs_filtered = [];
 
-        foreach ($programs as $program) {
+        foreach ($programs as $id => $program) {
 
             // Text search
             if (!empty($filter['search']) && !str_contains(strtolower($program['title']), strtolower($filter['search']))) {
@@ -123,7 +123,7 @@ class Utils
                 }
             }
 
-            $programs_filtered[] = $program;
+            $programs_filtered[$id] = $program;
         }
 
         return $programs_filtered;

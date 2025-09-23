@@ -18,6 +18,7 @@ if (empty($data) && !$show_search)
     return;
 
 $lang = $atts['language'] ?? 'de';
+$linkTarget = $atts['linkTarget'] ?? 'local';
 $labels = get_labels($lang);
 //var_dump($labels); exit;
 
@@ -36,13 +37,22 @@ foreach ($table_fields as $field) {
 }
 $program_table .= sprintf('<tr>%s</tr>', $table_header);
 
-foreach ($data as $program) {
+foreach ($data as $post_id => $program) {
     if (empty($program))
         continue;
 
-    $table_content = '';
+    $url = match ($linkTarget) {
+        'local' => get_permalink($post_id),
+        'remote' => ! empty($program[ 'link' ]) ? esc_url($program[ 'link' ]) : '',
+        default => '',
+    };
+    $title = $program['title'] . ' (' . $program[ 'degree' ][ 'abbreviation' ] . ')';
 
-    $table_content .= '<td class="image-title">' . $program['teaser_image']['rendered'] . '<a class="program-title">' . $program['title'] . ' (' . $program[ 'degree' ][ 'abbreviation' ] . ')</a></td>';
+    if (!empty($url)) {
+        $title = sprintf('<a class="program-title" href="%s">%s</a>', $url, $title);
+    }
+
+    $table_content = '<td class="image-title">' . $program[ 'teaser_image' ][ 'rendered' ] . $title . '</td>';
 
     $table_content .= '<td class="program-degree"><span class="label">' . $labels['degree'] . ': </span>' . $program['degree']['name']. '</td>';
 

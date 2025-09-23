@@ -33,7 +33,7 @@ const icon = (
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
-registerBlockType(metadata.name, {
+registerBlockType((metadata as any).name, {
 	icon: icon,
 	/**
 	 * @see ./edit.js

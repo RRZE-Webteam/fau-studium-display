@@ -17,11 +17,12 @@ if (empty($data) && !$show_search)
 
 $items = $atts['selectedItemsGrid'] ?? [];
 $lang = $atts['language'] ?? 'de';
+$linkTarget = $atts['linkTarget'] ?? 'local';
 $labels = get_labels($lang);
 //var_dump($labels); exit;
 
 $program_grid = '';
-foreach ($data as $program) {
+foreach ($data as $post_id => $program) {
     if (empty($program) || !isset($program['title']))
         continue;
 
@@ -63,11 +64,16 @@ foreach ($data as $program) {
     $grid_content .= '</div>';
 
     //print "<pre>"; var_dump($program); print "</pre>";
-    // ToDo: Link auf importierte Studiengänge, wenn vorhanden, sonst meinstudium
-    if (!empty($program['link'])) {
+    $url = match ($linkTarget) {
+        'local' => get_permalink($post_id),
+        'remote' => ! empty($program[ 'link' ]) ? esc_url($program[ 'link' ]) : '',
+        default => '',
+    };
+
+    if (!empty($url)) {
         $program_grid .= sprintf(
             '<li><a href="%s">%s</a></li>',
-            $program[ 'link' ],
+            $url,
             $grid_content
         );
     } else {

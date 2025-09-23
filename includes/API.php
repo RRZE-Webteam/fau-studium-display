@@ -188,7 +188,4 @@ class API
         return $data;
     }
 
-    public function filter_programs($programs, $filter = []) {
-
-    }
 }

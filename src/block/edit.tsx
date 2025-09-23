@@ -27,6 +27,7 @@ interface BlockAttributes {
     format: string;
     showSearch : boolean;
     showTitle : boolean;
+    linkTarget : string;
     selectedItemsGrid: string[];
     selectedItemsFull: string[];
 }
@@ -36,7 +37,7 @@ const Edit = ({
                   setAttributes,
               }: BlockEditProps<BlockAttributes>) => {
     const blockProps = useBlockProps();
-    const { degreeProgram, language, format = 'full', showSearch, showTitle = true } = attributes;
+    const { degreeProgram, language, format = 'full', showSearch, showTitle = true, linkTarget } = attributes;
     const [degreePrograms, setDegreePrograms] = useState(() => fauStudiumData?.degreePrograms ?? []);
     const [itemsGrid, setItemsGrid] = useState(() => fauStudiumData?.itemsGridOptions ?? []);
     const [itemsFull, setItemsFull] = useState(() => fauStudiumData?.itemsFullOptions ?? []);
@@ -58,6 +59,12 @@ const Edit = ({
     const onChangeLanguage = (value: string | null | undefined) => {
         if (typeof value === 'string') {
             setAttributes({ language: value });
+        }
+    };
+
+    const onChangeLinkTarget = (value: string | null | undefined) => {
+        if (typeof value === 'string') {
+            setAttributes({ linkTarget: value });
         }
     };
 
@@ -161,6 +168,21 @@ const Edit = ({
                             onChange={onChangeDegreeProgram}
                         />
                         </>
+                    )}
+
+                    {(selectedFormat === "grid"
+                        || selectedFormat === "list"
+                        || selectedFormat === "table") && (
+                        <ComboboxControl
+                            label={__('Link Target', 'fau-studium-display')}
+                            value={linkTarget}
+                            options={[
+                                { label: __('None', 'fau-studium-display'), value: 'none' },
+                                { label: __('Single View', 'fau-studium-display'), value: 'local' },
+                                { label: __('MyStudies', 'fau-studium-display'), value: 'remote' },
+                            ]}
+                            onChange={onChangeLinkTarget}
+                        />
                     )}
 
                     {(selectedFormat === "box") && (
