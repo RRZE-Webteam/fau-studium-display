@@ -192,7 +192,7 @@ class Utils
                 }
                 $degreeProgramOptions[] = [
                     'label' => $degreeProgram->post_title . $degree,
-                    'value' => $degreeProgram->ID,
+                    'value' => (string) $degreeProgram->ID,
                 ];
             }
         } else {

@@ -48,7 +48,8 @@ if (in_array('teaser_image', $items)) {
 
 // Title
 if (in_array('title', $items) && ! empty($data[ 'title' ])) {
-    $title = '<h1 class="title"><span itemprop="name">' . esc_attr($data['title']) . '</span> (' . esc_attr($data['degree']['abbreviation'] . ')') . '</h1>';
+    $title = '<span itemprop="name">' . $data['title'] . '</span>' . (!empty($data[ 'degree' ][ 'abbreviation' ]) ? ' (' . $data[ 'degree' ][ 'abbreviation' ] . ')' : '');
+    $title = '<h1 class="title">' . $title . '</h1>';
 } else {
     $title = '<meta name="title" itemprop="name" content="' . esc_attr($data['title']) . '">';
 }

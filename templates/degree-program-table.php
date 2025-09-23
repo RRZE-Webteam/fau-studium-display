@@ -46,22 +46,42 @@ foreach ($data as $post_id => $program) {
         'remote' => ! empty($program[ 'link' ]) ? esc_url($program[ 'link' ]) : '',
         default => '',
     };
-    $title = $program['title'] . ' (' . $program[ 'degree' ][ 'abbreviation' ] . ')';
+    $title = $program['title'] . (!empty($program[ 'degree' ][ 'abbreviation' ]) ? ' (' . $program[ 'degree' ][ 'abbreviation' ] . ')' : '');
 
     if (!empty($url)) {
         $title = sprintf('<a class="program-title" href="%s">%s</a>', $url, $title);
     }
 
-    $table_content = '<td class="image-title">' . $program[ 'teaser_image' ][ 'rendered' ] . $title . '</td>';
+    $table_content = '<td class="image-title">';
+    if (!empty($program['_thumbnail_rendered'] . $title)) {
+        $table_content .= $program[ '_thumbnail_rendered' ] . $title;
+    }
+    $table_content .= '</td>';
 
-    $table_content .= '<td class="program-degree"><span class="label">' . $labels['degree'] . ': </span>' . $program['degree']['name']. '</td>';
+    $table_content .= '<td class="program-degree">';
+    if (!empty($program['degree']['name'])) {
+        $table_content .= '<span class="label">' . $labels['degree'] . ': </span>' . $program['degree']['name'];
+    }
+    $table_content .= '</td>';
 
-    $start = implode(', ', $program['start']);
-    $table_content .= '<td class="program-start"><span class="label">' . $labels['start'] . ': </span>' . $start. '</td>';
+    $table_content .= '<td class="program-start">';
+    if (!empty($program['start'])) {
+        $start = implode(', ', $program['start']);
+        $table_content .= '<span class="label">' . $labels['start'] . ': </span>' . $start;
+    }
+    $table_content .= '</td>';
 
-    $table_content .= '<td class="program-location"><span class="label">' . $labels['location'] . ': </span>' . implode(', ',$program['location']) . '</td>';
+    $table_content .= '<td class="program-location">';
+    if (!empty($program['location'])) {
+        $table_content .= '<span class="label">' . $labels['location'] . ': </span>' . implode(', ',$program['location']);
+    }
+    $table_content .= '</td>';
 
-    $table_content .= '<td class="program-adm-req"><span class="label">' . $labels['admission_requirements'] . ': </span>' . $program['admission_requirement_link']['name']. '</td>';
+    $table_content .= '<td class="program-adm-req">';
+    if (!empty($program['admission_requirement_link']['name'])) {
+        $table_content .= '<span class="label">' . $labels['admission_requirements'] . ': </span>' . $program['admission_requirement_link']['name'];
+    }
+    $table_content .= '</td>';
 
     //print "<pre>"; var_dump($program); print "</pre>";
     $program_table .= sprintf('<tr>%s</tr>',

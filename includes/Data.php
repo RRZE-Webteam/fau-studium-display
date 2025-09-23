@@ -81,6 +81,24 @@ class Data
     }
 
     public function get_programs($lang = 'de') {
+        $data = [];
+
+        // if on meinstudium.fau.de -> get local post type (studiengang)
+        if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+            $programs = get_posts([
+                'post_type'      => 'studiengang',
+                'post_status'    => 'publish',
+                'posts_per_page' => -1,
+                'orderby'        => 'title',
+                'order'          => 'ASC'
+            ]);
+            foreach ($programs as $program) {
+                $data[$program->ID] = Utils::map_post_type_data($program->ID, $lang);
+            }
+            return $data;
+        }
+
+        // else get imported degree programs (post type 'degree-program')
         $programs_imported = get_posts([
             'post_type'      => 'degree-program',
             'post_status'    => 'publish',
@@ -89,18 +107,19 @@ class Data
             'order'          => 'ASC'
         ]);
 
-        $data = [];
         if (!empty($programs_imported)) {
             switch ($lang) {
                 case 'en':
                     foreach ($programs_imported as $program) {
                         $data[$program->ID] = get_post_meta($program->ID, 'program_data_en', true);
+                        $data[$program->ID]['_thumbnail_rendered'] = get_the_post_thumbnail($program->ID, 'full');
                     }
                     return $data;
                 case 'de':
                 default:
                     foreach ($programs_imported as $program) {
                         $data[$program->ID] = get_post_meta($program->ID, 'program_data_de', true);
+                        $data[$program->ID]['_thumbnail_rendered'] = get_the_post_thumbnail($program->ID, 'full');
                     }
                     return $data;
             }

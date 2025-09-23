@@ -14,8 +14,6 @@ class CPT
         add_action('init', [$this, 'register_taxonomies']);
         add_action('add_meta_boxes', [$this, 'render_metabox']);
         add_action('admin_menu', [$this, 'disable_new_posts']);
-        add_filter('single_template', [__CLASS__, 'include_single_template']);
-        add_filter('archive_template', [__CLASS__, 'include_archive_template']);
 
     }
 
@@ -124,37 +122,6 @@ class CPT
         if (isset($_GET['post_type']) && $_GET['post_type'] == 'degree-program') {
             echo '<style type="text/css">.page-title-action {display:none;}</style>';
         }
-    }
-
-    public static function include_single_template($template_path)
-    {
-        global $post;
-
-        if (!($post->post_type == 'degree-program')) {
-            return $template_path;
-        }
-
-        $template_path = plugin()->getPath() . 'templates/fau/single-degree-program.php';
-
-        wp_enqueue_style('fau-studium-display');
-
-        return $template_path;
-    }
-
-    public static function include_archive_template($template_path)
-    {
-        global $post;
-        if ($post->post_type == 'degree-program' && is_archive()) {
-            if ($theme_file = locate_template(array('archive-degree-program.php'))) {
-                $template_path = $theme_file;
-            } else {
-                $template_path = plugin()->getPath() . '/templates/fau/archive-degree-program.php';
-            }
-        }
-
-        wp_enqueue_style('fau-studium-display');
-
-        return $template_path;
     }
 
 }

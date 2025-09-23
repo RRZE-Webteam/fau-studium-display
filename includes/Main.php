@@ -19,6 +19,8 @@ class Main
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminScripts']);
         add_action('init', [$this, 'createBlocks']);
         add_filter('block_categories_all', [$this, 'rrzeBlockCategory'], 10, 2);
+        add_filter('single_template', [__CLASS__, 'include_single_template']);
+        add_filter('archive_template', [__CLASS__, 'include_archive_template']);
 
         if (!is_plugin_active('FAU-Studium/fau-degree-program.php')) {
             new CPT();
@@ -146,6 +148,37 @@ class Main
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce'    => wp_create_nonce('fau_studium_display_admin_ajax_nonce')
         ]);
+    }
+
+    public static function include_single_template($template_path)
+    {
+        global $post;
+
+        if (!in_array($post->post_type, ['degree-program', 'studiengang'])) {
+            return $template_path;
+        }
+
+        $template_path = plugin()->getPath() . 'templates/fau/single-degree-program.php';
+
+        wp_enqueue_style('fau-studium-display');
+
+        return $template_path;
+    }
+
+    public static function include_archive_template($template_path)
+    {
+        global $post;
+        if (in_array($post->post_type, ['degree-program', 'studiengang']) && is_archive()) {
+            if ($theme_file = locate_template(array('archive-degree-program.php'))) {
+                $template_path = $theme_file;
+            } else {
+                $template_path = plugin()->getPath() . '/templates/fau/archive-degree-program.php';
+            }
+        }
+
+        wp_enqueue_style('fau-studium-display');
+
+        return $template_path;
     }
 
 }

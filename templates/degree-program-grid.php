@@ -28,14 +28,15 @@ foreach ($data as $post_id => $program) {
 
     $grid_content = '';
 
-    if (in_array('teaser_image', $items) && !empty($program['featured_image']['rendered'])) {
-        $grid_content .= '<div class="teaser-image">' . $program['featured_image']['rendered'] . '</div>';
+    if (in_array('teaser_image', $items) && !empty($program['_thumbnail_rendered'])) {
+        $grid_content .= '<div class="teaser-image">' . $program['_thumbnail_rendered'] . '</div>';
     }
 
     $grid_content .= '<div class="program-content">';
 
     if (in_array('title', $items) && !empty($program['title'])) {
-        $grid_content .= '<p class="program-title">' . $program['title'] . ' (' . $program[ 'degree' ][ 'abbreviation' ] . ')</p>';
+        $title = $program['title'] . (!empty($program[ 'degree' ][ 'abbreviation' ]) ? ' (' . $program[ 'degree' ][ 'abbreviation' ] . ')' : '');
+        $grid_content .= '<p class="program-title">' . $title . '</p>';
     }
 
     if (in_array('subtitle', $items) && !empty($program['subtitle'])) {

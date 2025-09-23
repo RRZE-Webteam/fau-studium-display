@@ -15,14 +15,13 @@ foreach ($data as $post_id => $program) {
             'remote' => ! empty($program[ 'link' ]) ? esc_url($program[ 'link' ]) : '',
             default => '',
         };
-        $title = $program['title'] . ' (' . $program[ 'degree' ][ 'abbreviation' ] . ')';
+        $title = $program['title'] . (!empty($program[ 'degree' ][ 'abbreviation' ]) ? ' (' . $program[ 'degree' ][ 'abbreviation' ] . ')' : '');
 
         if (!empty($url)) {
             $program_list .= sprintf('<li><a href="%s">%s</a></li>', $url,  $title);
         } else {
             $program_list .= sprintf('<li>%s</li>', $title);
         }
-
     }
 
 }
