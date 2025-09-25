@@ -167,7 +167,7 @@ if (in_array('fact_sheet', $items)) {
 }
 
 // Content Collapsibles
-$content_fields_all = ['content.structure', 'content.specializations', 'content.qualities_and_skills', 'content.why_should_study', 'content.career_prospects', 'special_features', 'testimonials'];
+$content_fields_all = ['content.structure', 'content.specializations', 'content.qualities_and_skills', 'content.why_should_study', 'content.career_prospects', 'special_features', 'combinations'];
 $content_fields = array_intersect($content_fields_all, $items);
 
 $content_title = __('Program Overview', 'fau-studium-display');
@@ -185,6 +185,25 @@ foreach ($content_fields as $field) {
         $content_html .= '<!-- wp:rrze-elements/collapse {"hstart":3,"title":"' . ($labels[$field_name] ?? $field_name) . '","jumpName":"' . sanitize_title($labels[$field_name] ?? $field_name) . '","isCustomJumpname":true} --><!-- wp:paragraph -->
         ' . $data['content'][$field_name]['description']
         . '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
+    }
+    if ($field == 'combinations') {
+        $content_html .= '<!-- wp:rrze-elements/collapse {"hstart":3,"title":"' . ($labels[$field_name] ?? $field_name) . '","jumpName":"' . sanitize_title($labels[$field_name] ?? $field_name) . '","isCustomJumpname":true} --><!-- wp:paragraph -->';
+        if (!empty($data['combinations'])) {
+            $content_html .= '<h4>' . ($labels['content.combinations'] ?? 'combinations') . '</h4><ul class="program-combinations">';
+            foreach ($data['combinations'] as $combination) {
+                $content_html .= sprintf('<li><a href="%s">%s</a></li>', $combination['url'], $combination['title']);
+            }
+            $content_html .= '</ul>';
+        }
+        if (!empty($data['limited_combinations'])) {
+            $content_html .= '<h4>' . ($labels['content.limited_combinations'] ?? 'limited_combinations') . '</h4><ul class="program-limited-combinations">';
+            foreach ($data['limited_combinations'] as $limited_combination) {
+                $content_html .= sprintf('<li><a href="%s">%s</a></li>', $limited_combination['url'], $limited_combination['title']);
+            }
+            $content_html .= '</ul>';
+        }
+        $content_html .= '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
+
     }
 }
 $content_html .= '<!-- /wp:rrze-elements/collapsibles -->';
@@ -210,14 +229,18 @@ if (in_array('videos', $items) && !empty($data['videos'])) {
 }
 
 // Info Internationals
-$cta_internationals_id = sanitize_title(__('International Prospective Students', 'fau-studium-display'));
-$cta_internationals_title = __('International Prospective Students', 'fau-studium-display');
-$cta_internationals = '<h2 id="' . $cta_internationals_id . '">' . $cta_internationals_title . '</h2><div class="width-medium">'
-                      . do_blocks('<!-- wp:rrze-elements/cta {"url":"' . $constants['internationals-image'] . '","buttonUrl":"fau.de","alt":"","title":"So läuft die Bewerbung für Internationale ab","subtitle":"Alle Informationen zu Voraussetzungen, Fristen und Ablauf","buttonText":"Mehr erfahren"} /-->')
-                      . '</div>';
-$quicklinks[1] = '<!-- wp:button -->
-            <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $cta_internationals_id . '">' . $cta_internationals_title . '</a></div>
+if (in_array('info_internationals_link', $items)) {
+    $cta_internationals_title = __('International Prospective Students', 'fau-studium-display');
+    $cta_internationals_id = sanitize_title($cta_internationals_title);
+    $cta_internationals = '<h2 id="' . $cta_internationals_id . '">' . $cta_internationals_title . '</h2><div class="width-medium">'
+                          . do_blocks('<!-- wp:rrze-elements/cta {"url":"' . $constants['internationals-image'] . '","buttonUrl":"fau.de","alt":"","title":"So läuft die Bewerbung für Internationale ab","subtitle":"Alle Informationen zu Voraussetzungen, Fristen und Ablauf","buttonText":"Mehr erfahren"} /-->')
+                          . '</div>';
+    $quicklinks[1] = '<!-- wp:button -->
+                <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $cta_internationals_id . '">' . $cta_internationals_title . '</a></div>
             <!-- /wp:button -->';
+} else {
+    $cta_internationals = '';
+}
 
 // Admission Requirements and Application
 if (in_array('admission_requirements_application', $items)) {
@@ -289,11 +312,11 @@ if (in_array('admission_requirements_application', $items)) {
         }
 
         if (!empty($language_skills)) {
-            $admission_requirements_application .= '<h4>' . ($labels['language_skills'] ?? 'language_skills') . '</h4>';
+            $admission_requirements_application .= '<h4>' . ($labels['language_skills'] ?? 'language_skills') . '</h4><ul>';
             foreach ($language_skills as $skill) {
                 $admission_requirements_application .= '<li>' . $skill . '</li>';
             }
-
+            $admission_requirements_application .= '</ul>';
         }
 
         if (!empty($content_related_master_requirements)) {

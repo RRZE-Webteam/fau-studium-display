@@ -14,16 +14,6 @@ function get_output_fields($format = '') {
             'subtitle',
             'entry_text',
             'fact_sheet',
-            //'degree',
-            //'admission_requirements',
-            //'admission_requirement_link',
-            //'standard_duration',
-            //'teaching_language',
-            //'faculty',
-            //'start',
-            //'number_of_students',
-            //'location',
-            //'attributes',
             'content.about',
             'content.structure',
             'content.specializations',
@@ -31,10 +21,10 @@ function get_output_fields($format = '') {
             'content.why_should_study',
             'content.career_prospects',
             'content.special_features',
-            'content.testimonials',
+            'combinations',
             'videos',
+            'info_internationals_link',
             'admission_requirements_application',
-            'admission_requirements_application_internationals',
             'apply_now_link',
             'student_advice',
             'subject_specific_advice',
@@ -42,33 +32,6 @@ function get_output_fields($format = '') {
             'links.downloads',
             'links.additional_information',
             'benefits'
-
-            //'subject_groups',
-            //'details_and_notes',
-            //'start_of_semester',
-            //'semester_dates',
-            //'examinations_office',
-            //'examination_regulations',
-            //'module_handbook',
-            //'url',
-            //'department',
-            //'service_centers',
-            //'info_brochure',
-            //'semester_fee',
-            //'abroad_opportunities',
-            //'keywords',
-            //'area_of_study',
-            //'combinations',
-            //'limited_combinations',
-            //'notes_for_international_applicants',
-            //'student_initiatives',
-            //'content_related_master_requirements',
-            //'application_deadline_winter_semester',
-            //'application_deadline_summer_semester',
-            //'language_skills',
-            //'language_skills_humanities_faculty',
-            //'german_language_skills_for_international_students',
-            //'degree_program_fees'
         ],
         'box' => [
             'title',
@@ -103,6 +66,18 @@ function get_output_fields($format = '') {
         'list' => [
             'title'
         ],
+        'search-filters' => [
+            'admission-requirement',
+            //'area-of-study',
+            'attribute',
+            'degree',
+            'german-language-skills-for-international-students',
+            'faculty',
+            'semester',
+            'study-location',
+            'subject-group',
+            'teaching-language',
+        ]
     ];
 
     if ($format != '' && isset($output_fields[$format])) {
@@ -293,6 +268,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Content: Testimonials'
             ]
         ],
+        'info_internationals_link' => [
+            'labels' => [
+                'de' => 'CTA: Info für Internationals',
+                'en' => 'CTA: Information for Internationals'
+            ]
+        ],
         'admission_requirements' => [
             'labels' => [
                 'de' => 'Zugang',
@@ -435,14 +416,26 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'combinations' => [
             'labels' => [
-                'de' => 'Kombinationen',
-                'en' => 'Combinations'
+                'de' => 'Mögliche Studiengangskombinationen',
+                'en' => 'Possible degree program combinations'
+            ]
+        ],
+        'content.combinations' => [
+            'labels' => [
+                'de' => 'In der Regel ohne Überschneidungen',
+                'en' => 'Possible combinations without overlaps'
             ]
         ],
         'limited_combinations' => [
             'labels' => [
                 'de' => 'Eingeschränkte Kombinationen',
                 'en' => 'Limited combinations'
+            ]
+        ],
+        'content.limited_combinations' => [
+            'labels' => [
+                'de' => 'Mögliche Überschneidungen im Stundenplan',
+                'en' => 'Possible overlaps in the timetable'
             ]
         ],
         'notes_for_international_applicants' => [
@@ -465,8 +458,8 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'apply_now_link' => [
             'labels' => [
-                'de' => 'Jetzt-Bewerben-Link',
-                'en' => 'Apply now link'
+                'de' => 'CTA: Jetzt bewerben',
+                'en' => 'CTA: Apply now'
             ]
         ],
         'entry_text' => [

@@ -25,6 +25,7 @@ class Main
         if (!is_plugin_active('FAU-Studium/fau-degree-program.php')) {
             new CPT();
         }
+        new Shortcode();
     }
 
 

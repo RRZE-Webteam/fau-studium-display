@@ -38,7 +38,7 @@ foreach ($table_fields as $field) {
 $program_table .= sprintf('<tr>%s</tr>', $table_header);
 
 foreach ($data as $post_id => $program) {
-    if (empty($program))
+    if (empty($program) || !isset($program['title']))
         continue;
 
     $url = match ($linkTarget) {
