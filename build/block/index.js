@@ -8,7 +8,7 @@
   \******************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"fau-studium/display","version":"1.0.3","title":"FAU-Studium Display","category":"rrze","description":"","example":{},"attributes":{"degreeProgram":{"type":"number","default":0},"selectedFaculties":{"type":"array","default":[]},"selectedDegrees":{"type":"array","default":[]},"selectedSpecialWays":{"type":"array","default":[]},"language":{"type":"string","default":"de"},"format":{"type":"string","default":"full"},"showSearch":{"type":"boolean","default":false},"showTitle":{"type":"boolean","default":true},"linkTarget":{"type":"string","default":"local"},"selectedItemsGrid":{"type":"array","default":["teaser_image","title","subtitle","degree","start","admission_requirements","area_of_study"]},"selectedItemsTable":{"type":"array","default":["teaser_image","title","degree","start","location","admission_requirements","german_language_skills_for_international_students","application_deadline"]},"selectedItemsFull":{"type":"array","default":["teaser_image","title","subtitle","entry_text","fact_sheet","content.about","content.structure","content.specializations","content.qualities_and_skills","content.why_should_study","content.career_prospects","content.special_features","combinations","videos","info_internationals_link","admission_requirements_application","apply_now_link","student_advice","subject_specific_advice","links.organizational","links.downloads","links.additional_information","benefits"]}},"supports":{"html":false},"textdomain":"fau-studium-display","editorScript":"file:./index.js","editorStyle":"file:./index.css","viewScript":"file:./view.js","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"fau-studium/display","version":"1.0.3","title":"FAU-Studium Display","category":"rrze","description":"","example":{},"attributes":{"degreeProgram":{"type":"number","default":0},"selectedFaculties":{"type":"array","default":[]},"selectedDegrees":{"type":"array","default":[]},"selectedSpecialWays":{"type":"array","default":[]},"language":{"type":"string","default":"de"},"format":{"type":"string","default":"full"},"showSearch":{"type":"boolean","default":false},"showTitle":{"type":"boolean","default":true},"linkTarget":{"type":"string","default":"local"},"selectedItemsGrid":{"type":"array","default":["teaser_image","title","subtitle","degree","start","admission_requirements","area_of_study"]},"selectedItemsTable":{"type":"array","default":["teaser_image","title","degree","start","location","admission_requirements","german_language_skills_for_international_students","application_deadline"]},"selectedItemsFull":{"type":"array","default":["teaser_image","title","subtitle","entry_text","fact_sheet","content.about","content.structure","content.specializations","content.qualities_and_skills","content.why_should_study","content.career_prospects","content.special_features","combinations","videos","info_internationals_link","admission_requirements_application","apply_now_link","student_advice","subject_specific_advice","links.organizational","links.downloads","links.additional_information","benefits"]},"selectedSearchFilters":{"type":"array","default":["admission_requirements","attribute","degree","german_language_skills_for_international_students","faculty","semester","study_location","subject_group","teaching_language"]}},"supports":{"html":false},"textdomain":"fau-studium-display","editorScript":"file:./index.js","editorStyle":"file:./index.css","viewScript":"file:./view.js","render":"file:./render.php"}');
 
 /***/ }),
 
@@ -68,6 +68,10 @@ const Edit = ({
     var _fauStudiumData$items2;
     return (_fauStudiumData$items2 = fauStudiumData?.itemsFullOptions) !== null && _fauStudiumData$items2 !== void 0 ? _fauStudiumData$items2 : [];
   });
+  const [searchFilters, setSearchFilters] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(() => {
+    var _fauStudiumData$searc;
+    return (_fauStudiumData$searc = fauStudiumData?.searchFilters) !== null && _fauStudiumData$searc !== void 0 ? _fauStudiumData$searc : [];
+  });
   const [faculties] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(() => {
     var _fauStudiumData$facul;
     return (_fauStudiumData$facul = fauStudiumData?.facultiesOptions) !== null && _fauStudiumData$facul !== void 0 ? _fauStudiumData$facul : [];
@@ -85,6 +89,9 @@ const Edit = ({
   } = attributes;
   const {
     selectedItemsFull = ["teaser_image", "title", "subtitle", "entry_text", "fact_sheet", "content.about", "content.structure", "content.specializations", "content.qualities_and_skills", "content.why_should_study", "content.career_prospects", "content.special_features", "combinations", "videos", "info_internationals_link", "admission_requirements_application", "apply_now_link", "student_advice", "subject_specific_advice", "links.organizational", "links.downloads", "links.additional_information", "benefits"]
+  } = attributes;
+  const {
+    selectedSearchFilters = ["admission-requirement", "attribute", "degree", "german-language-skills-for-international-students", "faculty", "semester", "study-location", "subject-group", "teaching-language"]
   } = attributes;
   const {
     selectedFaculties = [],
@@ -146,6 +153,12 @@ const Edit = ({
       selectedItemsFull: [...updated]
     });
   };
+  const toggleSearchItem = value => {
+    const updated = selectedSearchFilters.includes(value) ? selectedSearchFilters.filter(v => v !== value) : [...selectedSearchFilters, value];
+    setAttributes({
+      selectedSearchFilters: [...updated]
+    });
+  };
   const toggleFaculties = value => {
     const updated = selectedFaculties.includes(value) ? selectedFaculties.filter(v => v !== value) : [...selectedFaculties, value];
     setAttributes({
@@ -197,6 +210,14 @@ const Edit = ({
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Search', 'fau-studium-display'),
           checked: !!showSearch,
           onChange: onChangeShowSearch
+        }), showSearch && (selectedFormat === "grid" || selectedFormat === "table" || selectedFormat === "list") && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Search Filters', 'fau-studium-display')
+          }), searchFilters.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.CheckboxControl, {
+            label: item.label,
+            checked: selectedSearchFilters.includes(item.value),
+            onChange: () => toggleSearchItem(item.value)
+          }, item.value))]
         }), (selectedFormat === "full" || selectedFormat === "box") && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ComboboxControl, {
             label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Degree Program', 'fau-studium-display'),

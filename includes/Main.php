@@ -76,6 +76,15 @@ class Main
             ];
         }
 
+        $search_filters = get_output_fields('search-filters');
+        $search_filters_formatted = [];
+        foreach ($search_filters as $filter) {
+            $search_filters_formatted[] = [
+                'label' => $labels[$filter] ?? $filter,
+                'value' => $filter,
+            ];
+        }
+
         wp_localize_script($script_handle, 'fauStudiumData', [
             'degreePrograms' => $degree_programs,
             'facultiesOptions' => $facultyOptions,
@@ -84,6 +93,7 @@ class Main
             'itemsGridOptions' => $items_grid_formatted,
             'itemsTableOptions' => $items_table_formatted,
             'itemsFullOptions' => $items_full_formatted,
+            'searchFilters' => $search_filters_formatted,
         ]);
 
     }

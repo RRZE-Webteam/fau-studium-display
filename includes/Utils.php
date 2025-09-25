@@ -2,17 +2,24 @@
 
 namespace Fau\DegreeProgram\Display;
 
+use function Fau\DegreeProgram\Display\Config\get_labels;
+use function Fau\DegreeProgram\Display\Config\get_output_fields;
+
 defined('ABSPATH') || exit;
 
 class Utils
 {
-    public static function renderSearchForm($prefilter = []): string
+    public static function renderSearchForm($prefilter = [], $filter_items = [], $lang = 'de'): string
     {
         $getParams = Utils::array_map_recursive('sanitize_text_field', $_GET);
         $api = new API();
         $degrees = !empty($prefilter['degree']) ? $prefilter['degree'] : $api->get_meta_list('degree_parents');
         $subject_groups = !empty($prefilter['subject_group']) ? $prefilter['subject_group'] : $api->get_meta_list('subject_groups');
         $attributes = !empty($prefilter['attribute']) ? $prefilter['attribute'] : $api->get_meta_list('attributes');
+        $labels = get_labels($lang); // ToDO
+        if (empty($filter_items)) {
+            $filter_items = get_output_fields('search-filters');
+        }
         $filters_default = [
             ['key' => 'degree', 'label' => __('Degrees', 'fau-studium-display'), 'data' => $degrees],
             ['key' => 'subject_group', 'label' => __('Subject groups', 'fau-studium-display'), 'data' => $subject_groups],
@@ -27,6 +34,11 @@ class Utils
             ['key' => 'german_language_skills', 'label' => __('German language skills for international students', 'fau-studium-display'), 'data' => $api->get_meta_list('german_language_skills')],
             //['key' => 'area', 'label' => __('Area of study', 'fau-studium-display'), 'data' => $api->get_areas_of_study()],
         ];
+        foreach ($filters_default as $i => $filter_default) {
+            if (!in_array($filter_default['key'], $filter_items)) {
+                unset($filters_default[$i]);
+            }
+        }
 
         $output = '<form method="get" class="program-search" action="' . esc_url(get_permalink()) . '">';
         $search = !empty($getParams['search']) ? sanitize_text_field($getParams['search']) : '';

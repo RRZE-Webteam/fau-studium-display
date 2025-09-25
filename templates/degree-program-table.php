@@ -100,7 +100,8 @@ foreach ($data as $post_id => $program) {
         $prefilter = array_map(function ($v) use ($atts) {
             return $atts[ $v ];
         }, ['faculty' => 'selectedFaculties', 'degree' => 'selectedDegrees', 'attribute' => 'selectedSpecialWays']);
-        echo Utils::renderSearchForm($prefilter);
+        $filter_items = $atts['selectedSearchFilters'] ?? [];
+        echo Utils::renderSearchForm($prefilter, $filter_items, $lang);
 
     endif; ?>
 

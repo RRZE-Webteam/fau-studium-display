@@ -67,16 +67,16 @@ function get_output_fields($format = '') {
             'title'
         ],
         'search-filters' => [
-            'admission-requirement',
-            //'area-of-study',
-            'attribute',
             'degree',
-            'german-language-skills-for-international-students',
-            'faculty',
+            'subject_group',
+            'attribute',
+            'admission_requirements',
             'semester',
-            'study-location',
-            'subject-group',
-            'teaching-language',
+            'study_location',
+            'teaching_language',
+            'faculty',
+            'german_language_skills_for_international_students',
+            //'area-of-study',
         ]
     ];
 

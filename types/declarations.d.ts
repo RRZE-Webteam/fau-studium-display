@@ -28,6 +28,10 @@ declare const fauStudiumData: {
         label: string;
         value: string;
     }[];
+    searchFilters: {
+        label: string;
+        value: string;
+    }[];
 };
 
 declare module '*.json' {

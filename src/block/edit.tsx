@@ -30,6 +30,7 @@ interface BlockAttributes {
     linkTarget : string;
     selectedItemsGrid: string[];
     selectedItemsFull: string[];
+    selectedSearchFilters: string[];
 }
 
 const Edit = ({
@@ -41,11 +42,13 @@ const Edit = ({
     const [degreePrograms, setDegreePrograms] = useState(() => fauStudiumData?.degreePrograms ?? []);
     const [itemsGrid, setItemsGrid] = useState(() => fauStudiumData?.itemsGridOptions ?? []);
     const [itemsFull, setItemsFull] = useState(() => fauStudiumData?.itemsFullOptions ?? []);
+    const [searchFilters, setSearchFilters] = useState(() => fauStudiumData?.searchFilters ?? []);
     const [faculties] = useState(() => fauStudiumData?.facultiesOptions ?? []);
     const [degrees] = useState(() => fauStudiumData?.degreesOptions ?? []);
     const [specialWays] = useState(() => fauStudiumData?.specialWaysOptions ?? []);
     const {selectedItemsGrid = ["teaser_image", "title", "subtitle", "degree", "start", "admission_requirements", "area_of_study"]} = attributes;
     const {selectedItemsFull = ["teaser_image", "title", "subtitle", "entry_text", "fact_sheet", "content.about", "content.structure", "content.specializations", "content.qualities_and_skills", "content.why_should_study", "content.career_prospects", "content.special_features", "combinations", "videos", "info_internationals_link", "admission_requirements_application", "apply_now_link", "student_advice", "subject_specific_advice", "links.organizational", "links.downloads", "links.additional_information", "benefits"]} = attributes;
+    const {selectedSearchFilters = ["admission-requirement", "attribute", "degree", "german-language-skills-for-international-students", "faculty", "semester", "study-location", "subject-group", "teaching-language"]} = attributes;
     const {selectedFaculties = [], selectedDegrees = [], selectedSpecialWays = []} = attributes;
     const [selectedFormat, setSelectedFormat] = useState<string>(format);
 
@@ -103,6 +106,15 @@ const Edit = ({
 
     };
 
+    const toggleSearchItem = (value: string) => {
+        const updated = selectedSearchFilters.includes(value)
+            ? selectedSearchFilters.filter((v: string) => v !== value)
+            : [...selectedSearchFilters, value];
+
+        setAttributes({ selectedSearchFilters: [...updated] });
+
+    };
+
     const toggleFaculties = (value: string) => {
         const updated = selectedFaculties.includes(value)
             ? selectedFaculties.filter((v: string) => v !== value)
@@ -156,6 +168,23 @@ const Edit = ({
                             checked={!!showSearch}
                             onChange={onChangeShowSearch}
                         />
+                    )}
+
+                    {showSearch &&
+                        (selectedFormat === "grid"
+                        || selectedFormat === "table"
+                        || selectedFormat === "list") && (
+                        <>
+                        <h3>{__('Search Filters', 'fau-studium-display')}</h3>
+                        {searchFilters.map((item: { label: string; value: string }) => (
+                                <CheckboxControl
+                                    key={item.value}
+                                    label={item.label}
+                                    checked={selectedSearchFilters.includes(item.value)}
+                                    onChange={() => toggleSearchItem(item.value)}
+                                />
+                            ))}
+                        </>
                     )}
 
                     {(selectedFormat === "full"
