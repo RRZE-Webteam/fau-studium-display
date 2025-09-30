@@ -11,6 +11,7 @@ class Utils
 {
     public static function renderSearchForm($prefilter = [], $filter_items = [], $lang = 'de'): string
     {
+        var_dump($prefilter);
         $getParams = Utils::array_map_recursive('sanitize_text_field', $_GET);
         $api = new API();
         $degrees = !empty($prefilter['degree']) ? $prefilter['degree'] : $api->get_meta_list('degree_parents');
@@ -21,22 +22,28 @@ class Utils
             $filter_items = get_output_fields('search-filters');
         }
         $filters_default = [
-            ['key' => 'degree', 'label' => __('Degrees', 'fau-studium-display'), 'data' => $degrees],
-            ['key' => 'subject_group', 'label' => __('Subject groups', 'fau-studium-display'), 'data' => $subject_groups],
-            ['key' => 'attribute', 'label' => __('Special ways to study', 'fau-studium-display'), 'data' => $attributes],
+            ['key' => 'degree', 'label' => ($labels['degree'] ?? 'degree'), 'data' => $degrees],
+            ['key' => 'subject_group', 'label' => ($labels['subject_group'] ?? 'subject_group'), 'data' => $subject_groups],
+            ['key' => 'attribute', 'label' => ($labels['attribute'] ?? 'attribute'), 'data' => $attributes],
         ];
         $filters_extended = [
-            ['key' => 'admission_requirements', 'label' => __('Admission requirements', 'fau-studium-display'), 'data' => $api->get_meta_list('admission_requirements')],
-            ['key' => 'start', 'label' => __('Start of degree program', 'fau-studium-display'), 'data' => $api->get_meta_list('start_semesters')],
-            ['key' => 'location', 'label' => __('Study location', 'fau-studium-display'), 'data' => $api->get_meta_list('study_locations')],
-            ['key' => 'teaching_language', 'label' => __('Teaching language', 'fau-studium-display'), 'data' => $api->get_meta_list('teaching_languages')],
-            ['key' => 'faculty', 'label' => __('Faculty', 'fau-studium-display'), 'data' => $api->get_meta_list('faculties')],
-            ['key' => 'german_language_skills', 'label' => __('German language skills for international students', 'fau-studium-display'), 'data' => $api->get_meta_list('german_language_skills')],
-            //['key' => 'area', 'label' => __('Area of study', 'fau-studium-display'), 'data' => $api->get_areas_of_study()],
+            ['key' => 'admission_requirements', 'label' => ($labels['admission_requirements'] ?? 'admission_requirements'), 'data' => $api->get_meta_list('admission_requirements')],
+            ['key' => 'start', 'label' => ($labels['start'] ?? 'start'), 'data' => $api->get_meta_list('start_semesters')],
+            ['key' => 'location', 'label' => ($labels['location'] ?? 'location'), 'data' => $api->get_meta_list('study_locations')],
+            ['key' => 'teaching_language', 'label' => ($labels['teaching_language'] ?? 'teaching_language'), 'data' => $api->get_meta_list('teaching_languages')],
+            ['key' => 'faculty', 'label' => ($labels['faculty'] ?? 'faculty'), 'data' => $api->get_meta_list('faculties')],
+            ['key' => 'german_language_skills', 'label' => ($labels['german_language_skills'] ?? 'german_language_skills'), 'data' => $api->get_meta_list('german_language_skills')],
+            //['key' => 'area', 'label' => ($labels['area'] ?? 'area'), 'data' => $api->get_areas_of_study()],
         ];
         foreach ($filters_default as $i => $filter_default) {
             if (!in_array($filter_default['key'], $filter_items)) {
                 unset($filters_default[$i]);
+            }
+        }
+
+        foreach ($filters_extended as $i => $filter_extended) {
+            if (!in_array($filter_extended['key'], $filter_items)) {
+                unset($filters_extended[$i]);
             }
         }
 

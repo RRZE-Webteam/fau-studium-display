@@ -29,6 +29,13 @@ class Data
             if (!empty($atts['selectedSpecialWays'])) {
                 $filterBlock['attribute'] = $atts['selectedSpecialWays'];
             }
+            // Additional filter from Shortcode settings (backwards compatibility)
+            if (!empty($atts['start'])) {
+                $filterBlock['start'] = $atts['start'];
+            }
+            if (!empty($atts['subject-group'])) {
+                $filterBlock['subject_group'] = $atts['subject-group'];
+            }
 
             // Filter from $_GET parameters respecting block presets
             $getParams = isset($_GET) ? Utils::array_map_recursive('sanitize_text_field', $_GET) : [];

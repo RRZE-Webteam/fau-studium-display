@@ -124,6 +124,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Start of degree program'
             ]
         ],
+        'semester' => [
+            'labels' => [
+                'de' => 'Studienbeginn',
+                'en' => 'Start of degree program'
+            ]
+        ],
         'number_of_students' => [
             'labels' => [
                 'de' => 'Größe',
@@ -134,6 +140,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
             'labels' => [
                 'de' => 'Unterrichtssprache',
                 'en' => 'Teaching language'
+            ]
+        ],
+        'attribute' => [
+            'labels' => [
+                'de' => 'Besondere Studienform',
+                'en' => 'Special way to study'
             ]
         ],
         'attributes' => [
@@ -158,6 +170,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
             'labels' => [
                 'de' => 'Studienort',
                 'en' => 'Study location'
+            ]
+        ],
+        'subject_group' => [
+            'labels' => [
+                'de' => 'Fächergruppe',
+                'en' => 'Subject group'
             ]
         ],
         'subject_groups' => [
