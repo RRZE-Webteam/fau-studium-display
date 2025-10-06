@@ -42,6 +42,20 @@ jQuery(document).ready(function($) {
         });
     });
 
+    $('#degree-program-results').on('click', 'button#import-select-all-button', function(e) {
+        e.preventDefault();
+        const checkboxes = $('input[type="checkbox"][name^="batch-import"]');
+        const allChecked = checkboxes.length === checkboxes.filter(':checked').length;
+        checkboxes.prop('checked', !allChecked);
+    })
+
+    $('#degree-program-results').on('click', 'button#import-selected-button', function(e) {
+        e.preventDefault();
+        const checkboxes = $('input[type="checkbox"][name^="batch-import"]:checked');
+        //console.log(checkboxes);
+
+    })
+
     $('#degree-program-results').on('click', 'a.add-degree-program', function(e) {
         e.preventDefault();
         sync_degree_program($(this));

@@ -12,14 +12,21 @@ use function Fau\DegreeProgram\Display\Config\get_output_fields;
 $format = cmb2_get_option('fau-studium-display_layout', 'archive_view', 'grid');
 $output_fields = cmb2_get_option('fau-studium-display_layout', 'grid_items' );
 if (!$output_fields) {
-    $output_fields_all = get_output_fields();
-    $output_fields = $output_fields_all['grid'];
+    $output_fields = get_output_fields('grid');
 }
 $show_search = cmb2_get_option('fau-studium-display_layout', 'archive_search', '');
+$search_filters = cmb2_get_option('fau-studium-display_layout', 'archive_search_filters');
+if (!$search_filters) {
+    $search_filters = get_output_fields('search-items');
+}
 $atts = [
     'format' => $format,
     'selectedItemsGrid' => $output_fields,
     'showSearch' => ($show_search == 'on'),
+    'selectedFaculties' => [],
+    'selectedDegrees' => [],
+    'selectedSpecialWays' => [],
+    'selectedSearchFilters' => $search_filters,
 ];
 $output = new Output();
 $content = $output->renderOutput($atts);

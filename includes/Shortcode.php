@@ -93,11 +93,18 @@ class Shortcode
             'output' => 'list',
             'hide' => '',
             'filters' => '',
+            'admission-requirement' => '',
+            'area-of-study	' => '',
+            'attribute	' => '',
+            'degree	' => '',
+            'german-language-skills-for-international-students' => '',
+            'faculty' => '',
+            'search' => '',
+            'semester' => '',
+            'study-location' => '',
+            'subject-group' => '',
+            'teaching-language' => '',
         ];
-        $search_filters = get_output_fields('search-filters');
-        foreach ($search_filters as $filter) {
-            $defaults[$filter] = '';
-        }
         $args = shortcode_atts($defaults, $atts);
         array_walk($args, 'sanitize_text_field');
         return $args;

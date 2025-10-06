@@ -7,9 +7,9 @@ use Fau\DegreeProgram\Display\Utils;
 use function Fau\DegreeProgram\Display\Config\get_output_fields;
 use function Fau\DegreeProgram\Display\Config\get_labels;
 
-//print "<pre>"; var_dump($data);print "</pre>";
-//print "<pre>"; var_dump($atts);print "</pre>";
-//print_r($atts);
+//print "<pre>"; var_dump($data); print "</pre>";
+//print "<pre>"; var_dump($atts); print "</pre>";
+//print "<pre>"; print_r($atts); print "</pre>";
 //exit;
 
 $show_search = isset($atts['showSearch']) && $atts['showSearch'] == '1';

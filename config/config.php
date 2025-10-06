@@ -172,6 +172,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Study location'
             ]
         ],
+        'study_location' => [
+            'labels' => [
+                'de' => 'Studienort',
+                'en' => 'Study location'
+            ]
+        ],
         'subject_group' => [
             'labels' => [
                 'de' => 'Fächergruppe',

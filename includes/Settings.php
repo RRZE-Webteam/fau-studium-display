@@ -86,6 +86,8 @@ class Settings
     }
     
     public function register_settings() {
+        $output_fields = get_output_fields();
+        $labels = get_labels();
         $layout_options = new_cmb2_box([
                                            'id' => $this->slug.'_layout',
                                            'title' => __('Layout', 'fau-studium-display'),
@@ -104,6 +106,20 @@ class Settings
                                        'name' => __('Show Search', 'fau-studium-display'),
                                        'type' => 'toggle',
                                    ]);
+        $search_filters = $output_fields['search-filters'];
+        $search_filter_options = [];
+        foreach ($search_filters as $search_filter) {
+            $search_filter_options[$search_filter] = $labels[$search_filter];
+        }
+        $layout_options->add_field([
+                                       'id' => 'archive_search_filters',
+                                       'name' => esc_html__('Show/Hide Search Filters', 'fau-studium-display'),
+                                       //'desc' => __('', 'fau-studium-display'),
+                                       'type' => 'multicheck',
+                                       'options' => $search_filter_options,
+                                       'default' => $search_filters,
+                                       'select_all_button' => __('Select / Deselect All', 'fau-studium-display'),
+                                   ]);
         $layout_options->add_field([
                                        'id' => 'archive_view',
                                        'name' => esc_html__('Archive Format', 'fau-studium-display'),
@@ -114,8 +130,6 @@ class Settings
                                        ],
                                        'default' => 'grid',
                                    ]);
-        $output_fields = get_output_fields();
-        $labels = get_labels();
         $grid_view_fields = $output_fields['grid'];
         $grid_view_options = [];
         foreach ($grid_view_fields as $archive_view_field) {
@@ -337,13 +351,14 @@ class Settings
             AND p.post_status = 'publish'
         " );
 
-        $output = '';
+        $output = '<button id="import-select-all-button" class="button">' . __('Select / Deselect All', 'fau-studium-display') . '</button>'
+            . '<button id="import-selected-button" class="button button-primary">' . __('Import selected', 'fau-studium-display') . '</button>';
         foreach ($programs as $program) {
             if (in_array($program['id'], $imported_ids)) continue;
 
             $output .= '<div class="program-item add-program">'
-                       . '<div class="program-check"><input' . '</div>'
-                       . '<div class="program-title">' . $program['title']. ' (' . $program['degree']['abbreviation'] . ')</div>'
+                       . '<div class="program-check"><input type="checkbox" value="1" name="batch-import[' . $program['id'] . ']" id="batch-import' . $program['id'] . '">' . '</div>'
+                       . '<div class="program-title"><label for="batch-import' . $program['id'] . '">' . $program['title']. ' (' . $program['degree']['abbreviation'] . ')</label></div>'
                        . '<div class="program-buttons"><a class="add-degree-program button" data-id="' . $program['id'] . '" data-task="sync" data-post_id="0"><span class="dashicons dashicons-plus"></span> ' . __('Add', 'fau-studium-display') . '</a></div>'
                        . '</div>';
         }

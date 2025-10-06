@@ -11,7 +11,7 @@ class Utils
 {
     public static function renderSearchForm($prefilter = [], $filter_items = [], $lang = 'de'): string
     {
-        var_dump($prefilter);
+        //var_dump($prefilter);
         $getParams = Utils::array_map_recursive('sanitize_text_field', $_GET);
         $api = new API();
         $degrees = !empty($prefilter['degree']) ? $prefilter['degree'] : $api->get_meta_list('degree_parents');
