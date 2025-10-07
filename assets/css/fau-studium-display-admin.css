@@ -69,13 +69,15 @@
   color: #dc3232;
 }
 .settings_page_fau-studium-display #degree-program-results {
-  margin-top: 20px;
-}
-.settings_page_fau-studium-display #degree-program-results .program-item:first-child {
-  border-top: 1px solid #e9e9e9;
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 1px solid #c3c4c7;
 }
 .settings_page_fau-studium-display #degree-program-results #import-select-all-button {
   margin-right: 1em;
+}
+.settings_page_fau-studium-display #degree-program-results .program-check {
+  width: 21px;
 }
 .settings_page_fau-studium-display .dashicons.spin {
   animation: dashicons-spin 1s infinite linear;

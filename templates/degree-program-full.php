@@ -25,8 +25,12 @@ $meinstudium_options = get_meinstudium_options($lang);
 
 $number_of_students_raw = $data['number_of_students']['name'] ?? '';
 if (!empty($number_of_students_raw)) {
-    $number_of_students_array = explode('-', $number_of_students_raw);
-    $number_of_students = $number_of_students_array[1];
+    if (str_contains($number_of_students_raw, '-')) {
+        $number_of_students_array = explode('-', $number_of_students_raw);
+        $number_of_students = $number_of_students_array[1];
+    } else {
+        $number_of_students = filter_var($number_of_students_raw, FILTER_SANITIZE_NUMBER_INT);
+    }
 }
 $standard_duration = $data['standard_duration'] ?? '';
 if (!empty($standard_duration)) {

@@ -1,10 +1,16 @@
+const { __, _x, _n, sprintf } = wp.i18n;
+
 jQuery(document).ready(function($) {
+
+    let searchResults = $('#degree-program-results');
+    let programsImported = $('#degree-programs-imported');
+
     $('#degree-search-button').on('click', function(e) {
         e.preventDefault();
 
         let $this = $(this);
         $this.append('<span class="dashicons dashicons-update search-spinner spin" title="Searching">Searching</span>').addClass('button-disabled');
-        $('#degree-program-results').empty();
+        searchResults.empty();
 
         let selectedFaculties = $('input[name="faculty[]"]:checked').map(function() {
             return $(this).val();
@@ -42,34 +48,39 @@ jQuery(document).ready(function($) {
         });
     });
 
-    $('#degree-program-results').on('click', 'button#import-select-all-button', function(e) {
+    searchResults.on('click', 'button#import-select-all-button', function(e) {
         e.preventDefault();
         const checkboxes = $('input[type="checkbox"][name^="batch-import"]');
         const allChecked = checkboxes.length === checkboxes.filter(':checked').length;
         checkboxes.prop('checked', !allChecked);
     })
 
-    $('#degree-program-results').on('click', 'button#import-selected-button', function(e) {
+    searchResults.on('click', 'button#import-selected-button', function(e) {
         e.preventDefault();
-        const checkboxes = $('input[type="checkbox"][name^="batch-import"]:checked');
-        //console.log(checkboxes);
-
+        const checkedIds = $('input[type="checkbox"][name^="batch-import"]:checked')
+            .map(function() { return $(this).data('id'); })
+            .get();
+        console.log(checkedIds);
+        if (checkedIds.length > 0) {
+            sync_degree_programs(checkedIds);
+        } else {
+            alert(__('No program selected. Please select at least one program to import.'));
+        }
     })
 
-    $('#degree-program-results').on('click', 'a.add-degree-program', function(e) {
+    searchResults.on('click', 'a.add-degree-program', function(e) {
         e.preventDefault();
         sync_degree_program($(this));
     })
 
-    $('#degree-programs-imported').on('click', 'a.update-degree-program', function(e) {
+    programsImported.on('click', 'a.update-degree-program', function(e) {
         e.preventDefault();
         sync_degree_program($(this));
     })
 
-    $('#degree-programs-imported').on('click', 'a.delete-degree-program', function(e) {
+    programsImported.on('click', 'a.delete-degree-program', function(e) {
         e.preventDefault();
         let $this = $(this);
-        let task = $this.data('task');
         $this.addClass('button-disabled');
         $this.parent().find('span.dashicons.dashicons-yes.sync-ok').remove();
         $this.parent().find('a.update-degree-program').addClass('button-disabled');
@@ -86,8 +97,8 @@ jQuery(document).ready(function($) {
                 if (response.success) {
                     $this.find('span.dashicons-update').removeClass('spin');
                     $this.append('<span class="dashicons dashicons-yes sync-ok" title="Deleted">Deleted</span>');
-                    $this.closest('div.program-item').find('div.program-title').css("text-decoration", "line-through");
-                    //$this.closest('div.program-item').remove();
+                    //$this.closest('div.program-item').find('div.program-title').css("text-decoration", "line-through");
+                    $this.closest('div.program-item').remove();
                 } else {
                     console.log('Fehler: ' + response.data);
                 }
@@ -125,10 +136,14 @@ jQuery(document).ready(function($) {
                     $button.find('span.dashicons-update')
                         .removeClass('dashicons-update')
                         .addClass('dashicons-plus');
+                    $('#degree-program-results div.add-program-' + $button.data('id') + ' input').remove();
+                    //$('#degree-program-results div.add-program-' + $button.data('id')).remove();
                 }
 
                 if (response.success) {
-                    $button.append('<span class="dashicons dashicons-yes sync-ok" title="Sync OK">Sync OK</span>');
+                    $button.after('<span class="dashicons dashicons-yes sync-ok" title="Sync OK">Sync OK</span>');
+                    $button.remove();
+
                 } else {
                     $button.append('<span class="dashicons dashicons-no sync-error" title="Sync Error">Sync Error</span>');
                     console.log('Fehler: ' + response);
@@ -142,6 +157,31 @@ jQuery(document).ready(function($) {
                         .addClass('dashicons-plus');
                 }
                 console.log('AJAX-Fehler');
+            }
+        });
+    }
+
+    function sync_degree_programs(ids) {
+        $.ajax({
+            url: program_ajax.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'program_sync',
+                _ajax_nonce: program_ajax.nonce,
+                program_ids: ids,
+            },
+            success: function(response) {
+                if (response.success) {
+                    const arr = JSON.parse(response.data);
+                    $.each(arr, function(index, id_synced) {
+                        $('#degree-program-results div.add-program-' + id_synced).remove();
+                    });
+                } else {
+                    console.log('Fehler: ' + response);
+                }
+            },
+            error: function() {
+                console.log('Fehler: ' + response);
             }
         });
     }

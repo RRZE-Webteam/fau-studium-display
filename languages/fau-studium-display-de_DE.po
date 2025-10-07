@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: FAU Studium Display\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-12 12:41+0000\n"
-"PO-Revision-Date: 2025-10-06 16:39+0000\n"
+"PO-Revision-Date: 2025-10-07 13:58+0000\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch\n"
 "Language: de_DE\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Loco-Version: 2.8.0; wp-6.8.2; php-8.3.14\n"
 "X-Domain: fau-studium-display"
 
-#: templates/degree-program-box.php:37 templates/degree-program-full.php:107
+#: templates/degree-program-box.php:37 templates/degree-program-full.php:111
 msgid "%s semesters"
 msgstr "%s Semester"
 
@@ -23,11 +23,11 @@ msgstr "%s Semester"
 msgid "-- Please select --"
 msgstr "-- Bitte auswählen --"
 
-#: templates/degree-program-full.php:251
+#: templates/degree-program-full.php:255
 msgid "1st semester"
 msgstr "1. Semester"
 
-#: includes/Settings.php:362
+#: includes/Settings.php:370
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -64,7 +64,7 @@ msgstr "Studiengänge"
 msgid "Degrees"
 msgstr "Abschlüsse"
 
-#: includes/Settings.php:239
+#: includes/Settings.php:247
 msgid "Delete"
 msgstr "Löschen"
 
@@ -72,7 +72,7 @@ msgstr "Löschen"
 msgid "English"
 msgstr "Englisch"
 
-#: templates/degree-program-full.php:154
+#: templates/degree-program-full.php:158
 msgid "Fact Sheet"
 msgstr "Steckbrief"
 
@@ -117,7 +117,7 @@ msgstr "Deutschkenntnisse"
 msgid "Grid"
 msgstr "Kacheln"
 
-#: templates/degree-program-full.php:254
+#: templates/degree-program-full.php:258
 msgid "Higher semesters"
 msgstr "Höhere Semester"
 
@@ -130,7 +130,11 @@ msgstr "https://github.com/RRZE-Webteam/fau-studium-display"
 msgid "Import"
 msgstr "Importieren"
 
-#: includes/Settings.php:355
+#: includes/Settings.php:178
+msgid "Import degree programs"
+msgstr "Studiengänge importieren"
+
+#: includes/Settings.php:363
 msgid "Import selected"
 msgstr "Ausgewählte importieren"
 
@@ -138,7 +142,7 @@ msgstr "Ausgewählte importieren"
 msgid "Infobox"
 msgstr "Infobox"
 
-#: templates/degree-program-full.php:233
+#: templates/degree-program-full.php:237
 msgid "International Prospective Students"
 msgstr "Internationale Studieninteressierte"
 
@@ -158,11 +162,15 @@ msgstr "Linkziel"
 msgid "List"
 msgstr "Liste"
 
-#: includes/Settings.php:192
+#: includes/Settings.php:199
 msgid "Manage Imported"
 msgstr "Importierte Studiengänge verwalten"
 
-#: templates/degree-program-full.php:257
+#: includes/Settings.php:192
+msgid "Manage Imported Degree Programs"
+msgstr "Importierte Studiengänge verwalten"
+
+#: templates/degree-program-full.php:261
 msgid "Master"
 msgstr "Master"
 
@@ -183,7 +191,7 @@ msgstr "Keine Studiengänge gefunden."
 msgid "None"
 msgstr "Kein Link"
 
-#: templates/degree-program-full.php:263 templates/degree-program-full.php:264
+#: templates/degree-program-full.php:267 templates/degree-program-full.php:268
 msgid "not possible"
 msgstr "nicht möglich"
 
@@ -213,7 +221,7 @@ msgstr "Post-Meta-Daten englisch"
 msgid "Post Meta German"
 msgstr "Post-Meta-Daten deutsch"
 
-#: templates/degree-program-full.php:173
+#: templates/degree-program-full.php:177
 msgid "Program Overview"
 msgstr "Studiengang im Detail"
 
@@ -234,7 +242,7 @@ msgstr "RRZE Webteam"
 msgid "Save changes"
 msgstr "Änderungen speichern"
 
-#: includes/Settings.php:228 includes/Utils.php:55 includes/Utils.php:57
+#: includes/Settings.php:236 includes/Utils.php:55 includes/Utils.php:57
 msgid "Search"
 msgstr "Suche"
 
@@ -243,15 +251,15 @@ msgid "Search Filters"
 msgstr "Filter"
 
 #: includes/Settings.php:121 includes/Settings.php:145
-#: includes/Settings.php:165 includes/Settings.php:354
+#: includes/Settings.php:165 includes/Settings.php:362
 msgid "Select / Deselect All"
 msgstr "Alle auswählen / abwählen"
 
-#: includes/Settings.php:214
+#: includes/Settings.php:222
 msgid "Select Degree (optional)"
 msgstr "Abschluss auswählen (optional)"
 
-#: includes/Settings.php:209
+#: includes/Settings.php:217
 msgid "Select Faculty (optional)"
 msgstr "Fakultät auswählen (optional)"
 
@@ -300,7 +308,7 @@ msgstr "Besondere Studienformen"
 msgid "Start of degree program"
 msgstr "Studienbeginn"
 
-#: templates/degree-program-full.php:514
+#: templates/degree-program-full.php:518
 msgid "Studies"
 msgstr "Studium"
 
@@ -312,17 +320,13 @@ msgstr "Studienort"
 msgid "Subject groups"
 msgstr "Fächergruppen"
 
-#: templates/degree-program-full.php:264
+#: templates/degree-program-full.php:268
 msgid "Summer semester"
 msgstr "Sommersemester"
 
 #: includes/Settings.php:60 includes/Settings.php:172
 msgid "Sync"
 msgstr "Sync"
-
-#: includes/Settings.php:178
-msgid "Sync and manage degree programs"
-msgstr "Studiengänge synchronisieren und verwalten"
 
 #: includes/Settings.php:129 build/block/index.js:201
 msgid "Table"
@@ -350,11 +354,11 @@ msgstr ""
 "Auf dem Server läuft WordPress Version %1$s. Dieses Plugin benötigt "
 "mindestens WordPress Version %2$s."
 
-#: includes/Settings.php:235
+#: includes/Settings.php:243
 msgid "Update"
 msgstr "Aktualisieren"
 
-#: templates/degree-program-full.php:588
+#: templates/degree-program-full.php:592
 msgid "We're Here to Help with All Your Study-Related Questions"
 msgstr "Wir helfen Dir bei Fragen rund ums Studium"
 
@@ -362,6 +366,6 @@ msgstr "Wir helfen Dir bei Fragen rund ums Studium"
 msgid "What format should the list view use?"
 msgstr "In welchem Format soll die Archiv-Ansicht dargestellt werden?"
 
-#: templates/degree-program-full.php:263
+#: templates/degree-program-full.php:267
 msgid "Winter semester"
 msgstr "Wintersemester"

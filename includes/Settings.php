@@ -175,10 +175,10 @@ class Settings
                                              'parent_slug'  => $this->slug,
                                          ]);
             $sync_options->add_field([
-                                         'name' => __('Sync and manage degree programs', 'fau-studium-display'),
+                                         'name' => __('Import degree programs', 'fau-studium-display'),
                                          //'desc' => __('', 'fau-studium-display'),
                                          'type' => 'title',
-                                         'id'   => 'apply_now_heading'
+                                         'id'   => 'import_programs_heading'
                                      ]);
             $sync_options->add_field([
                                          'id'      => 'sync-search',
@@ -186,6 +186,13 @@ class Settings
                                          //'desc' => '',
                                          'type'    => 'sync-search',
                                          'default' => '',
+                                         'show_names' => false,
+                                     ]);
+            $sync_options->add_field([
+                                         'name' => __('Manage Imported Degree Programs', 'fau-studium-display'),
+                                         //'desc' => __('', 'fau-studium-display'),
+                                         'type' => 'title',
+                                         'id'   => 'manage_programs_heading'
                                      ]);
             $sync_options->add_field([
                                          'id'      => 'sync-imported',
@@ -193,6 +200,7 @@ class Settings
                                          //'desc' => '',
                                          'type'    => 'sync-imported',
                                          'default' => '',
+                                         'show_names' => false,
                                      ]);
         }
 
@@ -356,10 +364,10 @@ class Settings
         foreach ($programs as $program) {
             if (in_array($program['id'], $imported_ids)) continue;
 
-            $output .= '<div class="program-item add-program">'
-                       . '<div class="program-check"><input type="checkbox" value="1" name="batch-import[' . $program['id'] . ']" id="batch-import' . $program['id'] . '">' . '</div>'
-                       . '<div class="program-title"><label for="batch-import' . $program['id'] . '">' . $program['title']. ' (' . $program['degree']['abbreviation'] . ')</label></div>'
-                       . '<div class="program-buttons"><a class="add-degree-program button" data-id="' . $program['id'] . '" data-task="sync" data-post_id="0"><span class="dashicons dashicons-plus"></span> ' . __('Add', 'fau-studium-display') . '</a></div>'
+            $output .= '<div class="program-item add-program add-program-' . $program['id'] . '">'
+                       . '<div class="program-check"><input type="checkbox" value="1" name="batch-import[' . $program['id'] . ']" id="batch-import-' . $program['id'] . '" data-id="' . $program['id'] . '">' . '</div>'
+                       . '<div class="program-title"><label for="batch-import-' . $program['id'] . '">' . $program['title']. ' (' . $program['degree']['abbreviation'] . ')</label></div>'
+                       . '<div class="program-buttons"><a class="add-degree-program button" data-id="' . $program['id'] . '" data-task="add" data-post_id="0"><span class="dashicons dashicons-plus"></span> ' . __('Add', 'fau-studium-display') . '</a></div>'
                        . '</div>';
         }
 
@@ -374,13 +382,33 @@ class Settings
         }
         check_ajax_referer('fau_studium_display_admin_ajax_nonce');
 
-        $program_id = isset( $_POST[ 'program_id' ]) ? (int)$_POST[ 'program_id' ] : '';
-        $post_id = $_POST[ 'post_id' ] ?? '0';
+        $programs = [];
+        if (isset($_POST['program_ids'])) {
+            foreach ($_POST['program_ids'] as $program_id) {
+                $programs[] = [
+                    'program_id' => (int)$program_id,
+                    'post_id' => '0',
+                ];
+            }
+        } elseif (isset($_POST['program_id'])) {
+            $programs[] = [
+                'program_id' => (int)$_POST['program_id'],
+                'post_id' => (isset($_POST[ 'post_id' ]) ? (int)$_POST[ 'post_id' ] : '0'),
+            ];
+        }
 
-        $sync = new Sync();
-        $sync->sync_program($program_id, $post_id);
-
-        wp_send_json_success($program_id, $post_id);
+        $synced = [];
+        if (!empty($programs)) {
+            $sync = new Sync();
+            foreach ($programs as $program) {
+                $result = $sync->sync_program($program['program_id'], $program['post_id']);
+                if (!is_wp_error($result) && $result > 0) {
+                    $synced[] = $program['program_id'];
+                }
+            }
+            wp_send_json_success(json_encode($synced));
+        }
+        wp_send_json_error();
     }
 
     public function ajaxProgramDelete() {
