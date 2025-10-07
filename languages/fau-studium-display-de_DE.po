@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: FAU Studium Display\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-12 12:41+0000\n"
-"PO-Revision-Date: 2025-10-07 13:58+0000\n"
+"PO-Revision-Date: 2025-10-07 16:58+0000\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch\n"
 "Language: de_DE\n"
@@ -27,7 +27,7 @@ msgstr "-- Bitte auswählen --"
 msgid "1st semester"
 msgstr "1. Semester"
 
-#: includes/Settings.php:370
+#: includes/Settings.php:364
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -47,6 +47,10 @@ msgstr "Archiv-Format"
 msgid "Archive View"
 msgstr "Archiv-Ansicht"
 
+#: src/js/fau-studium-display-admin.js:105
+msgid "Are you sure you want to delete %d selected degree programs?"
+msgstr "Möchten Sie wirklich %d Studiengänge löschen?"
+
 #: build/block/block.json src/block/block.json
 msgctxt "block title"
 msgid "FAU-Studium Display"
@@ -64,9 +68,13 @@ msgstr "Studiengänge"
 msgid "Degrees"
 msgstr "Abschlüsse"
 
-#: includes/Settings.php:247
+#: includes/Settings.php:238
 msgid "Delete"
 msgstr "Löschen"
+
+#: includes/Settings.php:245
+msgid "Delete selected"
+msgstr "Ausgewählte löschen"
 
 #: build/block/index.js:254
 msgid "English"
@@ -134,7 +142,7 @@ msgstr "Importieren"
 msgid "Import degree programs"
 msgstr "Studiengänge importieren"
 
-#: includes/Settings.php:363
+#: includes/Settings.php:357
 msgid "Import selected"
 msgstr "Ausgewählte importieren"
 
@@ -186,6 +194,21 @@ msgstr "Keine Daten vorhanden"
 #: templates/degree-program-grid.php:110 templates/degree-program-table.php:116
 msgid "No degree programs found."
 msgstr "Keine Studiengänge gefunden."
+
+#: includes/Settings.php:416
+msgid "No posts selected"
+msgstr "Keine Studiengänge ausgewählt."
+
+#: src/js/fau-studium-display-admin.js:69
+msgid "No program selected. Please select at least one program to import."
+msgstr ""
+"Keine Studiengänge ausgewählt. Bitte wähle mindestens einen zu "
+"importierenden Studiengang."
+
+#: src/js/fau-studium-display-admin.js:93
+#: src/js/fau-studium-display-admin.js:103
+msgid "No program selected. Please select at least one program."
+msgstr "Kein Studiengang ausgewählt. Bitte wähle mindestens einen Studiengang."
 
 #: build/block/index.js:232
 msgid "None"
@@ -242,7 +265,7 @@ msgstr "RRZE Webteam"
 msgid "Save changes"
 msgstr "Änderungen speichern"
 
-#: includes/Settings.php:236 includes/Utils.php:55 includes/Utils.php:57
+#: includes/Settings.php:227 includes/Utils.php:55 includes/Utils.php:57
 msgid "Search"
 msgstr "Suche"
 
@@ -251,7 +274,8 @@ msgid "Search Filters"
 msgstr "Filter"
 
 #: includes/Settings.php:121 includes/Settings.php:145
-#: includes/Settings.php:165 includes/Settings.php:362
+#: includes/Settings.php:165 includes/Settings.php:243
+#: includes/Settings.php:356
 msgid "Select / Deselect All"
 msgstr "Alle auswählen / abwählen"
 
@@ -336,6 +360,10 @@ msgstr "Tabelle"
 msgid "Teaching language"
 msgstr "Unterrichtssprache"
 
+#: src/js/fau-studium-display-admin.js:3
+msgid "Test"
+msgstr "Test de_DE"
+
 #. translators: 1: Server PHP version number, 2: Required PHP version number.
 #: fau-studium-display.php:212
 msgid ""
@@ -354,9 +382,13 @@ msgstr ""
 "Auf dem Server läuft WordPress Version %1$s. Dieses Plugin benötigt "
 "mindestens WordPress Version %2$s."
 
-#: includes/Settings.php:243
+#: includes/Settings.php:234
 msgid "Update"
 msgstr "Aktualisieren"
+
+#: includes/Settings.php:244
+msgid "Update selected"
+msgstr "Ausgewählte aktualisieren"
 
 #: templates/degree-program-full.php:592
 msgid "We're Here to Help with All Your Study-Related Questions"

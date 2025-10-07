@@ -12,6 +12,12 @@
   color: inherit;
   margin-left: 0.25em;
 }
+.settings_page_fau-studium-display #degree-programs-imported button,
+.settings_page_fau-studium-display #degree-programs-imported a.button,
+.settings_page_fau-studium-display #degree-program-results button,
+.settings_page_fau-studium-display #degree-program-results a.button {
+  margin-right: 1em;
+}
 .settings_page_fau-studium-display #degree-programs-imported .program-item,
 .settings_page_fau-studium-display #degree-program-results .program-item {
   background: #fff;
@@ -29,6 +35,10 @@
 .settings_page_fau-studium-display #degree-programs-imported .program-item:hover,
 .settings_page_fau-studium-display #degree-program-results .program-item:hover {
   background-color: #F9F9F9;
+}
+.settings_page_fau-studium-display #degree-programs-imported .program-item .program-check,
+.settings_page_fau-studium-display #degree-program-results .program-item .program-check {
+  min-width: 21px;
 }
 .settings_page_fau-studium-display #degree-programs-imported .program-item .program-title,
 .settings_page_fau-studium-display #degree-program-results .program-item .program-title {
@@ -75,9 +85,6 @@
 }
 .settings_page_fau-studium-display #degree-program-results #import-select-all-button {
   margin-right: 1em;
-}
-.settings_page_fau-studium-display #degree-program-results .program-check {
-  width: 21px;
 }
 .settings_page_fau-studium-display .dashicons.spin {
   animation: dashicons-spin 1s infinite linear;

@@ -1,5 +1,7 @@
 const { __, _x, _n, sprintf } = wp.i18n;
 
+//console.log(__('Test', 'fau-studium-display'));
+
 jQuery(document).ready(function($) {
 
     let searchResults = $('#degree-program-results');
@@ -60,17 +62,51 @@ jQuery(document).ready(function($) {
         const checkedIds = $('input[type="checkbox"][name^="batch-import"]:checked')
             .map(function() { return $(this).data('id'); })
             .get();
-        console.log(checkedIds);
+        //console.log(checkedIds);
         if (checkedIds.length > 0) {
             sync_degree_programs(checkedIds);
         } else {
-            alert(__('No program selected. Please select at least one program to import.'));
+            alert(__('No program selected. Please select at least one program to import.', 'fau-studium-display'));
         }
     })
 
     searchResults.on('click', 'a.add-degree-program', function(e) {
         e.preventDefault();
         sync_degree_program($(this));
+    })
+
+    programsImported.on('click', 'button#manage-select-all-button', function(e) {
+        e.preventDefault();
+        const checkboxes = $('input[type="checkbox"][name^="batch-manage"]');
+        const allChecked = checkboxes.length === checkboxes.filter(':checked').length;
+        checkboxes.prop('checked', !allChecked);
+    })
+
+    programsImported.on('click', 'button#update-selected-button', function(e) {
+        e.preventDefault();
+        const checkedIds = $('input[type="checkbox"][name^="batch-manage"]:checked')
+            .map(function() { return $(this).val(); })
+            .get();
+        if (checkedIds.length > 0) {
+            //sync_degree_programs(checkedIds);
+        } else {
+            alert(__('No program selected. Please select at least one program.', 'fau-studium-display'));
+        }
+    })
+
+    programsImported.on('click', 'button#delete-selected-button', function(e) {
+        e.preventDefault();
+        const checkedIds = $('input[type="checkbox"][name^="batch-manage"]:checked')
+            .map(function() { return $(this).val(); })
+            .get();
+        if (checkedIds.length < 1) {
+            alert(__('No program selected. Please select at least one program.', 'fau-studium-display'));
+        } else {
+            if (confirm(sprintf(__('Are you sure you want to delete %d selected degree programs?', 'fau-studium-display'), checkedIds.length))) {
+                delete_degree_programs(checkedIds);
+            }
+        }
+
     })
 
     programsImported.on('click', 'a.update-degree-program', function(e) {
@@ -91,7 +127,7 @@ jQuery(document).ready(function($) {
             data: {
                 action: 'program_delete',
                 _ajax_nonce: program_ajax.nonce,
-                post_id: $this.data('post_id'),
+                post_ids: $this.data('post_id'),
             },
             success: function(response) {
                 if (response.success) {
@@ -161,6 +197,8 @@ jQuery(document).ready(function($) {
         });
     }
 
+    //ToDo: Spinner
+
     function sync_degree_programs(ids) {
         $.ajax({
             url: program_ajax.ajax_url,
@@ -168,7 +206,7 @@ jQuery(document).ready(function($) {
             data: {
                 action: 'program_sync',
                 _ajax_nonce: program_ajax.nonce,
-                program_ids: ids,
+                post_ids: ids,
             },
             success: function(response) {
                 if (response.success) {
@@ -182,6 +220,31 @@ jQuery(document).ready(function($) {
             },
             error: function() {
                 console.log('Fehler: ' + response);
+            }
+        });
+    }
+
+    function delete_degree_programs(ids) {
+        $.ajax({
+            url: program_ajax.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'program_delete',
+                _ajax_nonce: program_ajax.nonce,
+                post_ids: ids,
+            },
+            success: function(response) {
+                if (response.success) {
+                    const arr = JSON.parse(response.data);
+                    $.each(arr, function(index, id_deleted) {
+                        $('#degree-programs-imported div.program-item-' + id_deleted).remove();
+                    });
+                } else {
+                    console.log('Fehler: ' + response.data);
+                }
+            },
+            error: function() {
+                console.log('AJAX-Fehler');
             }
         });
     }

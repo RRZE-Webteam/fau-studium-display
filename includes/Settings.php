@@ -223,15 +223,6 @@ class Settings
         foreach ($degreeOptions as $degreeOption) {
             echo '<label><input type="checkbox" name="degree[]" value="' . $degreeOption['value'] . '">' . $degreeOption['label'] . '</label><br />';
         }
-        /*echo '</div><div class="">'
-             . '<h4>' . __('Select Language', 'fau-studium-display') . '</h4>';
-        $languages = [
-            'de' => __('German', 'fau-studium-display'),
-            'en' => __('English', 'fau-studium-display'),
-        ];
-        foreach ($languages as $value => $label) {
-            echo '<label><input type="radio" name="language" value="' . $value . '"' . ($value == 'de' ? ' checked="checked"' : '') . '>' . $label . '</label><br />';
-        }*/
         echo '</div></div>';
         echo '<button id="degree-search-button" class="button">' . __('Search', 'fau-studium-display') . '</button>';
         echo '<div id="degree-program-results"></div>';
@@ -248,19 +239,22 @@ class Settings
                 'icon'  => 'dashicons-trash',
             ]
         ];
-        echo '<div id="degree-programs-imported">';
-        foreach ($this->programs as $program) {
-            $title = $program->post_title;
-            $program_id = get_post_meta($program->ID, 'id', true);
-            echo '<div class="program-item">'
+        echo '<div id="degree-programs-imported">'
+             . '<button id="manage-select-all-button" class="button">' . __('Select / Deselect All', 'fau-studium-display') . '</button>'
+             . '<button id="update-selected-button" class="button button-primary">' . __('Update selected', 'fau-studium-display') . '</button>'
+             . '<button id="delete-selected-button" class="button button-link-delete">' . __('Delete selected', 'fau-studium-display') . '</button>';
+        foreach ($this->programs as $post) {
+            $title = $post->post_title;
+            $program_id = get_post_meta($post->ID, 'program_id', true);
+            echo '<div class="program-item program-item-' . $post->ID . '">'
+                 . '<div class="program-check"><input type="checkbox" value="' . $post->ID . '" name="batch-manage[]" id="batch-manage-' . $post->ID . '">' . '</div>'
                 . '<div class="program-title">' . $title . '</div>'
                 . '<div class="program-buttons">';
             foreach ($buttons as $task => $button) {
-                echo '<a class="' . $task . '-degree-program button" data-id="' . $program_id . '" data-task="' . $task . '" data-post_id="' . $program->ID . '"><span class="dashicons ' . $button['icon'] . '"></span> ' . $button['label'] . '</a>';
+                echo '<a class="' . $task . '-degree-program button" data-id="' . $program_id . '" data-task="' . $task . '" data-post_id="' . $post->ID . '"><span class="dashicons ' . $button['icon'] . '"></span> ' . $button['label'] . '</a>';
             }
             echo '</div></div>';
         }
-
         echo '</div>';
     }
 
@@ -383,11 +377,12 @@ class Settings
         check_ajax_referer('fau_studium_display_admin_ajax_nonce');
 
         $programs = [];
-        if (isset($_POST['program_ids'])) {
-            foreach ($_POST['program_ids'] as $program_id) {
+        if (isset($_POST['post_ids'])) {
+            foreach ($_POST['post_ids'] as $post_id) {
+                $program_id = get_post_meta($post_id, 'program_id', true);
                 $programs[] = [
-                    'program_id' => (int)$program_id,
-                    'post_id' => '0',
+                    'program_id' => $program_id,
+                    'post_id' => $post_id,
                 ];
             }
         } elseif (isset($_POST['program_id'])) {
@@ -417,16 +412,38 @@ class Settings
         }
         check_ajax_referer('fau_studium_display_admin_ajax_nonce');
 
-        if (empty($_POST[ 'post_id' ])) {
-            wp_send_json_error('Post ID existiert nicht.');
+        if ( empty($_POST[ 'post_ids' ])) {
+            wp_send_json_error(__('No posts selected', 'fau-studium-display'));
         }
 
-        $program_id = get_post_meta( $_POST[ 'post_id' ], 'id', true );
-        delete_transient('fau_studium_degree_program_' . $program_id);
+        if (!is_array($_POST[ 'post_ids' ])) {
+            $post_ids = [intval($_POST[ 'post_ids' ])];
+        } else {
+            $post_ids = array_filter($_POST[ 'post_ids' ], 'is_numeric');
+        }
 
-        wp_delete_post( $_POST[ 'post_id' ], true );
+        $deleted = [];
+        foreach ($post_ids as $post_id) {
+            $program_id = get_post_meta( $post_id, 'program_id', true );
 
-        wp_send_json_success();
+            $attachments = get_children([
+                'post_parent' => $post_id,
+                'post_type'   => 'attachment',
+            ]);
+            if ($attachments) {
+                foreach ($attachments as $attachment) {
+                    wp_delete_attachment($attachment->ID, true);
+                }
+            }
+
+            $result = wp_delete_post( $post_id, true );
+            if ($result != false && !is_wp_error($result)) {
+                $deleted[] = $post_id;
+            }
+            delete_transient('fau_studium_degree_program_' . $program_id);
+        }
+
+        wp_send_json_success(json_encode($deleted));
     }
 
 }

@@ -137,9 +137,11 @@ class Main
         wp_register_script(
             'fau-studium-display-script',
             plugins_url('assets/js/fau-studium-display.min.js', plugin()->getFile()),
-            ['jquery'],
+            ['wp-i18n', 'jquery'],
             plugin()->getVersion()
         );
+        wp_set_script_translations('fau-studium-display-script', 'fau-studium-display', plugin_dir_path(plugin()->getFile()) . 'languages');
+
     }
 
     public function enqueueAdminScripts(): void {
@@ -152,13 +154,15 @@ class Main
         wp_register_script(
             'fau-studium-display-admin',
             plugins_url('assets/js/fau-studium-display-admin.min.js', plugin()->getFile()),
-            ['jquery'],
+            ['wp-i18n', 'jquery'],
             plugin()->getVersion()
         );
         wp_localize_script('fau-studium-display-admin', 'program_ajax', [
             'ajax_url' => admin_url('admin-ajax.php'),
             'nonce'    => wp_create_nonce('fau_studium_display_admin_ajax_nonce')
         ]);
+        wp_set_script_translations('fau-studium-display-admin', 'fau-studium-display', plugin_dir_path(plugin()->getFile()) . 'languages');
+
     }
 
     public static function include_single_template($template_path)

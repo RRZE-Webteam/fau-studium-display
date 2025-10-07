@@ -19,6 +19,11 @@
 
     #degree-programs-imported,
     #degree-program-results {
+        button,
+        a.button{
+            margin-right: 1em;
+        }
+
         .program-item {
             background: #fff;
             border-bottom: 1px solid #e9e9e9;
@@ -32,6 +37,9 @@
             }
             &:hover {
                 background-color: #F9F9F9;
+            }
+            .program-check {
+                min-width: 21px;
             }
             .program-title {
                 font-weight: bold;
@@ -79,9 +87,6 @@
         }
         #import-select-all-button {
             margin-right: 1em;
-        }
-        .program-check {
-            width: 21px;
         }
     }
 
