@@ -48,11 +48,15 @@ class Utils
         $search = !empty($getParams['search']) ? sanitize_text_field($getParams['search']) : '';
 
         // Search input
-        $output .= '<div class="search-title">'
-                   . '<label for="fau_studium_search" class="label sr-only">' . __('Search', 'fau-studium-display') . '</label>'
-                   . '<input type="text" name="search" id="fau_studium_search" value="' . $search . '" placeholder="' . __('Please enter search term...', 'fau-studium-display') . '" />'
-                   . '<input type="submit" value="' . __('Search', 'fau-studium-display') . '" />'
+        $output .= '<label for="fau_studium_search" class="label">' . __('Search', 'fau-studium-display') . '</label>'
+                   . '<div class="search-title">'
+                   . '<input type="text" name="search" id="fau_studium_search" value="' . $search . '" placeholder="' . __('Search all degree programs', 'fau-studium-display') . '" />'
+                   . '<button type="submit">' . __('Search', 'fau-studium-display') . '</button>'
                    . '</div>';
+
+        // Filter options
+        $output .= '<p class="label">' . __('Filter Options', 'fau-studium-display') . '</p>'
+            . '<div class="flex-wrapper">';
 
         // Filter sections default
         foreach ($filters_default as $filter) {
@@ -66,7 +70,6 @@ class Utils
                 $filter['label'],
                 $filter['data'],
                 $filter_active ? array_map('sanitize_text_field', $getParams[$filter['key']]) : [],
-                $filter_active ? '<span class="filter-count">' . count($getParams[$filter['key']]) . '</span>' : '',
             );
         }
 
@@ -84,25 +87,17 @@ class Utils
                     $filter[ 'label' ],
                     $filter[ 'data' ],
                     $filter_active ? array_map('sanitize_text_field', $getParams[ $filter[ 'key' ] ]) : [],
-                    $filter_active ? '<span class="filter-count">' . count(
-                            $getParams[ $filter[ 'key' ] ]
-                        ) . '</span>' : '',
                 );
             }
 
-            $output .= '<div class="settings-area">'
-                       . '<button type="button" class="extended-search-toggle">'
-                       . __('Advanced filters', 'fau-studium-display')
-                       . ($filters_extended_count > 0 ? '<span class="filter-count">' . $filters_extended_count . '</span>' : '')
-                       . '<span class="dashicons dashicons-arrow-down-alt2" aria-hidden="true"></span></button>'
-                       . '<div class="reset-link">'
-                       . '<a href="' . get_permalink() . '">&#9747; ' . __(
-                           'Reset all filters',
-                           'fau-studium-display'
-                       ) . '</a>'
-                       . '</div></div>';
+            $output .= '<button type="button" class="extended-search-toggle">'
+                       . __('More filter options', 'fau-studium-display')
+                       . '<span class="icon-wrapper icon-plus" aria-hidden="true"></span></button>';
+            $output .= '</div>'; // .flex-wrapper
 
             $output .= '<div class="extended-search"><div class="flex-wrapper">' . $filters_extended_html . '</div></div>';
+        } else {
+            $output .= '</div>';
         }
 
         $output .= '</form>';
@@ -152,11 +147,11 @@ class Utils
         return $programs_filtered;
     }
 
-    private static function renderChecklistSection(string $name, string $label, array $options, array $selected, string $filterCount = ''): string
+    private static function renderChecklistSection(string $name, string $label, array $options, array $selected): string
     {
         $output = '<div class="filter-' . esc_attr($name) . '">';
         $output .= '<button type="button" class="checklist-toggle">'
-                   . $label . $filterCount . '<span class="dashicons dashicons-arrow-down-alt2" aria-hidden="true"></span></button>';
+                   . $label . '<span class="icon-wrapper" aria-hidden="true"></span></button>';
         $output .= '<div class="checklist">';
         foreach ($options as $option) {
             $checked = in_array($option, $selected);
