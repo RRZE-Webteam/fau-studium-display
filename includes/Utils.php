@@ -21,31 +21,28 @@ class Utils
         if (empty($filter_items)) {
             $filter_items = get_output_fields('search-filters');
         }
-        $filters_default = [
+
+        $filters = [
             ['key' => 'degree', 'label' => ($labels['degree'] ?? 'degree'), 'data' => $degrees],
             ['key' => 'subject_group', 'label' => ($labels['subject_group'] ?? 'subject_group'), 'data' => $subject_groups],
             ['key' => 'attribute', 'label' => ($labels['attribute'] ?? 'attribute'), 'data' => $attributes],
-        ];
-        $filters_extended = [
             ['key' => 'admission_requirements', 'label' => ($labels['admission_requirements'] ?? 'admission_requirements'), 'data' => $api->get_meta_list('admission_requirements')],
-            ['key' => 'start', 'label' => ($labels['start'] ?? 'start'), 'data' => $api->get_meta_list('start_semesters')],
-            ['key' => 'location', 'label' => ($labels['location'] ?? 'location'), 'data' => $api->get_meta_list('study_locations')],
+            ['key' => 'semester', 'label' => ($labels['start'] ?? 'start'), 'data' => $api->get_meta_list('start_semesters')],
+            ['key' => 'study_location', 'label' => ($labels['location'] ?? 'location'), 'data' => $api->get_meta_list('study_locations')],
             ['key' => 'teaching_language', 'label' => ($labels['teaching_language'] ?? 'teaching_language'), 'data' => $api->get_meta_list('teaching_languages')],
             ['key' => 'faculty', 'label' => ($labels['faculty'] ?? 'faculty'), 'data' => $api->get_meta_list('faculties')],
-            ['key' => 'german_language_skills', 'label' => ($labels['german_language_skills'] ?? 'german_language_skills'), 'data' => $api->get_meta_list('german_language_skills')],
+            ['key' => 'german_language_skills_for_international_students', 'label' => ($labels['german_language_skills'] ?? 'german_language_skills'), 'data' => $api->get_meta_list('german_language_skills')],
             //['key' => 'area', 'label' => ($labels['area'] ?? 'area'), 'data' => $api->get_areas_of_study()],
         ];
-        foreach ($filters_default as $i => $filter_default) {
-            if (!in_array($filter_default['key'], $filter_items)) {
-                unset($filters_default[$i]);
+
+        foreach ($filters as $i => $filter) {
+            if (!in_array($filter['key'], $filter_items)) {
+                unset($filters[$i]);
             }
         }
 
-        foreach ($filters_extended as $i => $filter_extended) {
-            if (!in_array($filter_extended['key'], $filter_items)) {
-                unset($filters_extended[$i]);
-            }
-        }
+        $filters_default = array_slice($filters, 0, 3);
+        $filters_extended = array_slice($filters, 3);
 
         $output = '<form method="get" class="program-search" action="' . esc_url(get_permalink()) . '">';
         $search = !empty($getParams['search']) ? sanitize_text_field($getParams['search']) : '';
@@ -73,33 +70,40 @@ class Utils
             );
         }
 
-        // Settings links + Filter sections extended
-        $filters_extended_count = 0;
-        $filters_extended_html = '';
-        foreach ($filters_extended as $filter) {
-            $filter_active = !empty($getParams[$filter['key']]);
-            if ($filter_active) {
-                $filters_extended_count += count($getParams[$filter['key']]);
+        if (count($filters_extended) > 0) {
+            // Settings links + Filter sections extended
+            $filters_extended_count = 0;
+            $filters_extended_html  = '';
+            foreach ($filters_extended as $filter) {
+                $filter_active = ! empty($getParams[ $filter[ 'key' ] ]);
+                if ($filter_active) {
+                    $filters_extended_count += count($getParams[ $filter[ 'key' ] ]);
+                }
+                $filters_extended_html .= self::renderChecklistSection(
+                    $filter[ 'key' ],
+                    $filter[ 'label' ],
+                    $filter[ 'data' ],
+                    $filter_active ? array_map('sanitize_text_field', $getParams[ $filter[ 'key' ] ]) : [],
+                    $filter_active ? '<span class="filter-count">' . count(
+                            $getParams[ $filter[ 'key' ] ]
+                        ) . '</span>' : '',
+                );
             }
-            $filters_extended_html .= self::renderChecklistSection(
-                $filter['key'],
-                $filter['label'],
-                $filter['data'],
-                $filter_active ? array_map('sanitize_text_field', $getParams[$filter['key']]) : [],
-                $filter_active ? '<span class="filter-count">' . count($getParams[$filter['key']]) . '</span>' : '',
-            );
+
+            $output .= '<div class="settings-area">'
+                       . '<button type="button" class="extended-search-toggle">'
+                       . __('Advanced filters', 'fau-studium-display')
+                       . ($filters_extended_count > 0 ? '<span class="filter-count">' . $filters_extended_count . '</span>' : '')
+                       . '<span class="dashicons dashicons-arrow-down-alt2" aria-hidden="true"></span></button>'
+                       . '<div class="reset-link">'
+                       . '<a href="' . get_permalink() . '">&#9747; ' . __(
+                           'Reset all filters',
+                           'fau-studium-display'
+                       ) . '</a>'
+                       . '</div></div>';
+
+            $output .= '<div class="extended-search"><div class="flex-wrapper">' . $filters_extended_html . '</div></div>';
         }
-
-        $output .= '<div class="settings-area">'
-                   . '<button type="button" class="extended-search-toggle">'
-                   . __('Advanced filters', 'fau-studium-display')
-                   . ($filters_extended_count > 0 ? '<span class="filter-count">' . $filters_extended_count . '</span>' : '')
-                   . '<span class="dashicons dashicons-arrow-down-alt2" aria-hidden="true"></span></button>'
-                   . '<div class="reset-link">'
-                   . '<a href="' . get_permalink() . '">&#9747; ' . __('Reset all filters', 'fau-studium-display') . '</a>'
-                   . '</div></div>';
-
-        $output .= '<div class="extended-search"><div class="flex-wrapper">' . $filters_extended_html . '</div></div>';
 
         $output .= '</form>';
         return $output;

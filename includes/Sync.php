@@ -23,7 +23,7 @@ class Sync
         }
         $meta['program_data_en'] = $program['translations']['en'] ?? [];
         $meta['program_id'] = $id;
-        $title = esc_attr($program['title'] . ' (' . $program['degree']['abbreviation'] . ')');
+        $title = esc_attr($program['title'] . (isset($program['degree']['abbreviation']) ? ' (' . $program['degree']['abbreviation'] . ')' : ''));
 
         $result = wp_insert_post([
            'ID' => $post_id,

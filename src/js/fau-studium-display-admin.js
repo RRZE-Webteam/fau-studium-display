@@ -7,6 +7,10 @@ jQuery(document).ready(function($) {
     let searchResults = $('#degree-program-results');
     let programsImported = $('#degree-programs-imported');
 
+    /*
+     * Search for Degree Programs to import
+     */
+
     $('#degree-search-button').on('click', function(e) {
         e.preventDefault();
 
@@ -64,7 +68,14 @@ jQuery(document).ready(function($) {
             .get();
         //console.log(checkedIds);
         if (checkedIds.length > 0) {
-            sync_degree_programs(checkedIds);
+            searchResults.find('button, a.button').addClass('button-disabled');
+            searchResults.find('input[type="checkbox"][name^="batch-import"]').addClass('disabled');
+            $.each(checkedIds, function(index, id) {
+                $('#degree-program-results div.add-program-' + id + ' a.add-degree-program').find('span.dashicons-plus')
+                    .removeClass('dashicons-plus')
+                    .addClass('dashicons-update').addClass('spin');
+            });
+            sync_degree_programs(checkedIds, []);
         } else {
             alert(__('No program selected. Please select at least one program to import.', 'fau-studium-display'));
         }
@@ -74,6 +85,10 @@ jQuery(document).ready(function($) {
         e.preventDefault();
         sync_degree_program($(this));
     })
+
+    /*
+     * Manage Imported Degree Programs
+     */
 
     programsImported.on('click', 'button#manage-select-all-button', function(e) {
         e.preventDefault();
@@ -88,7 +103,7 @@ jQuery(document).ready(function($) {
             .map(function() { return $(this).val(); })
             .get();
         if (checkedIds.length > 0) {
-            //sync_degree_programs(checkedIds);
+            sync_degree_programs([], checkedIds);
         } else {
             alert(__('No program selected. Please select at least one program.', 'fau-studium-display'));
         }
@@ -145,6 +160,10 @@ jQuery(document).ready(function($) {
         });
     });
 
+    /*
+     * Helper Functions
+     */
+
     function sync_degree_program($button) {
         let task = $button.data('task');
         $button.addClass('button-disabled');
@@ -199,20 +218,30 @@ jQuery(document).ready(function($) {
 
     //ToDo: Spinner
 
-    function sync_degree_programs(ids) {
+    function sync_degree_programs(program_ids = [], post_ids = []) {
         $.ajax({
             url: program_ajax.ajax_url,
             type: 'POST',
             data: {
                 action: 'program_sync',
                 _ajax_nonce: program_ajax.nonce,
-                post_ids: ids,
+                program_ids: program_ids,
+                post_ids: post_ids
             },
             success: function(response) {
+                console.log(response);
                 if (response.success) {
                     const arr = JSON.parse(response.data);
                     $.each(arr, function(index, id_synced) {
-                        $('#degree-program-results div.add-program-' + id_synced).remove();
+                        //$('#degree-program-results div.add-program-' + id_synced).remove();
+                        const searchResults = $('#degree-program-results');
+                        const parentDiv = searchResults.find('div.add-program-' + id_synced);
+                        const button = parentDiv.find('a.add-degree-program');
+                        button.after('<span class="dashicons dashicons-yes sync-ok" title="Sync OK">Sync OK</span>');
+                        button.remove();
+                        parentDiv.find('input').remove();
+                        searchResults.find('input[type="checkbox"][name^="batch-import"]').removeClass('disabled');
+                        searchResults.find('button, a.button').removeClass('button-disabled');
                     });
                 } else {
                     console.log('Fehler: ' + response);

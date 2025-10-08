@@ -105,6 +105,7 @@ class Settings
                                        'id' => 'archive_search',
                                        'name' => __('Show Search', 'fau-studium-display'),
                                        'type' => 'toggle',
+                                       'default' => 'on',
                                    ]);
         $search_filters = $output_fields['search-filters'];
         $search_filter_options = [];
@@ -128,7 +129,7 @@ class Settings
                                            'grid' => __('Grid', 'fau-studium-display'),
                                            'table' => __('Table', 'fau-studium-display'),
                                        ],
-                                       'default' => 'grid',
+                                       'default' => 'table',
                                    ]);
         $grid_view_fields = $output_fields['grid'];
         $grid_view_options = [];
@@ -229,6 +230,12 @@ class Settings
     }
 
     public function render_sync_imported() {
+
+        if (count($this->programs) < 1) {
+            _e('No degree programs found', 'fau-studium-display');
+            return;
+        }
+
         $buttons = [
             'update' => [
                 'label' => __('Update', 'fau-studium-display'),
@@ -361,7 +368,7 @@ class Settings
             $output .= '<div class="program-item add-program add-program-' . $program['id'] . '">'
                        . '<div class="program-check"><input type="checkbox" value="1" name="batch-import[' . $program['id'] . ']" id="batch-import-' . $program['id'] . '" data-id="' . $program['id'] . '">' . '</div>'
                        . '<div class="program-title"><label for="batch-import-' . $program['id'] . '">' . $program['title']. ' (' . $program['degree']['abbreviation'] . ')</label></div>'
-                       . '<div class="program-buttons"><a class="add-degree-program button" data-id="' . $program['id'] . '" data-task="add" data-post_id="0"><span class="dashicons dashicons-plus"></span> ' . __('Add', 'fau-studium-display') . '</a></div>'
+                       . '<div class="program-buttons"><a class="add-degree-program button" data-id="' . $program['id'] . '" data-task="add" data-post_id="0"><span class="dashicons dashicons-plus"></span> ' . __('Import', 'fau-studium-display') . '</a></div>'
                        . '</div>';
         }
 
@@ -383,6 +390,13 @@ class Settings
                 $programs[] = [
                     'program_id' => $program_id,
                     'post_id' => $post_id,
+                ];
+            }
+        } elseif (isset($_POST['program_ids']) && is_array($_POST['program_ids'])) {
+            foreach ($_POST['program_ids'] as $program_id) {
+                $programs[] = [
+                    'program_id' => (int)$program_id,
+                    'post_id' => '0',
                 ];
             }
         } elseif (isset($_POST['program_id'])) {
