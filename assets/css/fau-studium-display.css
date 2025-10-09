@@ -124,6 +124,10 @@
     padding: 0 var(--Spacing-3x) var(--Spacing-3x) var(--Spacing-3x);
   }
 }
+.fau-elemental section.fau-studium-display.degree-program-list {
+  max-width: var(--wide-small-width, 870px);
+}
+
 .fau-studium-display table.degree-program-table {
   max-width: 100%;
 }
@@ -236,11 +240,12 @@
 }
 
 .fau-studium-display ul.degree-program-grid {
+  max-width: 100%;
   display: grid;
   margin: 0 0 32px;
   padding: 0;
   grid-gap: 16px;
-  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 }
 @media screen and (min-width: 1440px) {
   .fau-studium-display ul.degree-program-grid {
@@ -267,6 +272,7 @@
   aspect-ratio: 16/9;
   object-fit: cover;
   width: 100%;
+  height: auto;
 }
 .fau-studium-display ul.degree-program-grid li .program-content {
   background: var(--FAU_Col_FAU-Blau, #04316A);

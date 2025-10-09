@@ -1,11 +1,12 @@
 .fau-studium-display {
 
     ul.degree-program-grid {
+        max-width: 100%;
         display: grid;
         margin: 0 0 32px;
         padding: 0;
         grid-gap: 16px;
-        grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
         @media screen and (min-width: 768px) {
             //grid-template-columns: repeat(2, 1fr);
         }
@@ -33,6 +34,7 @@
                     aspect-ratio: 16/9;
                     object-fit: cover;
                     width: 100%;
+                    height: auto;
                 }
             }
             .program-content {
