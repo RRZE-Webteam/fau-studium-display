@@ -97,12 +97,12 @@ foreach ($data as $post_id => $program) {
         $filter_items = $atts['selectedSearchFilters'] ?? [];
         echo Utils::renderSearchForm($prefilter, $filter_items, $lang);
 
+        $count = count($data);
+        printf(_n('%s%d degree program found%s', '%s%d degree programs found%s', $count, 'fau-studium-display'), '<p>', $count, '</p>');
+        
     endif; ?>
 
-    <?php if (!empty($program_grid)) :
-        $count = count($data);
-        printf(_n('%s%d degree program found%s', '%s%d degree programs found%s', $count, 'fau-studium-display'), '<p>', $count, '</p>'); ?>
-        ?>
+    <?php if (!empty($program_grid)) : ?>
         <ul class="degree-program-grid">
             <?php echo $program_grid; ?>
         </ul>
