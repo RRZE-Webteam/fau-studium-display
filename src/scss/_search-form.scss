@@ -181,6 +181,10 @@
                         box-shadow: 0 4px 7px #00000073
                     }
                 }
+                input.submit-filter {
+                    width: 100%;
+                    margin: var(--Spacing-2x, 0.5rem) 0 0;
+                }
             }
             label {
                 display: block;
@@ -263,6 +267,15 @@
             }
             a > svg.rrze-elements-icon {
                 border-radius: 0 !important;
+            }
+        }
+        .filters-selected {
+            .filter-selected {
+                background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
+                color: #fff;
+                display: inline-block;
+                margin-right: .5em;
+                padding: .25em .75em;
             }
         }
     }

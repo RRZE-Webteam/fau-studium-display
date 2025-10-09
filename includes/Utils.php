@@ -76,7 +76,13 @@ class Utils
         $filters_default = array_slice($filters, 0, 3);
         $filters_extended = array_slice($filters, 3);
 
-        $output = '<form method="get" class="program-search" action="' . esc_url(get_permalink()) . '">';
+        if (is_post_type_archive('degree-program')) {
+            $url = get_post_type_archive_link( 'degree-program' );
+        } else {
+            $url = get_permalink();
+        }
+
+        $output = '<form method="get" class="program-search" action="' . esc_url($url) . '">';
         $search = !empty($getParams['search']) ? sanitize_text_field($getParams['search']) : '';
 
         // Search input
@@ -90,6 +96,8 @@ class Utils
         $output .= '<p class="label">' . __('Filter Options', 'fau-studium-display') . '</p>'
             . '<div class="flex-wrapper">';
 
+        $filters_selected = [];
+
         // Filter sections default
         foreach ($filters_default as $filter) {
             // Don't show filters with only one option
@@ -97,28 +105,40 @@ class Utils
                 continue;
             }
             $filter_active = !empty($getParams[$filter['key']]);
+            if ($filter_active) {
+                $filters_selected[$filter['key']] = $getParams[$filter['key']];
+                $selected = array_map('sanitize_text_field', $getParams[$filter['key']]);
+            } else {
+                $selected = [];
+            }
             $output .= self::renderChecklistSection(
                 $filter['key'],
                 $filter['label'],
                 $filter['data'],
-                $filter_active ? array_map('sanitize_text_field', $getParams[$filter['key']]) : [],
+                $selected,
             );
         }
 
         if (count($filters_extended) > 0) {
             // Settings links + Filter sections extended
-            $filters_extended_count = 0;
             $filters_extended_html  = '';
             foreach ($filters_extended as $filter) {
+                // Don't show filters with only one option
+                if (count($filter['data']) < 2) {
+                    continue;
+                }
                 $filter_active = ! empty($getParams[ $filter[ 'key' ] ]);
                 if ($filter_active) {
-                    $filters_extended_count += count($getParams[ $filter[ 'key' ] ]);
+                    $filters_selected[$filter['key']] = $getParams[$filter['key']];
+                    $selected = array_map('sanitize_text_field', $getParams[$filter['key']]);
+                } else {
+                    $selected = [];
                 }
                 $filters_extended_html .= self::renderChecklistSection(
                     $filter[ 'key' ],
                     $filter[ 'label' ],
                     $filter[ 'data' ],
-                    $filter_active ? array_map('sanitize_text_field', $getParams[ $filter[ 'key' ] ]) : [],
+                    $selected,
                 );
             }
 
@@ -129,6 +149,17 @@ class Utils
 
             $output .= '<div class="extended-search"><div class="flex-wrapper">' . $filters_extended_html . '</div></div>';
         } else {
+            $output .= '</div>';
+        }
+
+        if (!empty($filters_selected)) {
+            $output .= '<div class="filters-selected">';
+            foreach ($filters_selected as $filter_key => $filter_selected) {
+                foreach ($filter_selected as $filter_item) {
+                    $output .= '<span class="filter-selected" data-key="' . $filter_key . '" data-value="' . $filter_item . '">'  . $filter_item . ' X</span>';
+                }
+            }
+            $output .= '<span class="filter-selected" data-key="all" data-value="all">'  . __('Delete all', 'fau-studium-display') . ' X</span>';
             $output .= '</div>';
         }
 
@@ -190,7 +221,9 @@ class Utils
             $output .= '<label><input type="checkbox" name="' . esc_attr($name) . '[]" value="' . esc_attr($option) . '" '
                        . checked($checked, true, false) . '>' . esc_html($option) . '</label>';
         }
-        $output .= '</div></div>';
+        $output .= '<input type="submit" class="submit-filter" value="' . __('Apply filter', 'fau-studium-display') . '">';
+        $output .= '</div>';
+        $output .= '</div>';
         return $output;
     }
 
