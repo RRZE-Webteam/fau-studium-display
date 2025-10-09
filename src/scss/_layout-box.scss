@@ -40,12 +40,15 @@
 
         h1 {
             color: var(--FAU_Col_FAU-Blau, #04316A);
-            font-size: var(--H-Heading-5, 1.15rem);
+            font-size: var(--P-Body-Text, 1.125rem);
             margin-top: 0;
             padding-top: 0;
         }
+        p {
+            padding: 0;
+        }
         dl.facts {
-
+            font-size: var(--P-Body-Text, 1.125rem);
             margin: 0;
             line-height: 1.8;
             @media screen and (min-width: 768px) {
@@ -70,6 +73,7 @@
             }
         }
         dl.special-features {
+            font-size: var(--P-Body-Text, 1.125rem);
             margin: 16px 0 0;
             dt {
                 margin: 0;

@@ -99,8 +99,10 @@ foreach ($data as $post_id => $program) {
 
     endif; ?>
 
-    <?php if (!empty($program_grid)) : ?>
-
+    <?php if (!empty($program_grid)) :
+        $count = count($data);
+        printf(_n('%s%d degree program found%s', '%s%d degree programs found%s', $count, 'fau-studium-display'), '<p>', $count, '</p>'); ?>
+        ?>
         <ul class="degree-program-grid">
             <?php echo $program_grid; ?>
         </ul>

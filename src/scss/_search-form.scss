@@ -181,9 +181,14 @@
                         box-shadow: 0 4px 7px #00000073
                     }
                 }
-                input.submit-filter {
+                button.submit-filter {
                     width: 100%;
-                    margin: var(--Spacing-2x, 0.5rem) 0 0;
+                    margin: var(--Spacing-2x, .5rem) 0 0;
+                    background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
+                    color: #fff;
+                    padding: var(--Spacing-2x, .5rem);
+                    font-size: var(--P-Body-Text-Small, 1rem);
+                    cursor: pointer;
                 }
             }
             label {
@@ -270,12 +275,33 @@
             }
         }
         .filters-selected {
+            .filter-selected-title {
+                padding-bottom: var(--Spacing-1x, .25rem);;
+                padding-top: var(--Spacing-4x, 1rem);
+            }
             .filter-selected {
                 background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
                 color: #fff;
                 display: inline-block;
                 margin-right: .5em;
                 padding: .25em .75em;
+                &:after {
+                    content: "";
+                    -webkit-mask-size: var(--icon-size-mask, 120%);
+                    mask-size: var(--icon-size-mask, 120%);
+                    -webkit-mask-repeat: no-repeat;
+                    mask-repeat: no-repeat;
+                    -webkit-mask-position: center;
+                    mask-position: center;
+                    display: inline-block;
+                    width: 1em;
+                    height: 1em;
+                    mask-image: url(../svg/close.svg);
+                    -webkit-mask-image: url(../svg/close.svg);
+                    background-color: #fff;
+                    vertical-align: text-top;
+                    margin-left: .5em;
+                }
             }
         }
     }

@@ -14,6 +14,7 @@ class CPT
         add_action('init', [$this, 'register_taxonomies']);
         add_action('add_meta_boxes', [$this, 'render_metabox']);
         add_action('admin_menu', [$this, 'disable_new_posts']);
+        add_filter( 'query_vars', [$this, 'register_custom_query_vars'] );
 
     }
 
@@ -122,6 +123,12 @@ class CPT
         if (isset($_GET['post_type']) && $_GET['post_type'] == 'degree-program') {
             echo '<style type="text/css">.page-title-action {display:none;}</style>';
         }
+    }
+
+    public function register_custom_query_vars( $vars ) {
+        $vars[] = 'search';
+        $vars[] = 'subject_group';
+        return $vars;
     }
 
 }

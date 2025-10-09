@@ -153,13 +153,16 @@ class Utils
         }
 
         if (!empty($filters_selected)) {
-            $output .= '<div class="filters-selected">';
+            $current_url = ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            $output .= '<div class="filters-selected">'
+                . '<p class="filter-selected-title">' . __('Selected filters', 'fau-studium-display') . '</p>';
             foreach ($filters_selected as $filter_key => $filter_selected) {
                 foreach ($filter_selected as $filter_item) {
-                    $output .= '<span class="filter-selected" data-key="' . $filter_key . '" data-value="' . $filter_item . '">'  . $filter_item . ' X</span>';
+                    $cleared_url = str_replace('&' . $filter_key . '%5B%5D=' . urlencode($filter_item), '', $current_url);
+                    $output .= '<a class="filter-selected" data-key="' . $filter_key . '" data-value="' . $filter_item . '" href="' . $cleared_url . '">'  . $filter_item . '</a>';
                 }
             }
-            $output .= '<span class="filter-selected" data-key="all" data-value="all">'  . __('Delete all', 'fau-studium-display') . ' X</span>';
+            $output .= '<a class="filter-selected" data-key="all" data-value="all" href="' . $url . '">'  . __('Delete all', 'fau-studium-display') . '</a>';
             $output .= '</div>';
         }
 
@@ -221,7 +224,7 @@ class Utils
             $output .= '<label><input type="checkbox" name="' . esc_attr($name) . '[]" value="' . esc_attr($option) . '" '
                        . checked($checked, true, false) . '>' . esc_html($option) . '</label>';
         }
-        $output .= '<input type="submit" class="submit-filter" value="' . __('Apply filter', 'fau-studium-display') . '">';
+        $output .= '<button type="submit" class="submit-filter" value="' . __('Apply filter', 'fau-studium-display') . '">' . __('Apply filter', 'fau-studium-display') . '</button>';
         $output .= '</div>';
         $output .= '</div>';
         return $output;
