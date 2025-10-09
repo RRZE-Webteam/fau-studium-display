@@ -102,9 +102,9 @@ foreach ($data as $post_id => $program) {
         }, ['faculty' => 'selectedFaculties', 'degree' => 'selectedDegrees', 'attribute' => 'selectedSpecialWays']);
         $filter_items = $atts['selectedSearchFilters'] ?? [];
         echo Utils::renderSearchForm($prefilter, $filter_items, $lang);
-        
+
         $count = count($data);
-        printf(_n('%s%d degree program found%s', '%s%d degree programs found%s', $count, 'fau-studium-display'), '<p>', $count, '</p>');
+        printf(_n('%s%d degree program found%s', '%s%d degree programs found%s', $count, 'fau-studium-display'), '<p class="items-found">', $count, '</p>');
 
     endif; ?>
 

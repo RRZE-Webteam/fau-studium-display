@@ -162,7 +162,7 @@ class Utils
                     $output .= '<a class="filter-selected" data-key="' . $filter_key . '" data-value="' . $filter_item . '" href="' . $cleared_url . '">'  . $filter_item . '</a>';
                 }
             }
-            $output .= '<a class="filter-selected" data-key="all" data-value="all" href="' . $url . '">'  . __('Delete all', 'fau-studium-display') . '</a>';
+            $output .= '<a class="filter-selected delete-all" data-key="all" data-value="all" href="' . $url . '">'  . __('Delete all', 'fau-studium-display') . '</a>';
             $output .= '</div>';
         }
 

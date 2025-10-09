@@ -128,6 +128,9 @@
   max-width: var(--wide-small-width, 870px);
 }
 
+.fau-studium-display p.items-found {
+  padding: 0;
+}
 .fau-studium-display table.degree-program-table {
   max-width: 100%;
 }
@@ -239,6 +242,9 @@
   }
 }
 
+.fau-studium-display p.items-found {
+  padding: 0;
+}
 .fau-studium-display ul.degree-program-grid {
   max-width: 100%;
   display: grid;
@@ -731,6 +737,9 @@
     column-gap: var(--Spacing-8x, 2rem);
   }
 }
+.fau-studium-display .program-search p {
+  padding: 0;
+}
 .fau-studium-display .program-search .label {
   display: block;
   font-weight: bold;
@@ -987,6 +996,16 @@
   display: inline-block;
   margin-right: 0.5em;
   padding: 0.25em 0.75em;
+  text-decoration: none;
+}
+.fau-studium-display .program-search .filters-selected .filter-selected:hover, .fau-studium-display .program-search .filters-selected .filter-selected:focus, .fau-studium-display .program-search .filters-selected .filter-selected:active {
+  background-color: var(--FAU-Col-FAU-Dunkelblau-100, #041e42);
+}
+.fau-studium-display .program-search .filters-selected .filter-selected.delete-all {
+  background-color: var(--FAU-Col-FAU-Dunkelblau-100, #041e42);
+}
+.fau-studium-display .program-search .filters-selected .filter-selected.delete-all:hover, .fau-studium-display .program-search .filters-selected .filter-selected.delete-all:focus, .fau-studium-display .program-search .filters-selected .filter-selected.delete-all:active {
+  background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
 }
 .fau-studium-display .program-search .filters-selected .filter-selected:after {
   content: "";
@@ -1002,7 +1021,7 @@
   mask-image: url(../svg/close.svg);
   -webkit-mask-image: url(../svg/close.svg);
   background-color: #fff;
-  vertical-align: text-top;
+  vertical-align: middle;
   margin-left: 0.5em;
 }
 
