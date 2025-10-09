@@ -1,0 +1,101 @@
+.fau-studium-display {
+
+    table.degree-program-table {
+        max-width: 100%;
+        tr {
+            border-left: none;
+            border-right: none;
+            border-bottom: 1px solid var(--FAU_Col_Base-Schwarz_25, #BFBFBF);
+            display: block;
+            padding: 8px 0;
+            &:nth-child(odd) td {
+                background-color: #fff;
+            }
+            @media screen and (min-width: 992px) {
+                display: table-row;
+                padding: 0;
+            }
+        }
+        th {
+            display: none;
+            @media screen and (min-width: 992px) {
+                display: table-cell;
+                background-color: var(--FAU_Col_FAU-Blau, #04316A);
+                color: #fff;
+                font-size: unset;
+                letter-spacing: 0.02em;
+                padding: 6px 8px;
+            }
+        }
+        td {
+            padding: 0;
+            border-right: none;
+            font-size: unset;
+            display: block;
+            @media screen and (min-width: 992px) {
+                display: table-cell;
+                padding: 8px;
+            }
+            &.image-title {
+                padding-left: 0;
+                font-weight: bold;
+                @media screen and (min-width: 992px) {
+                    display: grid;
+                    grid-template-columns: 80px 1fr;
+                    grid-column-gap: 16px;
+                    font-weight: normal;
+                }
+                img {
+                    aspect-ratio: 1/1;
+                    object-fit: cover;
+                    width: 80px;
+                    height: auto;
+                    box-shadow: none;
+                    float: left;
+                    margin-right: 8px;
+                    margin-bottom: 8px;
+                    @media screen and (min-width: 768px) {
+                        //width: 160px;
+                    }
+                    @media screen and (min-width: 992px) {
+                        margin-bottom: 0;
+                    }
+                }
+                .program-title {
+                    display: block;
+                    align-self: center;
+                    color: var(--FAU_Col_FAU-Blau, #04316A);
+                    font-size: var(--P-Body-Text, 1.125rem);
+                    margin-bottom: 8px;
+                    @media screen and (min-width: 992px) {
+                        font-size: unset;
+                        margin-bottom: 0;
+                    }
+                }
+            }
+            &.program-degree {
+                clear: left;
+                @media screen and (min-width: 768px) {
+                    clear:  none;
+                }
+            }
+            &.program-adm-req {
+                &:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                }
+                @media screen and (min-width: 992px) {
+                    padding-right: 0;
+                }
+            }
+        }
+        .label {
+            font-weight: bold;
+            @media screen and (min-width: 992px) {
+                display: none;
+            }
+        }
+    }
+
+}
