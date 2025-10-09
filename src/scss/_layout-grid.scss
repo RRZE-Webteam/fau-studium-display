@@ -3,6 +3,7 @@
     ul.degree-program-grid {
         display: grid;
         margin: 0 0 32px;
+        padding: 0;
         grid-gap: 16px;
         grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
         @media screen and (min-width: 768px) {

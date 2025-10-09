@@ -220,7 +220,7 @@ $quicklinks[0] = '<!-- wp:button -->
 
 // Videos
 if (in_array('videos', $items) && !empty($data['videos'])) {
-    $videos_html = '<div class="program-videos"><!-- wp:columns --><div class="wp-block-columns">';
+    $videos_html = '<div class="program-videos"><!-- wp:columns --><div class="wp-block-columns alignwide">';
     foreach ($data['videos'] as $video) {
         $videos_html .= '<!-- wp:column --><div class="wp-block-column">'
         . '<!-- wp:rrze/rrze-video {"url":"' . $video . '"} /-->'
@@ -590,7 +590,7 @@ if (in_array('benefits', $items)) {
             // Student advice
             if (!empty($student_advice . $subject_specific_advice)) {
                 echo '<div class="student-advice width-large"><h3>' . __("We're Here to Help with All Your Study-Related Questions", 'fau-studium-display') . '</h3>'
-                     . do_blocks('<!-- wp:columns --><div class="wp-block-columns">'
+                     . do_blocks('<!-- wp:columns --><div class="wp-block-columns alignwide">'
                          . '<!-- wp:column --><div class="wp-block-column">' . $student_advice . '</div><!-- /wp:column -->'
                          . '<!-- wp:column --><div class="wp-block-column">' . $subject_specific_advice . '</div><!-- /wp:column -->'
                          . '</div><!-- /wp:columns -->')

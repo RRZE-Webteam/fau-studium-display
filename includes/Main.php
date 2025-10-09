@@ -173,7 +173,7 @@ class Main
             return $template_path;
         }
 
-        $template_path = plugin()->getPath() . 'templates/fau/single-degree-program.php';
+        $template_path = Utils::getTemplatePath() . 'single-degree-program.php';
 
         wp_enqueue_style('fau-studium-display');
 
@@ -187,7 +187,7 @@ class Main
             if ($theme_file = locate_template(array('archive-degree-program.php'))) {
                 $template_path = $theme_file;
             } else {
-                $template_path = plugin()->getPath() . '/templates/fau/archive-degree-program.php';
+                $template_path = Utils::getTemplatePath() . 'archive-degree-program.php';
             }
         }
 

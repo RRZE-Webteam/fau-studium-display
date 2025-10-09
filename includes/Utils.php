@@ -9,6 +9,38 @@ defined('ABSPATH') || exit;
 
 class Utils
 {
+
+    protected static array $themes = [
+        'fau' => [
+            'FAU-Einrichtungen',
+            'FAU-Einrichtungen-BETA',
+            'FAU-Medfak',
+            'FAU-RWFak',
+            'FAU-Philfak',
+            'FAU-Techfak',
+            'FAU-Natfak'
+        ],
+        'fau-elemental' => [
+            'FAU-Elemental',
+        ],
+        'rrze' => [
+            'rrze-2019'
+        ],
+        'vendor' => [
+            'Francesca-Child',
+            'Francesca-Child-Main'
+        ]
+    ];
+
+    public static function getTemplatePath(): string {
+        $currentTheme = wp_get_theme();
+        foreach (self::$themes as $slug => $theme) {
+            if (in_array(strtolower($currentTheme->stylesheet), array_map('strtolower', $theme))) {
+                return plugin()->getPath('templates/') . $slug . '/';
+            }
+        }
+        return plugin()->getPath('templates/');
+    }
     public static function renderSearchForm($prefilter = [], $filter_items = [], $lang = 'de'): string
     {
         //var_dump($prefilter);

@@ -1,6 +1,7 @@
 .fau-studium-display {
 
     table.degree-program-table {
+        max-width: 100%;
         tr {
             border-left: none;
             border-right: none;
@@ -48,12 +49,13 @@
                     aspect-ratio: 1/1;
                     object-fit: cover;
                     width: 80px;
+                    height: auto;
                     box-shadow: none;
                     float: left;
                     margin-right: 8px;
                     margin-bottom: 8px;
                     @media screen and (min-width: 768px) {
-                        width: 160px;
+                        //width: 160px;
                     }
                     @media screen and (min-width: 992px) {
                         margin-bottom: 0;
