@@ -454,7 +454,7 @@ class Settings
             if ($result != false && !is_wp_error($result)) {
                 $deleted[] = $post_id;
             }
-            delete_transient('fau_studium_degree_program_' . $program_id);
+
         }
 
         wp_send_json_success(json_encode($deleted));
