@@ -17,6 +17,9 @@ class Sync
         $meta = [];
         $program = $this->api->get_program($id);
         foreach ($program as $key => $value) {
+            if (empty($program['title'])) {
+                continue;
+            }
             if ($key != 'translations') {
                 $meta['program_data_de'][$key] = $value;
             }
