@@ -185,11 +185,12 @@ class Utils
                 'degree'            => fn($program, $value) => !empty($program['degree']['parent']['name']) && $program['degree']['parent']['name'] === $value,
                 'subject_group'     => fn($program, $value) => !empty($program['subject_groups']) && in_array($value, $program['subject_groups']),
                 'attribute'         => fn($program, $value) => !empty($program['attributes']) && in_array($value, $program['attributes']),
+                'admission_requirements' => fn($program, $value) => !empty($program['admission_requirement_link']) && $program['admission_requirement_link']['parent']['name'] === $value,
                 'teaching_language' => fn($program, $value) => !empty($program['teaching_language']) && $program['teaching_language'] === $value,
-                'start'             => fn($program, $value) => !empty($program['start']) && in_array($value, $program['start']),
-                'location'          => fn($program, $value) => !empty($program['location']) && in_array($value, $program['location']),
+                'semester'             => fn($program, $value) => !empty($program['start']) && in_array($value, $program['start']),
+                'study_location'          => fn($program, $value) => !empty($program['location']) && in_array($value, $program['location']),
                 'faculty'           => fn($program, $value) => !empty($program['faculty']) && in_array($value, array_column($program['faculty'], 'name')),
-                'area'              => fn($program, $value) => !empty($program['area_of_study']) && in_array($value, array_column($program['area_of_study'], 'name')),
+                'german_language_skills_for_international_students' => fn($program, $value) => !empty($program['german_language_skills_for_international_students']) && $program['german_language_skills_for_international_students']['name'] === $value,
             ];
 
             foreach ($filterMap as $key => $matcher) {

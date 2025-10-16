@@ -26,36 +26,40 @@ class API
 
         $base_url = $this->api_url;
         $page     = 1;
-        $degree_programs  = [];
 
         $url      = add_query_arg(['per_page' => 100, 'page' => $page], $base_url);
         $response = wp_remote_get($url);
 
-        if (!is_wp_error($response)) {
-            $headers       = wp_remote_retrieve_headers($response);
-            $total_pages   = isset($headers['x-wp-totalpages']) ? (int) $headers['x-wp-totalpages'] : 1;
-            $body          = wp_remote_retrieve_body($response);
-            $data          = json_decode($body, true);
-            $degree_programs       = $data;
-
-            for ($page = 2; $page <= $total_pages; $page++) {
-                $url      = add_query_arg(['per_page' => 100, 'page' => $page], $base_url);
-                $response = wp_remote_get($url);
-
-                if (is_wp_error($response)) {
-                    break;
-                }
-
-                $body = wp_remote_retrieve_body($response);
-                $data = json_decode($body, true);
-
-                if (empty($data)) {
-                    break;
-                }
-
-                $degree_programs = array_merge($degree_programs, $data);
-            }
+        if (is_wp_error($response)) {
+            return $filter;
         }
+        if (empty($response)) {
+            return new \WP_Error('api_empty', __('Empty response from API', 'fau-studium-display'));
+        }
+
+        $headers       = wp_remote_retrieve_headers($response);
+        $total_pages   = isset($headers['x-wp-totalpages']) ? (int) $headers['x-wp-totalpages'] : 1;
+        $body          = wp_remote_retrieve_body($response);
+        $degree_programs = json_decode($body, true);
+
+        for ($page = 2; $page <= $total_pages; $page++) {
+            $url      = add_query_arg(['per_page' => 100, 'page' => $page], $base_url);
+            $response = wp_remote_get($url);
+
+            if (is_wp_error($response)) {
+                break;
+            }
+
+            $body = wp_remote_retrieve_body($response);
+            $data = json_decode($body, true);
+
+            if (empty($data)) {
+                break;
+            }
+
+            $degree_programs = array_merge($degree_programs, $data);
+        }
+
 
         if ($show_empty) {
             $empty_option[ 0 ] = [
@@ -74,20 +78,11 @@ class API
 
     public function get_program($program_id) {
         $response = wp_remote_get($this->api_url.'/'.$program_id);
-        if (is_wp_error($response)) {
+        if (is_wp_error($response) || empty($response)) {
             return [];
         }
 
         return json_decode(wp_remote_retrieve_body($response), true);
-    }
-
-    public function get_localized_data($data, $lang = 'de') {
-        if ($lang == 'de') {
-            unset($data['translations']);
-        } elseif ($lang == 'en') {
-            $data = $data['translations']['en'] ?? $data;
-        }
-        return $data;
     }
 
 }

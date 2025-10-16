@@ -194,13 +194,7 @@ class Data
                     }
                     break;
                 case 'admission_requirements':
-                    if (!empty($post_meta['admission_requirements'])) {
-                        foreach ($post_meta['admission_requirements'] as $level) {
-                            if (!empty($level['parent']['name'])) {
-                                $meta_list[] = $level['parent']['name'];
-                            }
-                        }
-                    }
+                    $meta_list[] = $post_meta['admission_requirement_link']['parent']['name'] ?? $post_meta['admission_requirement_link']['name'];
                     break;
                 case 'german_language_skills':
                     if (!empty($post_meta['german_language_skills_for_international_students']['name'])) {
