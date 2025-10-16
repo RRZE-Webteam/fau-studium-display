@@ -41,7 +41,7 @@ class Utils
         }
         return plugin()->getPath('templates/');
     }
-    public static function renderSearchForm($prefilter = [], $filter_items = [], $lang = 'de'): string
+    public static function renderSearchForm($prefilter = [], $filter_items = [], $lang = 'de', $display = 'table'): string
     {
         //var_dump($prefilter);
         $getParams = Utils::array_map_recursive('sanitize_text_field', $_GET);
@@ -53,6 +53,7 @@ class Utils
         if (empty($filter_items)) {
             $filter_items = get_output_fields('search-filters');
         }
+        $display = ($display == 'table') ? 'table' : 'grid';
 
         $filters = [
             ['key' => 'degree', 'label' => ($labels['degree'] ?? 'degree'), 'data' => $degrees],
@@ -83,13 +84,15 @@ class Utils
         }
 
         $output = '<form method="get" class="program-search" action="' . esc_url($url) . '">';
-        $search = !empty($getParams['search']) ? sanitize_text_field($getParams['search']) : '';
+        $search = (!empty($getParams['search']) ? sanitize_text_field($getParams['search']) : '');
+        $search_in_text = (!empty($getParams['search_text']) && $getParams['search_text'] == 'on' ? ' checked ' : '');
 
         // Search input
-        $output .= '<label for="fau_studium_search" class="label">' . __('Search', 'fau-studium-display') . '</label>'
+        $output .= '<label for="fau_studium_search" class="label" xmlns="http://www.w3.org/1999/html">' . __('Search', 'fau-studium-display') . '</label>'
                    . '<div class="search-title">'
                    . '<input type="text" name="search" id="fau_studium_search" value="' . $search . '" placeholder="' . __('Search all degree programs', 'fau-studium-display') . '" />'
                    . '<button type="submit">' . __('Search', 'fau-studium-display') . '</button>'
+                   . '<p class="search-in-text"><label><input type="checkbox" name="search_text" value="on" ' . $search_in_text . '>' . __('Also search in text', 'fau-studium-display') . '</label></p>'
                    . '</div>';
 
         // Filter options
@@ -165,19 +168,34 @@ class Utils
             $output .= '<a class="filter-selected delete-all" data-key="all" data-value="all" href="' . $url . '">'  . __('Delete all', 'fau-studium-display') . '</a>';
             $output .= '</div>';
         }
-
+        $output .= '<p class="display-settings">' . __('Display', 'fau-studium-display')
+                    . '<button type="submit" class="display-settings-table' . ($display == 'table' ? ' active' : '') . '" name="display" value="table">' . __('Table', 'fau-studium-display') . '</button>'
+                    . '<button type="submit" class="display-settings-grid' . ($display == 'grid' ? ' active' : '') . '" name="display" value="grid">' . __('Grid', 'fau-studium-display') . '</button>'
+                   . '</p>';
         $output .= '</form>';
         return $output;
     }
 
     public static function filterPrograms($programs, $filter) {
         $programs_filtered = [];
+        $search_in_text = isset($filter['search_text']) && $filter['search_text'] == 'on';
 
         foreach ($programs as $id => $program) {
 
             // Text search
-            if (!empty($filter['search']) && !str_contains(strtolower($program['title']), strtolower($filter['search']))) {
-                continue;
+            if (!empty($filter['search'])) {
+                $search_term = strtolower(sanitize_text_field($filter['search']));
+                $search_target = $program['title'];
+                if ($search_in_text) {
+                    $search_target .= $program['entry_text'] ?? '';
+                    foreach ($program['content'] as $content_item) {
+                        $search_target .= $content_item['description'] ?? '';
+                    }
+                }
+                $search_target = strtolower(strip_tags($search_target));
+                if (!str_contains($search_target, $search_term)) {
+                    continue;
+                }
             }
 
             // Attribute search
@@ -301,9 +319,17 @@ class Utils
         return $degreeProgramOptions;
     }
 
-    public static function get_degree_options($parents = false) {
+    public static function get_degree_options($parents = false, $from_api = false) {
         $degreeOptions = [];
-        if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+        if ($from_api == true) {
+            $degrees = (new API)->get_meta_list('degree_parents');
+            foreach ($degrees as $degree) {
+                $degreeOptions[] = [
+                    'label' => $degree,
+                    'value' => $degree,
+                ];
+            }
+        } elseif (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
             $degree_terms = get_terms([
                 'taxonomy'      => 'abschluss',
                 'hide_empty' => true,
@@ -329,9 +355,17 @@ class Utils
         return $degreeOptions;
     }
 
-    public static function get_faculty_options() {
+    public static function get_faculty_options($from_api = false) {
         $facultyOptions = [];
-        if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+        if ($from_api == true) {
+            $faculties = (new API)->get_meta_list('faculties');
+            foreach ($faculties as $faculty) {
+                $facultyOptions[] = [
+                    'label' => $faculty,
+                    'value' => $faculty,
+                ];
+            }
+        } elseif (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
             $faculty_terms = get_terms([
                 'taxonomy'      => 'faculty',
                 'hide_empty' => true,

@@ -14,12 +14,18 @@
             row-gap: var(--Spacing-2x, .5rem);
             column-gap: var(--Spacing-8x, 2rem);
         }
+        * {
+            font-family: var(--font-family-base, "Source Sans 3", "Roboto", arial, sans-serif);
+        }
         p {
             padding: 0;
         }
         .label {
             display: block;
             font-weight: bold;
+        }
+        input {
+            font-size: var(--P-Body-Text-Small, 1rem);
         }
         .search-title,
         .filter-degrees {
@@ -45,6 +51,7 @@
                 margin-right: 0;
                 margin-top: 0;
                 margin-left: 0;
+                border: none;
                 width: 48px;
                 height: 48px;
                 padding: 0;
@@ -74,6 +81,13 @@
                 padding-left: 10px;
                 margin-bottom: 0;
             }
+            p.search-in-text {
+                flex: 100% 0 0;
+                margin: var(--Spacing-1x, .25rem) 0 0;
+            }
+            input[type=checkbox] {
+                margin-right: var(--Spacing-2x, .5rem);
+            }
         }
 
         .search-title,
@@ -92,18 +106,23 @@
 
         .flex-wrapper {
             width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--Spacing-4x, .5rem);
             @media (min-width:768px) {
-                display: flex;
-                flex-wrap: wrap;
                 gap: var(--Spacing-8x, 2rem);
             }
         }
 
         div[class^='filter-'] {
-            flex-basis: 40%;
-            flex-shrink: 0;
-            flex-grow: 1;
             position: relative;
+            width: 100%;
+            @media (min-width:768px) {
+                flex-basis: 40%;
+                flex-shrink: 0;
+                flex-grow: 1;
+                max-width: 419px;
+            }
             button.checklist-toggle {
                 width: 100%;
                 height: 48px;
@@ -111,6 +130,7 @@
                 border: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
                 border-radius: var(--border-radius-buttons,3px);
                 color: var(--FAU-Col-FAU-Blau-100, #04316a);
+                font-size: var(--P-Body-Text-Small, 1rem);
                 font-weight: 600;
                 margin: 0;
                 padding: 8px 8px 8px 12px;
@@ -212,6 +232,7 @@
             cursor: pointer;
             background-color: #fff;
             color: var(--FAU-Col-FAU-Blau-100, #04316a);
+            font-size: var(--P-Body-Text-Small, 1rem);
             border: none;
             .icon-wrapper.icon-plus {
                 margin-left: .3em;
@@ -315,6 +336,50 @@
                     background-color: #fff;
                     vertical-align: middle;
                     margin-left: .5em;
+                }
+            }
+        }
+        .display-settings {
+            width: 100%;
+            text-align: right;
+            margin: 0;
+            button {
+                width: 48px;
+                height: 48px;
+                overflow: hidden;
+                background-color: #fff;
+                border: none;
+                vertical-align: middle;
+                padding: 0;
+                &:before {
+                    content: "";
+                    -webkit-mask-size: var(--icon-size-mask, 70%);
+                    mask-size: var(--icon-size-mask, 70%);
+                    -webkit-mask-repeat: no-repeat;
+                    mask-repeat: no-repeat;
+                    -webkit-mask-position: center;
+                    mask-position: center;
+                    display: inline-block;
+                    width: 48px;
+                    height: 48px;
+                    background-color: var(--FAU-Col-FAU-Blau-25, #C0CBDA);
+                }
+                &.display-settings-table:before {
+                    mask-image: url(../svg/list.svg);
+                    -webkit-mask-image: url(../svg/list.svg);
+                }
+                &.display-settings-grid:before {
+                    mask-image: url(../svg/grid.svg);
+                    -webkit-mask-image: url(../svg/grid.svg);
+                }
+                &.active:before {
+                    background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
+                }
+                &:hover, &:focus, &:active {
+                    background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
+                    &:before {
+                        background-color: #fff;
+                    }
                 }
             }
         }

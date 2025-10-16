@@ -210,8 +210,8 @@ class Settings
     }
 
     public function render_sync_search() {
-        $facultyOptions = Utils::get_faculty_options();
-        $degreeOptions = Utils::get_degree_options(true);
+        $facultyOptions = Utils::get_faculty_options(true);
+        $degreeOptions = Utils::get_degree_options(true, true);
 
         echo '<div class="" style="display:flex; flex-direction: row; flex-wrap: wrap; column-gap: 2em;">'
              . '<div class="">'

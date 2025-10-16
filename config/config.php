@@ -312,7 +312,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'admission_requirements_application' => [
             'labels' => [
-                'de' => 'Zulassungsvoraussetzungen und Bewerbung',
+                'de' => 'Zugangsvoraussetzungen und Bewerbung',
                 'en' => 'Admission Requirements and Application'
             ]
         ],
@@ -388,8 +388,8 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Student advice center'
             ],
             'description' => [
-                'de' => 'Die Zentrale Studienberatung ist deine Anlaufstelle für alle Fragen rund ums Studium und den Studieneinstieg.',
-                'en' => 'Die Zentrale Studienberatung ist deine Anlaufstelle für alle Fragen rund ums Studium und den Studieneinstieg.', // ToDo: Übersetzung
+                'de' => 'Die Zentrale Studienberatung ist die erste Anlaufstelle zu allen Fragen rund ums Studium und den Studieneinstieg.',
+                'en' => 'The Central Student Advisory Service is the first point of contact for all questions concerning your studies and the start of your degree program.',
             ],
         ],
         'subject_specific_advice' => [
@@ -398,8 +398,8 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Specific student advice'
             ],
             'description' => [
-                'de' => 'Die Studien-Servcie-Center und Studienfachberater unterstützen dich bei der Planung deines Studiums.',
-                'en' => 'Die Studien-Servcie-Center und Studienfachberater unterstützen dich bei der Planung deines Studiums.', // ToDo: Übersetzung
+                'de' => 'Fachbezogene Beratung für Fragen rund um das Fach und die Studienplanung.',
+                'en' => 'Subject-specific advising for questions related to your field of study and study planning.',
             ],
         ],
         'service_centers' => [
@@ -563,6 +563,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Your Path to University Admission'
             ]
         ],
+        'application_for_program' => [
+            'labels' => [
+                'de' => 'Bewerbung zum Studium',
+                'en' => 'Application for a Degree Program'
+            ]
+        ],
         'useful_links' => [
             'labels' => [
                 'de' => 'Nützliche Links',
@@ -625,14 +631,32 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'how_to_apply' => [
             'labels' => [
-                'de' => 'So läuft die Bewerbung ab',
-                'en' => 'How to apply'
+                'de' => 'Bewerbungsprozess',
+                'en' => 'Application process'
             ]
         ],
         'how_to_apply_internationals' => [
             'labels' => [
-                'de' => 'So läuft die Bewerbung für Internationale ab',
-                'en' => 'How to apply as an international student'
+                'de' => 'Bewerbungsprozess für Internationale',
+                'en' => 'Application process for internationals'
+            ]
+        ],
+        'how_to_apply_internationals_title' => [
+            'labels' => [
+                'de' => 'Bewerbung für Internationale',
+                'en' => 'Application for internationals'
+            ]
+        ],
+        'all_information_internationals' => [
+            'labels' => [
+                'de' => 'Hinweise zu Zugangsvoraussetzungen, Fristen und Bewerbung im Überblick.',
+                'en' => 'Overview of admission requirements, deadlines, and application procedures'
+            ]
+        ],
+        'button_internationals' => [
+            'labels' => [
+                'de' => 'Bewerbungsprozess für Internationale',
+                'en' => 'Application process for Internationals',
             ]
         ]
     ];
@@ -672,16 +696,16 @@ function get_constants($lang = 'de') {
     $mein_studium_options = get_meinstudium_options($lang);
     $constants = [
         'apply-now-title' => [
-            'de' => 'Bewirb dich jetzt!',
-            'en' => 'Apply now!'
+            'de' => 'Jetzt für einen Studienplatz bewerben',
+            'en' => 'Apply now for a degree program'
         ],
         'apply-now-text' => [
-            'de' => 'auf campo, dem Bewerbungsportal der FAU',
-            'en' => 'on campo, the FAU application portal'
+            'de' => 'Der erste Schritt zum Studium beginnt mit der Online-Bewerbung.',
+            'en' => 'The first step towards your studies begins with the online application.'
         ],
         'apply-now-link-text' => [
-            'de' => 'Jetzt auf campo bewerben/anmelden',
-            'en' => 'Apply/Register now on campo'
+            'de' => 'Direkt zum Bewerbungsportal',
+            'en' => 'To the application portal'
         ],
         'apply-now-link-url' => [
             'de' => 'https://www.campo.fau.de',
@@ -700,16 +724,16 @@ function get_constants($lang = 'de') {
             'en' => plugin()->getUrl() . 'assets/img/student-advice.jpg'
         ],
         'specific-student-advice-image' => [
-            'de' => plugin()->getUrl() . 'assets/img/student-advice-specific.jpeg',
-            'en' => plugin()->getUrl() . 'assets/img/student-advice-specific.jpeg'
+            'de' => plugin()->getUrl() . 'assets/img/student-advice-specific.jpg',
+            'en' => plugin()->getUrl() . 'assets/img/student-advice-specific.jpg'
         ],
         'benefits-fau-title' => [
             'de' => 'Deine Vorteile an der FAU',
             'en' => 'Deine Vorteile an der FAU'
         ],
         'benefits-fau-text' => [
-            'de' => 'Die FAU bietet Ihnen mit über 270 Studiengängen eine inspirierende Lernumgebung, studentische Gemeinschaft und zahlreiche Möglichkeiten, Ihre Leidenschaft zu entdecken.',
-            'en' => 'Die FAU bietet Ihnen mit über 270 Studiengängen eine inspirierende Lernumgebung, studentische Gemeinschaft und zahlreiche Möglichkeiten, Ihre Leidenschaft zu entdecken.'
+            'de' => 'Die FAU bietet Ihnen mit über 275 Studiengängen eine inspirierende Lernumgebung, studentische Gemeinschaft und zahlreiche Möglichkeiten, Ihre Leidenschaft zu entdecken.',
+            'en' => 'With more than 275 degree programs, FAU offers an inspiring learning environment, a vibrant student community, and numerous opportunities to discover your passion.'
         ],
         'benefits-fau-link-text' => [
             'de' => 'Mehr erfahren',
@@ -724,8 +748,8 @@ function get_constants($lang = 'de') {
             'en' => plugin()->getUrl() . 'assets/img/benefits-fau.png'
         ],
         'features-1-text' => [
-            'de' => 'Mehr als 270 Studiengänge',
-            'en' => 'More than 270 degree programs',
+            'de' => 'Mehr als 275 Studiengänge',
+            'en' => 'More than 275 degree programs',
         ],
         'features-1-icon' => [
             'de' => 'school',

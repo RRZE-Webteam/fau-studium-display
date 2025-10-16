@@ -202,13 +202,15 @@ foreach ($content_fields as $field) {
                 $content_html .= sprintf('<li><a href="%s">%s</a></li>', $combination['url'], $combination['title']);
             }
             $content_html .= '</ul>';
+            $content_html .= '<p>' . __('With these subject combinations, there are generally no overlaps in the timetable.', 'fau-studium-display') . '</p>';
         }
         if (!empty($data['limited_combinations'])) {
-            $content_html .= '<h4>' . ($labels['content.limited_combinations'] ?? 'limited_combinations') . '</h4><ul class="program-limited-combinations">';
+            $content_html .= '<h4>' . ($labels['content.limited_combinations'] ?? 'limited_combinations') . '</h4><ul class="program-limited-combinations wp-block-list">';
             foreach ($data['limited_combinations'] as $limited_combination) {
                 $content_html .= sprintf('<li><a href="%s">%s</a></li>', $limited_combination['url'], $limited_combination['title']);
             }
             $content_html .= '</ul>';
+            $content_html .= '<p>' . __('If you combine these subjects, individual courses may overlap in your timetable. For this reason, you can only combine the following subjects with your chosen subject after a consultation. Students are responsible for ensuring that the combination can be studied and that the deadlines set out in Section 11 of the ABMStPOPhil are met. When enrolling, proof of a corresponding consultation with the Central Student Advisory Service or the Student Service Center (Faculty of Humanities, Social Studies, and Theology) must be submitted.', 'fau-studium-display') . '</p>';
         }
         $content_html .= '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
 
@@ -236,32 +238,18 @@ if (in_array('videos', $items) && !empty($data['videos'])) {
     $videos = '';
 }
 
-// Info Internationals
-if (in_array('info_internationals_link', $items)) {
-    $cta_internationals_title = __('International Prospective Students', 'fau-studium-display');
-    $cta_internationals_id = sanitize_title($cta_internationals_title);
-    $cta_internationals = '<h2 id="' . $cta_internationals_id . '">' . $cta_internationals_title . '</h2><div class="width-medium">'
-                          . do_blocks('<!-- wp:rrze-elements/cta {"url":"' . $constants['internationals-image'] . '","buttonUrl":"fau.de","alt":"","title":"So läuft die Bewerbung für Internationale ab","subtitle":"Alle Informationen zu Voraussetzungen, Fristen und Ablauf","buttonText":"Mehr erfahren"} /-->')
-                          . '</div>';
-    $quicklinks[1] = '<!-- wp:button -->
-                <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $cta_internationals_id . '">' . $cta_internationals_title . '</a></div>
-            <!-- /wp:button -->';
-} else {
-    $cta_internationals = '';
-}
-
 // Admission Requirements and Application
 if (in_array('admission_requirements_application', $items)) {
 
     $admission_requirements = [];
     if (!empty($data['admission_requirements']['bachelor_or_teaching_degree'])) {
-        $admission_requirements['bachelor_or_teaching_degree'] = __('1st semester', 'fau-studium-display') . ': <a href="' . $data['admission_requirements']['bachelor_or_teaching_degree']['link_url'] . '">' . $data['admission_requirements']['bachelor_or_teaching_degree']['link_text'] . '</a>';
+        $admission_requirements['bachelor_or_teaching_degree'] = __('1st semester', 'fau-studium-display') . ': ' . $data['admission_requirements']['bachelor_or_teaching_degree']['link_text'];
     }
     if (!empty($data['admission_requirements']['teaching_degree_higher_semester'])) {
-        $admission_requirements['teaching_degree_higher_semester'] = __('Higher semesters', 'fau-studium-display') . ': <a href="' . $data['admission_requirements']['teaching_degree_higher_semester']['link_url'] . '">' . $data['admission_requirements']['teaching_degree_higher_semester']['link_text'] . '</a>';
+        $admission_requirements['teaching_degree_higher_semester'] = __('Higher semesters', 'fau-studium-display') . ': ' . $data['admission_requirements']['teaching_degree_higher_semester']['link_text'];
     }
     if (!empty($data['admission_requirements']['master'])) {
-        $admission_requirements['master'] = __('Master', 'fau-studium-display') . ': <a href="' . $data['admission_requirements']['master']['link_url'] . '">' . $data['admission_requirements']['master']['link_text'] . '</a>';
+        $admission_requirements['master'] = __('Master', 'fau-studium-display') . ': ' . $data['admission_requirements']['master']['link_text'];
     }
 
     if (empty($data['application_deadline_winter_semester']) && empty($data['application_deadline_summer_semester'])) {
@@ -293,7 +281,7 @@ if (in_array('admission_requirements_application', $items)) {
         || !empty($content_related_master_requirements)
         || !empty($admission_details)) {
 
-        $admission_requirements_application_title = ($labels['path_to_admission'] ?? 'path_to_admission');
+        $admission_requirements_application_title = ($labels['application_for_program'] ?? 'application_for_program');
         $admission_requirements_application_id = sanitize_title($admission_requirements_application_title);
         $admission_requirements_application .= '<h2 id="' . $admission_requirements_application_id . '">' . $admission_requirements_application_title . '</h2>';
         $admission_requirements_application .= '<div class="program-admission width-small"><h3>' . ($labels['admission_requirements_application'] ?? 'admission_requirements_application') . '</h3>';
@@ -349,6 +337,27 @@ if (in_array('admission_requirements_application', $items)) {
     }
 } else {
     $admission_requirements_application = '';
+}
+
+// Info Internationals
+if (in_array('info_internationals_link', $items)) {
+    //$cta_internationals_title = __('International Prospective Students', 'fau-studium-display');
+    //$cta_internationals_id = sanitize_title($cta_internationals_title);
+    $cta_internationals = '<div class="width-medium">'
+                          . do_blocks('<!-- wp:rrze-elements/cta {
+                          "url":"' . $constants['internationals-image'] . '",
+                          "buttonUrl":"fau.de",
+                          "alt":"",
+                          "title":"' . ($labels['how_to_apply_internationals_title'] ?? 'how_to_apply_internationals_title') . '",
+                          "subtitle":"' . ($labels['all_information_internationals'] ?? 'all_information_internationals') . '",
+                          "buttonText":"' . ($labels['button_internationals'] ?? 'button_internationals') . '"
+                          } /-->')
+                          . '</div>';
+    /*$quicklinks[1] = '<!-- wp:button -->
+                <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $cta_internationals_id . '">' . $cta_internationals_title . '</a></div>
+            <!-- /wp:button -->';*/
+} else {
+    $cta_internationals = '';
 }
 
 // Apply now!
@@ -522,14 +531,14 @@ if (in_array('benefits', $items)) {
         . '<div class="fau-big-teaser__content">'
         . '<h3 class="fau-big-teaser__headline">' . $constants[ 'benefits-fau-title' ] . '</h3>'
         . '<p class="fau-big-teaser__teaser-text">' . $constants[ 'benefits-fau-text' ] . '</p>'
-        . '<a href="' . $constants[ 'benefits-fau-link-url' ] . '" class="wp-block-buttons is-layout-flex">' . $constants[ 'benefits-fau-link-text' ] . '</a>'
+        //. '<a href="' . $constants[ 'benefits-fau-link-url' ] . '" class="wp-block-buttons is-layout-flex">' . $constants[ 'benefits-fau-link-text' ] . '</a>'
         . '</div>'
         . '<div class="fau-big-teaser__image">'
         . '<img src="' . $benefits_fau_image . '" alt="" />'
         . '</div>'
         . '</div>';
     $benefits_fau .= do_blocks('<!-- wp:rrze-elements/iconbox-row -->
-<!-- wp:rrze-elements/rrze-iconbox {"title":"Mehr als 270","description":"Studiengänge","materialSymbol":"school"} /-->
+<!-- wp:rrze-elements/rrze-iconbox {"title":"Mehr als 275","description":"Studiengänge","materialSymbol":"school"} /-->
 <!-- wp:rrze-elements/rrze-iconbox {"title":"Internationale","description":"Partnerschaften","materialSymbol":"language"} /-->
 <!-- wp:rrze-elements/rrze-iconbox {"title":"\u003cstrong\u003eEnge Verknüpfung\u003c/strong\u003e","description":"mit der Wirtschaft","materialSymbol":"handshake"} /-->
 <!-- wp:rrze-elements/rrze-iconbox {"title":"\u003cstrong\u003eBachelorverbundstudium\u003c/strong\u003e","description":"dual studieren","materialSymbol":"join_left"} /-->
@@ -573,13 +582,13 @@ if (in_array('benefits', $items)) {
         // Videos
         echo $videos;
 
-        // Internationals
-        echo $cta_internationals;
-
         // Admission
         if (!empty($admission_requirements_application)) {
             echo $admission_requirements_application;
         }
+
+        // Internationals
+        echo $cta_internationals;
 
         // Apply now CTA
         echo $apply_now;
@@ -591,7 +600,7 @@ if (in_array('benefits', $items)) {
 
             // Student advice
             if (!empty($student_advice . $subject_specific_advice)) {
-                echo '<div class="student-advice width-large"><h3>' . __("We're Here to Help with All Your Study-Related Questions", 'fau-studium-display') . '</h3>'
+                echo '<div class="student-advice width-large"><h3>' . __("Advice and support for all questions related to your studies", 'fau-studium-display') . '</h3>'
                      . do_blocks('<!-- wp:columns --><div class="wp-block-columns alignwide">'
                          . '<!-- wp:column --><div class="wp-block-column">' . $student_advice . '</div><!-- /wp:column -->'
                          . '<!-- wp:column --><div class="wp-block-column">' . $subject_specific_advice . '</div><!-- /wp:column -->'

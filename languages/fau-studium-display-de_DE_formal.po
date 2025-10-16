@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: FAU Studium Display\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-06-12 12:41+0000\n"
-"PO-Revision-Date: 2025-10-09 16:54+0000\n"
+"PO-Revision-Date: 2025-10-16 16:06+0000\n"
 "Last-Translator: \n"
 "Language-Team: Deutsch (Sie)\n"
 "Language: de_DE_formal\n"
@@ -18,21 +18,21 @@ msgstr ""
 "X-Loco-Template: languages/fau-studium-display-de_DE.po\n"
 "X-Loco-Template-Mode: PO,JSON"
 
-#: templates/degree-program-box.php:37 templates/degree-program-full.php:111
+#: templates/degree-program-box.php:37 templates/degree-program-full.php:115
 msgid "%s semesters"
 msgstr "%s Semester"
 
-#: templates/degree-program-grid.php:104 templates/degree-program-table.php:110
+#: templates/degree-program-grid.php:101 templates/degree-program-table.php:107
 msgid "%s%d degree program found%s"
 msgid_plural "%s%d degree programs found%s"
 msgstr[0] "%s%d Studiengang gefunden%s"
 msgstr[1] "%s%d Studiengänge gefunden%s"
 
-#: includes/API.php:69
+#: includes/API.php:66
 msgid "-- Please select --"
 msgstr "-- Bitte auswählen --"
 
-#: templates/degree-program-full.php:254
+#: templates/degree-program-full.php:246
 msgid "1st semester"
 msgstr "1. Semester"
 
@@ -40,7 +40,15 @@ msgstr "1. Semester"
 msgid "Admission requirements"
 msgstr "Zugangsvoraussetzung"
 
-#: includes/Utils.php:227
+#: templates/degree-program-full.php:603
+msgid "Advice and support for all questions related to your studies"
+msgstr "Beratung und Unterstützung bei Fragen rund ums Studium"
+
+#: includes/Utils.php:94
+msgid "Also search in text"
+msgstr "Auch im Text suchen"
+
+#: includes/Utils.php:245
 msgid "Apply filter"
 msgstr "Filter anwenden"
 
@@ -78,7 +86,7 @@ msgstr "Abschlüsse"
 msgid "Delete"
 msgstr "Löschen"
 
-#: includes/Utils.php:165
+#: includes/Utils.php:167
 msgid "Delete all"
 msgstr "Alle löschen"
 
@@ -86,11 +94,19 @@ msgstr "Alle löschen"
 msgid "Delete selected"
 msgstr "Ausgewählte löschen"
 
+#: includes/Utils.php:170
+msgid "Display"
+msgstr "Darstellung"
+
+#: includes/API.php:37
+msgid "Empty response from API"
+msgstr "Leere Antwort von der API"
+
 #: build/block/index.js:254 build/block/index.js:1
 msgid "English"
 msgstr "Englisch"
 
-#: templates/degree-program-full.php:158
+#: templates/degree-program-full.php:162
 msgid "Fact Sheet"
 msgstr "Steckbrief"
 
@@ -107,7 +123,7 @@ msgstr "Fakultät"
 msgid "FAU Studium Display"
 msgstr "FAU Studium Display"
 
-#: includes/Utils.php:96
+#: includes/Utils.php:98
 msgid "Filter Options"
 msgstr "Filtermöglichkeiten"
 
@@ -139,7 +155,7 @@ msgstr "Deutschkenntnisse"
 msgid "Grid"
 msgstr "Kacheln"
 
-#: templates/degree-program-full.php:257
+#: templates/degree-program-full.php:249
 msgid "Higher semesters"
 msgstr "Höhere Semester"
 
@@ -147,6 +163,27 @@ msgstr "Höhere Semester"
 #: fau-studium-display.php
 msgid "https://github.com/RRZE-Webteam/fau-studium-display"
 msgstr "https://github.com/RRZE-Webteam/fau-studium-display"
+
+#: templates/degree-program-full.php:213
+msgid ""
+"If you combine these subjects, individual courses may overlap in your "
+"timetable. For this reason, you can only combine the following subjects with "
+"your chosen subject after a consultation. Students are responsible for "
+"ensuring that the combination can be studied and that the deadlines set out "
+"in Section 11 of the ABMStPOPhil are met. When enrolling, proof of a "
+"corresponding consultation with the Central Student Advisory Service or the "
+"Student Service Center (Faculty of Humanities, Social Studies, and Theology) "
+"must be submitted."
+msgstr ""
+"Wenn Sie diese Fächer kombinieren, könnten sich einzelne Veranstaltungen in "
+"Ihrem Stundenplan überschneiden. Deshalb können Sie folgende Fächer nur nach "
+"einem Beratungsgespräch mit dem von Ihnen gewählten Fach kombinieren. Die "
+"Studierenden tragen selbst die Verantwortung für die Studierbarkeit der "
+"Kombination und die Einhaltung der Fristen des § 11 der ABMStPOPhil.\n"
+"Bei der Immatrikulation ist ein Nachweis über ein entsprechendes "
+"Beratungsgespräch mit der Zentralen Studienberatung oder mit dem Studien-"
+"Service-Center (Philosophische Fakultät und Fachbereich Theologie) "
+"vorzulegen."
 
 #: includes/Settings.php:186 includes/Settings.php:371
 msgid "Import"
@@ -164,10 +201,6 @@ msgstr "Ausgewählte importieren"
 msgid "Infobox"
 msgstr "Infobox"
 
-#: templates/degree-program-full.php:237
-msgid "International Prospective Students"
-msgstr "Internationale Studieninteressierte"
-
 #: build/block/index.js:248 build/block/index.js:1
 msgid "Language"
 msgstr "Sprache"
@@ -180,7 +213,7 @@ msgstr "Layout"
 msgid "Link Target"
 msgstr "Linkziel"
 
-#: build/block/index.js:204 build/block/index.js:1
+#: includes/Utils.php:171 build/block/index.js:204 build/block/index.js:1
 msgid "List"
 msgstr "Liste"
 
@@ -192,11 +225,11 @@ msgstr "Importierte Studiengänge verwalten"
 msgid "Manage Imported Degree Programs"
 msgstr "Importierte Studiengänge verwalten"
 
-#: templates/degree-program-full.php:260
+#: templates/degree-program-full.php:252
 msgid "Master"
 msgstr "Master"
 
-#: includes/Utils.php:146
+#: includes/Utils.php:148
 msgid "More filter options"
 msgstr "Weitere Filtermöglichkeiten"
 
@@ -209,11 +242,15 @@ msgstr "MeinStudium"
 msgid "No data available"
 msgstr "Keine Daten vorhanden"
 
+#: templates/degree-program-full.php:18
+msgid "No data available."
+msgstr "Keine Daten verfügbar."
+
 #: includes/Settings.php:235
 msgid "No degree programs found"
 msgstr "Keine Studiengänge gefunden"
 
-#: templates/degree-program-grid.php:112 templates/degree-program-table.php:117
+#: templates/degree-program-grid.php:112 templates/degree-program-table.php:118
 msgid "No degree programs found."
 msgstr "Keine Studiengänge gefunden."
 
@@ -238,7 +275,7 @@ msgstr ""
 msgid "None"
 msgstr "Kein Link"
 
-#: templates/degree-program-full.php:266 templates/degree-program-full.php:267
+#: templates/degree-program-full.php:258 templates/degree-program-full.php:259
 msgid "not possible"
 msgstr "nicht möglich"
 
@@ -264,7 +301,7 @@ msgstr "Post-Meta-Daten englisch"
 msgid "Post Meta German"
 msgstr "Post-Meta-Daten deutsch"
 
-#: templates/degree-program-full.php:177
+#: templates/degree-program-full.php:181
 msgid "Program Overview"
 msgstr "Studiengang im Detail"
 
@@ -281,11 +318,11 @@ msgstr "RRZE Webteam"
 msgid "Save changes"
 msgstr "Änderungen speichern"
 
-#: includes/Settings.php:228 includes/Utils.php:89 includes/Utils.php:92
+#: includes/Settings.php:228 includes/Utils.php:90 includes/Utils.php:93
 msgid "Search"
 msgstr "Suche"
 
-#: includes/Utils.php:91
+#: includes/Utils.php:92
 msgid "Search all degree programs"
 msgstr "Alle Studiengänge durchsuchen"
 
@@ -317,7 +354,7 @@ msgstr ""
 "Suchen Sie die Elemente aus, die in der Detail-Ansicht angezeigt werden "
 "sollen."
 
-#: includes/Utils.php:158
+#: includes/Utils.php:160
 msgid "Selected filters"
 msgstr "Ausgewählte Filter"
 
@@ -357,7 +394,7 @@ msgstr "Besondere Studienformen"
 msgid "Start of degree program"
 msgstr "Studienbeginn"
 
-#: templates/degree-program-full.php:516
+#: templates/degree-program-full.php:529
 msgid "Studies"
 msgstr "Studium"
 
@@ -369,7 +406,7 @@ msgstr "Studienort"
 msgid "Subject groups"
 msgstr "Fächergruppen"
 
-#: templates/degree-program-full.php:267
+#: templates/degree-program-full.php:259
 msgid "Summer semester"
 msgstr "Sommersemester"
 
@@ -377,7 +414,8 @@ msgstr "Sommersemester"
 msgid "Sync"
 msgstr "Sync"
 
-#: includes/Settings.php:130 build/block/index.js:201 build/block/index.js:1
+#: includes/Settings.php:130 includes/Utils.php:172 build/block/index.js:201
+#: build/block/index.js:1
 msgid "Table"
 msgstr "Tabelle"
 
@@ -411,14 +449,18 @@ msgstr "Aktualisieren"
 msgid "Update selected"
 msgstr "Ausgewählte aktualisieren"
 
-#: templates/degree-program-full.php:590
-msgid "We're Here to Help with All Your Study-Related Questions"
-msgstr "Wir helfen Dir bei Fragen rund ums Studium"
-
 #: includes/Settings.php:100
 msgid "What format should the list view use?"
 msgstr "In welchem Format soll die Archiv-Ansicht dargestellt werden?"
 
-#: templates/degree-program-full.php:266
+#: templates/degree-program-full.php:258
 msgid "Winter semester"
 msgstr "Wintersemester"
+
+#: templates/degree-program-full.php:205
+msgid ""
+"With these subject combinations, there are generally no overlaps in the "
+"timetable."
+msgstr ""
+"Bei diesen Fächerkombinationen gibt es in der Regel keine terminlichen "
+"Überschneidungen im Stundenplan."
