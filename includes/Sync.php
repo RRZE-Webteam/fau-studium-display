@@ -16,10 +16,10 @@ class Sync
 
         $meta = [];
         $program = $this->api->get_program($id);
+        if (empty($program['title'])) {
+            return new \WP_Error();
+        }
         foreach ($program as $key => $value) {
-            if (empty($program['title'])) {
-                continue;
-            }
             if ($key != 'translations') {
                 $meta['program_data_de'][$key] = $value;
             }

@@ -45,10 +45,10 @@ class Utils
     {
         //var_dump($prefilter);
         $getParams = Utils::array_map_recursive('sanitize_text_field', $_GET);
-        $api = new API();
-        $degrees = !empty($prefilter['degree']) ? $prefilter['degree'] : $api->get_meta_list('degree_parents');
-        $subject_groups = !empty($prefilter['subject_group']) ? $prefilter['subject_group'] : $api->get_meta_list('subject_groups');
-        $attributes = !empty($prefilter['attribute']) ? $prefilter['attribute'] : $api->get_meta_list('attributes');
+        $data = new Data();
+        $degrees = !empty($prefilter['degree']) ? $prefilter['degree'] : $data->get_meta_list('degree_parents');
+        $subject_groups = !empty($prefilter['subject_group']) ? $prefilter['subject_group'] : $data->get_meta_list('subject_groups');
+        $attributes = !empty($prefilter['attribute']) ? $prefilter['attribute'] : $data->get_meta_list('attributes');
         $labels = get_labels($lang); // ToDO
         if (empty($filter_items)) {
             $filter_items = get_output_fields('search-filters');
@@ -58,12 +58,12 @@ class Utils
             ['key' => 'degree', 'label' => ($labels['degree'] ?? 'degree'), 'data' => $degrees],
             ['key' => 'subject_group', 'label' => ($labels['subject_group'] ?? 'subject_group'), 'data' => $subject_groups],
             ['key' => 'attribute', 'label' => ($labels['attribute'] ?? 'attribute'), 'data' => $attributes],
-            ['key' => 'admission_requirements', 'label' => ($labels['admission_requirements'] ?? 'admission_requirements'), 'data' => $api->get_meta_list('admission_requirements')],
-            ['key' => 'semester', 'label' => ($labels['start'] ?? 'start'), 'data' => $api->get_meta_list('start_semesters')],
-            ['key' => 'study_location', 'label' => ($labels['location'] ?? 'location'), 'data' => $api->get_meta_list('study_locations')],
-            ['key' => 'teaching_language', 'label' => ($labels['teaching_language'] ?? 'teaching_language'), 'data' => $api->get_meta_list('teaching_languages')],
-            ['key' => 'faculty', 'label' => ($labels['faculty'] ?? 'faculty'), 'data' => $api->get_meta_list('faculties')],
-            ['key' => 'german_language_skills_for_international_students', 'label' => ($labels['german_language_skills'] ?? 'german_language_skills'), 'data' => $api->get_meta_list('german_language_skills')],
+            ['key' => 'admission_requirements', 'label' => ($labels['admission_requirements'] ?? 'admission_requirements'), 'data' => $data->get_meta_list('admission_requirements')],
+            ['key' => 'semester', 'label' => ($labels['start'] ?? 'start'), 'data' => $data->get_meta_list('start_semesters')],
+            ['key' => 'study_location', 'label' => ($labels['location'] ?? 'location'), 'data' => $data->get_meta_list('study_locations')],
+            ['key' => 'teaching_language', 'label' => ($labels['teaching_language'] ?? 'teaching_language'), 'data' => $data->get_meta_list('teaching_languages')],
+            ['key' => 'faculty', 'label' => ($labels['faculty'] ?? 'faculty'), 'data' => $data->get_meta_list('faculties')],
+            ['key' => 'german_language_skills_for_international_students', 'label' => ($labels['german_language_skills'] ?? 'german_language_skills'), 'data' => $data->get_meta_list('german_language_skills')],
             //['key' => 'area', 'label' => ($labels['area'] ?? 'area'), 'data' => $api->get_areas_of_study()],
         ];
 
@@ -282,15 +282,20 @@ class Utils
                 ];
             }
         } else {
-            $api = new API();
-            $data = $api->get_programs(false);
-            $degreeProgramOptions = array_map(
-                fn($item) => [
-                    'label' => $item[ 'title' ] . ' (' . $item[ 'degree' ][ 'abbreviation' ] . ')',
-                    'value' => (string)$item[ 'id' ],
-                ],
-                $data
-            );
+            $degreePrograms = get_posts([
+                'posts_per_page' => -1,
+                'post_type'      => 'degree-program',
+                'post_status'    => 'publish',
+                'orderby'        => 'title',
+                'order'          => 'ASC',
+            ]);
+            foreach ($degreePrograms as $degreeProgram) {
+                $program_id = get_post_meta($degreeProgram->ID, 'program_id', true);
+                $degreeProgramOptions[] = [
+                    'label' => $degreeProgram->post_title,
+                    'value' => (string) $program_id,
+                ];
+            }
         }
         return $degreeProgramOptions;
     }
@@ -312,8 +317,7 @@ class Utils
                 ];
             }
         } else {
-            $api           = new API();
-            $degrees       = $parents ? $api->get_meta_list('degree_parents') : $api->get_meta_list('degrees');
+            $degrees       = $parents ? (new Data)->get_meta_list('degree_parents') : (new Data)->get_meta_list('degrees');
             foreach ($degrees as $degree) {
                 $degreeOptions[] = [
                     'label' => $degree,
@@ -338,8 +342,7 @@ class Utils
                 ];
             }
         } else {
-            $api = new API();
-            $faculties = $api->get_meta_list('faculties');
+            $faculties = (new Data)->get_meta_list('faculties');
             foreach ($faculties as $faculty) {
                 $facultyOptions[] = [
                     'label' => $faculty,
@@ -364,8 +367,7 @@ class Utils
                 ];
             }
         } else {
-            $api = new API();
-            $attributes = $api->get_meta_list('attributes');
+            $attributes = (new Data)->get_meta_list('attributes');
             foreach ($attributes as $attribute) {
                 $attributeOptions[] = [
                     'label' => $attribute,

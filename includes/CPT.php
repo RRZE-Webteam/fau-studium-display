@@ -27,7 +27,7 @@ class CPT
             'label'             => __('Degree Programs', 'fau-studium-display'),
             'hierarchical'       => false,
             'public'             => true,
-            'show_ui'            => false,
+            //'show_ui'            => false,
             'supports'           => ['title', 'thumbnail'],
             'menu_icon'          => 'dashicons-portfolio',
             'capability_type'    => 'page',

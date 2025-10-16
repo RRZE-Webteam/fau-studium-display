@@ -7,11 +7,15 @@ use function \Fau\DegreeProgram\Display\Config\get_labels;
 use function \Fau\DegreeProgram\Display\Config\get_meinstudium_options;
 use function Fau\DegreeProgram\Display\plugin;
 
-//var_dump($data);
 //print "<pre>"; print_r($atts); print "</pre>";
+//print "<pre>"; var_dump($data); print "</pre>";
 
 if (empty($atts['degreeProgram'])) {
     print '<div class="components-placeholder is-large">' . __('Please select a degree program.', 'fau-studium-display') . '</div>';
+    return;
+}
+if (empty($data)) {
+    print '<div class="components-placeholder is-large">' . __('No data available.', 'fau-studium-display') . '</div>';
     return;
 }
 

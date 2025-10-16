@@ -15,9 +15,6 @@ class Data
 
             $programs = $this->get_programs($lang);
 
-            //$api = new API();
-            //$programs = $api->get_programs('', false, $lang);
-
             // Filter from block settings
             $filterBlock = [];
             if (!empty($atts['selectedFaculties'])) {
@@ -55,6 +52,7 @@ class Data
         }
 
         // check if the program exists as imported CPT (degree-program)
+        $data = [];
         if (empty($post_id)) {
             $program_imported = get_posts([
                 'post_type'      => 'degree-program',
@@ -76,15 +74,16 @@ class Data
             }
             $data['_thumbnail_rendered'] = get_the_post_thumbnail($post_id, 'full');
             $data['post_id'] = $post_id;
-            return $data;
         }
 
+        return $data;
+
         // if not, fetch from API
-        $api = new API();
+        /*$api = new API();
         $program = $api->get_program($program_id);
         $sync = new Sync();
         $sync->sync_program($program_id);
-        return $api->get_localized_data($program, $lang);
+        return $api->get_localized_data($program, $lang);*/
     }
 
     public function get_programs($lang = 'de') {
@@ -132,5 +131,87 @@ class Data
             }
         }
         return $data;
+    }
+
+    public function get_meta_list($meta) {
+
+        $meta_list = [];
+        $programs = $this->get_programs();
+        foreach ($programs as $post_id => $program) {
+            $post_meta = get_post_meta($post_id, 'program_data_de', true);
+            switch ($meta) {
+                case 'degrees':
+                    $meta_list[] = $post_meta['degree']['name'];
+                    break;
+                case 'degree_parents':
+                    $meta_list[] = $post_meta['degree']['parent']['name'] ?? $post_meta['degree']['name'];
+                    break;
+                case 'subject_groups':
+                    if (!empty($post_meta['subject_groups'])) {
+                        foreach ($post_meta['subject_groups'] as $group) {
+                            $meta_list[] = $group;
+                        }
+                    }
+                    break;
+                case 'attributes':
+                    if (!empty($post_meta['attributes'])) {
+                        foreach ($post_meta['attributes'] as $attribute) {
+                            $meta_list[] = $attribute;
+                        }
+                    }
+                    break;
+                case 'teaching_languages':
+                    if (!empty($post_meta['teaching_language'])) {
+                        $meta_list[] = $post_meta['teaching_language'];
+                    }
+                    break;
+                case 'start_semesters':
+                    if (!empty($post_meta['start'])) {
+                        foreach ($post_meta['start'] as $start) {
+                            $meta_list[] = $start;
+                        }
+                    }
+                    break;
+                case 'study_locations':
+                    if (!empty($post_meta['location'])) {
+                        foreach ($post_meta['location'] as $location) {
+                            $meta_list[] = $location;
+                        }
+                    }
+                    break;
+                case 'faculties':
+                    if (!empty($post_meta['faculty'])) {
+                        foreach ($post_meta['faculty'] as $faculty) {
+                            $meta_list[] = $faculty['name'] ?? '';
+                        }
+                    }
+                    break;
+                case 'areas_of_study':
+                    if (!empty($post_meta['area_of_study'])) {
+                        foreach ($post_meta['area_of_study'] as $area) {
+                            $meta_list[] = $area['name'] ?? '';
+                        }
+                    }
+                    break;
+                case 'admission_requirements':
+                    if (!empty($post_meta['admission_requirements'])) {
+                        foreach ($post_meta['admission_requirements'] as $level) {
+                            if (!empty($level['parent']['name'])) {
+                                $meta_list[] = $level['parent']['name'];
+                            }
+                        }
+                    }
+                    break;
+                case 'german_language_skills':
+                    if (!empty($post_meta['german_language_skills_for_international_students']['name'])) {
+                        $meta_list[] = $post_meta['german_language_skills_for_international_students']['name'];
+                    }
+                    break;
+            }
+        }
+
+        $meta_list = array_unique($meta_list);
+        sort($meta_list);
+        return $meta_list;
     }
 }
