@@ -8,6 +8,11 @@ use function \Fau\DegreeProgram\Display\Config\get_labels;
 //var_dump($atts);
 
 if (empty($atts['degreeProgram'])) {
+    print '<div class="components-placeholder is-large">' . __('Please select a degree program.', 'fau-studium-display') . '</div>';
+    return;
+}
+if (empty($data)) {
+    print '<div class="components-placeholder is-large">' . __('No data available.', 'fau-studium-display') . '</div>';
     return;
 }
 
@@ -34,7 +39,7 @@ $facts = [
     ],
     'standard_duration' => [
         'label' => $labels['standard_duration'],
-        'value' => (!empty($data['standard_duration']) ? sprintf(__('%s semesters', 'fau-studium-display'), $data['standard_duration']): ''),
+        'value' => (!empty($data['standard_duration']) ? sprintf($labels['%s_semesters'], $data['standard_duration']): ''),
         'itemprop' => 'timeToComplete'
     ],
     'teaching_language' => [

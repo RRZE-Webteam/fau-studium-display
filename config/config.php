@@ -118,6 +118,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Duration of studies'
             ]
         ],
+        '%s_semesters' => [
+            'labels' => [
+                'de' => '%s Semester',
+                'en' => '%s semesters'
+            ]
+        ],
         'start' => [
             'labels' => [
                 'de' => 'Studienbeginn',
@@ -382,6 +388,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Student advice and more'
             ]
         ],
+        'student_advice_title' => [
+            'labels' => [
+                'de' => 'Beratung und Unterstützung bei Fragen rund ums Studium',
+                'en' => 'Advice and support for all questions related to your studies'
+            ]
+        ],
         'main_student_advice' => [
             'labels' => [
                 'de' => 'Zentrale Studienberatung',
@@ -448,6 +460,10 @@ function get_labels ($lang = 'de', $task = 'labels') {
             'labels' => [
                 'de' => 'In der Regel ohne Überschneidungen',
                 'en' => 'Possible combinations without overlaps'
+            ],
+            'description' => [
+                'de' => 'Bei diesen Fächerkombinationen gibt es in der Regel keine terminlichen Überschneidungen im Stundenplan.',
+                'en' => 'With these subject combinations, there are generally no overlaps in the timetable.'
             ]
         ],
         'limited_combinations' => [
@@ -460,6 +476,10 @@ function get_labels ($lang = 'de', $task = 'labels') {
             'labels' => [
                 'de' => 'Mögliche Überschneidungen im Stundenplan',
                 'en' => 'Possible overlaps in the timetable'
+            ],
+            'description' => [
+                'de' => 'Wenn Sie diese Fächer kombinieren, könnten sich einzelne Veranstaltungen in Ihrem Stundenplan überschneiden. Deshalb können Sie folgende Fächer nur nach einem Beratungsgespräch mit dem von Ihnen gewählten Fach kombinieren. Die Studierenden tragen selbst die Verantwortung für die Studierbarkeit der Kombination und die Einhaltung der Fristen des § 11 der ABMStPOPhil. Bei der Immatrikulation ist ein Nachweis über ein entsprechendes Beratungsgespräch mit der Zentralen Studienberatung oder mit dem Studien-Service-Center (Philosophische Fakultät und Fachbereich Theologie) vorzulegen.',
+                'en' => 'If you combine these subjects, individual courses may overlap in your timetable. For this reason, you can only combine the following subjects with your chosen subject after a consultation. Students are responsible for ensuring that the combination can be studied and that the deadlines set out in Section 11 of the ABMStPOPhil are met. When enrolling, proof of a corresponding consultation with the Central Student Advisory Service or the Student Service Center (Faculty of Humanities, Social Studies, and Theology) must be submitted.'
             ]
         ],
         'notes_for_international_applicants' => [
@@ -514,6 +534,36 @@ function get_labels ($lang = 'de', $task = 'labels') {
             'labels' => [
                 'de' => 'Bewerbungsfrist Sommersemester',
                 'en' => 'Application deadline summer semester'
+            ]
+        ],
+        'summer_semester' => [
+            'labels' => [
+                'de' => 'Sommersemester',
+                'en' => 'Summer semester'
+            ]
+        ],
+        'winter_semester' => [
+            'labels' => [
+                'de' => 'Wintersemester',
+                'en' => 'Winter semester'
+            ]
+        ],
+        '1st_semester' => [
+            'labels' => [
+                'de' => '1. Semester',
+                'en' => '1st semester'
+            ]
+        ],
+        'higher_semesters' => [
+            'labels' => [
+                'de' => 'Höhere Semester',
+                'en' => 'Higher semesters'
+            ]
+        ],
+        'not_possible' => [
+            'labels' => [
+                'de' => 'not possible',
+                'en' => 'nicht möglich'
             ]
         ],
         'language_skills' => [
@@ -658,6 +708,18 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'de' => 'Bewerbungsprozess für Internationale',
                 'en' => 'Application process for Internationals',
             ]
+        ],
+        'program_overview' => [
+            'labels' => [
+                'de' => 'Studiengang im Detail',
+                'en' => 'Program overview'
+            ]
+        ],
+        'studies' => [
+            'labels' => [
+                'de' => 'Studium',
+                'en' => 'Studies'
+            ]
         ]
     ];
 
@@ -729,7 +791,7 @@ function get_constants($lang = 'de') {
         ],
         'benefits-fau-title' => [
             'de' => 'Deine Vorteile an der FAU',
-            'en' => 'Deine Vorteile an der FAU'
+            'en' => 'Your Benefits at FAU'
         ],
         'benefits-fau-text' => [
             'de' => 'Die FAU bietet Ihnen mit über 275 Studiengängen eine inspirierende Lernumgebung, studentische Gemeinschaft und zahlreiche Möglichkeiten, Ihre Leidenschaft zu entdecken.',

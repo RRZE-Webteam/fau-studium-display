@@ -112,7 +112,7 @@ if (in_array('fact_sheet', $items)) {
         ],
         'standard_duration' => [
             'label' => $labels['standard_duration'] ?? 'standard_duration',
-            'value' => (!empty($data['standard_duration']) ? sprintf(__('%s semesters', 'fau-studium-display'), $data['standard_duration']): ''),
+            'value' => (!empty($data['standard_duration']) ? sprintf($labels['%s_semesters'], $data['standard_duration']): ''),
             'itemprop' => 'timeToComplete',
             'itemprop_content' => (!empty($data['standard_duration']) ? $standard_duration_iso : ''),
         ],
@@ -159,7 +159,7 @@ if (in_array('fact_sheet', $items)) {
 
     $fact_sheet = '<div class="fact-sheet width-small">
             <div class="icon-thumbtack"></div>
-            <h1>' . __('Fact Sheet', 'fau-studium-display') . '</h1>';
+            <h1>' . ($labels['fact_sheet'] ?? 'fact_sheet') . '</h1>';
     if (!empty($fact_list)) {
         $fact_sheet .= '<dl class="facts">' . $fact_list . '</dl>';
     }
@@ -178,7 +178,7 @@ if (in_array('fact_sheet', $items)) {
 $content_fields_all = ['content.structure', 'content.specializations', 'content.qualities_and_skills', 'content.why_should_study', 'content.career_prospects', 'special_features', 'combinations'];
 $content_fields = array_intersect($content_fields_all, $items);
 
-$content_title = __('Program Overview', 'fau-studium-display');
+$content_title = ($labels['program_overview'] ?? 'program_overview');
 $content_id = sanitize_title($content_title);
 $content = '<div class="width-large"><h2 id="' . $content_id . '">' . $content_title . '</h2>'
            . '<div class="program-details width-small">';
@@ -194,7 +194,7 @@ foreach ($content_fields as $field) {
         ' . $data['content'][$field_name]['description']
         . '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
     }
-    if ($field == 'combinations' && !empty($data['combinations']) && !empty($data['limited_combinations'])) {
+    if ($field == 'combinations' && (!empty($data['combinations']) || !empty($data['limited_combinations']))) {
         $content_html .= '<!-- wp:rrze-elements/collapse {"hstart":3,"title":"' . ($labels[$field_name] ?? $field_name) . '","jumpName":"' . sanitize_title($labels[$field_name] ?? $field_name) . '","isCustomJumpname":true} --><!-- wp:paragraph -->';
         if (!empty($data['combinations'])) {
             $content_html .= '<h4>' . ($labels['content.combinations'] ?? 'combinations') . '</h4><ul class="program-combinations wp-block-list">';
@@ -202,7 +202,7 @@ foreach ($content_fields as $field) {
                 $content_html .= sprintf('<li><a href="%s">%s</a></li>', $combination['url'], $combination['title']);
             }
             $content_html .= '</ul>';
-            $content_html .= '<p>' . __('With these subject combinations, there are generally no overlaps in the timetable.', 'fau-studium-display') . '</p>';
+            $content_html .= !empty($descriptions['content.combinations']) ? '<p>' . $descriptions['content.combinations'] . '</p>' : '';
         }
         if (!empty($data['limited_combinations'])) {
             $content_html .= '<h4>' . ($labels['content.limited_combinations'] ?? 'limited_combinations') . '</h4><ul class="program-limited-combinations wp-block-list">';
@@ -210,7 +210,7 @@ foreach ($content_fields as $field) {
                 $content_html .= sprintf('<li><a href="%s">%s</a></li>', $limited_combination['url'], $limited_combination['title']);
             }
             $content_html .= '</ul>';
-            $content_html .= '<p>' . __('If you combine these subjects, individual courses may overlap in your timetable. For this reason, you can only combine the following subjects with your chosen subject after a consultation. Students are responsible for ensuring that the combination can be studied and that the deadlines set out in Section 11 of the ABMStPOPhil are met. When enrolling, proof of a corresponding consultation with the Central Student Advisory Service or the Student Service Center (Faculty of Humanities, Social Studies, and Theology) must be submitted.', 'fau-studium-display') . '</p>';
+            $content_html .= !empty($descriptions['content.limited_combinations']) ? '<p>' . $descriptions['content.limited_combinations'] . '</p>' : '';
         }
         $content_html .= '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
 
@@ -243,20 +243,20 @@ if (in_array('admission_requirements_application', $items)) {
 
     $admission_requirements = [];
     if (!empty($data['admission_requirements']['bachelor_or_teaching_degree'])) {
-        $admission_requirements['bachelor_or_teaching_degree'] = __('1st semester', 'fau-studium-display') . ': ' . $data['admission_requirements']['bachelor_or_teaching_degree']['link_text'];
+        $admission_requirements['bachelor_or_teaching_degree'] = $labels['1st_semester'] . ': ' . $data['admission_requirements']['bachelor_or_teaching_degree']['link_text'];
     }
     if (!empty($data['admission_requirements']['teaching_degree_higher_semester'])) {
-        $admission_requirements['teaching_degree_higher_semester'] = __('Higher semesters', 'fau-studium-display') . ': ' . $data['admission_requirements']['teaching_degree_higher_semester']['link_text'];
+        $admission_requirements['teaching_degree_higher_semester'] = $labels['higher_semesters'] . ': ' . $data['admission_requirements']['teaching_degree_higher_semester']['link_text'];
     }
     if (!empty($data['admission_requirements']['master'])) {
-        $admission_requirements['master'] = __('Master', 'fau-studium-display') . ': ' . $data['admission_requirements']['master']['link_text'];
+        $admission_requirements['master'] = 'Master: ' . $data['admission_requirements']['master']['link_text'];
     }
 
     if (empty($data['application_deadline_winter_semester']) && empty($data['application_deadline_summer_semester'])) {
         $deadlines = [];
     } else {
-        $deadlines['winter_semester'] = __('Winter semester', 'fau-studium-display') . ': ' . (empty($data['application_deadline_winter_semester']) ? __('not possible', 'fau-studium-display') : strip_tags($data['application_deadline_winter_semester']));
-        $deadlines['summer_semester'] = __('Summer semester', 'fau-studium-display') . ': ' . (empty($data['application_deadline_summer_semester']) ? __('not possible', 'fau-studium-display') : strip_tags($data['application_deadline_summer_semester']));
+        $deadlines['winter_semester'] = $labels['winter_semester'] . ': ' . (empty($data['application_deadline_winter_semester']) ? $labels['not possible'] : strip_tags($data['application_deadline_winter_semester']));
+        $deadlines['summer_semester'] = $labels['summer_semester'] . ': ' . (empty($data['application_deadline_summer_semester']) ? $labels['not possible'] : strip_tags($data['application_deadline_summer_semester']));
     }
 
     $language_skills = [];
@@ -526,7 +526,7 @@ if (in_array('links.additional_information', $items)) {
 if (in_array('benefits', $items)) {
 
     $benefits_fau_image = $constants[ 'benefits-fau-image' ];
-    $benefits_fau = '<div class="benefits width-full"><h2>' . __('Studies', 'fau-studium-display') . '</h2>';
+    $benefits_fau = '<div class="benefits width-full"><h2>' . ($labels['studies'] ?? 'studies'). '</h2>';
     $benefits_fau .= '<div class="fau-big-teaser width-large">'
         . '<div class="fau-big-teaser__content">'
         . '<h3 class="fau-big-teaser__headline">' . $constants[ 'benefits-fau-title' ] . '</h3>'
@@ -600,7 +600,7 @@ if (in_array('benefits', $items)) {
 
             // Student advice
             if (!empty($student_advice . $subject_specific_advice)) {
-                echo '<div class="student-advice width-large"><h3>' . __("Advice and support for all questions related to your studies", 'fau-studium-display') . '</h3>'
+                echo '<div class="student-advice width-large"><h3>' . $labels['student_advice_title'] . '</h3>'
                      . do_blocks('<!-- wp:columns --><div class="wp-block-columns alignwide">'
                          . '<!-- wp:column --><div class="wp-block-column">' . $student_advice . '</div><!-- /wp:column -->'
                          . '<!-- wp:column --><div class="wp-block-column">' . $subject_specific_advice . '</div><!-- /wp:column -->'

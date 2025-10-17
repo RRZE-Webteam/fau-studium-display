@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-10-16T16:05:10+00:00\n"
+"POT-Creation-Date: 2025-10-17T10:18:40+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: fau-studium-display\n"
@@ -164,6 +164,7 @@ msgid "Archive Format"
 msgstr ""
 
 #: includes/Settings.php:129
+#: includes/Utils.php:173
 #: build/block/index.js:198
 msgid "Grid"
 msgstr ""
@@ -217,8 +218,8 @@ msgid "Select Degree (optional)"
 msgstr ""
 
 #: includes/Settings.php:228
-#: includes/Utils.php:90
-#: includes/Utils.php:93
+#: includes/Utils.php:91
+#: includes/Utils.php:94
 msgid "Search"
 msgstr ""
 
@@ -250,114 +251,57 @@ msgstr ""
 msgid "No posts selected"
 msgstr ""
 
-#: includes/Utils.php:92
+#: includes/Utils.php:93
 msgid "Search all degree programs"
 msgstr ""
 
-#: includes/Utils.php:94
+#: includes/Utils.php:95
 msgid "Also search in text"
 msgstr ""
 
-#: includes/Utils.php:98
+#: includes/Utils.php:99
 msgid "Filter Options"
 msgstr ""
 
-#: includes/Utils.php:148
+#: includes/Utils.php:149
 msgid "More filter options"
 msgstr ""
 
-#: includes/Utils.php:160
+#: includes/Utils.php:161
 msgid "Selected filters"
 msgstr ""
 
-#: includes/Utils.php:167
+#: includes/Utils.php:168
 msgid "Delete all"
 msgstr ""
 
-#: includes/Utils.php:170
+#: includes/Utils.php:171
 msgid "Display"
 msgstr ""
 
-#: includes/Utils.php:171
-#: build/block/index.js:204
-msgid "List"
-msgstr ""
-
-#: includes/Utils.php:245
+#: includes/Utils.php:246
 msgid "Apply filter"
 msgstr ""
 
-#: templates/degree-program-box.php:37
-#: templates/degree-program-full.php:115
-msgid "%s semesters"
-msgstr ""
-
+#: templates/degree-program-box.php:11
 #: templates/degree-program-full.php:14
 msgid "Please select a degree program."
 msgstr ""
 
+#: templates/degree-program-box.php:15
 #: templates/degree-program-full.php:18
 msgid "No data available."
 msgstr ""
 
-#: templates/degree-program-full.php:162
-msgid "Fact Sheet"
-msgstr ""
-
-#: templates/degree-program-full.php:181
-msgid "Program Overview"
-msgstr ""
-
-#: templates/degree-program-full.php:205
-msgid "With these subject combinations, there are generally no overlaps in the timetable."
-msgstr ""
-
-#: templates/degree-program-full.php:213
-msgid "If you combine these subjects, individual courses may overlap in your timetable. For this reason, you can only combine the following subjects with your chosen subject after a consultation. Students are responsible for ensuring that the combination can be studied and that the deadlines set out in Section 11 of the ABMStPOPhil are met. When enrolling, proof of a corresponding consultation with the Central Student Advisory Service or the Student Service Center (Faculty of Humanities, Social Studies, and Theology) must be submitted."
-msgstr ""
-
-#: templates/degree-program-full.php:246
-msgid "1st semester"
-msgstr ""
-
-#: templates/degree-program-full.php:249
-msgid "Higher semesters"
-msgstr ""
-
-#: templates/degree-program-full.php:252
-msgid "Master"
-msgstr ""
-
-#: templates/degree-program-full.php:258
-msgid "Winter semester"
-msgstr ""
-
-#: templates/degree-program-full.php:258
-#: templates/degree-program-full.php:259
-msgid "not possible"
-msgstr ""
-
-#: templates/degree-program-full.php:259
-msgid "Summer semester"
-msgstr ""
-
-#: templates/degree-program-full.php:529
-msgid "Studies"
-msgstr ""
-
-#: templates/degree-program-full.php:603
-msgid "Advice and support for all questions related to your studies"
-msgstr ""
-
 #: templates/degree-program-grid.php:101
-#: templates/degree-program-table.php:107
+#: templates/degree-program-table.php:108
 msgid "%s%d degree program found%s"
 msgid_plural "%s%d degree programs found%s"
 msgstr[0] ""
 msgstr[1] ""
 
 #: templates/degree-program-grid.php:112
-#: templates/degree-program-table.php:118
+#: templates/degree-program-table.php:120
 msgid "No degree programs found."
 msgstr ""
 
@@ -375,6 +319,10 @@ msgstr ""
 
 #: build/block/index.js:195
 msgid "Infobox"
+msgstr ""
+
+#: build/block/index.js:204
+msgid "List"
 msgstr ""
 
 #: build/block/index.js:215
