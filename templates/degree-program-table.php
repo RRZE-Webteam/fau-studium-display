@@ -105,8 +105,7 @@ $program_table .= '</tbody>'
         echo Utils::renderSearchForm($prefilter, $filter_items, $lang, 'table');
 
         $count = count($data);
-        printf(_n('%s%d degree program found%s', '%s%d degree programs found%s', $count, 'fau-studium-display'), '<p class="items-found">', $count, '</p>');
-
+        echo '<p class="items-found">' . sprintf($count == 1 ? $labels['num_programs_found_singular'] : $labels['num_programs_found_plural'], $count) . '</p>';
     endif; ?>
 
     <?php if (!empty($data)) : ?>

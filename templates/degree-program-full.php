@@ -283,7 +283,6 @@ if (in_array('admission_requirements_application', $items)) {
 
         $admission_requirements_application_title = ($labels['application_for_program'] ?? 'application_for_program');
         $admission_requirements_application_id = sanitize_title($admission_requirements_application_title);
-        $admission_requirements_application .= '<h2 id="' . $admission_requirements_application_id . '">' . $admission_requirements_application_title . '</h2>';
         $admission_requirements_application .= '<div class="program-admission width-small"><h3>' . ($labels['admission_requirements_application'] ?? 'admission_requirements_application') . '</h3>';
         $quicklinks[2] = '<!-- wp:button -->
             <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $admission_requirements_application_id . '">' . $admission_requirements_application_title . '</a></div>
@@ -582,13 +581,17 @@ if (in_array('benefits', $items)) {
         // Videos
         echo $videos;
 
-        // Admission
-        if (!empty($admission_requirements_application)) {
-            echo $admission_requirements_application;
+        if (!empty($cta_internationals.$admission_requirements_application.$apply_now)) {
+            echo '<h2 id="' . $admission_requirements_application_id . '">' . $admission_requirements_application_title . '</h2>';
         }
 
         // Internationals
         echo $cta_internationals;
+
+        // Admission
+        if (!empty($admission_requirements_application)) {
+            echo $admission_requirements_application;
+        }
 
         // Apply now CTA
         echo $apply_now;

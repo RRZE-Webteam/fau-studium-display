@@ -88,15 +88,15 @@ class Utils
         $search_in_text = (!empty($getParams['search_text']) && $getParams['search_text'] == 'on' ? ' checked ' : '');
 
         // Search input
-        $output .= '<label for="fau_studium_search" class="label" xmlns="http://www.w3.org/1999/html">' . __('Search', 'fau-studium-display') . '</label>'
+        $output .= '<label for="fau_studium_search" class="label" xmlns="http://www.w3.org/1999/html">' . $labels['search_title'] . '</label>'
                    . '<div class="search-title">'
-                   . '<input type="text" name="search" id="fau_studium_search" value="' . $search . '" placeholder="' . __('Search all degree programs', 'fau-studium-display') . '" />'
-                   . '<button type="submit">' . __('Search', 'fau-studium-display') . '</button>'
-                   . '<p class="search-in-text"><label><input type="checkbox" name="search_text" value="on" ' . $search_in_text . '>' . __('Also search in text', 'fau-studium-display') . '</label></p>'
+                   . '<input type="text" name="search" id="fau_studium_search" value="' . $search . '" placeholder="' . $labels['search_placeholder'] . '" />'
+                   . '<button type="submit">' . $labels['search_button'] . '</button>'
+                   . '<p class="search-in-text"><label><input type="checkbox" name="search_text" value="on" ' . $search_in_text . '>' . $labels['text_search'] . '</label></p>'
                    . '</div>';
 
         // Filter options
-        $output .= '<p class="label">' . __('Filter Options', 'fau-studium-display') . '</p>'
+        $output .= '<p class="label">' . $labels['filter_options'] . '</p>'
             . '<div class="flex-wrapper">';
 
         $filters_selected = [];
@@ -146,7 +146,7 @@ class Utils
             }
 
             $output .= '<button type="button" class="extended-search-toggle">'
-                       . __('More filter options', 'fau-studium-display')
+                       . $labels['more_filter_options']
                        . '<span class="icon-wrapper icon-plus" aria-hidden="true"></span></button>';
             $output .= '</div>'; // .flex-wrapper
 
@@ -165,12 +165,12 @@ class Utils
                     $output .= '<a class="filter-selected" data-key="' . $filter_key . '" data-value="' . $filter_item . '" href="' . $cleared_url . '">'  . $filter_item . '</a>';
                 }
             }
-            $output .= '<a class="filter-selected delete-all" data-key="all" data-value="all" href="' . $url . '">'  . __('Delete all', 'fau-studium-display') . '</a>';
+            $output .= '<a class="filter-selected delete-all" data-key="all" data-value="all" href="' . $url . '">'  . $labels['delete_all'] . '</a>';
             $output .= '</div>';
         }
-        $output .= '<p class="display-settings">' . __('Display', 'fau-studium-display')
-                    . '<button type="submit" class="display-settings-table' . ($display == 'table' ? ' active' : '') . '" name="display" value="table">' . __('Table', 'fau-studium-display') . '</button>'
-                    . '<button type="submit" class="display-settings-grid' . ($display == 'grid' ? ' active' : '') . '" name="display" value="grid">' . __('Grid', 'fau-studium-display') . '</button>'
+        $output .= '<p class="display-settings">' . $labels['display']
+                    . '<button type="submit" class="display-settings-table' . ($display == 'table' ? ' active' : '') . '" name="display" value="table" title="' . $labels['display_table'] . '">' . $labels['display_table'] . '</button>'
+                    . '<button type="submit" class="display-settings-grid' . ($display == 'grid' ? ' active' : '') . '" name="display" value="grid" title="' . $labels['display_grid'] . '">' . $labels['display_grid'] . '</button>'
                    . '</p>';
         $output .= '</form>';
         return $output;

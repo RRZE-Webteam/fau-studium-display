@@ -88,6 +88,84 @@ function get_output_fields($format = '') {
 
 function get_labels ($lang = 'de', $task = 'labels') {
     $labels = [
+        'search_title' => [
+            'labels' => [
+                'de' => 'Suche',
+                'en' => 'Search'
+            ]
+        ],
+        'search_button' => [
+            'labels' => [
+                'de' => 'Suchen',
+                'en' => 'Search'
+            ]
+        ],
+        'search_placeholder' => [
+            'labels' => [
+                'de' => 'Alle Studiengänge durchsuchen',
+                'en' => 'Search all degree programs'
+            ]
+        ],
+        'text_search' => [
+            'labels' => [
+                'de' => 'Auch im Text suchen',
+                'en' => 'Also search in text'
+            ]
+        ],
+        'filter_options' => [
+            'labels' => [
+                'de' => 'Filtermöglichkeiten',
+                'en' => 'Filter options'
+            ]
+        ],
+        'apply_filter' => [
+            'labels' => [
+                'de' => 'Filter anwenden',
+                'en' => 'Apply filter'
+            ]
+        ],
+        'more_filter_options' => [
+            'labels' => [
+                'de' => 'Weitere Filtermöglichkeiten',
+                'en' => 'More filter options'
+            ]
+        ],
+        'delete_all' => [
+            'labels' => [
+                'de' => 'Alle löschen',
+                'en' => 'Delete all'
+            ]
+        ],
+        'display' => [
+            'labels' => [
+                'de' => 'Darstellung',
+                'en' => 'Display'
+            ]
+        ],
+        'display_table' => [
+            'labels' => [
+                'de' => 'Tabelle',
+                'en' => 'Table'
+            ]
+        ],
+        'display_grid' => [
+            'labels' => [
+                'de' => 'Kacheln',
+                'en' => 'Grid'
+            ]
+        ],
+        'num_programs_found_singular' => [
+            'labels' => [
+                'de' => '%d Studiengang gefunden',
+                'en' => '%d degree program found'
+            ]
+        ],
+        'num_programs_found_plural' => [
+            'labels' => [
+                'de' => '%d Studiengänge gefunden',
+                'en' => '%d degree programs found'
+            ]
+        ],
         'featured_image' => [
             'labels' => [
                 'de' => 'Headerbild',
