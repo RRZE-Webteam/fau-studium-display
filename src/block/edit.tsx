@@ -227,6 +227,7 @@ const Edit = ({
                         label={__('Language', 'fau-studium-display')}
                         value={language}
                         options={[
+                            { label: __('Default', 'fau-studium-display'), value: '' },
                             { label: __('German', 'fau-studium-display'), value: 'de' },
                             { label: __('English', 'fau-studium-display'), value: 'en' },
                         ]}

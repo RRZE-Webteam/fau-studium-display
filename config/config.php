@@ -88,6 +88,84 @@ function get_output_fields($format = '') {
 
 function get_labels ($lang = 'de', $task = 'labels') {
     $labels = [
+        'search_title' => [
+            'labels' => [
+                'de' => 'Suche',
+                'en' => 'Search'
+            ]
+        ],
+        'search_button' => [
+            'labels' => [
+                'de' => 'Suchen',
+                'en' => 'Search'
+            ]
+        ],
+        'search_placeholder' => [
+            'labels' => [
+                'de' => 'Alle Studiengänge durchsuchen',
+                'en' => 'Search all degree programs'
+            ]
+        ],
+        'text_search' => [
+            'labels' => [
+                'de' => 'Auch im Text suchen',
+                'en' => 'Also search in text'
+            ]
+        ],
+        'filter_options' => [
+            'labels' => [
+                'de' => 'Filtermöglichkeiten',
+                'en' => 'Filter options'
+            ]
+        ],
+        'apply_filter' => [
+            'labels' => [
+                'de' => 'Filter anwenden',
+                'en' => 'Apply filter'
+            ]
+        ],
+        'more_filter_options' => [
+            'labels' => [
+                'de' => 'Weitere Filtermöglichkeiten',
+                'en' => 'More filter options'
+            ]
+        ],
+        'delete_all' => [
+            'labels' => [
+                'de' => 'Alle löschen',
+                'en' => 'Delete all'
+            ]
+        ],
+        'display' => [
+            'labels' => [
+                'de' => 'Darstellung',
+                'en' => 'Display'
+            ]
+        ],
+        'display_table' => [
+            'labels' => [
+                'de' => 'Tabelle',
+                'en' => 'Table'
+            ]
+        ],
+        'display_grid' => [
+            'labels' => [
+                'de' => 'Kacheln',
+                'en' => 'Grid'
+            ]
+        ],
+        'num_programs_found_singular' => [
+            'labels' => [
+                'de' => '%d Studiengang gefunden',
+                'en' => '%d degree program found'
+            ]
+        ],
+        'num_programs_found_plural' => [
+            'labels' => [
+                'de' => '%d Studiengänge gefunden',
+                'en' => '%d degree programs found'
+            ]
+        ],
         'featured_image' => [
             'labels' => [
                 'de' => 'Headerbild',
@@ -118,6 +196,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Duration of studies'
             ]
         ],
+        '%s_semesters' => [
+            'labels' => [
+                'de' => '%s Semester',
+                'en' => '%s semesters'
+            ]
+        ],
         'start' => [
             'labels' => [
                 'de' => 'Studienbeginn',
@@ -144,8 +228,8 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'attribute' => [
             'labels' => [
-                'de' => 'Besondere Studienform',
-                'en' => 'Special way to study'
+                'de' => 'Besondere Studienformen',
+                'en' => 'Special ways to study'
             ]
         ],
         'attributes' => [
@@ -312,7 +396,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'admission_requirements_application' => [
             'labels' => [
-                'de' => 'Zulassungsvoraussetzungen und Bewerbung',
+                'de' => 'Zugangsvoraussetzungen und Bewerbung',
                 'en' => 'Admission Requirements and Application'
             ]
         ],
@@ -382,14 +466,20 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Student advice and more'
             ]
         ],
+        'student_advice_title' => [
+            'labels' => [
+                'de' => 'Beratung und Unterstützung bei Fragen rund ums Studium',
+                'en' => 'Advice and support for all questions related to your studies'
+            ]
+        ],
         'main_student_advice' => [
             'labels' => [
                 'de' => 'Zentrale Studienberatung',
                 'en' => 'Student advice center'
             ],
             'description' => [
-                'de' => 'Die Zentrale Studienberatung ist deine Anlaufstelle für alle Fragen rund ums Studium und den Studieneinstieg.',
-                'en' => 'Die Zentrale Studienberatung ist deine Anlaufstelle für alle Fragen rund ums Studium und den Studieneinstieg.', // ToDo: Übersetzung
+                'de' => 'Die Zentrale Studienberatung ist die erste Anlaufstelle zu allen Fragen rund ums Studium und den Studieneinstieg.',
+                'en' => 'The Central Student Advisory Service is the first point of contact for all questions concerning your studies and the start of your degree program.',
             ],
         ],
         'subject_specific_advice' => [
@@ -398,8 +488,8 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Specific student advice'
             ],
             'description' => [
-                'de' => 'Die Studien-Servcie-Center und Studienfachberater unterstützen dich bei der Planung deines Studiums.',
-                'en' => 'Die Studien-Servcie-Center und Studienfachberater unterstützen dich bei der Planung deines Studiums.', // ToDo: Übersetzung
+                'de' => 'Fachbezogene Beratung für Fragen rund um das Fach und die Studienplanung.',
+                'en' => 'Subject-specific advising for questions related to your field of study and study planning.',
             ],
         ],
         'service_centers' => [
@@ -448,6 +538,10 @@ function get_labels ($lang = 'de', $task = 'labels') {
             'labels' => [
                 'de' => 'In der Regel ohne Überschneidungen',
                 'en' => 'Possible combinations without overlaps'
+            ],
+            'description' => [
+                'de' => 'Bei diesen Fächerkombinationen gibt es in der Regel keine terminlichen Überschneidungen im Stundenplan.',
+                'en' => 'With these subject combinations, there are generally no overlaps in the timetable.'
             ]
         ],
         'limited_combinations' => [
@@ -460,6 +554,10 @@ function get_labels ($lang = 'de', $task = 'labels') {
             'labels' => [
                 'de' => 'Mögliche Überschneidungen im Stundenplan',
                 'en' => 'Possible overlaps in the timetable'
+            ],
+            'description' => [
+                'de' => 'Wenn Sie diese Fächer kombinieren, könnten sich einzelne Veranstaltungen in Ihrem Stundenplan überschneiden. Deshalb können Sie folgende Fächer nur nach einem Beratungsgespräch mit dem von Ihnen gewählten Fach kombinieren. Die Studierenden tragen selbst die Verantwortung für die Studierbarkeit der Kombination und die Einhaltung der Fristen des § 11 der ABMStPOPhil. Bei der Immatrikulation ist ein Nachweis über ein entsprechendes Beratungsgespräch mit der Zentralen Studienberatung oder mit dem Studien-Service-Center (Philosophische Fakultät und Fachbereich Theologie) vorzulegen.',
+                'en' => 'If you combine these subjects, individual courses may overlap in your timetable. For this reason, you can only combine the following subjects with your chosen subject after a consultation. Students are responsible for ensuring that the combination can be studied and that the deadlines set out in Section 11 of the ABMStPOPhil are met. When enrolling, proof of a corresponding consultation with the Central Student Advisory Service or the Student Service Center (Faculty of Humanities, Social Studies, and Theology) must be submitted.'
             ]
         ],
         'notes_for_international_applicants' => [
@@ -516,6 +614,36 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Application deadline summer semester'
             ]
         ],
+        'summer_semester' => [
+            'labels' => [
+                'de' => 'Sommersemester',
+                'en' => 'Summer semester'
+            ]
+        ],
+        'winter_semester' => [
+            'labels' => [
+                'de' => 'Wintersemester',
+                'en' => 'Winter semester'
+            ]
+        ],
+        '1st_semester' => [
+            'labels' => [
+                'de' => '1. Semester',
+                'en' => '1st semester'
+            ]
+        ],
+        'higher_semesters' => [
+            'labels' => [
+                'de' => 'Höhere Semester',
+                'en' => 'Higher semesters'
+            ]
+        ],
+        'not_possible' => [
+            'labels' => [
+                'de' => 'not possible',
+                'en' => 'nicht möglich'
+            ]
+        ],
         'language_skills' => [
             'labels' => [
                 'de' => 'Sprachkenntnisse',
@@ -561,6 +689,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
             'labels' => [
                 'de' => 'Dein Weg zum Studienplatz',
                 'en' => 'Your Path to University Admission'
+            ]
+        ],
+        'application_for_program' => [
+            'labels' => [
+                'de' => 'Bewerbung zum Studium',
+                'en' => 'Application for a Degree Program'
             ]
         ],
         'useful_links' => [
@@ -625,14 +759,44 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'how_to_apply' => [
             'labels' => [
-                'de' => 'So läuft die Bewerbung ab',
-                'en' => 'How to apply'
+                'de' => 'Bewerbungsprozess',
+                'en' => 'Application process'
             ]
         ],
         'how_to_apply_internationals' => [
             'labels' => [
-                'de' => 'So läuft die Bewerbung für Internationale ab',
-                'en' => 'How to apply as an international student'
+                'de' => 'Bewerbungsprozess für Internationale',
+                'en' => 'Application process for internationals'
+            ]
+        ],
+        'how_to_apply_internationals_title' => [
+            'labels' => [
+                'de' => 'Bewerbung für Internationale',
+                'en' => 'Application for internationals'
+            ]
+        ],
+        'all_information_internationals' => [
+            'labels' => [
+                'de' => 'Hinweise zu Zugangsvoraussetzungen, Fristen und Bewerbung im Überblick.',
+                'en' => 'Overview of admission requirements, deadlines, and application procedures'
+            ]
+        ],
+        'button_internationals' => [
+            'labels' => [
+                'de' => 'Bewerbungsprozess für Internationale',
+                'en' => 'Application process for Internationals',
+            ]
+        ],
+        'program_overview' => [
+            'labels' => [
+                'de' => 'Studiengang im Detail',
+                'en' => 'Program overview'
+            ]
+        ],
+        'studies' => [
+            'labels' => [
+                'de' => 'Studium',
+                'en' => 'Studies'
             ]
         ]
     ];
@@ -672,16 +836,16 @@ function get_constants($lang = 'de') {
     $mein_studium_options = get_meinstudium_options($lang);
     $constants = [
         'apply-now-title' => [
-            'de' => 'Bewirb dich jetzt!',
-            'en' => 'Apply now!'
+            'de' => 'Jetzt für einen Studienplatz bewerben',
+            'en' => 'Apply now for a degree program'
         ],
         'apply-now-text' => [
-            'de' => 'auf campo, dem Bewerbungsportal der FAU',
-            'en' => 'on campo, the FAU application portal'
+            'de' => 'Der erste Schritt zum Studium beginnt mit der Online-Bewerbung.',
+            'en' => 'The first step towards your studies begins with the online application.'
         ],
         'apply-now-link-text' => [
-            'de' => 'Jetzt auf campo bewerben/anmelden',
-            'en' => 'Apply/Register now on campo'
+            'de' => 'Direkt zum Bewerbungsportal',
+            'en' => 'To the application portal'
         ],
         'apply-now-link-url' => [
             'de' => 'https://www.campo.fau.de',
@@ -700,16 +864,16 @@ function get_constants($lang = 'de') {
             'en' => plugin()->getUrl() . 'assets/img/student-advice.jpg'
         ],
         'specific-student-advice-image' => [
-            'de' => plugin()->getUrl() . 'assets/img/student-advice-specific.jpeg',
-            'en' => plugin()->getUrl() . 'assets/img/student-advice-specific.jpeg'
+            'de' => plugin()->getUrl() . 'assets/img/student-advice-specific.jpg',
+            'en' => plugin()->getUrl() . 'assets/img/student-advice-specific.jpg'
         ],
         'benefits-fau-title' => [
             'de' => 'Deine Vorteile an der FAU',
-            'en' => 'Deine Vorteile an der FAU'
+            'en' => 'Your Benefits at FAU'
         ],
         'benefits-fau-text' => [
-            'de' => 'Die FAU bietet Ihnen mit über 270 Studiengängen eine inspirierende Lernumgebung, studentische Gemeinschaft und zahlreiche Möglichkeiten, Ihre Leidenschaft zu entdecken.',
-            'en' => 'Die FAU bietet Ihnen mit über 270 Studiengängen eine inspirierende Lernumgebung, studentische Gemeinschaft und zahlreiche Möglichkeiten, Ihre Leidenschaft zu entdecken.'
+            'de' => 'Die FAU bietet Ihnen mit über 275 Studiengängen eine inspirierende Lernumgebung, studentische Gemeinschaft und zahlreiche Möglichkeiten, Ihre Leidenschaft zu entdecken.',
+            'en' => 'With more than 275 degree programs, FAU offers an inspiring learning environment, a vibrant student community, and numerous opportunities to discover your passion.'
         ],
         'benefits-fau-link-text' => [
             'de' => 'Mehr erfahren',
@@ -724,8 +888,8 @@ function get_constants($lang = 'de') {
             'en' => plugin()->getUrl() . 'assets/img/benefits-fau.png'
         ],
         'features-1-text' => [
-            'de' => 'Mehr als 270 Studiengänge',
-            'en' => 'More than 270 degree programs',
+            'de' => 'Mehr als 275 Studiengänge',
+            'en' => 'More than 275 degree programs',
         ],
         'features-1-icon' => [
             'de' => 'school',

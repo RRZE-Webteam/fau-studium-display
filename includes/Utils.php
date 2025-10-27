@@ -41,29 +41,30 @@ class Utils
         }
         return plugin()->getPath('templates/');
     }
-    public static function renderSearchForm($prefilter = [], $filter_items = [], $lang = 'de'): string
+    public static function renderSearchForm($prefilter = [], $filter_items = [], $lang = 'de', $display = 'table'): string
     {
         //var_dump($prefilter);
         $getParams = Utils::array_map_recursive('sanitize_text_field', $_GET);
-        $api = new API();
-        $degrees = !empty($prefilter['degree']) ? $prefilter['degree'] : $api->get_meta_list('degree_parents');
-        $subject_groups = !empty($prefilter['subject_group']) ? $prefilter['subject_group'] : $api->get_meta_list('subject_groups');
-        $attributes = !empty($prefilter['attribute']) ? $prefilter['attribute'] : $api->get_meta_list('attributes');
-        $labels = get_labels($lang); // ToDO
+        $data = new Data();
+        $degrees = !empty($prefilter['degree']) ? $prefilter['degree'] : $data->get_meta_list('degree_parents', 'en');
+        $subject_groups = !empty($prefilter['subject_group']) ? $prefilter['subject_group'] : $data->get_meta_list('subject_groups');
+        $attributes = !empty($prefilter['attribute']) ? $prefilter['attribute'] : $data->get_meta_list('attributes');
+        $labels = get_labels($lang);
         if (empty($filter_items)) {
             $filter_items = get_output_fields('search-filters');
         }
+        $display = ($display == 'table') ? 'table' : 'grid';
 
         $filters = [
-            ['key' => 'degree', 'label' => ($labels['degree'] ?? 'degree'), 'data' => $degrees],
-            ['key' => 'subject_group', 'label' => ($labels['subject_group'] ?? 'subject_group'), 'data' => $subject_groups],
-            ['key' => 'attribute', 'label' => ($labels['attribute'] ?? 'attribute'), 'data' => $attributes],
-            ['key' => 'admission_requirements', 'label' => ($labels['admission_requirements'] ?? 'admission_requirements'), 'data' => $api->get_meta_list('admission_requirements')],
-            ['key' => 'semester', 'label' => ($labels['start'] ?? 'start'), 'data' => $api->get_meta_list('start_semesters')],
-            ['key' => 'study_location', 'label' => ($labels['location'] ?? 'location'), 'data' => $api->get_meta_list('study_locations')],
-            ['key' => 'teaching_language', 'label' => ($labels['teaching_language'] ?? 'teaching_language'), 'data' => $api->get_meta_list('teaching_languages')],
-            ['key' => 'faculty', 'label' => ($labels['faculty'] ?? 'faculty'), 'data' => $api->get_meta_list('faculties')],
-            ['key' => 'german_language_skills_for_international_students', 'label' => ($labels['german_language_skills'] ?? 'german_language_skills'), 'data' => $api->get_meta_list('german_language_skills')],
+            ['key' => 'degree', 'label' => ($labels['degree']), 'data' => $degrees],
+            ['key' => 'subject_group', 'label' => ($labels['subject_group']), 'data' => $subject_groups],
+            ['key' => 'attribute', 'label' => ($labels['attributes']), 'data' => $attributes],
+            ['key' => 'admission_requirements', 'label' => ($labels['admission_requirements']), 'data' => $data->get_meta_list('admission_requirements')],
+            ['key' => 'semester', 'label' => ($labels['start']), 'data' => $data->get_meta_list('start_semesters')],
+            ['key' => 'study_location', 'label' => ($labels['location']), 'data' => $data->get_meta_list('study_locations')],
+            ['key' => 'teaching_language', 'label' => ($labels['teaching_language']), 'data' => $data->get_meta_list('teaching_languages')],
+            ['key' => 'faculty', 'label' => ($labels['faculty']), 'data' => $data->get_meta_list('faculties')],
+            ['key' => 'german_language_skills_for_international_students', 'label' => ($labels['german_language_skills_for_international_students']), 'data' => $data->get_meta_list('german_language_skills')],
             //['key' => 'area', 'label' => ($labels['area'] ?? 'area'), 'data' => $api->get_areas_of_study()],
         ];
 
@@ -76,19 +77,29 @@ class Utils
         $filters_default = array_slice($filters, 0, 3);
         $filters_extended = array_slice($filters, 3);
 
-        $output = '<form method="get" class="program-search" action="' . esc_url(get_permalink()) . '">';
-        $search = !empty($getParams['search']) ? sanitize_text_field($getParams['search']) : '';
+        if (is_post_type_archive('degree-program')) {
+            $url = get_post_type_archive_link( 'degree-program' );
+        } else {
+            $url = get_permalink();
+        }
+
+        $output = '<form method="get" class="program-search" action="' . esc_url($url) . '">';
+        $search = (!empty($getParams['search']) ? sanitize_text_field($getParams['search']) : '');
+        $search_in_text = (!empty($getParams['search_text']) && $getParams['search_text'] == 'on' ? ' checked ' : '');
 
         // Search input
-        $output .= '<label for="fau_studium_search" class="label">' . __('Search', 'fau-studium-display') . '</label>'
+        $output .= '<label for="fau_studium_search" class="label" xmlns="http://www.w3.org/1999/html">' . $labels['search_title'] . '</label>'
                    . '<div class="search-title">'
-                   . '<input type="text" name="search" id="fau_studium_search" value="' . $search . '" placeholder="' . __('Search all degree programs', 'fau-studium-display') . '" />'
-                   . '<button type="submit">' . __('Search', 'fau-studium-display') . '</button>'
+                   . '<input type="text" name="search" id="fau_studium_search" value="' . $search . '" placeholder="' . $labels['search_placeholder'] . '" />'
+                   . '<button type="submit">' . $labels['search_button'] . '</button>'
+                   . '<p class="search-in-text"><label><input type="checkbox" name="search_text" value="on" ' . $search_in_text . '>' . $labels['text_search'] . '</label></p>'
                    . '</div>';
 
         // Filter options
-        $output .= '<p class="label">' . __('Filter Options', 'fau-studium-display') . '</p>'
+        $output .= '<p class="label">' . $labels['filter_options'] . '</p>'
             . '<div class="flex-wrapper">';
+
+        $filters_selected = [];
 
         // Filter sections default
         foreach ($filters_default as $filter) {
@@ -97,33 +108,45 @@ class Utils
                 continue;
             }
             $filter_active = !empty($getParams[$filter['key']]);
+            if ($filter_active) {
+                $filters_selected[$filter['key']] = $getParams[$filter['key']];
+                $selected = array_map('sanitize_text_field', $getParams[$filter['key']]);
+            } else {
+                $selected = [];
+            }
             $output .= self::renderChecklistSection(
                 $filter['key'],
                 $filter['label'],
                 $filter['data'],
-                $filter_active ? array_map('sanitize_text_field', $getParams[$filter['key']]) : [],
+                $selected,
             );
         }
 
         if (count($filters_extended) > 0) {
             // Settings links + Filter sections extended
-            $filters_extended_count = 0;
             $filters_extended_html  = '';
             foreach ($filters_extended as $filter) {
+                // Don't show filters with only one option
+                if (count($filter['data']) < 2) {
+                    continue;
+                }
                 $filter_active = ! empty($getParams[ $filter[ 'key' ] ]);
                 if ($filter_active) {
-                    $filters_extended_count += count($getParams[ $filter[ 'key' ] ]);
+                    $filters_selected[$filter['key']] = $getParams[$filter['key']];
+                    $selected = array_map('sanitize_text_field', $getParams[$filter['key']]);
+                } else {
+                    $selected = [];
                 }
                 $filters_extended_html .= self::renderChecklistSection(
                     $filter[ 'key' ],
                     $filter[ 'label' ],
                     $filter[ 'data' ],
-                    $filter_active ? array_map('sanitize_text_field', $getParams[ $filter[ 'key' ] ]) : [],
+                    $selected,
                 );
             }
 
             $output .= '<button type="button" class="extended-search-toggle">'
-                       . __('More filter options', 'fau-studium-display')
+                       . $labels['more_filter_options']
                        . '<span class="icon-wrapper icon-plus" aria-hidden="true"></span></button>';
             $output .= '</div>'; // .flex-wrapper
 
@@ -132,18 +155,47 @@ class Utils
             $output .= '</div>';
         }
 
+        if (!empty($filters_selected)) {
+            $current_url = ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            $output .= '<div class="filters-selected">'
+                . '<p class="filter-selected-title">' . __('Selected filters', 'fau-studium-display') . '</p>';
+            foreach ($filters_selected as $filter_key => $filter_selected) {
+                foreach ($filter_selected as $filter_item) {
+                    $cleared_url = str_replace('&' . $filter_key . '%5B%5D=' . urlencode($filter_item), '', $current_url);
+                    $output .= '<a class="filter-selected" data-key="' . $filter_key . '" data-value="' . $filter_item . '" href="' . $cleared_url . '">'  . $filter_item . '</a>';
+                }
+            }
+            $output .= '<a class="filter-selected delete-all" data-key="all" data-value="all" href="' . $url . '">'  . $labels['delete_all'] . '</a>';
+            $output .= '</div>';
+        }
+        $output .= '<p class="display-settings">' . $labels['display']
+                    . '<button type="submit" class="display-settings-table' . ($display == 'table' ? ' active' : '') . '" name="display" value="table" title="' . $labels['display_table'] . '">' . $labels['display_table'] . '</button>'
+                    . '<button type="submit" class="display-settings-grid' . ($display == 'grid' ? ' active' : '') . '" name="display" value="grid" title="' . $labels['display_grid'] . '">' . $labels['display_grid'] . '</button>'
+                   . '</p>';
         $output .= '</form>';
         return $output;
     }
 
     public static function filterPrograms($programs, $filter) {
         $programs_filtered = [];
+        $search_in_text = isset($filter['search_text']) && $filter['search_text'] == 'on';
 
         foreach ($programs as $id => $program) {
 
             // Text search
-            if (!empty($filter['search']) && !str_contains(strtolower($program['title']), strtolower($filter['search']))) {
-                continue;
+            if (!empty($filter['search'])) {
+                $search_term = strtolower(sanitize_text_field($filter['search']));
+                $search_target = $program['title'];
+                if ($search_in_text) {
+                    $search_target .= $program['entry_text'] ?? '';
+                    foreach ($program['content'] as $content_item) {
+                        $search_target .= $content_item['description'] ?? '';
+                    }
+                }
+                $search_target = strtolower(strip_tags($search_target));
+                if (!str_contains($search_target, $search_term)) {
+                    continue;
+                }
             }
 
             // Attribute search
@@ -151,11 +203,12 @@ class Utils
                 'degree'            => fn($program, $value) => !empty($program['degree']['parent']['name']) && $program['degree']['parent']['name'] === $value,
                 'subject_group'     => fn($program, $value) => !empty($program['subject_groups']) && in_array($value, $program['subject_groups']),
                 'attribute'         => fn($program, $value) => !empty($program['attributes']) && in_array($value, $program['attributes']),
+                'admission_requirements' => fn($program, $value) => !empty($program['admission_requirement_link']) && $program['admission_requirement_link']['parent']['name'] === $value,
                 'teaching_language' => fn($program, $value) => !empty($program['teaching_language']) && $program['teaching_language'] === $value,
-                'start'             => fn($program, $value) => !empty($program['start']) && in_array($value, $program['start']),
-                'location'          => fn($program, $value) => !empty($program['location']) && in_array($value, $program['location']),
+                'semester'             => fn($program, $value) => !empty($program['start']) && in_array($value, $program['start']),
+                'study_location'          => fn($program, $value) => !empty($program['location']) && in_array($value, $program['location']),
                 'faculty'           => fn($program, $value) => !empty($program['faculty']) && in_array($value, array_column($program['faculty'], 'name')),
-                'area'              => fn($program, $value) => !empty($program['area_of_study']) && in_array($value, array_column($program['area_of_study'], 'name')),
+                'german_language_skills_for_international_students' => fn($program, $value) => !empty($program['german_language_skills_for_international_students']) && $program['german_language_skills_for_international_students']['name'] === $value,
             ];
 
             foreach ($filterMap as $key => $matcher) {
@@ -190,7 +243,9 @@ class Utils
             $output .= '<label><input type="checkbox" name="' . esc_attr($name) . '[]" value="' . esc_attr($option) . '" '
                        . checked($checked, true, false) . '>' . esc_html($option) . '</label>';
         }
-        $output .= '</div></div>';
+        $output .= '<button type="submit" class="submit-filter" value="' . __('Apply filter', 'fau-studium-display') . '">' . __('Apply filter', 'fau-studium-display') . '</button>';
+        $output .= '</div>';
+        $output .= '</div>';
         return $output;
     }
 
@@ -246,22 +301,35 @@ class Utils
                 ];
             }
         } else {
-            $api = new API();
-            $data = $api->get_programs(false);
-            $degreeProgramOptions = array_map(
-                fn($item) => [
-                    'label' => $item[ 'title' ] . ' (' . $item[ 'degree' ][ 'abbreviation' ] . ')',
-                    'value' => (string)$item[ 'id' ],
-                ],
-                $data
-            );
+            $degreePrograms = get_posts([
+                'posts_per_page' => -1,
+                'post_type'      => 'degree-program',
+                'post_status'    => 'publish',
+                'orderby'        => 'title',
+                'order'          => 'ASC',
+            ]);
+            foreach ($degreePrograms as $degreeProgram) {
+                $program_id = get_post_meta($degreeProgram->ID, 'program_id', true);
+                $degreeProgramOptions[] = [
+                    'label' => $degreeProgram->post_title,
+                    'value' => (string) $program_id,
+                ];
+            }
         }
         return $degreeProgramOptions;
     }
 
-    public static function get_degree_options($parents = false) {
+    public static function get_degree_options($parents = false, $from_api = false) {
         $degreeOptions = [];
-        if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+        if ($from_api == true) {
+            $degrees = (new API)->get_meta_list('degree_parents');
+            foreach ($degrees as $degree) {
+                $degreeOptions[] = [
+                    'label' => $degree,
+                    'value' => $degree,
+                ];
+            }
+        } elseif (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
             $degree_terms = get_terms([
                 'taxonomy'      => 'abschluss',
                 'hide_empty' => true,
@@ -276,8 +344,7 @@ class Utils
                 ];
             }
         } else {
-            $api           = new API();
-            $degrees       = $parents ? $api->get_meta_list('degree_parents') : $api->get_meta_list('degrees');
+            $degrees       = $parents ? (new Data)->get_meta_list('degree_parents') : (new Data)->get_meta_list('degrees');
             foreach ($degrees as $degree) {
                 $degreeOptions[] = [
                     'label' => $degree,
@@ -288,9 +355,17 @@ class Utils
         return $degreeOptions;
     }
 
-    public static function get_faculty_options() {
+    public static function get_faculty_options($from_api = false) {
         $facultyOptions = [];
-        if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+        if ($from_api == true) {
+            $faculties = (new API)->get_meta_list('faculties');
+            foreach ($faculties as $faculty) {
+                $facultyOptions[] = [
+                    'label' => $faculty,
+                    'value' => $faculty,
+                ];
+            }
+        } elseif (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
             $faculty_terms = get_terms([
                 'taxonomy'      => 'faculty',
                 'hide_empty' => true,
@@ -302,8 +377,7 @@ class Utils
                 ];
             }
         } else {
-            $api = new API();
-            $faculties = $api->get_meta_list('faculties');
+            $faculties = (new Data)->get_meta_list('faculties');
             foreach ($faculties as $faculty) {
                 $facultyOptions[] = [
                     'label' => $faculty,
@@ -328,8 +402,7 @@ class Utils
                 ];
             }
         } else {
-            $api = new API();
-            $attributes = $api->get_meta_list('attributes');
+            $attributes = (new Data)->get_meta_list('attributes');
             foreach ($attributes as $attribute) {
                 $attributeOptions[] = [
                     'label' => $attribute,
@@ -722,36 +795,6 @@ class Utils
         return $data;
     }
 
-    public static function set_large_transient( $base_key, $data, $expiration = DAY_IN_SECONDS, $chunk_length = 50 ) {
-        // Aufteilen in Chunks: 50 Elemente pro Chunk
-        $chunks = array_chunk( $data, $chunk_length, true );
-
-        // Anzahl der Chunks merken
-        set_transient( $base_key . '_count', count( $chunks ), $expiration );
-
-        // Einzelne Chunks speichern
-        foreach ( $chunks as $i => $chunk ) {
-            set_transient( $base_key . '_' . $i, $chunk, $expiration );
-        }
-    }
-
-    public static function get_large_transient( $base_key ) {
-        $count = get_transient( $base_key . '_count' );
-
-        if ( ! $count ) {
-            return false;
-        }
-
-        $data = [];
-        for ( $i = 0; $i < $count; $i++ ) {
-            $chunk = get_transient( $base_key . '_' . $i );
-            if ( $chunk !== false ) {
-                $data = array_replace($data, $chunk);
-            }
-        }
-        return $data;
-    }
-
     /**
      * Weist einem Post einen Term einer Taxonomie zu (inkl. Parent).
      *
@@ -788,5 +831,11 @@ class Utils
         }
 
         return $child_id;
+    }
+
+    public static function get_short_locale() {
+        $locale = get_locale();
+        $locale_parts = explode('_', $locale);
+        return $locale_parts[ 0 ] ?? $locale;
     }
 }

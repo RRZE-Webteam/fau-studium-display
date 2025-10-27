@@ -60,6 +60,13 @@
             padding: 0;
             margin-bottom: 1em;
         }
+        h4 {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        p {
+            padding: 0;
+        }
 
         .program-content {
             position: relative;
@@ -132,16 +139,16 @@
         .program-combinations,
         .program-limited-combinations {
             @media(min-width: 480px) {
-                column-count: 2;
-                column-gap: 2em;
-            }
-            @media screen and (min-width: 768px) {
-                column-count: 3;
+                columns: 200px 3;
+                column-gap: 4em;
             }
         }
 
         .program-videos {
             margin-top: 3em;
+            .rrze-video-container {
+                max-width: 424px;
+            }
         }
 
         .program-admission {
@@ -347,57 +354,9 @@
         .fau-big-teaser {
             padding-top: 0;
         }
-        .features-fau {
-            span[class^='icon-'] {
-                //.icon-circle-check {
-                width: 60px;
-                height: 60px;
-                display: block;
-                //position: absolute;
-                //top: -24px;
-                //left: 16px;
-                background-color: #fff;
-                margin-bottom: .5em;
-                &:after {
-                    content: "";
-                    //-webkit-mask-size: var(--icon-size-mask, 70%);
-                    //mask-size: var(--icon-size-mask, 70%);
-                    -webkit-mask-size: 100%;
-                    mask-size: 100%;
-                    -webkit-mask-repeat: no-repeat;
-                    mask-repeat: no-repeat;
-                    -webkit-mask-position: center;
-                    mask-position: center;
-                    display: inline-block;
-                    width: 60px;
-                    height: 60px;
-                    //position: relative;
-                    //top: 9px;
-                    //left: 8px;
-                    mask-image: url(../svg/circle-check.svg);
-                    -webkit-mask-image: url(../svg/circle-check.svg);
-                    background-color: var(--FAU_Col_FAU-Blau, #04316A);
-                }
-            }
-            span.icon-handshake:after {
-                mask-image: url(../svg/handshake.svg);
-                -webkit-mask-image: url(../svg/handshake.svg);
-            }
-            span.icon-join_left:after {
-                mask-image: url(../svg/join_left.svg);
-                -webkit-mask-image: url(../svg/join_left.svg);
-            }
-            span.icon-language:after {
-                mask-image: url(../svg/language.svg);
-                -webkit-mask-image: url(../svg/language.svg);
-            }
-            span.icon-school:after {
-                mask-image: url(../svg/school.svg);
-                -webkit-mask-image: url(../svg/school.svg);
-            }
-            .column p {
-                font-weight: bold;
-            }
+        div.wp-block-rrze-elements-counter-row {
+            margin-right: auto;
+            margin-top: 32px;
         }
     }
 }

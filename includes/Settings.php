@@ -210,8 +210,8 @@ class Settings
     }
 
     public function render_sync_search() {
-        $facultyOptions = Utils::get_faculty_options();
-        $degreeOptions = Utils::get_degree_options(true);
+        $facultyOptions = Utils::get_faculty_options(true);
+        $degreeOptions = Utils::get_degree_options(true, true);
 
         echo '<div class="" style="display:flex; flex-direction: row; flex-wrap: wrap; column-gap: 2em;">'
              . '<div class="">'
@@ -253,7 +253,7 @@ class Settings
         foreach ($this->programs as $post) {
             $title = $post->post_title;
             $program_id = get_post_meta($post->ID, 'program_id', true);
-            echo '<div class="program-item program-item-' . $post->ID . '">'
+            echo '<div class="program-item manage-program" data-post_id="' . $post->ID . '">'
                  . '<div class="program-check"><input type="checkbox" value="' . $post->ID . '" name="batch-manage[]" id="batch-manage-' . $post->ID . '">' . '</div>'
                 . '<div class="program-title">' . $title . '</div>'
                 . '<div class="program-buttons">';
@@ -347,6 +347,8 @@ class Settings
         $atts['faculty'] = $faculties;
         $atts['degree'] = $degrees;
 
+        $language = Utils::get_short_locale();
+
         $api = new API();
         $programs = $api->get_programs(false, $atts);
 
@@ -364,10 +366,15 @@ class Settings
             . '<button id="import-selected-button" class="button button-primary">' . __('Import selected', 'fau-studium-display') . '</button>';
         foreach ($programs as $program) {
             if (in_array($program['id'], $imported_ids)) continue;
+            if ($language == 'de') {
+                $title = esc_attr($program['title'] . (isset($program['degree']['abbreviation']) ? ' (' . $program['degree']['abbreviation'] . ')' : ''));
+            } else {
+                $title = esc_attr($program['translations']['en']['title'] . (isset($program['translations']['en']['degree']['abbreviation']) ? ' (' . $program['translations']['en']['degree']['abbreviation'] . ')' : ''));
+            }
 
-            $output .= '<div class="program-item add-program add-program-' . $program['id'] . '">'
+            $output .= '<div class="program-item add-program" data-program_id="' . $program['id'] . '">'
                        . '<div class="program-check"><input type="checkbox" value="1" name="batch-import[' . $program['id'] . ']" id="batch-import-' . $program['id'] . '" data-id="' . $program['id'] . '">' . '</div>'
-                       . '<div class="program-title"><label for="batch-import-' . $program['id'] . '">' . $program['title']. ' (' . $program['degree']['abbreviation'] . ')</label></div>'
+                       . '<div class="program-title"><label for="batch-import-' . $program['id'] . '">' . $title . '</label></div>'
                        . '<div class="program-buttons"><a class="add-degree-program button" data-id="' . $program['id'] . '" data-task="add" data-post_id="0"><span class="dashicons dashicons-plus"></span> ' . __('Import', 'fau-studium-display') . '</a></div>'
                        . '</div>';
         }
@@ -412,7 +419,7 @@ class Settings
             foreach ($programs as $program) {
                 $result = $sync->sync_program($program['program_id'], $program['post_id']);
                 if (!is_wp_error($result) && $result > 0) {
-                    $synced[] = $program['program_id'];
+                    $synced[$result] = $program['program_id'];
                 }
             }
             wp_send_json_success(json_encode($synced));
@@ -454,7 +461,7 @@ class Settings
             if ($result != false && !is_wp_error($result)) {
                 $deleted[] = $post_id;
             }
-            delete_transient('fau_studium_degree_program_' . $program_id);
+
         }
 
         wp_send_json_success(json_encode($deleted));

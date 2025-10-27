@@ -1,8 +1,10 @@
 .fau-studium-display {
-
+    p.items-found {
+        padding: 0;
+    }
     table.degree-program-table {
         max-width: 100%;
-        tr {
+        /*tr {
             border-left: none;
             border-right: none;
             border-bottom: 1px solid var(--FAU_Col_Base-Schwarz_25, #BFBFBF);
@@ -26,15 +28,18 @@
                 letter-spacing: 0.02em;
                 padding: 6px 8px;
             }
-        }
+        }*/
         td {
-            padding: 0;
+            /*padding: 0;
             border-right: none;
             font-size: unset;
             display: block;
             @media screen and (min-width: 992px) {
                 display: table-cell;
                 padding: 8px;
+            }*/
+            &:first-child {
+                width: auto;
             }
             &.image-title {
                 padding-left: 0;
@@ -63,7 +68,7 @@
                 }
                 .program-title {
                     display: block;
-                    align-self: center;
+                    //align-self: center;
                     color: var(--FAU_Col_FAU-Blau, #04316A);
                     font-size: var(--P-Body-Text, 1.125rem);
                     margin-bottom: 8px;

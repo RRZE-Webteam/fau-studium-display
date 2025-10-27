@@ -35,8 +35,9 @@ $table_header = '';
 foreach ($table_fields as $field) {
     $table_header .= '<th>' . ($labels[$field] ?? $field) . '</th>';
 }
-$program_table .= sprintf('<tr>%s</tr>', $table_header);
+$program_table .= sprintf('<thead><tr>%s</tr></thead>', $table_header);
 
+$program_table .= '<tbody>';
 foreach ($data as $post_id => $program) {
     if (empty($program) || !isset($program['title']))
         continue;
@@ -87,9 +88,9 @@ foreach ($data as $post_id => $program) {
     $program_table .= sprintf('<tr>%s</tr>',
                              //$program['link'],
                              $table_content
-    );
-
+                        );
 }
+$program_table .= '</tbody>'
 
 ?>
 
@@ -101,16 +102,18 @@ foreach ($data as $post_id => $program) {
             return $atts[ $v ];
         }, ['faculty' => 'selectedFaculties', 'degree' => 'selectedDegrees', 'attribute' => 'selectedSpecialWays']);
         $filter_items = $atts['selectedSearchFilters'] ?? [];
-        echo Utils::renderSearchForm($prefilter, $filter_items, $lang);
+        echo Utils::renderSearchForm($prefilter, $filter_items, $lang, 'table');
 
+        $count = count($data);
+        echo '<p class="items-found">' . sprintf($count == 1 ? $labels['num_programs_found_singular'] : $labels['num_programs_found_plural'], $count) . '</p>';
     endif; ?>
 
     <?php if (!empty($data)) : ?>
-
-        <table class="degree-program-table">
-            <?php echo wp_kses_post($program_table); ?>
-        </table>
-
+        <figure class="wp-block-table">
+            <table class="degree-program-table">
+                <?php echo wp_kses_post($program_table); ?>
+            </table>
+        </figure>
     <?php else: ?>
 
         <p><?php _e('No degree programs found.', 'fau-studium-display'); ?></p>

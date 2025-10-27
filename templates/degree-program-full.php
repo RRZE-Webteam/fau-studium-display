@@ -7,11 +7,15 @@ use function \Fau\DegreeProgram\Display\Config\get_labels;
 use function \Fau\DegreeProgram\Display\Config\get_meinstudium_options;
 use function Fau\DegreeProgram\Display\plugin;
 
-//var_dump($data);
 //print "<pre>"; print_r($atts); print "</pre>";
+//print "<pre>"; var_dump($data); print "</pre>";
 
 if (empty($atts['degreeProgram'])) {
     print '<div class="components-placeholder is-large">' . __('Please select a degree program.', 'fau-studium-display') . '</div>';
+    return;
+}
+if (empty($data)) {
+    print '<div class="components-placeholder is-large">' . __('No data available.', 'fau-studium-display') . '</div>';
     return;
 }
 
@@ -88,7 +92,7 @@ if (!empty($data['content']['structure']['description'])) {
 
 // Entry Text
 if (in_array('entry_text', $items) && ! empty($data[ 'entry_text' ])) {
-    $entry_text = '<div class="entry-text width-small">' . $data['entry_text'] . '</div>';
+    $entry_text = '<div class="entry-text width-small">' . str_replace('<p>', '<p class="is-style-intro-text">', $data['entry_text'] ). '</div>';
 } else {
     $entry_text = '';
 }
@@ -108,7 +112,7 @@ if (in_array('fact_sheet', $items)) {
         ],
         'standard_duration' => [
             'label' => $labels['standard_duration'] ?? 'standard_duration',
-            'value' => (!empty($data['standard_duration']) ? sprintf(__('%s semesters', 'fau-studium-display'), $data['standard_duration']): ''),
+            'value' => (!empty($data['standard_duration']) ? sprintf($labels['%s_semesters'], $data['standard_duration']): ''),
             'itemprop' => 'timeToComplete',
             'itemprop_content' => (!empty($data['standard_duration']) ? $standard_duration_iso : ''),
         ],
@@ -155,7 +159,7 @@ if (in_array('fact_sheet', $items)) {
 
     $fact_sheet = '<div class="fact-sheet width-small">
             <div class="icon-thumbtack"></div>
-            <h1>' . __('Fact Sheet', 'fau-studium-display') . '</h1>';
+            <h1>' . ($labels['fact_sheet'] ?? 'fact_sheet') . '</h1>';
     if (!empty($fact_list)) {
         $fact_sheet .= '<dl class="facts">' . $fact_list . '</dl>';
     }
@@ -174,7 +178,7 @@ if (in_array('fact_sheet', $items)) {
 $content_fields_all = ['content.structure', 'content.specializations', 'content.qualities_and_skills', 'content.why_should_study', 'content.career_prospects', 'special_features', 'combinations'];
 $content_fields = array_intersect($content_fields_all, $items);
 
-$content_title = __('Program Overview', 'fau-studium-display');
+$content_title = ($labels['program_overview'] ?? 'program_overview');
 $content_id = sanitize_title($content_title);
 $content = '<div class="width-large"><h2 id="' . $content_id . '">' . $content_title . '</h2>'
            . '<div class="program-details width-small">';
@@ -190,21 +194,23 @@ foreach ($content_fields as $field) {
         ' . $data['content'][$field_name]['description']
         . '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
     }
-    if ($field == 'combinations') {
+    if ($field == 'combinations' && (!empty($data['combinations']) || !empty($data['limited_combinations']))) {
         $content_html .= '<!-- wp:rrze-elements/collapse {"hstart":3,"title":"' . ($labels[$field_name] ?? $field_name) . '","jumpName":"' . sanitize_title($labels[$field_name] ?? $field_name) . '","isCustomJumpname":true} --><!-- wp:paragraph -->';
         if (!empty($data['combinations'])) {
-            $content_html .= '<h4>' . ($labels['content.combinations'] ?? 'combinations') . '</h4><ul class="program-combinations">';
+            $content_html .= '<h4>' . ($labels['content.combinations'] ?? 'combinations') . '</h4><ul class="program-combinations wp-block-list">';
             foreach ($data['combinations'] as $combination) {
                 $content_html .= sprintf('<li><a href="%s">%s</a></li>', $combination['url'], $combination['title']);
             }
             $content_html .= '</ul>';
+            $content_html .= !empty($descriptions['content.combinations']) ? '<p>' . $descriptions['content.combinations'] . '</p>' : '';
         }
         if (!empty($data['limited_combinations'])) {
-            $content_html .= '<h4>' . ($labels['content.limited_combinations'] ?? 'limited_combinations') . '</h4><ul class="program-limited-combinations">';
+            $content_html .= '<h4>' . ($labels['content.limited_combinations'] ?? 'limited_combinations') . '</h4><ul class="program-limited-combinations wp-block-list">';
             foreach ($data['limited_combinations'] as $limited_combination) {
                 $content_html .= sprintf('<li><a href="%s">%s</a></li>', $limited_combination['url'], $limited_combination['title']);
             }
             $content_html .= '</ul>';
+            $content_html .= !empty($descriptions['content.limited_combinations']) ? '<p>' . $descriptions['content.limited_combinations'] . '</p>' : '';
         }
         $content_html .= '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
 
@@ -232,43 +238,27 @@ if (in_array('videos', $items) && !empty($data['videos'])) {
     $videos = '';
 }
 
-// Info Internationals
-if (in_array('info_internationals_link', $items)) {
-    $cta_internationals_title = __('International Prospective Students', 'fau-studium-display');
-    $cta_internationals_id = sanitize_title($cta_internationals_title);
-    $cta_internationals = '<h2 id="' . $cta_internationals_id . '">' . $cta_internationals_title . '</h2><div class="width-medium">'
-                          . do_blocks('<!-- wp:rrze-elements/cta {"url":"' . $constants['internationals-image'] . '","buttonUrl":"fau.de","alt":"","title":"So läuft die Bewerbung für Internationale ab","subtitle":"Alle Informationen zu Voraussetzungen, Fristen und Ablauf","buttonText":"Mehr erfahren"} /-->')
-                          . '</div>';
-    $quicklinks[1] = '<!-- wp:button -->
-                <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $cta_internationals_id . '">' . $cta_internationals_title . '</a></div>
-            <!-- /wp:button -->';
-} else {
-    $cta_internationals = '';
-}
-
 // Admission Requirements and Application
 if (in_array('admission_requirements_application', $items)) {
 
     $admission_requirements = [];
-    //if (in_array('admission_requirements_application', $items)) {
-        if (!empty($data['admission_requirements']['bachelor_or_teaching_degree'])) {
-            $admission_requirements['bachelor_or_teaching_degree'] = __('1st semester', 'fau-studium-display') . ': <a href="' . $data['admission_requirements']['bachelor_or_teaching_degree']['link_url'] . '">' . $data['admission_requirements']['bachelor_or_teaching_degree']['link_text'] . '</a>';
-        }
-        if (!empty($data['admission_requirements']['teaching_degree_higher_semester'])) {
-            $admission_requirements['teaching_degree_higher_semester'] = __('Higher semesters', 'fau-studium-display') . ': <a href="' . $data['admission_requirements']['teaching_degree_higher_semester']['link_url'] . '">' . $data['admission_requirements']['teaching_degree_higher_semester']['link_text'] . '</a>';
-        }
-        if (!empty($data['admission_requirements']['master'])) {
-            $admission_requirements['master'] = __('Master', 'fau-studium-display') . ': <a href="' . $data['admission_requirements']['master']['link_url'] . '">' . $data['admission_requirements']['master']['link_text'] . '</a>';
-        }
-    //}
+    if (!empty($data['admission_requirements']['bachelor_or_teaching_degree'])) {
+        $admission_requirements['bachelor_or_teaching_degree'] = $labels['1st_semester'] . ': ' . $data['admission_requirements']['bachelor_or_teaching_degree']['link_text'];
+    }
+    if (!empty($data['admission_requirements']['teaching_degree_higher_semester'])) {
+        $admission_requirements['teaching_degree_higher_semester'] = $labels['higher_semesters'] . ': ' . $data['admission_requirements']['teaching_degree_higher_semester']['link_text'];
+    }
+    if (!empty($data['admission_requirements']['master'])) {
+        $admission_requirements['master'] = 'Master: ' . $data['admission_requirements']['master']['link_text'];
+    }
 
-    $deadlines = [];
-    //if (in_array('application_deadlines', $items)) {
-        $deadlines['winter_semester'] = __('Winter semester', 'fau-studium-display') . ': ' . (empty($data['application_deadline_winter_semester']) ? __('not possible', 'fau-studium-display') : strip_tags($data['application_deadline_winter_semester']));
-        $deadlines['summer_semester'] = __('Summer semester', 'fau-studium-display') . ': ' . (empty($data['application_deadline_summer_semester']) ? __('not possible', 'fau-studium-display') : strip_tags($data['application_deadline_summer_semester']));
-    //}
+    if (empty($data['application_deadline_winter_semester']) && empty($data['application_deadline_summer_semester'])) {
+        $deadlines = [];
+    } else {
+        $deadlines['winter_semester'] = $labels['winter_semester'] . ': ' . (empty($data['application_deadline_winter_semester']) ? $labels['not_possible'] : strip_tags($data['application_deadline_winter_semester']));
+        $deadlines['summer_semester'] = $labels['summer_semester'] . ': ' . (empty($data['application_deadline_summer_semester']) ? $labels['not_possible'] : strip_tags($data['application_deadline_summer_semester']));
+    }
 
-    //$language_skills = (in_array('language_skills', $items) && !empty($data['language_skills'])) ? $data['language_skills'] : '';
     $language_skills = [];
     if (!empty($data['language_skills'])) {
         $language_skills[] = strip_tags($data['language_skills']);
@@ -280,7 +270,7 @@ if (in_array('admission_requirements_application', $items)) {
         $language_skills[] = ($labels['german_language_skills_for_international_students'] ?? 'german_language_skills_for_international_students') . ': ' . $data['german_language_skills_for_international_students']['name'];
     }
 
-    $content_related_master_requirements = (/*in_array('content_related_master_requirements', $items) && */!empty($data['content_related_master_requirements'])) ? '<div itemprop="programPrerequisites">' . $data['content_related_master_requirements'] . '</div>' : '';
+    $content_related_master_requirements = (/*in_array('content_related_master_requirements', $items) && */!empty($data['content_related_master_requirements'])) ? '<div itemprop="programPrerequisites">' . str_replace('<ul>', '<ul class="wp-block-list">', $data['content_related_master_requirements']) . '</div>' : '';
 
     $admission_details = !empty($data['details_and_notes']) ? $data['details_and_notes'] : '';
 
@@ -291,16 +281,15 @@ if (in_array('admission_requirements_application', $items)) {
         || !empty($content_related_master_requirements)
         || !empty($admission_details)) {
 
-        $admission_requirements_application_title = ($labels['path_to_admission'] ?? 'path_to_admission');
+        $admission_requirements_application_title = ($labels['application_for_program'] ?? 'application_for_program');
         $admission_requirements_application_id = sanitize_title($admission_requirements_application_title);
-        $admission_requirements_application .= '<h2 id="' . $admission_requirements_application_id . '">' . $admission_requirements_application_title . '</h2>';
         $admission_requirements_application .= '<div class="program-admission width-small"><h3>' . ($labels['admission_requirements_application'] ?? 'admission_requirements_application') . '</h3>';
         $quicklinks[2] = '<!-- wp:button -->
             <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $admission_requirements_application_id . '">' . $admission_requirements_application_title . '</a></div>
             <!-- /wp:button -->';
 
         if (!empty($admission_requirements)) {
-            $admission_requirements_application .= '<h4>' . ($labels['admission_requirements'] ?? 'admission_requirements') . '</h4><ul>';
+            $admission_requirements_application .= '<h4>' . ($labels['admission_requirements'] ?? 'admission_requirements') . '</h4><ul class="wp-block-list">';
             foreach ($admission_requirements as $requirement) {
                 $admission_requirements_application .= '<li>' . $requirement . '</li>';
             }
@@ -308,7 +297,7 @@ if (in_array('admission_requirements_application', $items)) {
         }
 
         if (!empty($deadlines)) {
-            $admission_requirements_application .= '<h4>' . ($labels['application_deadline'] ?? 'application_deadline') . '</h4><ul>';
+            $admission_requirements_application .= '<h4>' . ($labels['application_deadline'] ?? 'application_deadline') . '</h4><ul class="wp-block-list">';
             foreach ($deadlines as $deadline) {
                 $admission_requirements_application .= '<li itemprop="applicationDeadline">' . strip_tags($deadline) . '</li>';
             }
@@ -316,7 +305,7 @@ if (in_array('admission_requirements_application', $items)) {
         }
 
         if (!empty($language_skills)) {
-            $admission_requirements_application .= '<h4>' . ($labels['language_skills'] ?? 'language_skills') . '</h4><ul>';
+            $admission_requirements_application .= '<h4>' . ($labels['language_skills'] ?? 'language_skills') . '</h4><ul class="wp-block-list">';
             foreach ($language_skills as $skill) {
                 $admission_requirements_application .= '<li>' . $skill . '</li>';
             }
@@ -349,17 +338,38 @@ if (in_array('admission_requirements_application', $items)) {
     $admission_requirements_application = '';
 }
 
+// Info Internationals
+if (in_array('info_internationals_link', $items)) {
+    //$cta_internationals_title = __('International Prospective Students', 'fau-studium-display');
+    //$cta_internationals_id = sanitize_title($cta_internationals_title);
+    $cta_internationals = '<div class="width-medium">'
+                          . do_blocks('<!-- wp:rrze-elements/cta {
+                          "url":"' . $constants['internationals-image'] . '",
+                          "buttonUrl":"fau.de",
+                          "alt":"",
+                          "title":"' . ($labels['how_to_apply_internationals_title'] ?? 'how_to_apply_internationals_title') . '",
+                          "subtitle":"' . ($labels['all_information_internationals'] ?? 'all_information_internationals') . '",
+                          "buttonText":"' . ($labels['button_internationals'] ?? 'button_internationals') . '"
+                          } /-->')
+                          . '</div>';
+    /*$quicklinks[1] = '<!-- wp:button -->
+                <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $cta_internationals_id . '">' . $cta_internationals_title . '</a></div>
+            <!-- /wp:button -->';*/
+} else {
+    $cta_internationals = '';
+}
+
 // Apply now!
 $apply_now = '';
-if (in_array('apply_now_link', $items)) {
+if (in_array('apply_now_link', $items) && !empty($data['apply_now_link']['link_url'])) {
     $apply_now_title = $constants['apply-now-title'];
     $apply_now_text = $constants['apply-now-text'];
-    $apply_now_link_text = $constants['apply-now-link-text'];
-    $apply_now_link_url = $constants['apply-now-link-url'];
+    $apply_now_link_text = !empty($data['apply_now_link']['link_text']) ? $data['apply_now_link']['link_text'] : $constants['apply-now-link-text'];
+    $apply_now_link_url = $data['apply_now_link']['link_url'];
     $apply_now_image = $constants['apply-now-image'];
     if (!empty($apply_now_title.$apply_now_text.$apply_now_link_text.$apply_now_link_url.$apply_now_image)) {
         $apply_now = '<div class="program-apply-now width-medium">'
-                      . do_blocks('<!-- wp:rrze-elements/cta {"url":"' . $apply_now_image . '","buttonUrl":"' . $apply_now_link_url . '","alt":"","title":"' . $apply_now_title . '","subtitle":"' . $apply_now_text . '","buttonText":"' . $apply_now_link_text . '"} /-->')
+                      . do_blocks('<!-- wp:rrze-elements/cta {"url":"' . esc_url($apply_now_image) . '","buttonUrl":"' . esc_url($apply_now_link_url) . '","alt":"","title":"' . esc_attr($apply_now_title) . '","subtitle":"' . esc_attr($apply_now_text) . '","buttonText":"' . esc_attr($apply_now_link_text) . '"} /-->')
                       . '</div>';
     }
 }
@@ -423,7 +433,7 @@ if (in_array('links.organizational', $items)) {
     if (!empty($links_organizational)) {
         $useful_links .= '<div class="useful-links-organizational">'
             . '<h4>' . ($labels['organizational'] ?? 'organizational') . '</h4>'
-            . '<ul>';
+            . '<ul class="wp-block-list">';
         foreach ($links_organizational as $link) {
             $useful_links .= '<li>' . $link . '</li>';
         }
@@ -446,7 +456,7 @@ if (in_array('links.downloads', $items)) {
     if (!empty($links_downloads)) {
         $useful_links .= '<div class="useful-links-downloads">'
             . '<h4>' . ($labels['downloads'] ?? 'downloads') . '</h4>'
-            . '<ul>';
+            . '<ul class="wp-block-list">';
         foreach ($links_downloads as $link) {
             $useful_links .= '<li>' . $link . '</li>';
         }
@@ -503,7 +513,7 @@ if (in_array('links.additional_information', $items)) {
     if (!empty($links_additional)) {
         $useful_links .= '<div class="useful-links-additional">'
             . '<h4>' . ($labels['additional_information'] ?? 'additional_information') . '</h4>'
-            . '<ul>';
+            . '<ul class="wp-block-list">';
         foreach ($links_additional as $link) {
             $useful_links .= '<li>' . $link . '</li>';
         }
@@ -515,23 +525,23 @@ if (in_array('links.additional_information', $items)) {
 if (in_array('benefits', $items)) {
 
     $benefits_fau_image = $constants[ 'benefits-fau-image' ];
-    $benefits_fau = '<div class="benefits width-full"><h2>' . __('Studies', 'fau-studium-display') . '</h2>';
+    $benefits_fau = '<div class="benefits width-full"><h2>' . ($labels['studies'] ?? 'studies'). '</h2>';
     $benefits_fau .= '<div class="fau-big-teaser width-large">'
         . '<div class="fau-big-teaser__content">'
         . '<h3 class="fau-big-teaser__headline">' . $constants[ 'benefits-fau-title' ] . '</h3>'
         . '<p class="fau-big-teaser__teaser-text">' . $constants[ 'benefits-fau-text' ] . '</p>'
-        . '<a href="' . $constants[ 'benefits-fau-link-url' ] . '" class="wp-block-buttons is-layout-flex">' . $constants[ 'benefits-fau-link-text' ] . '</a>'
+        //. '<a href="' . $constants[ 'benefits-fau-link-url' ] . '" class="wp-block-buttons is-layout-flex">' . $constants[ 'benefits-fau-link-text' ] . '</a>'
         . '</div>'
         . '<div class="fau-big-teaser__image">'
         . '<img src="' . $benefits_fau_image . '" alt="" />'
         . '</div>'
         . '</div>';
-    $benefits_fau .= do_blocks('<div class="width-large"><!-- wp:rrze-elements/facts-grid {"hideHeading":true} -->
-<!-- wp:rrze-elements/fact {"description":"Mehr als 270 Studiengänge","materialSymbol":"school"} /-->
-<!-- wp:rrze-elements/fact {"description":"Internationale Partnerschaften","materialSymbol":"language"} /-->
-<!-- wp:rrze-elements/fact {"description":"Enge Verknüpfung mit der Wirtschaft","materialSymbol":"handshake"} /-->
-<!-- wp:rrze-elements/fact {"description":"Duales Bachelorstudium möglich","materialSymbol":"join_left"} /-->
-<!-- /wp:rrze-elements/facts-grid --></div>');
+    $benefits_fau .= do_blocks('<!-- wp:rrze-elements/iconbox-row -->
+<!-- wp:rrze-elements/rrze-iconbox {"title":"Mehr als 275","description":"Studiengänge","materialSymbol":"school"} /-->
+<!-- wp:rrze-elements/rrze-iconbox {"title":"Internationale","description":"Partnerschaften","materialSymbol":"language"} /-->
+<!-- wp:rrze-elements/rrze-iconbox {"title":"\u003cstrong\u003eEnge Verknüpfung\u003c/strong\u003e","description":"mit der Wirtschaft","materialSymbol":"handshake"} /-->
+<!-- wp:rrze-elements/rrze-iconbox {"title":"\u003cstrong\u003eBachelorverbundstudium\u003c/strong\u003e","description":"dual studieren","materialSymbol":"join_left"} /-->
+<!-- /wp:rrze-elements/iconbox-row -->');
     $benefits_fau .= '</div>';
 } else {
     $benefits_fau = '';
@@ -571,6 +581,10 @@ if (in_array('benefits', $items)) {
         // Videos
         echo $videos;
 
+        if (!empty($cta_internationals.$admission_requirements_application.$apply_now)) {
+            echo '<h2 id="' . $admission_requirements_application_id . '">' . $admission_requirements_application_title . '</h2>';
+        }
+
         // Internationals
         echo $cta_internationals;
 
@@ -589,7 +603,7 @@ if (in_array('benefits', $items)) {
 
             // Student advice
             if (!empty($student_advice . $subject_specific_advice)) {
-                echo '<div class="student-advice width-large"><h3>' . __("We're Here to Help with All Your Study-Related Questions", 'fau-studium-display') . '</h3>'
+                echo '<div class="student-advice width-large"><h3>' . $labels['student_advice_title'] . '</h3>'
                      . do_blocks('<!-- wp:columns --><div class="wp-block-columns alignwide">'
                          . '<!-- wp:column --><div class="wp-block-column">' . $student_advice . '</div><!-- /wp:column -->'
                          . '<!-- wp:column --><div class="wp-block-column">' . $subject_specific_advice . '</div><!-- /wp:column -->'

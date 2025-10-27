@@ -95,12 +95,14 @@ foreach ($data as $post_id => $program) {
             return $atts[ $v ];
         }, ['faculty' => 'selectedFaculties', 'degree' => 'selectedDegrees', 'attribute' => 'selectedSpecialWays']);
         $filter_items = $atts['selectedSearchFilters'] ?? [];
-        echo Utils::renderSearchForm($prefilter, $filter_items, $lang);
+        echo Utils::renderSearchForm($prefilter, $filter_items, $lang, 'grid');
+
+        $count = count($data);
+        echo '<p class="items-found">' . sprintf($count == 1 ? $labels['num_programs_found_singular'] : $labels['num_programs_found_plural'], $count) . '</p>';
 
     endif; ?>
 
     <?php if (!empty($program_grid)) : ?>
-
         <ul class="degree-program-grid">
             <?php echo $program_grid; ?>
         </ul>

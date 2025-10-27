@@ -9,7 +9,7 @@ $linkTarget = $atts['linkTarget'] ?? 'local';
 $program_list = '';
 foreach ($data as $post_id => $program) {
 
-    if (!empty($program)) {
+    if (!empty($program) && !empty($program['title'])) {
         $url = match ($linkTarget) {
             'local' => get_permalink($post_id),
             'remote' => ! empty($program[ 'link' ]) ? esc_url($program[ 'link' ]) : '',

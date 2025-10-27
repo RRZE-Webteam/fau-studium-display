@@ -66,12 +66,11 @@ jQuery(document).ready(function($) {
         const checkedIds = $('input[type="checkbox"][name^="batch-import"]:checked')
             .map(function() { return $(this).data('id'); })
             .get();
-        //console.log(checkedIds);
         if (checkedIds.length > 0) {
             searchResults.find('button, a.button').addClass('button-disabled');
             searchResults.find('input[type="checkbox"][name^="batch-import"]').addClass('disabled');
             $.each(checkedIds, function(index, id) {
-                $('#degree-program-results div.add-program-' + id + ' a.add-degree-program').find('span.dashicons-plus')
+                searchResults.find('div.program-item[data-program_id="' + id + '"] span.dashicons-plus')
                     .removeClass('dashicons-plus')
                     .addClass('dashicons-update').addClass('spin');
             });
@@ -99,10 +98,15 @@ jQuery(document).ready(function($) {
 
     programsImported.on('click', 'button#update-selected-button', function(e) {
         e.preventDefault();
+        $(this).append('<span class="dashicons dashicons-update search-spinner spin" title="Updating">Updating</span>').addClass('button-disabled');
+        programsImported.find('button, a.button').addClass('button-disabled');
         const checkedIds = $('input[type="checkbox"][name^="batch-manage"]:checked')
             .map(function() { return $(this).val(); })
             .get();
         if (checkedIds.length > 0) {
+            $.each(checkedIds, function(index, id) {
+                $('#degree-programs-imported div.program-item[data-post_id="' + id + '"] a.update-degree-program').find('span.dashicons-update').addClass('spin');
+            });
             sync_degree_programs([], checkedIds);
         } else {
             alert(__('No program selected. Please select at least one program.', 'fau-studium-display'));
@@ -219,6 +223,7 @@ jQuery(document).ready(function($) {
     //ToDo: Spinner
 
     function sync_degree_programs(program_ids = [], post_ids = []) {
+        let task = (post_ids.length === 0) ? 'import' : 'update';
         $.ajax({
             url: program_ajax.ajax_url,
             type: 'POST',
@@ -229,19 +234,24 @@ jQuery(document).ready(function($) {
                 post_ids: post_ids
             },
             success: function(response) {
-                console.log(response);
                 if (response.success) {
                     const arr = JSON.parse(response.data);
-                    $.each(arr, function(index, id_synced) {
-                        //$('#degree-program-results div.add-program-' + id_synced).remove();
-                        const searchResults = $('#degree-program-results');
-                        const parentDiv = searchResults.find('div.add-program-' + id_synced);
-                        const button = parentDiv.find('a.add-degree-program');
-                        button.after('<span class="dashicons dashicons-yes sync-ok" title="Sync OK">Sync OK</span>');
-                        button.remove();
-                        parentDiv.find('input').remove();
-                        searchResults.find('input[type="checkbox"][name^="batch-import"]').removeClass('disabled');
-                        searchResults.find('button, a.button').removeClass('button-disabled');
+                    $.each(arr, function(post_id, program_id) {
+                        if (task === 'import') {
+                            let parentDiv = $('div[data-program_id="' + program_id + '"]');
+                            parentDiv.find('input').remove();
+                            let button = parentDiv.find('a.add-degree-program');
+                            button.find('span.dashicons').removeClass('spin dashicons-update').addClass('dashicons-yes sync-ok');
+                            button.addClass('button-disabled');
+                        } else if (task === 'update') {
+                            const parentDiv = $('div[data-post_id="' + post_id + '"]');
+                            const programsImported = $('div#degree-programs-imported');
+                            programsImported.find('button, a.button').removeClass('button-disabled');
+                            programsImported.find('button#update-selected-button span.dashicons').remove();
+                            parentDiv.find('input').remove();
+                            parentDiv.find('a.update-degree-program').addClass('button-disabled').find('span.dashicons').removeClass('spin dashicons-update').addClass('dashicons-yes sync-ok');
+                            parentDiv.find('a.delete-degree-program').removeClass('button-disabled');
+                        }
                     });
                 } else {
                     console.log('Fehler: ' + response);
