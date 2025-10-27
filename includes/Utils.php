@@ -46,25 +46,25 @@ class Utils
         //var_dump($prefilter);
         $getParams = Utils::array_map_recursive('sanitize_text_field', $_GET);
         $data = new Data();
-        $degrees = !empty($prefilter['degree']) ? $prefilter['degree'] : $data->get_meta_list('degree_parents');
+        $degrees = !empty($prefilter['degree']) ? $prefilter['degree'] : $data->get_meta_list('degree_parents', 'en');
         $subject_groups = !empty($prefilter['subject_group']) ? $prefilter['subject_group'] : $data->get_meta_list('subject_groups');
         $attributes = !empty($prefilter['attribute']) ? $prefilter['attribute'] : $data->get_meta_list('attributes');
-        $labels = get_labels($lang); // ToDO
+        $labels = get_labels($lang);
         if (empty($filter_items)) {
             $filter_items = get_output_fields('search-filters');
         }
         $display = ($display == 'table') ? 'table' : 'grid';
 
         $filters = [
-            ['key' => 'degree', 'label' => ($labels['degree'] ?? 'degree'), 'data' => $degrees],
-            ['key' => 'subject_group', 'label' => ($labels['subject_group'] ?? 'subject_group'), 'data' => $subject_groups],
-            ['key' => 'attribute', 'label' => ($labels['attribute'] ?? 'attribute'), 'data' => $attributes],
-            ['key' => 'admission_requirements', 'label' => ($labels['admission_requirements'] ?? 'admission_requirements'), 'data' => $data->get_meta_list('admission_requirements')],
-            ['key' => 'semester', 'label' => ($labels['start'] ?? 'start'), 'data' => $data->get_meta_list('start_semesters')],
-            ['key' => 'study_location', 'label' => ($labels['location'] ?? 'location'), 'data' => $data->get_meta_list('study_locations')],
-            ['key' => 'teaching_language', 'label' => ($labels['teaching_language'] ?? 'teaching_language'), 'data' => $data->get_meta_list('teaching_languages')],
-            ['key' => 'faculty', 'label' => ($labels['faculty'] ?? 'faculty'), 'data' => $data->get_meta_list('faculties')],
-            ['key' => 'german_language_skills_for_international_students', 'label' => ($labels['german_language_skills'] ?? 'german_language_skills'), 'data' => $data->get_meta_list('german_language_skills')],
+            ['key' => 'degree', 'label' => ($labels['degree']), 'data' => $degrees],
+            ['key' => 'subject_group', 'label' => ($labels['subject_group']), 'data' => $subject_groups],
+            ['key' => 'attribute', 'label' => ($labels['attributes']), 'data' => $attributes],
+            ['key' => 'admission_requirements', 'label' => ($labels['admission_requirements']), 'data' => $data->get_meta_list('admission_requirements')],
+            ['key' => 'semester', 'label' => ($labels['start']), 'data' => $data->get_meta_list('start_semesters')],
+            ['key' => 'study_location', 'label' => ($labels['location']), 'data' => $data->get_meta_list('study_locations')],
+            ['key' => 'teaching_language', 'label' => ($labels['teaching_language']), 'data' => $data->get_meta_list('teaching_languages')],
+            ['key' => 'faculty', 'label' => ($labels['faculty']), 'data' => $data->get_meta_list('faculties')],
+            ['key' => 'german_language_skills_for_international_students', 'label' => ($labels['german_language_skills_for_international_students']), 'data' => $data->get_meta_list('german_language_skills')],
             //['key' => 'area', 'label' => ($labels['area'] ?? 'area'), 'data' => $api->get_areas_of_study()],
         ];
 
@@ -831,5 +831,11 @@ class Utils
         }
 
         return $child_id;
+    }
+
+    public static function get_short_locale() {
+        $locale = get_locale();
+        $locale_parts = explode('_', $locale);
+        return $locale_parts[ 0 ] ?? $locale;
     }
 }

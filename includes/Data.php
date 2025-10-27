@@ -133,10 +133,10 @@ class Data
         return $data;
     }
 
-    public function get_meta_list($meta) {
+    public function get_meta_list($meta, $lang = 'de') {
 
         $meta_list = [];
-        $programs = $this->get_programs();
+        $programs = $this->get_programs($lang);
         foreach ($programs as $post_id => $program) {
             $post_meta = get_post_meta($post_id, 'program_data_de', true);
             switch ($meta) {

@@ -9,6 +9,10 @@ class Output
 {
     public function renderOutput($atts) {
 
+        if (empty($atts['language'])) {
+            $atts['language'] = Utils::get_short_locale();
+        }
+
         $data = (new Data)->get_data($atts);
 
         // Load the template and pass the sorted data

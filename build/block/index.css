@@ -135,51 +135,58 @@
     padding: 0 var(--Spacing-3x) var(--Spacing-3x) var(--Spacing-3x);
   }
 }
-.fau-studium-display table.degree-program-table tr {
-  border-left: none;
-  border-right: none;
-  border-bottom: 1px solid var(--FAU_Col_Base-Schwarz_25, #BFBFBF);
-  display: block;
-  padding: 8px 0;
+.fau-elemental section.fau-studium-display.degree-program-list {
+  max-width: var(--wide-small-width, 870px);
 }
 
-.fau-studium-display table.degree-program-table tr:nth-child(odd) td {
-  background-color: #fff;
-}
-
-@media screen and (min-width: 992px) {
-  .fau-studium-display table.degree-program-table tr {
-    display: table-row;
-    padding: 0;
-  }
-}
-.fau-studium-display table.degree-program-table th {
-  display: none;
-}
-
-@media screen and (min-width: 992px) {
-  .fau-studium-display table.degree-program-table th {
-    display: table-cell;
-    background-color: var(--FAU_Col_FAU-Blau, #04316A);
-    color: #fff;
-    font-size: unset;
-    letter-spacing: 0.02em;
-    padding: 6px 8px;
-  }
-}
-.fau-studium-display table.degree-program-table td {
+.fau-studium-display p.items-found {
   padding: 0;
+}
+
+.fau-studium-display table.degree-program-table {
+  max-width: 100%;
+  /*tr {
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid var(--FAU_Col_Base-Schwarz_25, #BFBFBF);
+      display: block;
+      padding: 8px 0;
+      &:nth-child(odd) td {
+          background-color: #fff;
+      }
+      @media screen and (min-width: 992px) {
+          display: table-row;
+          padding: 0;
+      }
+  }
+  th {
+      display: none;
+      @media screen and (min-width: 992px) {
+          display: table-cell;
+          background-color: var(--FAU_Col_FAU-Blau, #04316A);
+          color: #fff;
+          font-size: unset;
+          letter-spacing: 0.02em;
+          padding: 6px 8px;
+      }
+  }*/
+}
+
+.fau-studium-display table.degree-program-table td {
+  /*padding: 0;
   border-right: none;
   font-size: unset;
   display: block;
+  @media screen and (min-width: 992px) {
+      display: table-cell;
+      padding: 8px;
+  }*/
 }
 
-@media screen and (min-width: 992px) {
-  .fau-studium-display table.degree-program-table td {
-    display: table-cell;
-    padding: 8px;
-  }
+.fau-studium-display table.degree-program-table td:first-child {
+  width: auto;
 }
+
 .fau-studium-display table.degree-program-table td.image-title {
   padding-left: 0;
   font-weight: bold;
@@ -198,17 +205,13 @@
   -o-object-fit: cover;
      object-fit: cover;
   width: 80px;
+  height: auto;
   box-shadow: none;
   float: left;
   margin-right: 8px;
   margin-bottom: 8px;
 }
 
-@media screen and (min-width: 768px) {
-  .fau-studium-display table.degree-program-table td.image-title img {
-    width: 160px;
-  }
-}
 @media screen and (min-width: 992px) {
   .fau-studium-display table.degree-program-table td.image-title img {
     margin-bottom: 0;
@@ -216,7 +219,6 @@
 }
 .fau-studium-display table.degree-program-table td.image-title .program-title {
   display: block;
-  align-self: center;
   color: var(--FAU_Col_FAU-Blau, #04316A);
   font-size: var(--P-Body-Text, 1.125rem);
   margin-bottom: 8px;
@@ -257,11 +259,17 @@
     display: none;
   }
 }
+.fau-studium-display p.items-found {
+  padding: 0;
+}
+
 .fau-studium-display ul.degree-program-grid {
+  max-width: 100%;
   display: grid;
   margin: 0 0 32px;
+  padding: 0;
   grid-gap: 16px;
-  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 }
 
 @media screen and (min-width: 1440px) {
@@ -284,6 +292,10 @@
   padding: 0;
 }
 
+.fau-studium-display ul.degree-program-grid li p {
+  padding: 0;
+}
+
 .fau-studium-display ul.degree-program-grid li a {
   color: #fff;
   text-decoration: none;
@@ -294,6 +306,7 @@
   -o-object-fit: cover;
      object-fit: cover;
   width: 100%;
+  height: auto;
 }
 
 .fau-studium-display ul.degree-program-grid li .program-content {
@@ -366,12 +379,17 @@
 
 .fau-studium-display.degree-program-box h1, .fau-studium-display.degree-program-full .fact-sheet h1 {
   color: var(--FAU_Col_FAU-Blau, #04316A);
-  font-size: var(--H-Heading-5, 1.15rem);
+  font-size: var(--P-Body-Text, 1.125rem);
   margin-top: 0;
   padding-top: 0;
 }
 
+.fau-studium-display.degree-program-box p, .fau-studium-display.degree-program-full .fact-sheet p {
+  padding: 0;
+}
+
 .fau-studium-display.degree-program-box dl.facts, .fau-studium-display.degree-program-full .fact-sheet dl.facts {
+  font-size: var(--P-Body-Text, 1.125rem);
   margin: 0;
   line-height: 1.8;
 }
@@ -404,6 +422,7 @@
 }
 
 .fau-studium-display.degree-program-box dl.special-features, .fau-studium-display.degree-program-full .fact-sheet dl.special-features {
+  font-size: var(--P-Body-Text, 1.125rem);
   margin: 16px 0 0;
 }
 
@@ -487,6 +506,15 @@
   margin-bottom: 1em;
 }
 
+.fau-studium-display.degree-program-full h4 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.fau-studium-display.degree-program-full p {
+  padding: 0;
+}
+
 .fau-studium-display.degree-program-full .program-content {
   position: relative;
   top: -64px;
@@ -559,21 +587,18 @@
 @media (min-width: 480px) {
   .fau-studium-display.degree-program-full .program-combinations,
   .fau-studium-display.degree-program-full .program-limited-combinations {
-    -moz-column-count: 2;
-         column-count: 2;
-    -moz-column-gap: 2em;
-         column-gap: 2em;
-  }
-}
-@media screen and (min-width: 768px) {
-  .fau-studium-display.degree-program-full .program-combinations,
-  .fau-studium-display.degree-program-full .program-limited-combinations {
-    -moz-column-count: 3;
-         column-count: 3;
+    -moz-columns: 200px 3;
+         columns: 200px 3;
+    -moz-column-gap: 4em;
+         column-gap: 4em;
   }
 }
 .fau-studium-display.degree-program-full .program-videos {
   margin-top: 3em;
+}
+
+.fau-studium-display.degree-program-full .program-videos .rrze-video-container {
+  max-width: 424px;
 }
 
 .fau-studium-display.degree-program-full .program-admission {
@@ -797,52 +822,9 @@
   padding-top: 0;
 }
 
-.fau-studium-display.degree-program-full .features-fau span[class^=icon-] {
-  width: 60px;
-  height: 60px;
-  display: block;
-  background-color: #fff;
-  margin-bottom: 0.5em;
-}
-
-.fau-studium-display.degree-program-full .features-fau span[class^=icon-]:after {
-  content: "";
-  -webkit-mask-size: 100%;
-  mask-size: 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  display: inline-block;
-  width: 60px;
-  height: 60px;
-  mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNjQwIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIHY3LjAuMCBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIENvcHlyaWdodCAyMDI1IEZvbnRpY29ucywgSW5jLi0tPjxwYXRoIGQ9Ik0zMjAgMTEyQzQzNC45IDExMiA1MjggMjA1LjEgNTI4IDMyMEM1MjggNDM0LjkgNDM0LjkgNTI4IDMyMCA1MjhDMjA1LjEgNTI4IDExMiA0MzQuOSAxMTIgMzIwQzExMiAyMDUuMSAyMDUuMSAxMTIgMzIwIDExMnpNMzIwIDU3NkM0NjEuNCA1NzYgNTc2IDQ2MS40IDU3NiAzMjBDNTc2IDE3OC42IDQ2MS40IDY0IDMyMCA2NEMxNzguNiA2NCA2NCAxNzguNiA2NCAzMjBDNjQgNDYxLjQgMTc4LjYgNTc2IDMyMCA1NzZ6TTQwNC40IDI3Ni43QzQxMS40IDI2NS41IDQwOCAyNTAuNyAzOTYuOCAyNDMuNkMzODUuNiAyMzYuNSAzNzAuOCAyNDAgMzYzLjcgMjUxLjJMMzAyLjMgMzQ5LjVMMjc1LjMgMzEzLjVDMjY3LjMgMzAyLjkgMjUyLjMgMzAwLjcgMjQxLjcgMzA4LjdDMjMxLjEgMzE2LjcgMjI4LjkgMzMxLjcgMjM2LjkgMzQyLjNMMjg0LjkgNDA2LjNDMjg5LjYgNDEyLjYgMjk3LjIgNDE2LjIgMzA1LjEgNDE1LjlDMzEzIDQxNS42IDMyMC4yIDQxMS40IDMyNC40IDQwNC42TDQwNC40IDI3Ni42eiIvPjwvc3ZnPg==);
-  -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNjQwIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIHY3LjAuMCBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIENvcHlyaWdodCAyMDI1IEZvbnRpY29ucywgSW5jLi0tPjxwYXRoIGQ9Ik0zMjAgMTEyQzQzNC45IDExMiA1MjggMjA1LjEgNTI4IDMyMEM1MjggNDM0LjkgNDM0LjkgNTI4IDMyMCA1MjhDMjA1LjEgNTI4IDExMiA0MzQuOSAxMTIgMzIwQzExMiAyMDUuMSAyMDUuMSAxMTIgMzIwIDExMnpNMzIwIDU3NkM0NjEuNCA1NzYgNTc2IDQ2MS40IDU3NiAzMjBDNTc2IDE3OC42IDQ2MS40IDY0IDMyMCA2NEMxNzguNiA2NCA2NCAxNzguNiA2NCAzMjBDNjQgNDYxLjQgMTc4LjYgNTc2IDMyMCA1NzZ6TTQwNC40IDI3Ni43QzQxMS40IDI2NS41IDQwOCAyNTAuNyAzOTYuOCAyNDMuNkMzODUuNiAyMzYuNSAzNzAuOCAyNDAgMzYzLjcgMjUxLjJMMzAyLjMgMzQ5LjVMMjc1LjMgMzEzLjVDMjY3LjMgMzAyLjkgMjUyLjMgMzAwLjcgMjQxLjcgMzA4LjdDMjMxLjEgMzE2LjcgMjI4LjkgMzMxLjcgMjM2LjkgMzQyLjNMMjg0LjkgNDA2LjNDMjg5LjYgNDEyLjYgMjk3LjIgNDE2LjIgMzA1LjEgNDE1LjlDMzEzIDQxNS42IDMyMC4yIDQxMS40IDMyNC40IDQwNC42TDQwNC40IDI3Ni42eiIvPjwvc3ZnPg==);
-  background-color: var(--FAU_Col_FAU-Blau, #04316A);
-}
-
-.fau-studium-display.degree-program-full .features-fau span.icon-handshake:after {
-  mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDQzMTZBIj48cGF0aCBkPSJNNDc1LTE2MHE0IDAgOC0ydDYtNGwzMjgtMzI4cTEyLTEyIDE3LjUtMjd0NS41LTMwcTAtMTYtNS41LTMwLjVUODE3LTYwN0w2NDctNzc3cS0xMS0xMi0yNS41LTE3LjVUNTkxLTgwMHEtMTUgMC0zMCA1LjVUNTM0LTc3N2wtMTEgMTEgNzQgNzVxMTUgMTQgMjIgMzJ0NyAzOHEwIDQyLTI4LjUgNzAuNVQ1MjctNTIycS0yMCAwLTM4LjUtN1Q0NTYtNTUwbC03NS03NC0xNzUgMTc1cS0zIDMtNC41IDYuNVQyMDAtNDM1cTAgOCA2IDE0LjV0MTQgNi41cTQgMCA4LTJ0Ni00bDEzNi0xMzYgNTYgNTYtMTM1IDEzNnEtMyAzLTQuNSA2LjVUMjg1LTM1MHEwIDggNiAxNHQxNCA2cTQgMCA4LTJ0Ni00bDEzNi0xMzUgNTYgNTYtMTM1IDEzNnEtMyAyLTQuNSA2dC0xLjUgOHEwIDggNiAxNHQxNCA2cTQgMCA3LjUtMS41dDYuNS00LjVsMTM2LTEzNSA1NiA1Ni0xMzYgMTM2cS0zIDMtNC41IDYuNVQ0NTQtMTgwcTAgOCA2LjUgMTR0MTQuNSA2Wm0tMSA4MHEtMzcgMC02NS41LTI0LjVUMzc1LTE2NnEtMzQtNS01Ny0yOHQtMjgtNTdxLTM0LTUtNTYuNS0yOC41VDIwNi0zMzZxLTM4LTUtNjItMzN0LTI0LTY2cTAtMjAgNy41LTM4LjVUMTQ5LTUwNmwyMzItMjMxIDEzMSAxMzFxMiAzIDYgNC41dDggMS41cTkgMCAxNS01LjV0Ni0xNC41cTAtNC0xLjUtOHQtNC41LTZMMzk4LTc3N3EtMTEtMTItMjUuNS0xNy41VDM0Mi04MDBxLTE1IDAtMzAgNS41VDI4NS03NzdMMTQ0LTYzNXEtOSA5LTE1IDIxdC04IDI0cS0yIDEyIDAgMjQuNXQ4IDIzLjVsLTU4IDU4cS0xNy0yMy0yNS01MC41VDQwLTU5MHEyLTI4IDE0LTU0LjVUODctNjkybDE0MS0xNDFxMjQtMjMgNTMuNS0zNXQ2MC41LTEycTMxIDAgNjAuNSAxMnQ1Mi41IDM1bDExIDExIDExLTExcTI0LTIzIDUzLjUtMzV0NjAuNS0xMnEzMSAwIDYwLjUgMTJ0NTIuNSAzNWwxNjkgMTY5cTIzIDIzIDM1IDUzdDEyIDYxcTAgMzEtMTIgNjAuNVQ4NzMtNDM3TDU0NS0xMTBxLTE0IDE0LTMyLjUgMjJUNDc0LTgwWm0tOTktNTYwWiIvPjwvc3ZnPg==);
-  -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDQzMTZBIj48cGF0aCBkPSJNNDc1LTE2MHE0IDAgOC0ydDYtNGwzMjgtMzI4cTEyLTEyIDE3LjUtMjd0NS41LTMwcTAtMTYtNS41LTMwLjVUODE3LTYwN0w2NDctNzc3cS0xMS0xMi0yNS41LTE3LjVUNTkxLTgwMHEtMTUgMC0zMCA1LjVUNTM0LTc3N2wtMTEgMTEgNzQgNzVxMTUgMTQgMjIgMzJ0NyAzOHEwIDQyLTI4LjUgNzAuNVQ1MjctNTIycS0yMCAwLTM4LjUtN1Q0NTYtNTUwbC03NS03NC0xNzUgMTc1cS0zIDMtNC41IDYuNVQyMDAtNDM1cTAgOCA2IDE0LjV0MTQgNi41cTQgMCA4LTJ0Ni00bDEzNi0xMzYgNTYgNTYtMTM1IDEzNnEtMyAzLTQuNSA2LjVUMjg1LTM1MHEwIDggNiAxNHQxNCA2cTQgMCA4LTJ0Ni00bDEzNi0xMzUgNTYgNTYtMTM1IDEzNnEtMyAyLTQuNSA2dC0xLjUgOHEwIDggNiAxNHQxNCA2cTQgMCA3LjUtMS41dDYuNS00LjVsMTM2LTEzNSA1NiA1Ni0xMzYgMTM2cS0zIDMtNC41IDYuNVQ0NTQtMTgwcTAgOCA2LjUgMTR0MTQuNSA2Wm0tMSA4MHEtMzcgMC02NS41LTI0LjVUMzc1LTE2NnEtMzQtNS01Ny0yOHQtMjgtNTdxLTM0LTUtNTYuNS0yOC41VDIwNi0zMzZxLTM4LTUtNjItMzN0LTI0LTY2cTAtMjAgNy41LTM4LjVUMTQ5LTUwNmwyMzItMjMxIDEzMSAxMzFxMiAzIDYgNC41dDggMS41cTkgMCAxNS01LjV0Ni0xNC41cTAtNC0xLjUtOHQtNC41LTZMMzk4LTc3N3EtMTEtMTItMjUuNS0xNy41VDM0Mi04MDBxLTE1IDAtMzAgNS41VDI4NS03NzdMMTQ0LTYzNXEtOSA5LTE1IDIxdC04IDI0cS0yIDEyIDAgMjQuNXQ4IDIzLjVsLTU4IDU4cS0xNy0yMy0yNS01MC41VDQwLTU5MHEyLTI4IDE0LTU0LjVUODctNjkybDE0MS0xNDFxMjQtMjMgNTMuNS0zNXQ2MC41LTEycTMxIDAgNjAuNSAxMnQ1Mi41IDM1bDExIDExIDExLTExcTI0LTIzIDUzLjUtMzV0NjAuNS0xMnEzMSAwIDYwLjUgMTJ0NTIuNSAzNWwxNjkgMTY5cTIzIDIzIDM1IDUzdDEyIDYxcTAgMzEtMTIgNjAuNVQ4NzMtNDM3TDU0NS0xMTBxLTE0IDE0LTMyLjUgMjJUNDc0LTgwWm0tOTktNTYwWiIvPjwvc3ZnPg==);
-}
-
-.fau-studium-display.degree-program-full .features-fau span.icon-join_left:after {
-  mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDQzMTZBIj48cGF0aCBkPSJNMzIwLTIwMHEtMTE3IDAtMTk4LjUtODEuNVQ0MC00ODBxMC0xMTcgODEuNS0xOTguNVQzMjAtNzYwcTI3IDAgNTIuNSA1dDQ5LjUgMTRxLTU4IDQ5LTkwIDExN3QtMzIgMTQ0cTAgNzYgMzIgMTQ0dDkwIDExN3EtMjQgOS00OS41IDE0dC01Mi41IDVabTMyMCAwcS0yNyAwLTUyLjUtNVQ1MzgtMjE5cTE3LTE0IDMyLTMwLjV0MjgtMzQuNXExMSAyIDIxIDN0MjEgMXE4MyAwIDE0MS41LTU4LjVUODQwLTQ4MHEwLTgzLTU4LjUtMTQxLjVUNjQwLTY4MHEtMTEgMC0yMSAxdC0yMSAzcS0xMy0xOC0yOC0zNC41VDUzOC03NDFxMjQtOSA0OS41LTE0dDUyLjUtNXExMTcgMCAxOTguNSA4MS41VDkyMC00ODBxMCAxMTctODEuNSAxOTguNVQ2NDAtMjAwWm0tMTYwLTUwcS01Ny0zOS04OC41LTEwMFQzNjAtNDgwcTAtNjkgMzEuNS0xMzBUNDgwLTcxMHE1NyAzOSA4OC41IDEwMFQ2MDAtNDgwcTAgNjktMzEuNSAxMzBUNDgwLTI1MFoiLz48L3N2Zz4=);
-  -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDQzMTZBIj48cGF0aCBkPSJNMzIwLTIwMHEtMTE3IDAtMTk4LjUtODEuNVQ0MC00ODBxMC0xMTcgODEuNS0xOTguNVQzMjAtNzYwcTI3IDAgNTIuNSA1dDQ5LjUgMTRxLTU4IDQ5LTkwIDExN3QtMzIgMTQ0cTAgNzYgMzIgMTQ0dDkwIDExN3EtMjQgOS00OS41IDE0dC01Mi41IDVabTMyMCAwcS0yNyAwLTUyLjUtNVQ1MzgtMjE5cTE3LTE0IDMyLTMwLjV0MjgtMzQuNXExMSAyIDIxIDN0MjEgMXE4MyAwIDE0MS41LTU4LjVUODQwLTQ4MHEwLTgzLTU4LjUtMTQxLjVUNjQwLTY4MHEtMTEgMC0yMSAxdC0yMSAzcS0xMy0xOC0yOC0zNC41VDUzOC03NDFxMjQtOSA0OS41LTE0dDUyLjUtNXExMTcgMCAxOTguNSA4MS41VDkyMC00ODBxMCAxMTctODEuNSAxOTguNVQ2NDAtMjAwWm0tMTYwLTUwcS01Ny0zOS04OC41LTEwMFQzNjAtNDgwcTAtNjkgMzEuNS0xMzBUNDgwLTcxMHE1NyAzOSA4OC41IDEwMFQ2MDAtNDgwcTAgNjktMzEuNSAxMzBUNDgwLTI1MFoiLz48L3N2Zz4=);
-}
-
-.fau-studium-display.degree-program-full .features-fau span.icon-language:after {
-  mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDQzMTZBIj48cGF0aCBkPSJNNDgwLTgwcS04MiAwLTE1NS0zMS41dC0xMjcuNS04NlExNDMtMjUyIDExMS41LTMyNVQ4MC00ODBxMC04MyAzMS41LTE1NS41dDg2LTEyN1EyNTItODE3IDMyNS04NDguNVQ0ODAtODgwcTgzIDAgMTU1LjUgMzEuNXQxMjcgODZxNTQuNSA1NC41IDg2IDEyN1Q4ODAtNDgwcTAgODItMzEuNSAxNTV0LTg2IDEyNy41cS01NC41IDU0LjUtMTI3IDg2VDQ4MC04MFptMC04MnEyNi0zNiA0NS03NXQzMS04M0g0MDRxMTIgNDQgMzEgODN0NDUgNzVabS0xMDQtMTZxLTE4LTMzLTMxLjUtNjguNVQzMjItMzIwSDIwNHEyOSA1MCA3Mi41IDg3dDk5LjUgNTVabTIwOCAwcTU2LTE4IDk5LjUtNTV0NzIuNS04N0g2MzhxLTkgMzgtMjIuNSA3My41VDU4NC0xNzhaTTE3MC00MDBoMTM2cS0zLTIwLTQuNS0zOS41VDMwMC00ODBxMC0yMSAxLjUtNDAuNVQzMDYtNTYwSDE3MHEtNSAyMC03LjUgMzkuNVQxNjAtNDgwcTAgMjEgMi41IDQwLjVUMTcwLTQwMFptMjE2IDBoMTg4cTMtMjAgNC41LTM5LjVUNTgwLTQ4MHEwLTIxLTEuNS00MC41VDU3NC01NjBIMzg2cS0zIDIwLTQuNSAzOS41VDM4MC00ODBxMCAyMSAxLjUgNDAuNVQzODYtNDAwWm0yNjggMGgxMzZxNS0yMCA3LjUtMzkuNVQ4MDAtNDgwcTAtMjEtMi41LTQwLjVUNzkwLTU2MEg2NTRxMyAyMCA0LjUgMzkuNVQ2NjAtNDgwcTAgMjEtMS41IDQwLjVUNjU0LTQwMFptLTE2LTI0MGgxMThxLTI5LTUwLTcyLjUtODdUNTg0LTc4MnExOCAzMyAzMS41IDY4LjVUNjM4LTY0MFptLTIzNCAwaDE1MnEtMTItNDQtMzEtODN0LTQ1LTc1cS0yNiAzNi00NSA3NXQtMzEgODNabS0yMDAgMGgxMThxOS0zOCAyMi41LTczLjVUMzc2LTc4MnEtNTYgMTgtOTkuNSA1NVQyMDQtNjQwWiIvPjwvc3ZnPg==);
-  -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDQzMTZBIj48cGF0aCBkPSJNNDgwLTgwcS04MiAwLTE1NS0zMS41dC0xMjcuNS04NlExNDMtMjUyIDExMS41LTMyNVQ4MC00ODBxMC04MyAzMS41LTE1NS41dDg2LTEyN1EyNTItODE3IDMyNS04NDguNVQ0ODAtODgwcTgzIDAgMTU1LjUgMzEuNXQxMjcgODZxNTQuNSA1NC41IDg2IDEyN1Q4ODAtNDgwcTAgODItMzEuNSAxNTV0LTg2IDEyNy41cS01NC41IDU0LjUtMTI3IDg2VDQ4MC04MFptMC04MnEyNi0zNiA0NS03NXQzMS04M0g0MDRxMTIgNDQgMzEgODN0NDUgNzVabS0xMDQtMTZxLTE4LTMzLTMxLjUtNjguNVQzMjItMzIwSDIwNHEyOSA1MCA3Mi41IDg3dDk5LjUgNTVabTIwOCAwcTU2LTE4IDk5LjUtNTV0NzIuNS04N0g2MzhxLTkgMzgtMjIuNSA3My41VDU4NC0xNzhaTTE3MC00MDBoMTM2cS0zLTIwLTQuNS0zOS41VDMwMC00ODBxMC0yMSAxLjUtNDAuNVQzMDYtNTYwSDE3MHEtNSAyMC03LjUgMzkuNVQxNjAtNDgwcTAgMjEgMi41IDQwLjVUMTcwLTQwMFptMjE2IDBoMTg4cTMtMjAgNC41LTM5LjVUNTgwLTQ4MHEwLTIxLTEuNS00MC41VDU3NC01NjBIMzg2cS0zIDIwLTQuNSAzOS41VDM4MC00ODBxMCAyMSAxLjUgNDAuNVQzODYtNDAwWm0yNjggMGgxMzZxNS0yMCA3LjUtMzkuNVQ4MDAtNDgwcTAtMjEtMi41LTQwLjVUNzkwLTU2MEg2NTRxMyAyMCA0LjUgMzkuNVQ2NjAtNDgwcTAgMjEtMS41IDQwLjVUNjU0LTQwMFptLTE2LTI0MGgxMThxLTI5LTUwLTcyLjUtODdUNTg0LTc4MnExOCAzMyAzMS41IDY4LjVUNjM4LTY0MFptLTIzNCAwaDE1MnEtMTItNDQtMzEtODN0LTQ1LTc1cS0yNiAzNi00NSA3NXQtMzEgODNabS0yMDAgMGgxMThxOS0zOCAyMi41LTczLjVUMzc2LTc4MnEtNTYgMTgtOTkuNSA1NVQyMDQtNjQwWiIvPjwvc3ZnPg==);
-}
-
-.fau-studium-display.degree-program-full .features-fau span.icon-school:after {
-  mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDQzMTZBIj48cGF0aCBkPSJNNDgwLTEyMCAyMDAtMjcydi0yNDBMNDAtNjAwbDQ0MC0yNDAgNDQwIDI0MHYzMjBoLTgwdi0yNzZsLTgwIDQ0djI0MEw0ODAtMTIwWm0wLTMzMiAyNzQtMTQ4LTI3NC0xNDgtMjc0IDE0OCAyNzQgMTQ4Wm0wIDI0MSAyMDAtMTA4di0xNTFMNDgwLTM2MCAyODAtNDcwdjE1MWwyMDAgMTA4Wm0wLTI0MVptMCA5MFptMCAwWiIvPjwvc3ZnPg==);
-  -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMDQzMTZBIj48cGF0aCBkPSJNNDgwLTEyMCAyMDAtMjcydi0yNDBMNDAtNjAwbDQ0MC0yNDAgNDQwIDI0MHYzMjBoLTgwdi0yNzZsLTgwIDQ0djI0MEw0ODAtMTIwWm0wLTMzMiAyNzQtMTQ4LTI3NC0xNDgtMjc0IDE0OCAyNzQgMTQ4Wm0wIDI0MSAyMDAtMTA4di0xNTFMNDgwLTM2MCAyODAtNDcwdjE1MWwyMDAgMTA4Wm0wLTI0MVptMCA5MFptMCAwWiIvPjwvc3ZnPg==);
-}
-
-.fau-studium-display.degree-program-full .features-fau .column p {
-  font-weight: bold;
+.fau-studium-display.degree-program-full div.wp-block-rrze-elements-counter-row {
+  margin-right: auto;
+  margin-top: 32px;
 }
 
 .fau-studium-display .program-search {
@@ -860,9 +842,21 @@
          column-gap: var(--Spacing-8x, 2rem);
   }
 }
+.fau-studium-display .program-search * {
+  font-family: var(--font-family-base, "Source Sans 3", "Roboto", arial, sans-serif);
+}
+
+.fau-studium-display .program-search p {
+  padding: 0;
+}
+
 .fau-studium-display .program-search .label {
   display: block;
   font-weight: bold;
+}
+
+.fau-studium-display .program-search input {
+  font-size: var(--P-Body-Text-Small, 1rem);
 }
 
 .fau-studium-display .program-search .search-title {
@@ -884,6 +878,7 @@
   margin-right: 0;
   margin-top: 0;
   margin-left: 0;
+  border: none;
   width: 48px;
   height: 48px;
   padding: 0;
@@ -912,7 +907,17 @@
   flex: 1;
   padding-top: 10px;
   padding-bottom: 10px;
+  padding-left: 10px;
   margin-bottom: 0;
+}
+
+.fau-studium-display .program-search .search-title p.search-in-text {
+  flex: 100% 0 0;
+  margin: var(--Spacing-1x, 0.25rem) 0 0;
+}
+
+.fau-studium-display .program-search .search-title input[type=checkbox] {
+  margin-right: var(--Spacing-2x, 0.5rem);
 }
 
 .fau-studium-display .program-search label.label,
@@ -926,22 +931,29 @@
 
 .fau-studium-display .program-search .flex-wrapper {
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--Spacing-4x, 0.5rem);
 }
 
 @media (min-width: 768px) {
   .fau-studium-display .program-search .flex-wrapper {
-    display: flex;
-    flex-wrap: wrap;
     gap: var(--Spacing-8x, 2rem);
   }
 }
 .fau-studium-display .program-search div[class^=filter-] {
-  flex-basis: 40%;
-  flex-shrink: 0;
-  flex-grow: 1;
   position: relative;
+  width: 100%;
 }
 
+@media (min-width: 768px) {
+  .fau-studium-display .program-search div[class^=filter-] {
+    flex-basis: 40%;
+    flex-shrink: 0;
+    flex-grow: 1;
+    max-width: 419px;
+  }
+}
 .fau-studium-display .program-search div[class^=filter-] button.checklist-toggle {
   width: 100%;
   height: 48px;
@@ -949,6 +961,7 @@
   border: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
   border-radius: var(--border-radius-buttons, 3px);
   color: var(--FAU-Col-FAU-Blau-100, #04316a);
+  font-size: var(--P-Body-Text-Small, 1rem);
   font-weight: 600;
   margin: 0;
   padding: 8px 8px 8px 12px;
@@ -1011,7 +1024,7 @@
 .fau-studium-display .program-search div[class^=filter-] .checklist {
   border: 1px solid var(--color-ContentBorders, #dfe6ec);
   border-top-width: 0;
-  padding: 0 5px;
+  padding: 5px;
   overflow-x: hidden;
   overflow-y: scroll;
   background: #fff;
@@ -1022,18 +1035,33 @@
     max-height: 400px;
   }
 }
-.js-enabled .fau-studium-display .program-search div[class^=filter-] .checklist {
+.js-enabled .fau-studium-display .program-search div[class^=filter-] .checklist, .fau-elemental .fau-studium-display .program-search div[class^=filter-] .checklist {
   display: none;
 }
 
 @media (min-width: 768px) {
-  .js-enabled .fau-studium-display .program-search div[class^=filter-] .checklist {
+  .js-enabled .fau-studium-display .program-search div[class^=filter-] .checklist, .fau-elemental .fau-studium-display .program-search div[class^=filter-] .checklist {
     position: absolute;
     z-index: 1;
     width: 100%;
     box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4509803922);
   }
 }
+.fau-studium-display .program-search div[class^=filter-] .checklist button.submit-filter {
+  width: 100%;
+  margin: var(--Spacing-2x, 0.5rem) 0 0;
+  background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
+  color: #fff;
+  padding: var(--Spacing-2x, 0.5rem);
+  font-size: var(--P-Body-Text-Small, 1rem);
+  cursor: pointer;
+}
+
+.fau-studium-display .program-search div[class^=filter-] label {
+  display: block;
+  line-height: 1.7;
+}
+
 .fau-studium-display .program-search .filter-subject-groups {
   clear: left;
 }
@@ -1048,10 +1076,12 @@
   cursor: pointer;
   background-color: #fff;
   color: var(--FAU-Col-FAU-Blau-100, #04316a);
+  font-size: var(--P-Body-Text-Small, 1rem);
+  border: none;
 }
 
 .fau-studium-display .program-search .extended-search-toggle .icon-wrapper.icon-plus {
-  margin-left: 0.5em;
+  margin-left: 0.3em;
 }
 
 .fau-studium-display .program-search .extended-search-toggle .icon-wrapper.icon-plus:before {
@@ -1068,6 +1098,7 @@
   mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMWYxZjFmIj48cGF0aCBkPSJNNDQwLTQ0MEgyMDB2LTgwaDI0MHYtMjQwaDgwdjI0MGgyNDB2ODBINTIwdjI0MGgtODB2LTI0MFoiLz48L3N2Zz4=);
   -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMWYxZjFmIj48cGF0aCBkPSJNNDQwLTQ0MEgyMDB2LTgwaDI0MHYtMjQwaDgwdjI0MGgyNDB2ODBINTIwdjI0MGgtODB2LTI0MFoiLz48L3N2Zz4=);
   background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
+  vertical-align: text-top;
 }
 
 .fau-studium-display .program-search .extended-search-toggle .filter-count {
@@ -1091,6 +1122,10 @@
 .fau-studium-display .program-search .extended-search {
   width: 100%;
   margin-top: var(--Spacing-8x, 2rem);
+}
+
+.js-enabled .fau-studium-display .program-search .extended-search, .fau-elemental .fau-studium-display .program-search .extended-search {
+  display: none;
 }
 
 .fau-studium-display .program-search .settings-area {
@@ -1117,8 +1152,118 @@
   border-radius: 0 !important;
 }
 
+.fau-studium-display .program-search .filters-selected .filter-selected-title {
+  padding-bottom: var(--Spacing-1x, 0.25rem);
+  padding-top: var(--Spacing-4x, 1rem);
+}
+
+.fau-studium-display .program-search .filters-selected .filter-selected {
+  background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
+  color: #fff;
+  display: inline-block;
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.25em 0.75em;
+  text-decoration: none;
+}
+
+.fau-studium-display .program-search .filters-selected .filter-selected:hover, .fau-studium-display .program-search .filters-selected .filter-selected:focus, .fau-studium-display .program-search .filters-selected .filter-selected:active {
+  background-color: var(--FAU-Col-FAU-Dunkelblau-100, #041e42);
+}
+
+.fau-studium-display .program-search .filters-selected .filter-selected.delete-all {
+  background-color: var(--FAU-Col-FAU-Dunkelblau-100, #041e42);
+}
+
+.fau-studium-display .program-search .filters-selected .filter-selected.delete-all:hover, .fau-studium-display .program-search .filters-selected .filter-selected.delete-all:focus, .fau-studium-display .program-search .filters-selected .filter-selected.delete-all:active {
+  background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+
+.fau-studium-display .program-search .filters-selected .filter-selected:after {
+  content: "";
+  -webkit-mask-size: var(--icon-size-mask, 120%);
+  mask-size: var(--icon-size-mask, 120%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMWYxZjFmIj48cGF0aCBkPSJtMjU2LTIwMC01Ni01NiAyMjQtMjI0LTIyNC0yMjQgNTYtNTYgMjI0IDIyNCAyMjQtMjI0IDU2IDU2LTIyNCAyMjQgMjI0IDIyNC01NiA1Ni0yMjQtMjI0LTIyNCAyMjRaIi8+PC9zdmc+);
+  -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMWYxZjFmIj48cGF0aCBkPSJtMjU2LTIwMC01Ni01NiAyMjQtMjI0LTIyNC0yMjQgNTYtNTYgMjI0IDIyNCAyMjQtMjI0IDU2IDU2LTIyNCAyMjQgMjI0IDIyNC01NiA1Ni0yMjQtMjI0LTIyNCAyMjRaIi8+PC9zdmc+);
+  background-color: #fff;
+  vertical-align: middle;
+  margin-left: 0.5em;
+}
+
+.fau-studium-display .program-search .display-settings {
+  width: 100%;
+  text-align: right;
+  margin: 0;
+}
+
+.fau-studium-display .program-search .display-settings button {
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  background-color: #fff;
+  border: none;
+  vertical-align: middle;
+  padding: 0;
+}
+
+.fau-studium-display .program-search .display-settings button:before {
+  content: "";
+  -webkit-mask-size: var(--icon-size-mask, 70%);
+  mask-size: var(--icon-size-mask, 70%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  background-color: var(--FAU-Col-FAU-Blau-25, #C0CBDA);
+}
+
+.fau-studium-display .program-search .display-settings button.display-settings-table:before {
+  mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMWYxZjFmIj48cGF0aCBkPSJNMjgwLTYwMHYtODBoNTYwdjgwSDI4MFptMCAxNjB2LTgwaDU2MHY4MEgyODBabTAgMTYwdi04MGg1NjB2ODBIMjgwWk0xNjAtNjAwcS0xNyAwLTI4LjUtMTEuNVQxMjAtNjQwcTAtMTcgMTEuNS0yOC41VDE2MC02ODBxMTcgMCAyOC41IDExLjVUMjAwLTY0MHEwIDE3LTExLjUgMjguNVQxNjAtNjAwWm0wIDE2MHEtMTcgMC0yOC41LTExLjVUMTIwLTQ4MHEwLTE3IDExLjUtMjguNVQxNjAtNTIwcTE3IDAgMjguNSAxMS41VDIwMC00ODBxMCAxNy0xMS41IDI4LjVUMTYwLTQ0MFptMCAxNjBxLTE3IDAtMjguNS0xMS41VDEyMC0zMjBxMC0xNyAxMS41LTI4LjVUMTYwLTM2MHExNyAwIDI4LjUgMTEuNVQyMDAtMzIwcTAgMTctMTEuNSAyOC41VDE2MC0yODBaIi8+PC9zdmc+);
+  -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMWYxZjFmIj48cGF0aCBkPSJNMjgwLTYwMHYtODBoNTYwdjgwSDI4MFptMCAxNjB2LTgwaDU2MHY4MEgyODBabTAgMTYwdi04MGg1NjB2ODBIMjgwWk0xNjAtNjAwcS0xNyAwLTI4LjUtMTEuNVQxMjAtNjQwcTAtMTcgMTEuNS0yOC41VDE2MC02ODBxMTcgMCAyOC41IDExLjVUMjAwLTY0MHEwIDE3LTExLjUgMjguNVQxNjAtNjAwWm0wIDE2MHEtMTcgMC0yOC41LTExLjVUMTIwLTQ4MHEwLTE3IDExLjUtMjguNVQxNjAtNTIwcTE3IDAgMjguNSAxMS41VDIwMC00ODBxMCAxNy0xMS41IDI4LjVUMTYwLTQ0MFptMCAxNjBxLTE3IDAtMjguNS0xMS41VDEyMC0zMjBxMC0xNyAxMS41LTI4LjVUMTYwLTM2MHExNyAwIDI4LjUgMTEuNVQyMDAtMzIwcTAgMTctMTEuNSAyOC41VDE2MC0yODBaIi8+PC9zdmc+);
+}
+
+.fau-studium-display .program-search .display-settings button.display-settings-grid:before {
+  mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMWYxZjFmIj48cGF0aCBkPSJNMjAwLTEyMHEtMzMgMC01Ni41LTIzLjVUMTIwLTIwMHYtNTYwcTAtMzMgMjMuNS01Ni41VDIwMC04NDBoNTYwcTMzIDAgNTYuNSAyMy41VDg0MC03NjB2NTYwcTAgMzMtMjMuNSA1Ni41VDc2MC0xMjBIMjAwWm0wLTgwaDEzM3YtMTMzSDIwMHYxMzNabTIxMyAwaDEzNHYtMTMzSDQxM3YxMzNabTIxNCAwaDEzM3YtMTMzSDYyN3YxMzNaTTIwMC00MTNoMTMzdi0xMzRIMjAwdjEzNFptMjEzIDBoMTM0di0xMzRINDEzdjEzNFptMjE0IDBoMTMzdi0xMzRINjI3djEzNFpNMjAwLTYyN2gxMzN2LTEzM0gyMDB2MTMzWm0yMTMgMGgxMzR2LTEzM0g0MTN2MTMzWm0yMTQgMGgxMzN2LTEzM0g2Mjd2MTMzWiIvPjwvc3ZnPg==);
+  -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAtOTYwIDk2MCA5NjAiIHdpZHRoPSIyNHB4IiBmaWxsPSIjMWYxZjFmIj48cGF0aCBkPSJNMjAwLTEyMHEtMzMgMC01Ni41LTIzLjVUMTIwLTIwMHYtNTYwcTAtMzMgMjMuNS01Ni41VDIwMC04NDBoNTYwcTMzIDAgNTYuNSAyMy41VDg0MC03NjB2NTYwcTAgMzMtMjMuNSA1Ni41VDc2MC0xMjBIMjAwWm0wLTgwaDEzM3YtMTMzSDIwMHYxMzNabTIxMyAwaDEzNHYtMTMzSDQxM3YxMzNabTIxNCAwaDEzM3YtMTMzSDYyN3YxMzNaTTIwMC00MTNoMTMzdi0xMzRIMjAwdjEzNFptMjEzIDBoMTM0di0xMzRINDEzdjEzNFptMjE0IDBoMTMzdi0xMzRINjI3djEzNFpNMjAwLTYyN2gxMzN2LTEzM0gyMDB2MTMzWm0yMTMgMGgxMzR2LTEzM0g0MTN2MTMzWm0yMTQgMGgxMzN2LTEzM0g2Mjd2MTMzWiIvPjwvc3ZnPg==);
+}
+
+.fau-studium-display .program-search .display-settings button.active:before {
+  background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+
+.fau-studium-display .program-search .display-settings button:hover, .fau-studium-display .program-search .display-settings button:focus, .fau-studium-display .program-search .display-settings button:active {
+  background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
+}
+
+.fau-studium-display .program-search .display-settings button:hover:before, .fau-studium-display .program-search .display-settings button:focus:before, .fau-studium-display .program-search .display-settings button:active:before {
+  background-color: #fff;
+}
+
 .fau-theme.single-degree-program #hero {
   margin-bottom: 0;
+}
+
+.fau-elemental.single-degree-program h4 {
+  padding: 0;
+}
+
+.fau-elemental.single-degree-program .wp-block-buttons {
+  padding: 0;
+  max-width: 100%;
+}
+
+.fau-elemental.single-degree-program .wp-block-buttons {
+  margin-bottom: var(----Spacing-2x, 0.5rem);
 }
 
 

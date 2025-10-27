@@ -255,8 +255,8 @@ if (in_array('admission_requirements_application', $items)) {
     if (empty($data['application_deadline_winter_semester']) && empty($data['application_deadline_summer_semester'])) {
         $deadlines = [];
     } else {
-        $deadlines['winter_semester'] = $labels['winter_semester'] . ': ' . (empty($data['application_deadline_winter_semester']) ? $labels['not possible'] : strip_tags($data['application_deadline_winter_semester']));
-        $deadlines['summer_semester'] = $labels['summer_semester'] . ': ' . (empty($data['application_deadline_summer_semester']) ? $labels['not possible'] : strip_tags($data['application_deadline_summer_semester']));
+        $deadlines['winter_semester'] = $labels['winter_semester'] . ': ' . (empty($data['application_deadline_winter_semester']) ? $labels['not_possible'] : strip_tags($data['application_deadline_winter_semester']));
+        $deadlines['summer_semester'] = $labels['summer_semester'] . ': ' . (empty($data['application_deadline_summer_semester']) ? $labels['not_possible'] : strip_tags($data['application_deadline_summer_semester']));
     }
 
     $language_skills = [];

@@ -228,8 +228,8 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'attribute' => [
             'labels' => [
-                'de' => 'Besondere Studienform',
-                'en' => 'Special way to study'
+                'de' => 'Besondere Studienformen',
+                'en' => 'Special ways to study'
             ]
         ],
         'attributes' => [

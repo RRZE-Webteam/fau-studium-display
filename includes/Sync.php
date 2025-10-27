@@ -19,6 +19,8 @@ class Sync
         if (empty($program['title'])) {
             return new \WP_Error();
         }
+        $language = Utils::get_short_locale();
+
         foreach ($program as $key => $value) {
             if ($key != 'translations') {
                 $meta['program_data_de'][$key] = $value;
@@ -26,7 +28,12 @@ class Sync
         }
         $meta['program_data_en'] = $program['translations']['en'] ?? [];
         $meta['program_id'] = $id;
-        $title = esc_attr($program['title'] . (isset($program['degree']['abbreviation']) ? ' (' . $program['degree']['abbreviation'] . ')' : ''));
+        if ($language == 'de') {
+            $title = esc_attr($program['title'] . (isset($program['degree']['abbreviation']) ? ' (' . $program['degree']['abbreviation'] . ')' : ''));
+        } else {
+            $title = esc_attr($program['translations']['en']['title'] . (isset($program['translations']['en']['degree']['abbreviation']) ? ' (' . $program['translations']['en']['degree']['abbreviation'] . ')' : ''));
+        }
+
 
         $result = wp_insert_post([
            'ID' => $post_id,
