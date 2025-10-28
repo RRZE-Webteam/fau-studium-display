@@ -537,10 +537,10 @@ if (in_array('benefits', $items)) {
         . '</div>'
         . '</div>';
     $benefits_fau .= do_blocks('<!-- wp:rrze-elements/iconbox-row -->
-<!-- wp:rrze-elements/rrze-iconbox {"title":"Mehr als 275","description":"Studiengänge","materialSymbol":"school"} /-->
-<!-- wp:rrze-elements/rrze-iconbox {"title":"Internationale","description":"Partnerschaften","materialSymbol":"language"} /-->
-<!-- wp:rrze-elements/rrze-iconbox {"title":"\u003cstrong\u003eEnge Verknüpfung\u003c/strong\u003e","description":"mit der Wirtschaft","materialSymbol":"handshake"} /-->
-<!-- wp:rrze-elements/rrze-iconbox {"title":"\u003cstrong\u003eBachelorverbundstudium\u003c/strong\u003e","description":"dual studieren","materialSymbol":"join_left"} /-->
+<!-- wp:rrze-elements/rrze-iconbox {"title":"' . __('More than 275', 'fau-studium-display') . '","description":"' . __('degree programs', 'fau-studium-display') . '","materialSymbol":"school"} /-->
+<!-- wp:rrze-elements/rrze-iconbox {"title":"' . __('International', 'fau-studium-display') . '","description":"' . __('partnerships', 'fau-studium-display') . '","materialSymbol":"language"} /-->
+<!-- wp:rrze-elements/rrze-iconbox {"title":"' . __('Close ties', 'fau-studium-display') . '","description":"' . __('to industry', 'fau-studium-display') . '","materialSymbol":"handshake"} /-->
+<!-- wp:rrze-elements/rrze-iconbox {"title":"' . __("Cooperative bachelor's program", 'fau-studium-display') . '","description":"' . __('available', 'fau-studium-display') . '","materialSymbol":"join_left"} /-->
 <!-- /wp:rrze-elements/iconbox-row -->');
     $benefits_fau .= '</div>';
 } else {

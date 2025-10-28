@@ -75,8 +75,8 @@ class Utils
             }
         }
 
-        $filters_default = array_slice($filters, 0, 3);
-        $filters_extended = array_slice($filters, 3);
+        $filters_default = array_slice($filters, 0, 4);
+        $filters_extended = array_slice($filters, 4);
 
         if (is_post_type_archive('degree-program')) {
             $url = get_post_type_archive_link( 'degree-program' );
@@ -97,8 +97,14 @@ class Utils
                    . '</div>';
 
         // Filter options
-        $output .= '<p class="label">' . $labels['filter_options'] . '</p>'
-            . '<div class="flex-wrapper">';
+        $output .= '<p class="label">' . $labels['filter_options'] . '</p>';
+        if (count($filters_extended) > 0) {
+            $output .= '<button type="button" class="extended-search-toggle">'
+                       . '<span class="button-label">' . $labels['more_filter_options'] . '</span>'
+                       . '<span class="icon-wrapper icon-plus" aria-hidden="true"></span></button>';
+        }
+
+        $output .= '<div class="flex-wrapper">';
 
         $filters_selected = [];
 
@@ -146,9 +152,6 @@ class Utils
                 );
             }
 
-            $output .= '<button type="button" class="extended-search-toggle">'
-                       . $labels['more_filter_options']
-                       . '<span class="icon-wrapper icon-plus" aria-hidden="true"></span></button>';
             $output .= '</div>'; // .flex-wrapper
 
             $output .= '<div class="extended-search"><div class="flex-wrapper">' . $filters_extended_html . '</div></div>';

@@ -234,7 +234,8 @@
             color: var(--FAU-Col-FAU-Blau-100, #04316a);
             font-size: var(--P-Body-Text-Small, 1rem);
             border: none;
-            .icon-wrapper.icon-plus {
+            .icon-wrapper.icon-plus,
+            .icon-wrapper.icon-minus {
                 margin-left: .3em;
                 &:before {
                     content: "";
@@ -251,6 +252,12 @@
                     -webkit-mask-image: url(../svg/add.svg);
                     background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
                     vertical-align: text-top;
+                }
+            }
+            .icon-wrapper.icon-minus {
+                &:before {
+                    mask-image: url(../svg/remove.svg);
+                    -webkit-mask-image: url(../svg/remove.svg);
                 }
             }
             .filter-count {
