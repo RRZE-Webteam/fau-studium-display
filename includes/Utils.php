@@ -46,9 +46,10 @@ class Utils
         //var_dump($prefilter);
         $getParams = Utils::array_map_recursive('sanitize_text_field', $_GET);
         $data = new Data();
-        $degrees = !empty($prefilter['degree']) ? $prefilter['degree'] : $data->get_meta_list('degree_parents', 'en');
-        $subject_groups = !empty($prefilter['subject_group']) ? $prefilter['subject_group'] : $data->get_meta_list('subject_groups');
-        $attributes = !empty($prefilter['attribute']) ? $prefilter['attribute'] : $data->get_meta_list('attributes');
+        $degrees = !empty($prefilter['degree']) ? $prefilter['degree'] : $data->get_meta_list('degree_parents', $lang);
+        $subject_groups = !empty($prefilter['subject_group']) ? $prefilter['subject_group'] : $data->get_meta_list('subject_groups', $lang);
+
+        $attributes = !empty($prefilter['attribute']) ? $prefilter['attribute'] : $data->get_meta_list('attributes', $lang);
         $labels = get_labels($lang);
         if (empty($filter_items)) {
             $filter_items = get_output_fields('search-filters');
@@ -59,12 +60,12 @@ class Utils
             ['key' => 'degree', 'label' => ($labels['degree']), 'data' => $degrees],
             ['key' => 'subject_group', 'label' => ($labels['subject_group']), 'data' => $subject_groups],
             ['key' => 'attribute', 'label' => ($labels['attributes']), 'data' => $attributes],
-            ['key' => 'admission_requirements', 'label' => ($labels['admission_requirements']), 'data' => $data->get_meta_list('admission_requirements')],
-            ['key' => 'semester', 'label' => ($labels['start']), 'data' => $data->get_meta_list('start_semesters')],
-            ['key' => 'study_location', 'label' => ($labels['location']), 'data' => $data->get_meta_list('study_locations')],
-            ['key' => 'teaching_language', 'label' => ($labels['teaching_language']), 'data' => $data->get_meta_list('teaching_languages')],
-            ['key' => 'faculty', 'label' => ($labels['faculty']), 'data' => $data->get_meta_list('faculties')],
-            ['key' => 'german_language_skills_for_international_students', 'label' => ($labels['german_language_skills_for_international_students']), 'data' => $data->get_meta_list('german_language_skills')],
+            ['key' => 'admission_requirements', 'label' => ($labels['admission_requirements']), 'data' => $data->get_meta_list('admission_requirements', $lang)],
+            ['key' => 'semester', 'label' => ($labels['start']), 'data' => $data->get_meta_list('start_semesters', $lang)],
+            ['key' => 'study_location', 'label' => ($labels['location']), 'data' => $data->get_meta_list('study_locations', $lang)],
+            ['key' => 'teaching_language', 'label' => ($labels['teaching_language']), 'data' => $data->get_meta_list('teaching_languages', $lang)],
+            ['key' => 'faculty', 'label' => ($labels['faculty']), 'data' => $data->get_meta_list('faculties', $lang)],
+            ['key' => 'german_language_skills_for_international_students', 'label' => ($labels['german_language_skills_for_international_students']), 'data' => $data->get_meta_list('german_language_skills', $lang)],
             //['key' => 'area', 'label' => ($labels['area'] ?? 'area'), 'data' => $api->get_areas_of_study()],
         ];
 
@@ -185,10 +186,10 @@ class Utils
             // Text search
             if (!empty($filter['search'])) {
                 $search_term = strtolower(sanitize_text_field($filter['search']));
-                $search_target = $program['title'];
+                $search_target = $program['title'] ?? '';
                 if ($search_in_text) {
                     $search_target .= $program['entry_text'] ?? '';
-                    foreach ($program['content'] as $content_item) {
+                    foreach ($program['content'] ?? [] as $content_item) {
                         $search_target .= $content_item['description'] ?? '';
                     }
                 }
@@ -200,14 +201,14 @@ class Utils
 
             // Attribute search
             $filterMap = [
-                'degree'            => fn($program, $value) => !empty($program['degree']['parent']['name']) && $program['degree']['parent']['name'] === $value,
-                'subject_group'     => fn($program, $value) => !empty($program['subject_groups']) && in_array($value, $program['subject_groups']),
-                'attribute'         => fn($program, $value) => !empty($program['attributes']) && in_array($value, $program['attributes']),
+                'degree' => fn($program, $value) => !empty($program['degree']['parent']['name']) && $program['degree']['parent']['name'] === $value,
+                'subject_group' => fn($program, $value) => !empty($program['subject_groups']) && in_array($value, $program['subject_groups']),
+                'attribute' => fn($program, $value) => !empty($program['attributes']) && in_array($value, $program['attributes']),
                 'admission_requirements' => fn($program, $value) => !empty($program['admission_requirement_link']) && $program['admission_requirement_link']['parent']['name'] === $value,
                 'teaching_language' => fn($program, $value) => !empty($program['teaching_language']) && $program['teaching_language'] === $value,
-                'semester'             => fn($program, $value) => !empty($program['start']) && in_array($value, $program['start']),
-                'study_location'          => fn($program, $value) => !empty($program['location']) && in_array($value, $program['location']),
-                'faculty'           => fn($program, $value) => !empty($program['faculty']) && in_array($value, array_column($program['faculty'], 'name')),
+                'semester' => fn($program, $value) => !empty($program['start']) && in_array($value, $program['start']),
+                'study_location' => fn($program, $value) => !empty($program['location']) && in_array($value, $program['location']),
+                'faculty' => fn($program, $value) => !empty($program['faculty']) && in_array($value, array_column($program['faculty'], 'name')),
                 'german_language_skills_for_international_students' => fn($program, $value) => !empty($program['german_language_skills_for_international_students']) && $program['german_language_skills_for_international_students']['name'] === $value,
             ];
 

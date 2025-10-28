@@ -125,7 +125,7 @@
             }
             button.checklist-toggle {
                 width: 100%;
-                height: 48px;
+                min-height: 48px;
                 background: #0000;
                 border: 1px solid var(--FAU-Col-FAU-Blau-100, #04316a);
                 border-radius: var(--border-radius-buttons,3px);
