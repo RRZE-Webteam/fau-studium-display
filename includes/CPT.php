@@ -16,9 +16,8 @@ class CPT
         add_action('admin_menu', [$this, 'disable_new_posts']);
         add_filter( 'query_vars', [$this, 'register_custom_query_vars'] );
         add_filter('redirect_canonical', [$this, 'archive_redirect_canonical'], 10, 2);
+        add_filter('request', [$this, 'preserve_archive_filters']);
 
-        //remove_action('template_redirect', 'redirect_canonical');
-        //add_filter('redirect_canonical', '__return_false');
     }
 
     public function register_post_type()
@@ -147,6 +146,38 @@ class CPT
             return false;
         }
         return $redirect_url;
+    }
+
+    public function preserve_archive_filters(array $query_vars): array
+    {
+        if (is_admin()) {
+            return $query_vars;
+        }
+
+        $postTypes = isset($query_vars['post_type']) ? (array) $query_vars['post_type'] : [];
+        if (!in_array(self::POST_TYPE, $postTypes, true)) {
+            return $query_vars;
+        }
+
+        $filterKeys = [
+            'attribute',
+            'subject_group',
+            'degree',
+            'admission_requirements',
+            'semester',
+            'study_location',
+            'teaching_language',
+            'faculty',
+            'german_language_skills_for_international_students',
+        ];
+
+        foreach ($filterKeys as $key) {
+            if (isset($query_vars[$key]) && isset($_GET[$key]) && is_array($_GET[$key])) {
+                unset($query_vars[$key]);
+            }
+        }
+
+        return $query_vars;
     }
 
 }

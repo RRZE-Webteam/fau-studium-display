@@ -13,7 +13,7 @@ defined('ABSPATH') || exit;
  * required WordPress version, and required PHP version.
  * 
  * @package Fau\DegreeProgram\Display
- * @since 1.0.1
+ * @since 1.0.0
  */
 class Plugin
 {
