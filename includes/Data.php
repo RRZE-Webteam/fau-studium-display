@@ -35,7 +35,12 @@ class Data
             }
 
             // Filter from $_GET parameters respecting block presets
-            $getParams = isset($_GET) ? Utils::array_map_recursive('sanitize_text_field', $_GET) : [];
+            if (isset($_GET)) {
+                $getParams = Utils::array_map_recursive('urldecode', $_GET);
+                $getParams = Utils::array_map_recursive('sanitize_text_field', $getParams);
+            } else {
+                $_GET = [];
+            }
             $getParams = array_filter($getParams);
             $filter = array_merge($filterBlock, $getParams);
             $data = Utils::filterPrograms($programs, $filter);
@@ -138,7 +143,7 @@ class Data
         $meta_list = [];
         $programs = $this->get_programs($lang);
         foreach ($programs as $post_id => $program) {
-            $post_meta = get_post_meta($post_id, 'program_data_de', true);
+            $post_meta = get_post_meta($post_id, 'program_data_'.$lang, true);
             switch ($meta) {
                 case 'degrees':
                     $meta_list[] = $post_meta['degree']['name'];

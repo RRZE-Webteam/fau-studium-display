@@ -15,6 +15,8 @@ class CPT
         add_action('add_meta_boxes', [$this, 'render_metabox']);
         add_action('admin_menu', [$this, 'disable_new_posts']);
         add_filter( 'query_vars', [$this, 'register_custom_query_vars'] );
+        add_filter('redirect_canonical', [$this, 'archive_redirect_canonical'], 10, 2);
+        add_filter('request', [$this, 'preserve_archive_filters']);
 
     }
 
@@ -128,7 +130,54 @@ class CPT
     public function register_custom_query_vars( $vars ) {
         $vars[] = 'search';
         $vars[] = 'subject_group';
+        $vars[] = 'degree';
+        $vars[] = 'attribute';
+        $vars[] = 'admission_requirements';
+        $vars[] = 'semester';
+        $vars[] = 'study_location';
+        $vars[] = 'teaching_language';
+        $vars[] = 'faculty';
+        $vars[] = 'german_language_skills_for_international_students';
         return $vars;
+    }
+
+    public function archive_redirect_canonical($redirect_url, $requested_url) {
+        if (is_post_type_archive('degree-program') && !empty($_GET)) {
+            return false;
+        }
+        return $redirect_url;
+    }
+
+    public function preserve_archive_filters(array $query_vars): array
+    {
+        if (is_admin()) {
+            return $query_vars;
+        }
+
+        $postTypes = isset($query_vars['post_type']) ? (array) $query_vars['post_type'] : [];
+        if (!in_array(self::POST_TYPE, $postTypes, true)) {
+            return $query_vars;
+        }
+
+        $filterKeys = [
+            'attribute',
+            'subject_group',
+            'degree',
+            'admission_requirements',
+            'semester',
+            'study_location',
+            'teaching_language',
+            'faculty',
+            'german_language_skills_for_international_students',
+        ];
+
+        foreach ($filterKeys as $key) {
+            if (isset($query_vars[$key]) && isset($_GET[$key]) && is_array($_GET[$key])) {
+                unset($query_vars[$key]);
+            }
+        }
+
+        return $query_vars;
     }
 
 }

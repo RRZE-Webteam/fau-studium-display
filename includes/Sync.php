@@ -28,12 +28,12 @@ class Sync
         }
         $meta['program_data_en'] = $program['translations']['en'] ?? [];
         $meta['program_id'] = $id;
-        if ($language == 'de') {
-            $title = esc_attr($program['title'] . (isset($program['degree']['abbreviation']) ? ' (' . $program['degree']['abbreviation'] . ')' : ''));
-        } else {
-            $title = esc_attr($program['translations']['en']['title'] . (isset($program['translations']['en']['degree']['abbreviation']) ? ' (' . $program['translations']['en']['degree']['abbreviation'] . ')' : ''));
+
+        if ($language == 'en' && isset($program['translations']['en'])) {
+            $program = $program['translations']['en'];
         }
 
+        $title = esc_attr($program['title'] . (isset($program['degree']['abbreviation']) ? ' (' . $program['degree']['abbreviation'] . ')' : ''));
 
         $result = wp_insert_post([
            'ID' => $post_id,
