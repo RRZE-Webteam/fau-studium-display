@@ -41,6 +41,17 @@ class Utils
         }
         return plugin()->getPath('templates/');
     }
+
+    public static function getThemeFamily(): string {
+        $currentTheme = wp_get_theme();
+        foreach (self::$themes as $slug => $theme) {
+            if (in_array(strtolower($currentTheme->stylesheet), array_map('strtolower', $theme))) {
+                return $slug;
+            }
+        }
+        return 'vendor';
+    }
+
     public static function renderSearchForm($prefilter = [], $filter_items = [], $lang = 'de', $display = 'table'): string
     {
         //var_dump($prefilter);
@@ -97,7 +108,7 @@ class Utils
                    . '</div>';
 
         // Filter options
-        $output .= '<p class="label">' . $labels['filter_options'] . '</p>';
+        $output .= '<div class="search-filter"><p class="label">' . $labels['filter_options'] . '</p>';
         if (count($filters_extended) > 0) {
             $output .= '<button type="button" class="extended-search-toggle">'
                        . '<span class="button-label">' . $labels['more_filter_options'] . '</span>'
@@ -172,6 +183,7 @@ class Utils
             $output .= '<a class="filter-selected delete-all" data-key="all" data-value="all" href="' . $url . '">'  . $labels['delete_all'] . '</a>';
             $output .= '</div>';
         }
+        $output .= '</div>'; //.search-filter
         $output .= '<p class="display-settings">' . $labels['display']
                     . '<button type="submit" class="display-settings-table' . ($display == 'table' ? ' active' : '') . '" name="display" value="table" title="' . $labels['display_table'] . '">' . $labels['display_table'] . '</button>'
                     . '<button type="submit" class="display-settings-grid' . ($display == 'grid' ? ' active' : '') . '" name="display" value="grid" title="' . $labels['display_grid'] . '">' . $labels['display_grid'] . '</button>'

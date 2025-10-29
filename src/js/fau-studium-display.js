@@ -1,4 +1,4 @@
-const { __, _x, _n, sprintf } = wp.i18n;
+const { __, _x, _n, _nx } = wp.i18n;
 
 jQuery(document).ready(function($) {
     $('.checklist-toggle').bind('mousedown', function(event) {

@@ -1,7 +1,14 @@
 .fau-studium-display {
 
     &.degree-program-full {
-        margin-bottom: 32px;
+        margin-bottom: var(--Spacing-8x, 2rem);
+        margin-top: var(--Spacing-6x, 1.5rem);
+        @media (min-width: 394px) {
+            margin-top: var(--Spacing-8x, 2rem);
+        }
+        @media (min-width: 769px) {
+            margin-top: var(--Spacing-10x, 2.5rem);
+        }
 
         .width-small {
             max-width: 870px;
@@ -65,7 +72,7 @@
             padding-right: 0;
         }
         p {
-            padding: 0;
+            //padding: 0;
         }
 
         .program-content {
@@ -357,6 +364,48 @@
         div.wp-block-rrze-elements-counter-row {
             margin-right: auto;
             margin-top: 32px;
+        }
+    }
+
+    .fau-theme & {
+        .fau-teaser-grid {
+            .teaser-content-wrapper {
+                background-color: var(--FAU_Col_FAU-Blau, #04316A);
+                padding: .5em;
+            }
+            .wp-block-button__link {
+                background-color: #fff !important;
+            }
+            .icon-arrow-right {
+                width: 40px;
+                height: 40px;
+                display: block;
+                position: absolute;
+                top: calc(50% - 20px);
+                right: 0;
+                background-color: #fff;
+
+                &:after {
+                    content: "";
+                    -webkit-mask-size: var(--icon-size-mask, 70%);
+                    mask-size: var(--icon-size-mask, 70%);
+                    -webkit-mask-repeat: no-repeat;
+                    mask-repeat: no-repeat;
+                    -webkit-mask-position: center;
+                    mask-position: center;
+                    display: inline-block;
+                    width: 24px;
+                    height: 24px;
+                    position: relative;
+                    //top: 9px;
+                    //left: 8px;
+                    top: 4px;
+                    mask-image: url(../svg/arrow-right.svg);
+                    -webkit-mask-image: url(../svg/arrow-right.svg);
+                    background-color: var(--FAU_Col_FAU-Blau, #04316A);
+                    transition: var(--basic-animation, all 0.2s ease-in-out);
+                }
+            }
         }
     }
 }
