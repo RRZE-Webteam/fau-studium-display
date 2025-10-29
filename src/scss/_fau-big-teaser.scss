@@ -1,11 +1,11 @@
 @use "mixins" as *;
 
-.fau-big-teaser {
+.fau-theme .fau-big-teaser {
 	display: flex;
 	max-width: var(--wide-max-width);
 	margin: 0 auto;
-	gap: var(--Spacing-10x, 2.5rem);
-	padding: var(--Spacing-8x, 2rem) var(--Spacing-10x, 2.5rem);
+	gap: var(--Spacing-10x);
+	padding: var(--Spacing-8x) var(--Spacing-10x);
 	box-sizing: content-box;
 
 	&__content {
@@ -23,12 +23,12 @@
 		h6 {
 
 			&.fau-big-teaser__headline {
-				font-size: var(--H-Heading-Big-Teaser, 40px);
-				background-color: var(--FAU-Col-FAU-Weiss-100, #fff);
+				font-size: var(--H-Heading-Big-Teaser);
+				background-color: var(--FAU-Col-FAU-Weiss-100);
 				margin: 0;
 				max-width: calc(100% + 16rem);
 				min-width: calc(100% + 5.5rem);
-				padding: var(--Spacing-6x, 1.5rem) var(--Spacing-8x, 2rem) var(--Spacing-6x, 1.5rem) 0;
+				padding: var(--Spacing-6x) var(--Spacing-8x) var(--Spacing-6x) 0;
 				box-sizing: border-box;
 				position: relative;
 				width: max-content;
@@ -37,7 +37,7 @@
 		}
 
 		p.fau-big-teaser__teaser-text {
-			padding: var(--Spacing-2x, 0.5rem) 0 var(--Spacing-4x, 1rem) 0;
+			padding: var(--Spacing-2x) 0 var(--Spacing-4x) 0;
 			margin: 0;
 			box-sizing: border-box;
 		}
@@ -73,7 +73,7 @@
 		h6 {
 
 			&.fau-big-teaser__headline {
-				background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
+				background-color: var(--FAU-Col-FAU-Blau-100);
 			}
 		}
 	}
@@ -125,7 +125,7 @@
 					min-width: unset;
 					margin-left: auto;
 					margin-right: auto;
-					padding: var(--Spacing-4x, 1rem) var(--Spacing-6x, 1.5rem) 0 var(--Spacing-6x, 1.5rem);
+					padding: var(--Spacing-4x) var(--Spacing-6x) 0 var(--Spacing-6x);
 					font-size: 2rem;
 				}
 			}
@@ -134,13 +134,13 @@
 				width: 90%;
 				margin-left: auto;
 				margin-right: auto;
-				padding: var(--Spacing-4x, 1rem) var(--Spacing-6x, 1.5rem) var(--Spacing-2x, .5rem) var(--Spacing-6x, 1.5rem);
+				padding: var(--Spacing-4x) var(--Spacing-6x) var(--Spacing-2x) var(--Spacing-6x);
 			}
 
 			.wp-block-buttons.is-layout-flex {
 				width: 90%;
 				margin: 0 auto;
-				padding: 0 var(--Spacing-6x, 1.5rem);
+				padding: 0 var(--Spacing-6x);
 			}
 		}
 
@@ -150,7 +150,7 @@
 	}
 }
 
-@include respond-to("x-small") {
+@include smaller-or-equals("x-small") {
 
 	.fau-big-teaser {
 		padding: unset;
@@ -165,7 +165,7 @@
 
 				&.fau-big-teaser__headline {
 					width: calc(100% - 1rem);
-					padding: var(--Spacing-4x, 1rem) var(--Spacing-3x) var(--Spacing-3x) var(--Spacing-3x);
+					padding: var(--Spacing-4x) var(--Spacing-3x) var(--Spacing-3x) var(--Spacing-3x);
 					font-size: 1.625rem;
 				}
 			}

@@ -324,11 +324,11 @@ if (in_array('admission_requirements_application', $items)) {
 
         $admission_requirements_application .= do_blocks('<!-- wp:buttons -->
             <div class="wp-block-buttons"><!-- wp:button -->
-            <div class="wp-block-button"><a href="' . $constants['how-to-apply-link'] . '" class="wp-block-button__link wp-element-button">' . ($labels['how_to_apply'] ?? 'how_to_apply') . '</a></div>
+            <div class="wp-block-button"><a class="wp-block-button__link wp-element-button">' . ($labels['how_to_apply'] ?? 'how_to_apply') . '</a></div>
             <!-- /wp:button --></div>
             <!-- /wp:buttons --><!-- wp:buttons -->
             <div class="wp-block-buttons"><!-- wp:button -->
-            <div class="wp-block-button"><a href="' . ($data['notes_for_international_applicants']['link_url'] ?? '') . '" class="wp-block-button__link wp-element-button">' . ($labels['how_to_apply_internationals'] ?? 'how_to_apply_internationals') . '</a></div>
+            <div class="wp-block-button"><a class="wp-block-button__link wp-element-button">' . ($labels['how_to_apply_internationals'] ?? 'how_to_apply_internationals') . '</a></div>
             <!-- /wp:button --></div>
             <!-- /wp:buttons -->');
         $admission_requirements_application .= '</div>';
@@ -340,18 +340,16 @@ if (in_array('admission_requirements_application', $items)) {
 
 // Info Internationals
 if (in_array('info_internationals_link', $items)) {
-    $cta_internationals = '<div class="width-full">'
-                          . do_blocks('<!-- wp:group {"className":"is-style-dark","layout":{"type":"constrained"}} -->
-                            <div class="wp-block-group is-style-dark">
-                            <!-- wp:fau-elemental/fau-big-teaser {
-                            "headline":"' . ($labels['how_to_apply_internationals_title'] ?? 'how_to_apply_internationals_title') . '",
-                            "teaserText":"' . ($labels['all_information_internationals'] ?? 'all_information_internationals') . '",
-                            "linkText":"' . ($labels['button_internationals'] ?? 'button_internationals') . '",
-                            "linkUrl":"' . ($data['notes_for_international_applicants']['link_url'] ?? '') . '",
-                            "image":{"url":"' . $constants['internationals-image'] . '","alt":""}
-                            } /--></div>
-                            <!-- /wp:group -->')
-                          . '</div>';
+    $cta_internationals = '<div class="width-medium">'
+         . do_blocks('<!-- wp:rrze-elements/cta {
+        "url":"' . $constants['internationals-image'] . '",
+        "buttonUrl":"' . ($data['notes_for_international_applicants']['link_url'] ?? '') . '",
+        "alt":"",
+        "title":"' . ($labels['how_to_apply_internationals_title'] ?? 'how_to_apply_internationals_title') . '",
+        "subtitle":"' . ($labels['all_information_internationals'] ?? 'all_information_internationals') . '",
+        "buttonText":"' . ($labels['button_internationals'] ?? 'button_internationals') . '"
+        } /-->')
+        . '</div>';
 } else {
     $cta_internationals = '';
 }
@@ -375,7 +373,7 @@ if (in_array('apply_now_link', $items) && !empty($data['apply_now_link']['link_u
 $student_advice = '';
 if (in_array('student_advice', $items) || in_array('subject_specific_advice', $items)) {
 
-    $student_advice = '<div class="wp-block-group is-style-dark is-layout-constrained wp-block-group-is-layout-constrained"><section class="fau-list-item wp-block-fau-elemental-fau-teaser-grid" aria-label="Inhaltsgitter" role="region"><div class="fau-teaser-grid teaser-grid layout-2s layout-2s-left" aria-label="Inhalt">';
+    $student_advice = '<div class="width-large wp-block-group is-style-dark is-layout-constrained wp-block-group-is-layout-constrained"><section class="fau-list-item wp-block-fau-elemental-fau-teaser-grid" aria-label="Inhaltsgitter" role="region"><div class="fau-teaser-grid teaser-grid layout-2s layout-2s-left" aria-label="Inhalt">';
 
     // Button Student Advice
     if (in_array('student_advice', $items)) {
@@ -402,7 +400,7 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
                                 </div>
                             </div>
                             <div class="button-teaser">
-                                <span class="wp-block-button__link">
+                                <span class="wp-block-button__link icon-arrow-right">
                                     <span class="screen-reader-text">' . sprintf(__('Read more about %s', 'fau-studium-display'), $student_advice_link_text) . '</span>
                                 </span>
                             </div>
@@ -439,7 +437,7 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
                                 </div>
                             </div>
                             <div class="button-teaser">
-                                <span class="wp-block-button__link">
+                                <span class="wp-block-button__link icon-arrow-right">
                                     <span class="screen-reader-text">' . sprintf(__('Read more about %s', 'fau-studium-display'), $subject_specific_advice_link_text) . '</span>
                                 </span>
                             </div>
@@ -447,6 +445,7 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
                     </div>
                 </article>
             </a>';
+
     }
 
     $student_advice .= '</div></section></div>';
@@ -566,17 +565,25 @@ if (in_array('benefits', $items)) {
 
     $benefits_fau_image = $constants[ 'benefits-fau-image' ];
     $benefits_fau = '<div class="benefits width-full"><h2>' . ($labels['studies'] ?? 'studies'). '</h2>';
-    $benefits_fau .= do_blocks('<!-- wp:fau-elemental/fau-big-teaser {
-                            "headline":"' . $constants[ 'benefits-fau-title' ] . '",
-                            "teaserText":"' . $constants[ 'benefits-fau-text' ] . '",
-                            "image":{"url":"' . $benefits_fau_image . '","alt":""}
-                            } /-->');
+    $benefits_fau .= do_blocks('<div class="width-large"><!-- wp:media-text {
+        "mediaPosition":"right",
+        "mediaId":0,
+        "mediaLink":"' . $benefits_fau_image . '",
+        "mediaType":"image",
+        "mediaWidth":50,
+        "style":{"spacing":{"margin":{"right":"0","left":"0","top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}}} -->
+        <div class="wp-block-media-text has-media-on-the-right is-stacked-on-mobile" style="margin-top:var(--wp--preset--spacing--60);margin-right:0;margin-bottom:var(--wp--preset--spacing--60);margin-left:0;grid-template-columns:auto 50%"><div class="wp-block-media-text__content">
+        <!-- wp:heading --><h3 class="wp-block-heading">' . $constants[ 'benefits-fau-title' ] . '</h3><!-- /wp:heading -->
+        <!-- wp:paragraph {"placeholder":"Content…"} --><p>' . $constants[ 'benefits-fau-text' ] . '</p><!-- /wp:paragraph --></div>
+        <figure class="wp-block-media-text__media"><img src="' . $benefits_fau_image . '" alt="" class="wp-image-0 size-full"/></figure></div>
+        <!-- /wp:media-text --></div>');;
+
     $benefits_fau .= do_blocks('<!-- wp:rrze-elements/iconbox-row -->
-                            <!-- wp:rrze-elements/rrze-iconbox {"title":"' . __('More than 275', 'fau-studium-display') . '","description":"' . __('degree programs', 'fau-studium-display') . '","materialSymbol":"school"} /-->
-                            <!-- wp:rrze-elements/rrze-iconbox {"title":"' . __('International', 'fau-studium-display') . '","description":"' . __('partnerships', 'fau-studium-display') . '","materialSymbol":"language"} /-->
-                            <!-- wp:rrze-elements/rrze-iconbox {"title":"' . __('Close ties', 'fau-studium-display') . '","description":"' . __('to industry', 'fau-studium-display') . '","materialSymbol":"handshake"} /-->
-                            <!-- wp:rrze-elements/rrze-iconbox {"title":"' . __("Cooperative bachelor's program", 'fau-studium-display') . '","description":"' . __('available', 'fau-studium-display') . '","materialSymbol":"join_left"} /-->
-                            <!-- /wp:rrze-elements/iconbox-row -->');
+        <!-- wp:rrze-elements/rrze-iconbox {"title":"' . __('More than 275', 'fau-studium-display') . '","description":"' . __('degree programs', 'fau-studium-display') . '","materialSymbol":"school"} /-->
+        <!-- wp:rrze-elements/rrze-iconbox {"title":"' . __('International', 'fau-studium-display') . '","description":"' . __('partnerships', 'fau-studium-display') . '","materialSymbol":"language"} /-->
+        <!-- wp:rrze-elements/rrze-iconbox {"title":"' . __('Close ties', 'fau-studium-display') . '","description":"' . __('to industry', 'fau-studium-display') . '","materialSymbol":"handshake"} /-->
+        <!-- wp:rrze-elements/rrze-iconbox {"title":"' . __("Cooperative bachelor's program", 'fau-studium-display') . '","description":"' . __('available', 'fau-studium-display') . '","materialSymbol":"join_left"} /-->
+        <!-- /wp:rrze-elements/iconbox-row -->');
     $benefits_fau .= '</div>';
 } else {
     $benefits_fau = '';

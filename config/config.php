@@ -835,6 +835,10 @@ function get_labels ($lang = 'de', $task = 'labels') {
 function get_constants($lang = 'de') {
     $mein_studium_options = get_meinstudium_options($lang);
     $constants = [
+        'how-to-apply-link' => [
+            'de' => 'https://www.fau.de/education/bewerbung/',
+            'en' => 'https://www.fau.eu/education/application-and-enrolment/'
+        ],
         'apply-now-title' => [
             'de' => 'Jetzt für einen Studienplatz bewerben',
             'en' => 'Apply now for a degree program'

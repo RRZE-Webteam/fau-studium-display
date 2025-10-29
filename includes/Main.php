@@ -136,11 +136,12 @@ class Main
         );
         wp_register_script(
             'fau-studium-display-script',
-            plugins_url('assets/js/fau-studium-display.min.js', plugin()->getFile()),
+            //plugins_url('assets/js/fau-studium-display.min.js', plugin()->getFile()), // funktioniert nicht mit .json-hash
+            plugins_url('src/js/fau-studium-display.js', plugin()->getFile()),
             ['wp-i18n', 'jquery'],
             plugin()->getVersion()
         );
-        wp_set_script_translations('fau-studium-display-script', 'fau-studium-display', plugin_dir_path(plugin()->getFile()) . 'languages');
+        wp_set_script_translations('fau-studium-display-script', 'fau-studium-display', plugin_dir_path(plugin()->getFile()) . 'languages/');
 
     }
 

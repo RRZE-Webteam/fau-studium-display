@@ -41,6 +41,17 @@ class Utils
         }
         return plugin()->getPath('templates/');
     }
+
+    public static function getThemeFamily(): string {
+        $currentTheme = wp_get_theme();
+        foreach (self::$themes as $slug => $theme) {
+            if (in_array(strtolower($currentTheme->stylesheet), array_map('strtolower', $theme))) {
+                return $slug;
+            }
+        }
+        return 'vendor';
+    }
+
     public static function renderSearchForm($prefilter = [], $filter_items = [], $lang = 'de', $display = 'table'): string
     {
         //var_dump($prefilter);
@@ -75,8 +86,8 @@ class Utils
             }
         }
 
-        $filters_default = array_slice($filters, 0, 3);
-        $filters_extended = array_slice($filters, 3);
+        $filters_default = array_slice($filters, 0, 4);
+        $filters_extended = array_slice($filters, 4);
 
         if (is_post_type_archive('degree-program')) {
             $url = get_post_type_archive_link( 'degree-program' );
@@ -97,8 +108,14 @@ class Utils
                    . '</div>';
 
         // Filter options
-        $output .= '<p class="label">' . $labels['filter_options'] . '</p>'
-            . '<div class="flex-wrapper">';
+        $output .= '<div class="search-filter"><p class="label">' . $labels['filter_options'] . '</p>';
+        if (count($filters_extended) > 0) {
+            $output .= '<button type="button" class="extended-search-toggle">'
+                       . '<span class="button-label">' . $labels['more_filter_options'] . '</span>'
+                       . '<span class="icon-wrapper icon-plus" aria-hidden="true"></span></button>';
+        }
+
+        $output .= '<div class="flex-wrapper">';
 
         $filters_selected = [];
 
@@ -146,9 +163,6 @@ class Utils
                 );
             }
 
-            $output .= '<button type="button" class="extended-search-toggle">'
-                       . $labels['more_filter_options']
-                       . '<span class="icon-wrapper icon-plus" aria-hidden="true"></span></button>';
             $output .= '</div>'; // .flex-wrapper
 
             $output .= '<div class="extended-search"><div class="flex-wrapper">' . $filters_extended_html . '</div></div>';
@@ -169,6 +183,7 @@ class Utils
             $output .= '<a class="filter-selected delete-all" data-key="all" data-value="all" href="' . $url . '">'  . $labels['delete_all'] . '</a>';
             $output .= '</div>';
         }
+        $output .= '</div>'; //.search-filter
         $output .= '<p class="display-settings">' . $labels['display']
                     . '<button type="submit" class="display-settings-table' . ($display == 'table' ? ' active' : '') . '" name="display" value="table" title="' . $labels['display_table'] . '">' . $labels['display_table'] . '</button>'
                     . '<button type="submit" class="display-settings-grid' . ($display == 'grid' ? ' active' : '') . '" name="display" value="grid" title="' . $labels['display_grid'] . '">' . $labels['display_grid'] . '</button>'
