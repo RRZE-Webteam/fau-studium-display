@@ -1437,6 +1437,12 @@
   background-color: var(--FAU_Col_FAU-Blau, #04316A);
   transition: var(--basic-animation, all 0.2s ease-in-out);
 }
+.fau-theme .fau-studium-display .student-advice-more .wp-block-fau-elemental-fau-teaser-grid {
+  margin-bottom: 32px;
+}
+.fau-theme .fau-studium-display .student-advice-more .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid {
+  gap: 32px;
+}
 
 .fau-studium-display .program-search {
   width: 100%;
@@ -1522,7 +1528,7 @@
 .fau-studium-display .program-search p.label {
   padding: 0;
   width: 100%;
-  font-size: 20px;
+  font-size: 1.5rem;
   color: var(--FAU-Col-FAU-Blau-100, #04316a);
   margin: 0;
 }
