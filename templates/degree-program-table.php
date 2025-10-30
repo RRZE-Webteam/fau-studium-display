@@ -18,7 +18,6 @@ if (empty($data) && !$show_search)
     return;
 
 $lang = $atts['language'] ?? 'de';
-$linkTarget = $atts['linkTarget'] ?? 'local';
 $labels = get_labels($lang);
 //var_dump($labels); exit;
 
@@ -42,11 +41,7 @@ foreach ($data as $post_id => $program) {
     if (empty($program) || !isset($program['title']))
         continue;
 
-    $url = match ($linkTarget) {
-        'local' => get_permalink($post_id),
-        'remote' => ! empty($program[ 'link' ]) ? esc_url($program[ 'link' ]) : '',
-        default => '',
-    };
+    $url = get_permalink($post_id);
     $title = $program['title'] . (!empty($program[ 'degree' ][ 'abbreviation' ]) ? ' (' . $program[ 'degree' ][ 'abbreviation' ] . ')' : '');
 
     if (!empty($url)) {

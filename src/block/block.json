@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "fau-studium/display",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"title": "FAU-Studium Display",
 	"category": "rrze",
 	"description": "",
@@ -39,10 +39,6 @@
 		"showTitle": {
 			"type": "boolean",
 			"default": true
-		},
-		"linkTarget": {
-			"type": "string",
-			"default": "local"
 		},
 		"selectedItemsGrid": {
 			"type": "array",
