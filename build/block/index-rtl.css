@@ -2,15 +2,15 @@
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/block/editor.scss ***!
   \**********************************************************************************************************************************************************************************************************************************************/
 @charset "UTF-8";
-.fau-big-teaser {
+.fau-theme .fau-big-teaser {
   display: flex;
   max-width: var(--wide-max-width);
   margin: 0 auto;
-  gap: var(--Spacing-10x, 2.5rem);
-  padding: var(--Spacing-8x, 2rem) var(--Spacing-10x, 2.5rem);
+  gap: var(--Spacing-10x);
+  padding: var(--Spacing-8x) var(--Spacing-10x);
   box-sizing: content-box;
 }
-.fau-big-teaser__content {
+.fau-theme .fau-big-teaser__content {
   min-width: 0;
   flex-basis: 0;
   flex-grow: 1;
@@ -18,37 +18,37 @@
   flex-direction: column;
   justify-content: center;
 }
-.fau-big-teaser__content h2.fau-big-teaser__headline,
-.fau-big-teaser__content h3.fau-big-teaser__headline,
-.fau-big-teaser__content h4.fau-big-teaser__headline,
-.fau-big-teaser__content h5.fau-big-teaser__headline,
-.fau-big-teaser__content h6.fau-big-teaser__headline {
-  font-size: var(--H-Heading-Big-Teaser, 40px);
-  background-color: var(--FAU-Col-FAU-Weiss-100, #fff);
+.fau-theme .fau-big-teaser__content h2.fau-big-teaser__headline,
+.fau-theme .fau-big-teaser__content h3.fau-big-teaser__headline,
+.fau-theme .fau-big-teaser__content h4.fau-big-teaser__headline,
+.fau-theme .fau-big-teaser__content h5.fau-big-teaser__headline,
+.fau-theme .fau-big-teaser__content h6.fau-big-teaser__headline {
+  font-size: var(--H-Heading-Big-Teaser);
+  background-color: var(--FAU-Col-FAU-Weiss-100);
   margin: 0;
   max-width: calc(100% + 16rem);
   min-width: calc(100% + 5.5rem);
-  padding: var(--Spacing-6x, 1.5rem) 0 var(--Spacing-6x, 1.5rem) var(--Spacing-8x, 2rem);
+  padding: var(--Spacing-6x) 0 var(--Spacing-6x) var(--Spacing-8x);
   box-sizing: border-box;
   position: relative;
   width: -moz-max-content;
   width: max-content;
   z-index: 1;
 }
-.fau-big-teaser__content p.fau-big-teaser__teaser-text {
-  padding: var(--Spacing-2x, 0.5rem) 0 var(--Spacing-4x, 1rem) 0;
+.fau-theme .fau-big-teaser__content p.fau-big-teaser__teaser-text {
+  padding: var(--Spacing-2x) 0 var(--Spacing-4x) 0;
   margin: 0;
   box-sizing: border-box;
 }
-.fau-big-teaser__content .wp-block-buttons.is-layout-flex {
+.fau-theme .fau-big-teaser__content .wp-block-buttons.is-layout-flex {
   padding: 0;
   box-sizing: border-box;
 }
-.fau-big-teaser__image {
+.fau-theme .fau-big-teaser__image {
   flex-basis: 0;
   flex-grow: 1;
 }
-.fau-big-teaser__image img {
+.fau-theme .fau-big-teaser__image img {
   width: 100%;
   height: auto;
   aspect-ratio: 3/2;
@@ -60,7 +60,7 @@
 .is-style-dark .fau-big-teaser .fau-big-teaser__content h4.fau-big-teaser__headline,
 .is-style-dark .fau-big-teaser .fau-big-teaser__content h5.fau-big-teaser__headline,
 .is-style-dark .fau-big-teaser .fau-big-teaser__content h6.fau-big-teaser__headline {
-  background-color: var(--FAU-Col-FAU-Blau-100, #04316a);
+  background-color: var(--FAU-Col-FAU-Blau-100);
 }
 @media screen and (max-width: 1199px) {
   .fau-big-teaser__content h2.fau-big-teaser__headline,
@@ -90,19 +90,19 @@
     min-width: unset;
     margin-right: auto;
     margin-left: auto;
-    padding: var(--Spacing-4x, 1rem) var(--Spacing-6x, 1.5rem) 0 var(--Spacing-6x, 1.5rem);
+    padding: var(--Spacing-4x) var(--Spacing-6x) 0 var(--Spacing-6x);
     font-size: 2rem;
   }
   .fau-big-teaser__content p.fau-big-teaser__teaser-text {
     width: 90%;
     margin-right: auto;
     margin-left: auto;
-    padding: var(--Spacing-4x, 1rem) var(--Spacing-6x, 1.5rem) var(--Spacing-2x, 0.5rem) var(--Spacing-6x, 1.5rem);
+    padding: var(--Spacing-4x) var(--Spacing-6x) var(--Spacing-2x) var(--Spacing-6x);
   }
   .fau-big-teaser__content .wp-block-buttons.is-layout-flex {
     width: 90%;
     margin: 0 auto;
-    padding: 0 var(--Spacing-6x, 1.5rem);
+    padding: 0 var(--Spacing-6x);
   }
   .fau-big-teaser__image img {
     aspect-ratio: 3/2;
@@ -118,13 +118,724 @@
   .fau-big-teaser__content h5.fau-big-teaser__headline,
   .fau-big-teaser__content h6.fau-big-teaser__headline {
     width: calc(100% - 1rem);
-    padding: var(--Spacing-4x, 1rem) var(--Spacing-3x) var(--Spacing-3x) var(--Spacing-3x);
+    padding: var(--Spacing-4x) var(--Spacing-3x) var(--Spacing-3x) var(--Spacing-3x);
     font-size: 1.625rem;
   }
   .fau-big-teaser__content p.fau-big-teaser__teaser-text,
   .fau-big-teaser__content .wp-block-buttons.is-layout-flex {
     width: calc(100% - 1rem);
     padding: 0 var(--Spacing-3x) var(--Spacing-3x) var(--Spacing-3x);
+  }
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid {
+  max-width: var(--wide-max-width);
+  padding: 0 var(--Spacing-10x);
+  margin: 0 auto;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid {
+  display: grid;
+  gap: var(--Spacing-8x);
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right {
+  grid-template-columns: repeat(3, 1fr);
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item-link, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item-link, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item-link, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item-link, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item-link, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item-link, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item-link {
+  text-decoration: none;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item-link article, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item-link article, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item-link article, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item-link article, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item-link article, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item-link article, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item-link article {
+  display: contents;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-image-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-image-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-image-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-image-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-image-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-image-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-image-wrapper {
+  position: relative;
+  width: 100%;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-image-wrapper .teaser-image, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-image-wrapper .teaser-image, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-image-wrapper .teaser-image, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-image-wrapper .teaser-image, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-image-wrapper .teaser-image, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-image-wrapper .teaser-image, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-image-wrapper .teaser-image {
+  overflow: hidden;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-image-wrapper .teaser-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  aspect-ratio: 3/2;
+  transition: all 0.2s linear;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-image-wrapper .teaser-meta, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-image-wrapper .teaser-meta, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-image-wrapper .teaser-meta, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-image-wrapper .teaser-meta, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-image-wrapper .teaser-meta, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-image-wrapper .teaser-meta, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-image-wrapper .teaser-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 5.5rem;
+  width: 5.5rem;
+  z-index: 1;
+  background: var(--FAU-Col-FAU-Dunkelblau-100);
+  color: var(--FAU-Col-FAU-Weiss-100);
+  font-size: 0.875rem;
+  text-align: center;
+  line-height: 1.3;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-image-wrapper .teaser-meta time, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-image-wrapper .teaser-meta time, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-image-wrapper .teaser-meta time, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-image-wrapper .teaser-meta time, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-image-wrapper .teaser-meta time, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-image-wrapper .teaser-meta time, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-image-wrapper .teaser-meta time {
+  position: absolute;
+  top: 0.6875rem;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-image-wrapper .teaser-meta time .date-day, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-image-wrapper .teaser-meta time .date-day, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-image-wrapper .teaser-meta time .date-day, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-image-wrapper .teaser-meta time .date-day, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-image-wrapper .teaser-meta time .date-day, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-image-wrapper .teaser-meta time .date-day, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-image-wrapper .teaser-meta time .date-day {
+  display: block;
+  font-size: 2rem;
+  letter-spacing: var(--letter-spacing-big);
+  font-weight: 700;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year {
+  display: block;
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year::first-letter, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year::first-letter, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year::first-letter, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year::first-letter, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year::first-letter, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year::first-letter, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year::first-letter {
+  text-transform: uppercase;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-content-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-content-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-content-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper {
+  position: relative;
+  width: 90%;
+  bottom: 2.5rem;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-content-wrapper .teaser-content, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-content-wrapper .teaser-content, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-content-wrapper .teaser-content, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--Spacing-6x);
+  background-color: var(--FAU-Col-FAU-Weiss-100);
+  padding: var(--Spacing-4x) var(--Spacing-6x) var(--Spacing-4x) 0;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-content-wrapper .teaser-content .content-column, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-content-wrapper .teaser-content .content-column, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-content-wrapper .teaser-content .content-column, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .content-column, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .content-column, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .content-column {
+  color: var(--FAU-Col-FAU-Schwarz-90);
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column > span, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-content-wrapper .teaser-content .content-column > span, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-content-wrapper .teaser-content .content-column > span, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-content-wrapper .teaser-content .content-column > span, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .content-column > span, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .content-column > span, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .content-column > span {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column h2,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column h3,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column h4,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column h5,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column h6, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-content-wrapper .teaser-content .content-column h2,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-content-wrapper .teaser-content .content-column h3,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-content-wrapper .teaser-content .content-column h4,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-content-wrapper .teaser-content .content-column h5,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-content-wrapper .teaser-content .content-column h6, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-content-wrapper .teaser-content .content-column h2,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-content-wrapper .teaser-content .content-column h3,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-content-wrapper .teaser-content .content-column h4,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-content-wrapper .teaser-content .content-column h5,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-content-wrapper .teaser-content .content-column h6, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-content-wrapper .teaser-content .content-column h2,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-content-wrapper .teaser-content .content-column h3,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-content-wrapper .teaser-content .content-column h4,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-content-wrapper .teaser-content .content-column h5,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-content-wrapper .teaser-content .content-column h6, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .content-column h2,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .content-column h3,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .content-column h4,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .content-column h5,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .content-column h6, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .content-column h2,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .content-column h3,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .content-column h4,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .content-column h5,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .content-column h6, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .content-column h2,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .content-column h3,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .content-column h4,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .content-column h5,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .content-column h6 {
+  margin: var(--Spacing-3x) 0;
+  padding: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: var(--letter-spacing-big);
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column a, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-content-wrapper .teaser-content .content-column a, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-content-wrapper .teaser-content .content-column a, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-content-wrapper .teaser-content .content-column a, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .content-column a, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .content-column a, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .content-column a {
+  text-decoration: none;
+  font-weight: inherit;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column p, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-content-wrapper .teaser-content .content-column p, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-content-wrapper .teaser-content .content-column p, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-content-wrapper .teaser-content .content-column p, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .content-column p, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .content-column p, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .content-column p {
+  font-size: 1rem;
+  margin: 0;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column .excerpt span, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-content-wrapper .teaser-content .content-column .excerpt span, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-content-wrapper .teaser-content .content-column .excerpt span, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-content-wrapper .teaser-content .content-column .excerpt span, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .content-column .excerpt span, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .content-column .excerpt span, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .content-column .excerpt span {
+  font-weight: 400;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .button-teaser, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-content-wrapper .teaser-content .button-teaser, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-content-wrapper .teaser-content .button-teaser, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-content-wrapper .teaser-content .button-teaser, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .button-teaser, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .button-teaser, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .button-teaser {
+  align-self: center;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .button-teaser .wp-block-button__link, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-content-wrapper .teaser-content .button-teaser .wp-block-button__link, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-content-wrapper .teaser-content .button-teaser .wp-block-button__link, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-content-wrapper .teaser-content .button-teaser .wp-block-button__link, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .button-teaser .wp-block-button__link, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .button-teaser .wp-block-button__link, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .button-teaser .wp-block-button__link {
+  position: relative;
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  background-color: var(--FAU-Col-FAU-Blau-100);
+  border-radius: 0;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-content-wrapper .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item .teaser-content-wrapper .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item .teaser-content-wrapper .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .button-teaser .wp-block-button__link::before {
+  content: "";
+  background-image: var(--icon-arrow-weiss);
+  background-repeat: no-repeat;
+  position: absolute;
+  top: calc(50% - 0.375rem);
+  right: calc(50% - 0.5rem);
+  width: 1rem;
+  height: 0.75rem;
+  transition: all 0.2s linear;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item:hover .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item:focus-visible .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item:hover .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item:focus-visible .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item:hover .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item:focus-visible .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item:hover .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item:focus-visible .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item:hover .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item:focus-visible .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item:hover .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item:focus-visible .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item:hover .teaser-content .button-teaser .wp-block-button__link::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item:focus-visible .teaser-content .button-teaser .wp-block-button__link::before {
+  right: calc(50% - 0.3125rem);
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item:hover .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item:focus-visible .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item:hover .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item:focus-visible .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item:hover .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item:focus-visible .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item:hover .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-item:focus-visible .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item:hover .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item:focus-visible .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item:hover .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item:focus-visible .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item:hover .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item:focus-visible .teaser-image-wrapper .teaser-image img {
+  transform: scale(1.03);
+  transition: all 0.2s linear;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h2, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h3, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h4, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h5, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h6, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h2, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h3, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h4, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h5, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h6, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h2, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h3, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h4, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h5, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h6, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h2, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h3, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h4, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h5, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h6, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h2, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h3, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h4, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h5, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h6, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h2, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h3, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h4, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h5, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h6, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h2, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h3, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h4, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h5, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column h6 {
+  margin-top: 0;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl {
+  display: flex;
+  flex-direction: column;
+  gap: var(--Spacing-8x);
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group {
+  display: grid;
+  gap: var(--Spacing-8x);
+  grid-template-rows: min-content 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "s a" "s b";
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item .teaser-content-wrapper .teaser-content, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item .teaser-content-wrapper .teaser-content {
+  padding: var(--Spacing-6x) var(--Spacing-6x) var(--Spacing-6x) 0;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(1), .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 2;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 1;
+  grid-area: s;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(1) .teaser-image-wrapper .teaser-meta, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(1) .teaser-image-wrapper .teaser-meta {
+  height: 7.0625rem;
+  width: 7.0625rem;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(1) .teaser-image-wrapper .teaser-meta time .date-day, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(1) .teaser-image-wrapper .teaser-meta time .date-day {
+  font-size: 3rem;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(1) .teaser-image-wrapper .teaser-meta time .date-month-year, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(1) .teaser-image-wrapper .teaser-meta time .date-month-year {
+  font-size: 1.15rem;
+  font-weight: 400;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(1) .teaser-content-wrapper .teaser-content .content-column h2,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(1) .teaser-content-wrapper .teaser-content .content-column h3,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(1) .teaser-content-wrapper .teaser-content .content-column h4,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(1) .teaser-content-wrapper .teaser-content .content-column h5,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(1) .teaser-content-wrapper .teaser-content .content-column h6, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(1) .teaser-content-wrapper .teaser-content .content-column h2,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(1) .teaser-content-wrapper .teaser-content .content-column h3,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(1) .teaser-content-wrapper .teaser-content .content-column h4,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(1) .teaser-content-wrapper .teaser-content .content-column h5,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(1) .teaser-content-wrapper .teaser-content .content-column h6 {
+  font-size: 1.5rem;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(2), .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(2) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: a;
+  flex-direction: row;
+  align-self: flex-start;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(2) .teaser-image-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(2) .teaser-image-wrapper {
+  width: calc(100% + 5rem);
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(2) .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(2) .teaser-image-wrapper .teaser-image img {
+  min-height: 15.625rem;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper {
+  width: 100%;
+  bottom: unset;
+  right: -2.5rem;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper .teaser-content, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper .teaser-content {
+  width: calc(100% + 2.5rem);
+  box-sizing: border-box;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper .teaser-content .content-column h2,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper .teaser-content .content-column h3,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper .teaser-content .content-column h4,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper .teaser-content .content-column h5,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper .teaser-content .content-column h6, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper .teaser-content .content-column h2,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper .teaser-content .content-column h3,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper .teaser-content .content-column h4,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper .teaser-content .content-column h5,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper .teaser-content .content-column h6 {
+  margin-bottom: 0;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper .teaser-content .content-column .excerpt, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper .teaser-content .content-column .excerpt {
+  display: none;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3), .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  grid-area: b;
+  flex-direction: row-reverse;
+  align-self: flex-start;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-image-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-image-wrapper {
+  width: calc(100% + 5rem);
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-image-wrapper .teaser-image img, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-image-wrapper .teaser-image img {
+  min-height: 15.625rem;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-image-wrapper .teaser-meta, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-image-wrapper .teaser-meta {
+  right: unset;
+  left: 0;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper {
+  width: 100%;
+  bottom: unset;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content {
+  width: calc(100% + 2rem);
+  padding: var(--Spacing-4x) var(--Spacing-4x) var(--Spacing-4x) 0;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content .content-column h2,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content .content-column h3,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content .content-column h4,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content .content-column h5,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content .content-column h6, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content .content-column h2,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content .content-column h3,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content .content-column h4,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content .content-column h5,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content .content-column h6 {
+  margin-bottom: 0;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content .content-column .excerpt, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content .content-column .excerpt {
+  display: none;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s[data-variant=page] .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper .teaser-content .content-column, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s[data-variant=page] .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content .content-column, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl[data-variant=page] .teaser-group .teaser-item:nth-child(2) .teaser-content-wrapper .teaser-content .content-column, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl[data-variant=page] .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content .content-column {
+  display: flex;
+  align-items: center;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl {
+  grid-template-columns: 1fr;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item {
+  flex-direction: row;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-image-wrapper .teaser-meta {
+  height: 7.0625rem;
+  width: 7.0625rem;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-image-wrapper .teaser-meta time .date-day {
+  font-size: 3rem;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year {
+  font-size: 1.15rem;
+  font-weight: 400;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper {
+  bottom: unset;
+  right: -5rem;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content {
+  padding: var(--Spacing-6x) var(--Spacing-6x) var(--Spacing-6x) 0;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column h2,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column h3,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column h4,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column h5,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column h6 {
+  font-size: 2rem;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right {
+  grid-template-columns: repeat(2, 1fr);
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group {
+  grid-template-areas: "a s" "b s";
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item {
+  flex-direction: row;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper {
+  bottom: unset;
+  right: -2.5rem;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content {
+  width: calc(100% + 2.5rem);
+  padding-left: 0;
+  box-sizing: border-box;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left[data-variant=post] .teaser-item .teaser-content-wrapper .teaser-content .content-column h2,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left[data-variant=post] .teaser-item .teaser-content-wrapper .teaser-content .content-column h3,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left[data-variant=post] .teaser-item .teaser-content-wrapper .teaser-content .content-column h4,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left[data-variant=post] .teaser-item .teaser-content-wrapper .teaser-content .content-column h5,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left[data-variant=post] .teaser-item .teaser-content-wrapper .teaser-content .content-column h6, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right[data-variant=post] .teaser-item .teaser-content-wrapper .teaser-content .content-column h2,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right[data-variant=post] .teaser-item .teaser-content-wrapper .teaser-content .content-column h3,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right[data-variant=post] .teaser-item .teaser-content-wrapper .teaser-content .content-column h4,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right[data-variant=post] .teaser-item .teaser-content-wrapper .teaser-content .content-column h5,
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right[data-variant=post] .teaser-item .teaser-content-wrapper .teaser-content .content-column h6 {
+  margin-bottom: 0;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left[data-variant=post] .teaser-item .teaser-content-wrapper .teaser-content .content-column .excerpt, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right[data-variant=post] .teaser-item .teaser-content-wrapper .teaser-content .content-column .excerpt {
+  display: none;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item {
+  flex-direction: row-reverse;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-image-wrapper .teaser-meta {
+  right: unset;
+  left: 0;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper {
+  right: unset;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .clamp-3 {
+  position: relative;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .clamp-3 [aria-hidden=true] {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .visually-hidden {
+  position: absolute;
+  width: 0.0625rem;
+  height: 0.0625rem;
+  padding: 0;
+  margin: -0.0625rem;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid h2.clamp-3 [aria-hidden=true],
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid h3.clamp-3 [aria-hidden=true],
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid h4.clamp-3 [aria-hidden=true],
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid h5.clamp-3 [aria-hidden=true],
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid h6.clamp-3 [aria-hidden=true],
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .excerpt.clamp-3 [aria-hidden=true] {
+  margin: 0;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid__load-more-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--Spacing-5x);
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid__load-more-wrapper .load-more-spinner {
+  display: none;
+  margin-right: var(--Spacing-2x);
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid__load-more-wrapper .load-more-spinner.loading {
+  display: block;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid__load-more-wrapper .load-more-spinner .loading-text {
+  font-size: 0.875rem;
+  color: var(--FAU-Col-FAU-Dunkelblau-100);
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .wp-block-button.is-style-secondary .wp-block-button__link.load-more-button {
+  border: 1px solid var(--FAU-Col-FAU-Dunkelblau-100);
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .wp-block-button.is-style-secondary .wp-block-button__link.load-more-button::before {
+  background-image: var(--icon-plus-weiss);
+  background-size: contain;
+  height: 1.5rem;
+  width: 1.5rem;
+  left: -36px;
+}
+.fau-theme .wp-block-fau-elemental-fau-teaser-grid .wp-block-button.is-style-secondary .wp-block-button__link.load-more-button:hover::before, .fau-theme .wp-block-fau-elemental-fau-teaser-grid .wp-block-button.is-style-secondary .wp-block-button__link.load-more-button:focus-visible::before {
+  scale: 1.3;
+}
+.is-style-dark .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid .teaser-item .teaser-content-wrapper .teaser-content {
+  background-color: var(--FAU-Col-FAU-Blau-100);
+}
+.is-style-dark .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid .teaser-item .teaser-content-wrapper .teaser-content .content-column {
+  color: var(--FAU-Col-FAU-Weiss-100);
+}
+.is-style-dark .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid .teaser-item .teaser-content-wrapper .teaser-content .button-teaser .wp-block-button__link {
+  background-color: var(--FAU-Col-FAU-Weiss-100);
+}
+.is-style-dark .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid .teaser-item .teaser-content-wrapper .teaser-content .button-teaser .wp-block-button__link::before {
+  background-image: var(--icon-arrow-fau-blau);
+}
+@media (max-width: 1440px) {
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right {
+    overflow: hidden;
+  }
+}
+@media screen and (max-width: 999px) {
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid {
+    gap: var(--Spacing-4x);
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group {
+    gap: var(--Spacing-6x);
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(2) .teaser-image-wrapper .teaser-image img, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(2) .teaser-image-wrapper .teaser-image img {
+    min-height: 180px;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3), .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) {
+    flex-direction: row;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-image-wrapper .teaser-image img, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-image-wrapper .teaser-image img {
+    min-height: 11.25rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-image-wrapper .teaser-meta, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-image-wrapper .teaser-meta {
+    right: 0;
+    left: unset;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper {
+    right: -2.5rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-content-wrapper .teaser-content {
+    width: calc(100% + 2.5rem);
+    padding-left: 0;
+    box-sizing: border-box;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(1) .teaser-image-wrapper .teaser-meta, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(1) .teaser-image-wrapper .teaser-meta {
+    height: 5rem;
+    width: 5rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(1) .teaser-image-wrapper .teaser-meta time .date-day, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(1) .teaser-image-wrapper .teaser-meta time .date-day {
+    font-size: 1.5rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(1) .teaser-image-wrapper .teaser-meta time .date-month-year, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(1) .teaser-image-wrapper .teaser-meta time .date-month-year {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(2) .teaser-image-wrapper .teaser-meta, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-image-wrapper .teaser-meta, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(2) .teaser-image-wrapper .teaser-meta, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-image-wrapper .teaser-meta {
+    height: 4.25rem;
+    width: 4.25rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(2) .teaser-image-wrapper .teaser-meta time .date-day, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-image-wrapper .teaser-meta time .date-day, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(2) .teaser-image-wrapper .teaser-meta time .date-day, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-image-wrapper .teaser-meta time .date-day {
+    font-size: 1.5rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(2) .teaser-image-wrapper .teaser-meta time .date-month-year, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item:nth-child(3) .teaser-image-wrapper .teaser-meta time .date-month-year, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(2) .teaser-image-wrapper .teaser-meta time .date-month-year, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item:nth-child(3) .teaser-image-wrapper .teaser-meta time .date-month-year {
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group .teaser-item .teaser-content-wrapper .teaser-content, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group .teaser-item .teaser-content-wrapper .teaser-content {
+    padding: var(--Spacing-4x) var(--Spacing-4x) var(--Spacing-4x) 0;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-image-wrapper .teaser-meta {
+    height: 5rem;
+    width: 5rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-image-wrapper .teaser-meta time .date-day {
+    font-size: 1.5rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content {
+    padding: var(--Spacing-4x) var(--Spacing-4x) var(--Spacing-4x) 0;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column .clamp-3 [aria-hidden=true] {
+    -webkit-line-clamp: 2;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column h2,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column h3,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column h4,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column h5,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column h6 {
+    font-size: 1.5rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-image-wrapper .teaser-meta {
+    height: 5rem;
+    width: 5rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-image-wrapper .teaser-meta time .date-day {
+    font-size: 1.5rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-image-wrapper .teaser-meta, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-image-wrapper .teaser-meta {
+    height: 4.25rem;
+    width: 4.25rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-image-wrapper .teaser-meta time .date-day, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-image-wrapper .teaser-meta time .date-day {
+    font-size: 1.5rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year {
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content {
+    padding: var(--Spacing-4x) var(--Spacing-4x) var(--Spacing-4x) 0;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .content-column .clamp-3 [aria-hidden=true], .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .content-column .clamp-3 [aria-hidden=true] {
+    -webkit-line-clamp: 2;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item {
+    flex-direction: row;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-image-wrapper .teaser-meta {
+    right: 0;
+    left: unset;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper {
+    right: -2.5rem;
+  }
+}
+@media (max-width: 768px) {
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid {
+    overflow: hidden;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m {
+    grid-template-columns: 1fr;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item {
+    flex-direction: row;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item .teaser-image-wrapper .teaser-image, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-image-wrapper .teaser-image {
+    height: 9.375rem;
+    min-width: 9.375rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item .teaser-image-wrapper .teaser-meta, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-image-wrapper .teaser-meta {
+    width: 4.25rem;
+    height: 4.25rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item .teaser-image-wrapper .teaser-meta time, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-image-wrapper .teaser-meta time {
+    top: 0.5rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item .teaser-image-wrapper .teaser-meta time .date-day, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-image-wrapper .teaser-meta time .date-day {
+    font-size: 1.5rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-image-wrapper .teaser-meta time .date-month-year {
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item .teaser-content-wrapper, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper {
+    width: 100%;
+    bottom: unset;
+    right: -2.5rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item .teaser-content-wrapper .teaser-content, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content {
+    width: calc(100% + 2.5rem);
+    padding: var(--Spacing-4x) var(--Spacing-4x);
+    padding-left: 0;
+    box-sizing: border-box;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item .teaser-content-wrapper .teaser-content .content-column h2,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item .teaser-content-wrapper .teaser-content .content-column h3,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item .teaser-content-wrapper .teaser-content .content-column h4,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item .teaser-content-wrapper .teaser-content .content-column h5,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item .teaser-content-wrapper .teaser-content .content-column h6, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .content-column h2,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .content-column h3,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .content-column h4,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .content-column h5,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item .teaser-content-wrapper .teaser-content .content-column h6 {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item.page-teaser .teaser-content-wrapper .teaser-content .content-column h2, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item.page-teaser .teaser-content-wrapper .teaser-content .content-column h3, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item.page-teaser .teaser-content-wrapper .teaser-content .content-column h4, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item.page-teaser .teaser-content-wrapper .teaser-content .content-column h5, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .teaser-item.page-teaser .teaser-content-wrapper .teaser-content .content-column h6, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item.page-teaser .teaser-content-wrapper .teaser-content .content-column h2, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item.page-teaser .teaser-content-wrapper .teaser-content .content-column h3, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item.page-teaser .teaser-content-wrapper .teaser-content .content-column h4, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item.page-teaser .teaser-content-wrapper .teaser-content .content-column h5, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .teaser-item.page-teaser .teaser-content-wrapper .teaser-content .content-column h6 {
+    font-size: 1.15rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item .excerpt, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m .excerpt {
+    display: none;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.list-item[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-3m[data-variant=page] .teaser-item .teaser-content-wrapper .teaser-content .content-column {
+    display: flex;
+    align-items: center;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group {
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: "s" "a" "b";
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-item:first-child {
+    margin-bottom: -2.5rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl {
+    position: relative;
+    width: calc(100% + 2.5rem);
+    right: -1.25rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item {
+    flex-direction: column;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper {
+    right: unset;
+    bottom: 2.5rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-1xl .teaser-item .teaser-content-wrapper .teaser-content .content-column .clamp-3 [aria-hidden=true] {
+    -webkit-line-clamp: 3;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2l, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right {
+    grid-template-columns: 1fr;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .content-column h2,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .content-column h3,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .content-column h4,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .content-column h5,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-left .teaser-item .teaser-content-wrapper .teaser-content .content-column h6, .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .content-column h2,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .content-column h3,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .content-column h4,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .content-column h5,
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2s-right .teaser-item .teaser-content-wrapper .teaser-content .content-column h6 {
+    font-size: 1rem;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group {
+    grid-template-areas: "a" "b" "s";
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group > .teaser-item:nth-child(1), .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group > .teaser-item:nth-child(1), .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group > .teaser-item:nth-child(1), .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group > .teaser-item:nth-child(1) {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 1;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group > .teaser-item:nth-child(1), .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group > .teaser-item:nth-child(1) {
+    -ms-grid-row: 3;
+    -ms-grid-row-span: 1;
+    -ms-grid-column: 1;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group > .teaser-item:nth-child(2), .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group > .teaser-item:nth-child(2), .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group > .teaser-item:nth-child(2), .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group > .teaser-item:nth-child(2) {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group > .teaser-item:nth-child(2), .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group > .teaser-item:nth-child(2) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group > .teaser-item:nth-child(3), .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group > .teaser-item:nth-child(3), .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-l2s .teaser-group > .teaser-item:nth-child(3), .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group > .teaser-item:nth-child(3) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+  }
+  .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group > .teaser-item:nth-child(3), .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid.layout-2sl .teaser-group > .teaser-item:nth-child(3) {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+  }
+}
+@media (max-width: 393px) {
+  .wp-block-fau-elemental-fau-teaser-grid {
+    padding: 0 var(--Spacing-5x);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
   }
 }
 .fau-elemental section.fau-studium-display.degree-program-list {
@@ -262,14 +973,19 @@
   hyphens: auto;
 }
 .fau-studium-display ul.degree-program-grid li {
-  display: block;
+  display: flex;
+  flex-direction: column;
   list-style-type: none;
-  background: var(--FAU_Col_FAU-Blau, #04316A);
+  background: var(--FAU-Col-FAU-Blau-100, #04316A);
   color: #fff;
   padding: 0;
 }
 .fau-studium-display ul.degree-program-grid li p {
   padding: 0;
+  margin: 0 0 0.5rem;
+}
+.fau-studium-display ul.degree-program-grid li p:last-child {
+  margin-bottom: 0;
 }
 .fau-studium-display ul.degree-program-grid li a {
   color: #fff;
@@ -284,27 +1000,57 @@
 }
 .fau-studium-display ul.degree-program-grid li .program-content {
   background: var(--FAU_Col_FAU-Blau, #04316A);
-  padding: 16px;
+  padding: 1rem;
 }
 .fau-studium-display ul.degree-program-grid li .teaser-image + .program-content {
   position: relative;
   top: -24px;
-  margin-right: 16px;
-  margin-left: 16px;
-  margin-bottom: -16px;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  margin-bottom: -1.5rem;
 }
 .fau-studium-display ul.degree-program-grid li .label {
   font-weight: bold;
   font-size: var(--P-Body-Text-Small, 1rem);
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
+}
+.fau-studium-display ul.degree-program-grid li .program-title-wrapper {
+  height: 7.45rem; /* 2 lines title, 2 lines subtitle, 1.5 line height, 2 * .5rem margin*/
 }
 .fau-studium-display ul.degree-program-grid li .program-title {
+  margin-top: 0;
   font-weight: bold;
   font-size: var(--H-Heading-5, 1.15rem);
   letter-spacing: 0.02em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .fau-studium-display ul.degree-program-grid li .program-subtitle {
   font-size: var(--P-Body-Text-Small, 1rem);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.fau-studium-display ul.degree-program-grid li .wp-block-buttons {
+  margin: 0 2rem 1rem;
+  padding: 0;
+  flex-grow: 1;
+  align-items: end;
+}
+.fau-theme .fau-studium-display ul.degree-program-grid * {
+  font-size: var(--font-size-normal, 1rem);
+}
+.fau-theme .fau-studium-display .wp-block-buttons .wp-block-button__link {
+  margin: 0;
+  background-color: var(----color-zentral-dunkler, #004A9F);
+  color: var(--color-primary-dunkler-kontrast, #fff);
+}
+.fau-theme .fau-studium-display .wp-block-buttons .wp-block-button__link:hover, .fau-theme .fau-studium-display .wp-block-buttons .wp-block-button__link:focus, .fau-theme .fau-studium-display .wp-block-buttons .wp-block-button__link:active {
+  background-color: var(--color-button-hover-bg, #041E42);
+  color: var(--color-button-hover-text, #fff);
 }
 .fau-studium-display.degree-program-box, .fau-studium-display.degree-program-full .fact-sheet {
   background-color: var(--FAU_Col_FAU-Dunkelblau_12_5, #DFE2E7);
@@ -396,7 +1142,18 @@
   padding-bottom: 0;
 }
 .fau-studium-display.degree-program-full {
-  margin-bottom: 32px;
+  margin-bottom: var(--Spacing-8x, 2rem);
+  margin-top: var(--Spacing-6x, 1.5rem);
+}
+@media (min-width: 394px) {
+  .fau-studium-display.degree-program-full {
+    margin-top: var(--Spacing-8x, 2rem);
+  }
+}
+@media (min-width: 769px) {
+  .fau-studium-display.degree-program-full {
+    margin-top: var(--Spacing-10x, 2.5rem);
+  }
 }
 .fau-studium-display.degree-program-full .width-small {
   max-width: 870px;
@@ -456,9 +1213,6 @@
 .fau-studium-display.degree-program-full h4 {
   padding-right: 0;
   padding-left: 0;
-}
-.fau-studium-display.degree-program-full p {
-  padding: 0;
 }
 .fau-studium-display.degree-program-full .program-content {
   position: relative;
@@ -731,6 +1485,46 @@
   margin-left: auto;
   margin-top: 32px;
 }
+.fau-theme .fau-studium-display .fau-teaser-grid .teaser-content-wrapper {
+  background-color: var(--FAU_Col_FAU-Blau, #04316A);
+  padding: 0.5em;
+}
+.fau-theme .fau-studium-display .fau-teaser-grid .wp-block-button__link {
+  background-color: #fff !important;
+}
+.fau-theme .fau-studium-display .fau-teaser-grid .icon-arrow-right {
+  width: 40px;
+  height: 40px;
+  display: block;
+  position: absolute;
+  top: calc(50% - 20px);
+  left: 0;
+  background-color: #fff;
+}
+.fau-theme .fau-studium-display .fau-teaser-grid .icon-arrow-right:after {
+  content: "";
+  -webkit-mask-size: var(--icon-size-mask, 70%);
+  mask-size: var(--icon-size-mask, 70%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  top: 4px;
+  mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTQzOC42IDI3OC42YzEyLjUtMTIuNSAxMi41LTMyLjggMC00NS4zbC0xNjAtMTYwYy0xMi41LTEyLjUtMzIuOC0xMi41LTQ1LjMgMHMtMTIuNSAzMi44IDAgNDUuM0wzMzguOCAyMjQgMzIgMjI0Yy0xNy43IDAtMzIgMTQuMy0zMiAzMnMxNC4zIDMyIDMyIDMybDMwNi43IDBMMjMzLjQgMzkzLjRjLTEyLjUgMTIuNS0xMi41IDMyLjggMCA0NS4zczMyLjggMTIuNSA0NS4zIDBsMTYwLTE2MHoiLz48L3N2Zz4=);
+  -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTQzOC42IDI3OC42YzEyLjUtMTIuNSAxMi41LTMyLjggMC00NS4zbC0xNjAtMTYwYy0xMi41LTEyLjUtMzIuOC0xMi41LTQ1LjMgMHMtMTIuNSAzMi44IDAgNDUuM0wzMzguOCAyMjQgMzIgMjI0Yy0xNy43IDAtMzIgMTQuMy0zMiAzMnMxNC4zIDMyIDMyIDMybDMwNi43IDBMMjMzLjQgMzkzLjRjLTEyLjUgMTIuNS0xMi41IDMyLjggMCA0NS4zczMyLjggMTIuNSA0NS4zIDBsMTYwLTE2MHoiLz48L3N2Zz4=);
+  background-color: var(--FAU_Col_FAU-Blau, #04316A);
+  transition: var(--basic-animation, all 0.2s ease-in-out);
+}
+.fau-theme .fau-studium-display .student-advice-more .wp-block-fau-elemental-fau-teaser-grid {
+  margin-bottom: 32px;
+}
+.fau-theme .fau-studium-display .student-advice-more .wp-block-fau-elemental-fau-teaser-grid .fau-teaser-grid {
+  gap: 32px;
+}
 .fau-studium-display .program-search {
   width: 100%;
   max-width: 870px;
@@ -759,7 +1553,7 @@
   font-size: var(--P-Body-Text-Small, 1rem);
 }
 .fau-studium-display .program-search .search-title {
-  margin-bottom: var(--Spacing-2x, 0.5rem);
+  margin-bottom: var(--Spacing-4x, 1rem);
   flex-basis: 100%;
   flex-shrink: 0;
   display: flex;
@@ -816,7 +1610,7 @@
 .fau-studium-display .program-search p.label {
   padding: 0;
   width: 100%;
-  font-size: 20px;
+  font-size: 1.5rem;
   color: var(--FAU-Col-FAU-Blau-100, #04316a);
   margin: 0;
 }
@@ -830,6 +1624,14 @@
   .fau-studium-display .program-search .flex-wrapper {
     gap: var(--Spacing-8x, 2rem);
   }
+}
+.fau-studium-display .program-search .search-filter {
+  width: 100%;
+}
+.fau-studium-display .program-search .search-filter p.label {
+  width: auto;
+  float: right;
+  margin-bottom: var(--Spacing-2x, 0.5rem);
 }
 .fau-studium-display .program-search div[class^=filter-] {
   position: relative;
@@ -944,11 +1746,10 @@
   clear: right;
 }
 .fau-studium-display .program-search .extended-search-toggle {
-  flex-basis: 40%;
-  flex-shrink: 0;
-  flex-grow: 1;
+  float: left;
   margin: 0;
   padding-right: 0;
+  padding-left: 0;
   text-align: right;
   cursor: pointer;
   background-color: #fff;
