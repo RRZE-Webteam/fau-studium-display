@@ -2,12 +2,14 @@
 
     &.degree-program-full {
         margin-bottom: var(--Spacing-8x, 2rem);
-        margin-top: var(--Spacing-6x, 1.5rem);
+        //margin-top: var(--Spacing-6x, 1.5rem);
         @media (min-width: 394px) {
-            margin-top: var(--Spacing-8x, 2rem);
+            //margin-top: var(--Spacing-8x, 2rem);
         }
         @media (min-width: 769px) {
             margin-top: var(--Spacing-10x, 2.5rem);
+            margin-right: var(--Spacing-10x, 2.5rem);
+            margin-left: var(--Spacing-10x, 2.5rem);
         }
 
         .width-small {
@@ -87,6 +89,7 @@
             aspect-ratio: 2.35/1;
             object-fit: cover;
             width: 100%;
+            height: auto;
         }
 
         .program-header {

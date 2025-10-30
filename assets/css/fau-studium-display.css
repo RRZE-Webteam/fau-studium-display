@@ -805,41 +805,41 @@
 }
 .fau-studium-display table.degree-program-table {
   max-width: 100%;
-  /*tr {
-      border-left: none;
-      border-right: none;
-      border-bottom: 1px solid var(--FAU_Col_Base-Schwarz_25, #BFBFBF);
-      display: block;
-      padding: 8px 0;
-      &:nth-child(odd) td {
-          background-color: #fff;
-      }
-      @media screen and (min-width: 992px) {
-          display: table-row;
-          padding: 0;
-      }
-  }
-  th {
-      display: none;
-      @media screen and (min-width: 992px) {
-          display: table-cell;
-          background-color: var(--FAU_Col_FAU-Blau, #04316A);
-          color: #fff;
-          font-size: unset;
-          letter-spacing: 0.02em;
-          padding: 6px 8px;
-      }
-  }*/
 }
-.fau-studium-display table.degree-program-table td {
-  /*padding: 0;
-  border-right: none;
-  font-size: unset;
+.fau-studium-display table.degree-program-table thead {
+  display: none;
+}
+@media (min-width: 678px) {
+  .fau-studium-display table.degree-program-table thead {
+    display: table-header-group;
+  }
+}
+@media (max-width: 678px) {
+  .fau-studium-display table.degree-program-table tbody {
+    border: none;
+  }
+  .fau-studium-display table.degree-program-table tbody tr:nth-child(2n) {
+    background-color: unset;
+  }
+}
+.fau-studium-display table.degree-program-table tr {
   display: block;
-  @media screen and (min-width: 992px) {
-      display: table-cell;
-      padding: 8px;
-  }*/
+}
+@media (min-width: 679px) {
+  .fau-studium-display table.degree-program-table tr {
+    display: table-row;
+  }
+}
+@media (max-width: 678px) {
+  .fau-studium-display table.degree-program-table td {
+    display: block;
+    border: none;
+  }
+}
+@media (min-width: 679px) {
+  .fau-studium-display table.degree-program-table td {
+    display: table-cell;
+  }
 }
 .fau-studium-display table.degree-program-table td:first-child {
   width: auto;
@@ -848,7 +848,7 @@
   padding-left: 0;
   font-weight: bold;
 }
-@media screen and (min-width: 992px) {
+@media (min-width: 992px) {
   .fau-studium-display table.degree-program-table td.image-title {
     display: grid;
     grid-template-columns: 80px 1fr;
@@ -866,7 +866,7 @@
   margin-right: 8px;
   margin-bottom: 8px;
 }
-@media screen and (min-width: 992px) {
+@media (min-width: 992px) {
   .fau-studium-display table.degree-program-table td.image-title img {
     margin-bottom: 0;
   }
@@ -877,7 +877,7 @@
   font-size: var(--P-Body-Text, 1.125rem);
   margin-bottom: 8px;
 }
-@media screen and (min-width: 992px) {
+@media (min-width: 992px) {
   .fau-studium-display table.degree-program-table td.image-title .program-title {
     font-size: unset;
     margin-bottom: 0;
@@ -886,7 +886,7 @@
 .fau-studium-display table.degree-program-table td.program-degree {
   clear: left;
 }
-@media screen and (min-width: 768px) {
+@media (min-width: 768px) {
   .fau-studium-display table.degree-program-table td.program-degree {
     clear: none;
   }
@@ -896,7 +896,7 @@
   display: table;
   clear: both;
 }
-@media screen and (min-width: 992px) {
+@media (min-width: 992px) {
   .fau-studium-display table.degree-program-table td.program-adm-req {
     padding-right: 0;
   }
@@ -904,7 +904,7 @@
 .fau-studium-display table.degree-program-table .label {
   font-weight: bold;
 }
-@media screen and (min-width: 992px) {
+@media (min-width: 679px) {
   .fau-studium-display table.degree-program-table .label {
     display: none;
   }
@@ -1100,16 +1100,12 @@
 
 .fau-studium-display.degree-program-full {
   margin-bottom: var(--Spacing-8x, 2rem);
-  margin-top: var(--Spacing-6x, 1.5rem);
-}
-@media (min-width: 394px) {
-  .fau-studium-display.degree-program-full {
-    margin-top: var(--Spacing-8x, 2rem);
-  }
 }
 @media (min-width: 769px) {
   .fau-studium-display.degree-program-full {
     margin-top: var(--Spacing-10x, 2.5rem);
+    margin-right: var(--Spacing-10x, 2.5rem);
+    margin-left: var(--Spacing-10x, 2.5rem);
   }
 }
 .fau-studium-display.degree-program-full .width-small {
@@ -1181,6 +1177,7 @@
   aspect-ratio: 2.35/1;
   object-fit: cover;
   width: 100%;
+  height: auto;
 }
 .fau-studium-display.degree-program-full .program-header {
   max-width: 934px;
