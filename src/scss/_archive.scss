@@ -1,0 +1,8 @@
+.post-type-archive-degree-program {
+    .fau-studium-display {
+        padding: 0 var(--Spacing-4x, 1rem);
+        @media (min-width: 1400px) {
+            padding: 0;
+        }
+    }
+}
