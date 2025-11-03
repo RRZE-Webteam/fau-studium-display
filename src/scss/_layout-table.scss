@@ -19,15 +19,17 @@
         }
         max-width: 100%;
         tr {
-            display: block;
-            @media (min-width: 679px) {
-                display: table-row;
+            @media (max-width: 678px) {
+                display: block;
+                margin-bottom: var(--Spacing-8x, 2rem);
             }
         }
         td {
             @media (max-width: 678px) {
                 display: block;
                 border: none;
+                font-size: var(--P-Body-Text, 1.125rem);
+                padding: 0;
             }
             @media (min-width: 679px) {
                 display: table-cell;
@@ -45,16 +47,18 @@
                     font-weight: normal;
                 }
                 img {
-                    aspect-ratio: 1/1;
+                    aspect-ratio: 16/9;
                     object-fit: cover;
-                    width: 80px;
+                    width: 100%;
                     height: auto;
-                    box-shadow: none;
-                    float: left;
-                    margin-right: 8px;
-                    margin-bottom: 8px;
-                    @media (min-width: 768px) {
-                        //width: 160px;
+                    @media (min-width: 679px) {
+                        aspect-ratio: 1/1;
+                        width: 80px;
+                        height: auto;
+                        box-shadow: none;
+                        float: left;
+                        margin-right: 8px;
+                        margin-bottom: 8px;
                     }
                     @media (min-width: 992px) {
                         margin-bottom: 0;
@@ -65,17 +69,36 @@
                     //align-self: center;
                     color: var(--FAU_Col_FAU-Blau, #04316A);
                     font-size: var(--P-Body-Text, 1.125rem);
-                    margin-bottom: 8px;
+                    background: #fff;
+                    position: relative;
+                    top: -2em;
+                    margin: 0 var(--Spacing-4x, 1rem) calc(var(--Spacing-8x, 2rem)*-1);
+                    padding: var(--Spacing-2x, .5rem);
+                    @media (min-width: 679px) {
+                        position: static;
+                        margin: 0 0 8px;
+                        padding: 0;
+                        background: transparent;
+                        font-size: unset;
+                    }
                     @media (min-width: 992px) {
                         font-size: unset;
                         margin-bottom: 0;
                     }
                 }
             }
+            &.program-degree,
+            &.program-start,
+            &.program-location,
+            &.program-adm-req {
+                padding: 0 var(--Spacing-6x, 1.5rem);
+                @media (min-width: 679px) {
+                    padding: 0;
+                }
+            }
             &.program-degree {
-                clear: left;
                 @media (min-width: 768px) {
-                    clear:  none;
+                    //clear:  none;
                 }
             }
             &.program-adm-req {
