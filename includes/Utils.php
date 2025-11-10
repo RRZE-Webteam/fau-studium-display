@@ -360,11 +360,11 @@ class Utils
                 ];
             }
         } else {
-            $degrees       = $parents ? (new Data)->get_meta_list('degree_parents') : (new Data)->get_meta_list('degrees');
+            $degrees       = (new Data)->get_taxonomy_list('degree', $parents);
             foreach ($degrees as $degree) {
                 $degreeOptions[] = [
                     'label' => $degree,
-                    'value' => $degree,
+                    'value' => str_replace('- ', '', $degree),
                 ];
             }
         }
@@ -393,7 +393,7 @@ class Utils
                 ];
             }
         } else {
-            $faculties = (new Data)->get_meta_list('faculties');
+            $faculties = (new Data)->get_taxonomy_list('faculty');
             foreach ($faculties as $faculty) {
                 $facultyOptions[] = [
                     'label' => $faculty,
@@ -418,7 +418,7 @@ class Utils
                 ];
             }
         } else {
-            $attributes = (new Data)->get_meta_list('attributes');
+            $attributes = (new Data)->get_taxonomy_list('attribute');
             foreach ($attributes as $attribute) {
                 $attributeOptions[] = [
                     'label' => $attribute,

@@ -1128,6 +1128,12 @@
     margin-left: var(--Spacing-10x, 2.5rem);
   }
 }
+@media (min-width: 992px) {
+  .fau-studium-display.degree-program-full {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 .fau-studium-display.degree-program-full .width-small {
   max-width: 870px;
   margin: 32px auto 0;

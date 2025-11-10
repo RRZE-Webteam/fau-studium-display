@@ -13,8 +13,6 @@ class Data
 
         } else {
 
-            $programs = $this->get_programs($lang);
-
             // Filter from block settings
             $filterBlock = [];
             if (!empty($atts['selectedFaculties'])) {
@@ -43,7 +41,9 @@ class Data
             }
             $getParams = array_filter($getParams);
             $filter = array_merge($filterBlock, $getParams);
-            $data = Utils::filterPrograms($programs, $filter);
+
+            $data = $this->get_programs($lang, $filter);
+            //$data = Utils::filterPrograms($programs, $filter);
         }
 
         return $data;
@@ -91,8 +91,22 @@ class Data
         return $api->get_localized_data($program, $lang);*/
     }
 
-    public function get_programs($lang = 'de') {
+    public function get_programs($lang = 'de', $filter = []) {
         $data = [];
+        $tax_query = [];
+
+        if (!empty($filter)) {
+            $tax_query = ['relation' => 'OR'];
+            foreach ($filter as $key => $value) {
+                if (taxonomy_exists($key)) {
+                    $tax_query[] = [
+                        'taxonomy' => $key,
+                        'field'    => 'name',
+                        'terms'    => $value
+                    ];
+                }
+            }
+        }
 
         // if on meinstudium.fau.de -> get local post type (studiengang)
         if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
@@ -101,7 +115,8 @@ class Data
                 'post_status'    => 'publish',
                 'posts_per_page' => -1,
                 'orderby'        => 'title',
-                'order'          => 'ASC'
+                'order'          => 'ASC',
+                'tax_query'      => $tax_query,
             ]);
             foreach ($programs as $program) {
                 $data[$program->ID] = Utils::map_post_type_data($program->ID, $lang);
@@ -115,7 +130,8 @@ class Data
             'post_status'    => 'publish',
             'posts_per_page' => -1,
             'orderby'        => 'title',
-            'order'          => 'ASC'
+            'order'          => 'ASC',
+            'tax_query'      => $tax_query,
         ]);
 
         if (!empty($programs_imported)) {
@@ -212,5 +228,40 @@ class Data
         $meta_list = array_unique($meta_list);
         sort($meta_list);
         return $meta_list;
+    }
+
+    public function get_taxonomy_list($taxonomy = '', $parents_only = false): array
+    {
+        if (empty($taxonomy)) {
+            return [];
+        }
+        $terms = get_terms( [
+            'taxonomy' => $taxonomy,
+            'hide_empty' => true,
+            'orderby' => 'name',
+            'order' => 'ASC',
+            'parent' => '0',
+        ] );
+        if (is_wp_error($terms)) {
+            return [];
+        }
+        $taxonomy_list = [];
+
+        if ($parents_only) {
+            foreach ($terms as $term) {
+                $taxonomy_list[$term->term_id] = $term->name;
+            }
+            return $taxonomy_list;
+        }
+
+        foreach ($terms as $term) {
+            $taxonomy_list[$term->term_id] = $term->name;
+            $children = get_term_children($term->term_id, $taxonomy);
+            foreach ($children as $child_id) {
+                $child = get_term($child_id, $taxonomy);
+                $taxonomy_list[$child->term_id] = '- ' . $child->name;
+            }
+        }
+        return $taxonomy_list;
     }
 }

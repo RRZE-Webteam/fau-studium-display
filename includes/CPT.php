@@ -10,8 +10,8 @@ class CPT
 
     public function __construct()
     {
-        add_action( 'init', [$this, 'register_post_type'] );
-        add_action('init', [$this, 'register_taxonomies']);
+        add_action('init', [$this, 'register_post_type'], 9);
+        add_action('init', [$this, 'register_taxonomies'], 9);
         add_action('add_meta_boxes', [$this, 'render_metabox']);
         add_action('admin_menu', [$this, 'disable_new_posts']);
         add_filter( 'query_vars', [$this, 'register_custom_query_vars'] );
@@ -61,8 +61,8 @@ class CPT
             register_taxonomy($taxonomy, self::POST_TYPE, [
                 'label'        => $label,
                 'public'       => true,
-                'show_ui'      => false,
-                //'show_ui'      => true,
+                //'show_ui'      => false,
+                'show_ui'      => true,
                 'show_in_rest' => true,
                 'hierarchical' => true
             ]);
