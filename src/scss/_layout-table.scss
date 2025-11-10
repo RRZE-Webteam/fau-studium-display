@@ -29,7 +29,7 @@
                 display: block;
                 border: none;
                 font-size: var(--P-Body-Text, 1.125rem);
-                padding: 0;
+                padding: var(--Spacing-2x, 0.5rem);
             }
             @media (min-width: 679px) {
                 display: table-cell;
@@ -93,7 +93,7 @@
             &.program-adm-req {
                 padding: 0 var(--Spacing-6x, 1.5rem);
                 @media (min-width: 679px) {
-                    padding: 0;
+                    padding: var(--Spacing-2x, 0.5rem);
                 }
             }
             &.program-degree {

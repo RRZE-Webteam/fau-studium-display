@@ -21,6 +21,7 @@ $labels = get_labels($lang);
 //var_dump($labels); exit;
 
 $program_grid = '';
+
 foreach ($data as $post_id => $program) {
     if (empty($program) || ! isset($program[ 'title' ])) {
         continue;
@@ -97,7 +98,7 @@ foreach ($data as $post_id => $program) {
         echo Utils::renderSearchForm($prefilter, $filter_items, $lang, 'grid');
 
         $count = count($data);
-        echo '<p class="items-found">' . sprintf($count == 1 ? $labels['num_programs_found_singular'] : $labels['num_programs_found_plural'], $count) . '</p>';
+        echo '<p class="items-found" id="degree_program_results">' . sprintf($count == 1 ? $labels['num_programs_found_singular'] : $labels['num_programs_found_plural'], $count) . '</p>';
 
     endif; ?>
 

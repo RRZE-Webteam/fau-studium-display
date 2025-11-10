@@ -91,7 +91,7 @@ $program_table .= '</tbody>'
 
 <section class="fau-studium-display degree-program-table">
 
-    <?php if (isset($atts['showSearch']) && $atts['showSearch'] == '1') :
+    <?php if ($show_search) :
 
         $prefilter = array_map(function ($v) use ($atts) {
             return $atts[ $v ];
@@ -100,7 +100,8 @@ $program_table .= '</tbody>'
         echo Utils::renderSearchForm($prefilter, $filter_items, $lang, 'table');
 
         $count = count($data);
-        echo '<p class="items-found">' . sprintf($count == 1 ? $labels['num_programs_found_singular'] : $labels['num_programs_found_plural'], $count) . '</p>';
+        echo '<p class="items-found" id="degree_program_results">' . sprintf($count == 1 ? $labels['num_programs_found_singular'] : $labels['num_programs_found_plural'], $count) . '</p>';
+
     endif; ?>
 
     <?php if (!empty($data)) : ?>

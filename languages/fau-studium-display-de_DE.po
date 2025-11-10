@@ -3,12 +3,12 @@ msgstr ""
 "Project-Id-Version: FAU Studium Display\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
-"Language-Team: German\n"
+"Language-Team: Deutsch\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2025-06-12 12:41+0000\n"
-"PO-Revision-Date: 2025-10-28 14:44+0000\n"
+"PO-Revision-Date: 2025-11-10 16:18+0000\n"
 "Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz/\n"
@@ -23,7 +23,7 @@ msgstr "-- Bitte auswählen --"
 msgid "Admission requirements"
 msgstr "Zugangsvoraussetzung"
 
-#: includes/Utils.php:250
+#: includes/Utils.php:266
 msgid "Apply filter"
 msgstr "Filter anwenden"
 
@@ -35,34 +35,44 @@ msgstr "Archiv-Format"
 msgid "Archive View"
 msgstr "Archiv-Ansicht"
 
-#: templates/degree-program-full.php:543
+#: src/js/fau-studium-display-admin.js:124
+msgid "Are you sure you want to delete %d selected degree programs?"
+msgstr "Möchten Sie wirklich %d Studiengänge löschen?"
+
+#: templates/degree-program-full.php:615
 msgid "available"
 msgstr "dual studieren"
 
-#: build/block/block.json
-#: src/block/block.json
+#: build/block/block.json src/block/block.json
 msgctxt "block title"
 msgid "FAU-Studium Display"
 msgstr "FAU-Studium Display"
 
-#: templates/degree-program-full.php:542
+#: templates/degree-program-full.php:614
 msgid "Close ties"
 msgstr "Enge Verknüpfung"
 
-#: templates/degree-program-full.php:543
+#: templates/degree-program-full.php:615
 msgid "Cooperative bachelor's program"
 msgstr "Bachelorverbundstudium"
+
+#: build/block/index.js:1
+msgid "Default"
+msgstr "Standard"
+
+#: build/block/index.js:1
+msgid "Degree Program"
+msgstr "Studiengang"
 
 #: includes/CPT.php:29
 msgid "Degree Programs"
 msgstr "Studiengänge"
 
-#: templates/degree-program-full.php:540
+#: templates/degree-program-full.php:612
 msgid "degree programs"
 msgstr "Studiengänge"
 
-#: includes/CPT.php:49
-#: build/block/index.js:288
+#: includes/CPT.php:49 build/block/index.js:1
 msgid "Degrees"
 msgstr "Abschlüsse"
 
@@ -78,6 +88,14 @@ msgstr "Ausgewählte löschen"
 msgid "Empty response from API"
 msgstr "Leere Antwort von der API"
 
+#: build/block/index.js:1
+msgid "English"
+msgstr "Englisch"
+
+#: build/block/index.js:1
+msgid "Faculties"
+msgstr "Fakultäten"
+
 #: includes/CPT.php:56
 msgid "Faculty"
 msgstr "Fakultät"
@@ -87,12 +105,31 @@ msgstr "Fakultät"
 msgid "FAU Studium Display"
 msgstr "FAU Studium Display"
 
+#: build/block/index.js:1
+msgid "Filter Programs"
+msgstr "Studiengänge filtern"
+
+#: build/block/index.js:1
+msgid "Format"
+msgstr "Layout"
+
+#: build/block/index.js:1
+msgid "Full"
+msgstr "Seite"
+
+#: build/block/index.js:1
+msgid "General Settings"
+msgstr "Allgemeine Einstellungen"
+
+#: build/block/index.js:1
+msgid "German"
+msgstr "Deutsch"
+
 #: includes/CPT.php:57
 msgid "German language skills"
 msgstr "Deutschkenntnisse"
 
-#: includes/Settings.php:129
-#: build/block/index.js:198
+#: includes/Settings.php:129 build/block/index.js:1
 msgid "Grid"
 msgstr "Kacheln"
 
@@ -101,8 +138,7 @@ msgstr "Kacheln"
 msgid "https://github.com/RRZE-Webteam/fau-studium-display"
 msgstr "https://github.com/RRZE-Webteam/fau-studium-display"
 
-#: includes/Settings.php:186
-#: includes/Settings.php:378
+#: includes/Settings.php:186 includes/Settings.php:378
 msgid "Import"
 msgstr "Importieren"
 
@@ -114,14 +150,29 @@ msgstr "Studiengänge importieren"
 msgid "Import selected"
 msgstr "Ausgewählte importieren"
 
-#: templates/degree-program-full.php:541
+#: build/block/index.js:1
+msgid "Infobox"
+msgstr "Infobox"
+
+#: templates/degree-program-full.php:613
 msgid "International"
 msgstr "Internationale"
 
-#: includes/Settings.php:58
-#: includes/Settings.php:93
+#: build/block/index.js:1
+msgid "Language"
+msgstr "Sprache"
+
+#: includes/Settings.php:58 includes/Settings.php:93
 msgid "Layout"
 msgstr "Layout"
+
+#: src/js/fau-studium-display.js:48
+msgid "Less filter options"
+msgstr "Weniger Filteroptionen"
+
+#: build/block/index.js:1
+msgid "List"
+msgstr "Liste"
 
 #: includes/Settings.php:200
 msgid "Manage Imported"
@@ -131,17 +182,19 @@ msgstr "Importierte Studiengänge verwalten"
 msgid "Manage Imported Degree Programs"
 msgstr "Importierte Studiengänge verwalten"
 
-#: templates/degree-program-full.php:540
+#: src/js/fau-studium-display.js:48
+msgid "More filter options"
+msgstr "Mehr Filteroptionen"
+
+#: templates/degree-program-full.php:612
 msgid "More than 275"
 msgstr "Mehr als 275"
 
-#: includes/CPT.php:98
-#: includes/CPT.php:111
+#: includes/CPT.php:98 includes/CPT.php:111
 msgid "No data available"
 msgstr "Keine Daten vorhanden"
 
-#: templates/degree-program-box.php:15
-#: templates/degree-program-full.php:18
+#: templates/degree-program-box.php:15 templates/degree-program-full.php:19
 msgid "No data available."
 msgstr "Keine Daten verfügbar."
 
@@ -149,8 +202,7 @@ msgstr "Keine Daten verfügbar."
 msgid "No degree programs found"
 msgstr "Keine Studiengänge gefunden"
 
-#: templates/degree-program-grid.php:112
-#: templates/degree-program-table.php:119
+#: templates/degree-program-grid.php:112 templates/degree-program-table.php:115
 msgid "No degree programs found."
 msgstr "Keine Studiengänge gefunden."
 
@@ -158,12 +210,23 @@ msgstr "Keine Studiengänge gefunden."
 msgid "No posts selected"
 msgstr "Keine Studiengänge ausgewählt."
 
-#: templates/degree-program-full.php:541
+#: src/js/fau-studium-display-admin.js:79
+msgid "No program selected. Please select at least one program to import."
+msgstr ""
+"Kein Studiengang ausgewählt. Bitte wählen Sie mindestens einen Studiengang "
+"zum importieren."
+
+#: src/js/fau-studium-display-admin.js:112
+#: src/js/fau-studium-display-admin.js:122
+msgid "No program selected. Please select at least one program."
+msgstr ""
+"Kein Studiengang ausgewählt. Bitte wählen Sie mindestens einen Studiengang."
+
+#: templates/degree-program-full.php:613
 msgid "partnerships"
 msgstr "Partnerschaften"
 
-#: templates/degree-program-box.php:11
-#: templates/degree-program-full.php:14
+#: templates/degree-program-box.php:11 templates/degree-program-full.php:15
 msgid "Please select a degree program."
 msgstr "Bitte wählen Sie einen Studiengang aus."
 
@@ -185,6 +248,14 @@ msgstr "Post-Meta-Daten englisch"
 msgid "Post Meta German"
 msgstr "Post-Meta-Daten deutsch"
 
+#: templates/degree-program-grid.php:76
+msgid "Read more"
+msgstr "Mehr erfahren"
+
+#: templates/degree-program-full.php:424 templates/degree-program-full.php:461
+msgid "Read more about %s"
+msgstr "Mehr über %s erfahren"
+
 #: includes/Main.php:120
 msgid "RRZE"
 msgstr "RRZE"
@@ -202,10 +273,12 @@ msgstr "Änderungen speichern"
 msgid "Search"
 msgstr "Suche"
 
-#: includes/Settings.php:122
-#: includes/Settings.php:146
-#: includes/Settings.php:166
-#: includes/Settings.php:250
+#: build/block/index.js:1
+msgid "Search Filters"
+msgstr "Filteroptionen"
+
+#: includes/Settings.php:122 includes/Settings.php:146
+#: includes/Settings.php:166 includes/Settings.php:250
 #: includes/Settings.php:365
 msgid "Select / Deselect All"
 msgstr "Alle auswählen / abwählen"
@@ -218,11 +291,16 @@ msgstr "Abschluss auswählen (optional)"
 msgid "Select Faculty (optional)"
 msgstr "Fakultät auswählen (optional)"
 
+#: build/block/index.js:1
+msgid "Select items"
+msgstr "Elemente auswählen"
+
 #: includes/Settings.php:150
 msgid "Select the elements to be shown in single view"
-msgstr "Suche die Elemente aus, die in der Detail-Ansicht angezeigt werden sollen."
+msgstr ""
+"Suche die Elemente aus, die in der Detail-Ansicht angezeigt werden sollen."
 
-#: includes/Utils.php:165
+#: includes/Utils.php:176
 msgid "Selected filters"
 msgstr "Ausgewählte Filter"
 
@@ -230,10 +308,13 @@ msgstr "Ausgewählte Filter"
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: includes/Settings.php:106
-#: build/block/index.js:210
+#: includes/Settings.php:106 build/block/index.js:1
 msgid "Show Search"
 msgstr "Suche anzeigen"
+
+#: build/block/index.js:1
+msgid "Show Title"
+msgstr "Titel anzeigen"
 
 #: includes/Settings.php:141
 msgid "Show/Hide Grid Items"
@@ -248,12 +329,10 @@ msgid "Show/Hide Single Items"
 msgstr "Detail-Elemente ein-/ausblenden"
 
 #: includes/Settings.php:149
-#: build/block/index.js:235
 msgid "Single View"
 msgstr "Detail-Ansicht"
 
-#: includes/CPT.php:51
-#: build/block/index.js:294
+#: includes/CPT.php:51 build/block/index.js:1
 msgid "Special ways to study"
 msgstr "Besondere Studienformen"
 
@@ -269,13 +348,11 @@ msgstr "Studienort"
 msgid "Subject groups"
 msgstr "Fächergruppen"
 
-#: includes/Settings.php:60
-#: includes/Settings.php:173
+#: includes/Settings.php:60 includes/Settings.php:173
 msgid "Sync"
 msgstr "Sync"
 
-#: includes/Settings.php:130
-#: build/block/index.js:201
+#: includes/Settings.php:130 build/block/index.js:1
 msgid "Table"
 msgstr "Tabelle"
 
@@ -285,15 +362,23 @@ msgstr "Unterrichtssprache"
 
 #. translators: 1: Server PHP version number, 2: Required PHP version number.
 #: fau-studium-display.php:212
-msgid "The server is running PHP version %1$s. The plugin requires at least PHP version %2$s."
-msgstr "Auf dem Server läuft PHP Version %1$s. Dieses Plugin benötigt mindestens PHP Version %2$s."
+msgid ""
+"The server is running PHP version %1$s. The plugin requires at least PHP "
+"version %2$s."
+msgstr ""
+"Auf dem Server läuft PHP Version %1$s. Dieses Plugin benötigt mindestens PHP "
+"Version %2$s."
 
 #. translators: 1: Server WordPress version number, 2: Required WordPress version number.
 #: fau-studium-display.php:202
-msgid "The server is running WordPress version %1$s. The plugin requires at least WordPress version %2$s."
-msgstr "Auf dem Server läuft WordPress Version %1$s. Dieses Plugin benötigt mindestens WordPress Version %2$s."
+msgid ""
+"The server is running WordPress version %1$s. The plugin requires at least "
+"WordPress version %2$s."
+msgstr ""
+"Auf dem Server läuft WordPress Version %1$s. Dieses Plugin benötigt "
+"mindestens WordPress Version %2$s."
 
-#: templates/degree-program-full.php:542
+#: templates/degree-program-full.php:614
 msgid "to industry"
 msgstr "mit der Wirtschaft"
 

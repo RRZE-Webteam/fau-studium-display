@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-10-28T12:45:13+00:00\n"
+"POT-Creation-Date: 2025-11-10T16:18:02+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: fau-studium-display\n"
@@ -62,7 +62,7 @@ msgid "Degree Programs"
 msgstr ""
 
 #: includes/CPT.php:49
-#: build/block/index.js:288
+#: build/block/index.js:1
 msgid "Degrees"
 msgstr ""
 
@@ -71,7 +71,7 @@ msgid "Subject groups"
 msgstr ""
 
 #: includes/CPT.php:51
-#: build/block/index.js:294
+#: build/block/index.js:1
 msgid "Special ways to study"
 msgstr ""
 
@@ -143,7 +143,7 @@ msgid "What format should the list view use?"
 msgstr ""
 
 #: includes/Settings.php:106
-#: build/block/index.js:210
+#: build/block/index.js:1
 msgid "Show Search"
 msgstr ""
 
@@ -164,12 +164,12 @@ msgid "Archive Format"
 msgstr ""
 
 #: includes/Settings.php:129
-#: build/block/index.js:198
+#: build/block/index.js:1
 msgid "Grid"
 msgstr ""
 
 #: includes/Settings.php:130
-#: build/block/index.js:201
+#: build/block/index.js:1
 msgid "Table"
 msgstr ""
 
@@ -178,7 +178,6 @@ msgid "Show/Hide Grid Items"
 msgstr ""
 
 #: includes/Settings.php:149
-#: build/block/index.js:235
 msgid "Single View"
 msgstr ""
 
@@ -247,131 +246,127 @@ msgstr ""
 msgid "No posts selected"
 msgstr ""
 
-#: includes/Utils.php:165
+#: includes/Utils.php:176
 msgid "Selected filters"
 msgstr ""
 
-#: includes/Utils.php:250
+#: includes/Utils.php:266
 msgid "Apply filter"
 msgstr ""
 
 #: templates/degree-program-box.php:11
-#: templates/degree-program-full.php:14
+#: templates/degree-program-full.php:15
 msgid "Please select a degree program."
 msgstr ""
 
 #: templates/degree-program-box.php:15
-#: templates/degree-program-full.php:18
+#: templates/degree-program-full.php:19
 msgid "No data available."
 msgstr ""
 
-#: templates/degree-program-full.php:540
+#: templates/degree-program-full.php:424
+#: templates/degree-program-full.php:461
+msgid "Read more about %s"
+msgstr ""
+
+#: templates/degree-program-full.php:612
 msgid "More than 275"
 msgstr ""
 
-#: templates/degree-program-full.php:540
+#: templates/degree-program-full.php:612
 msgid "degree programs"
 msgstr ""
 
-#: templates/degree-program-full.php:541
+#: templates/degree-program-full.php:613
 msgid "International"
 msgstr ""
 
-#: templates/degree-program-full.php:541
+#: templates/degree-program-full.php:613
 msgid "partnerships"
 msgstr ""
 
-#: templates/degree-program-full.php:542
+#: templates/degree-program-full.php:614
 msgid "Close ties"
 msgstr ""
 
-#: templates/degree-program-full.php:542
+#: templates/degree-program-full.php:614
 msgid "to industry"
 msgstr ""
 
-#: templates/degree-program-full.php:543
+#: templates/degree-program-full.php:615
 msgid "Cooperative bachelor's program"
 msgstr ""
 
-#: templates/degree-program-full.php:543
+#: templates/degree-program-full.php:615
 msgid "available"
 msgstr ""
 
+#: templates/degree-program-grid.php:76
+msgid "Read more"
+msgstr ""
+
 #: templates/degree-program-grid.php:112
-#: templates/degree-program-table.php:119
+#: templates/degree-program-table.php:115
 msgid "No degree programs found."
 msgstr ""
 
-#: build/block/index.js:184
+#: build/block/index.js:1
 msgid "General Settings"
 msgstr ""
 
-#: build/block/index.js:187
+#: build/block/index.js:1
 msgid "Format"
 msgstr ""
 
-#: build/block/index.js:190
+#: build/block/index.js:1
 msgid "Full"
 msgstr ""
 
-#: build/block/index.js:195
+#: build/block/index.js:1
 msgid "Infobox"
 msgstr ""
 
-#: build/block/index.js:204
+#: build/block/index.js:1
 msgid "List"
 msgstr ""
 
-#: build/block/index.js:215
+#: build/block/index.js:1
 msgid "Search Filters"
 msgstr ""
 
-#: build/block/index.js:223
+#: build/block/index.js:1
 msgid "Degree Program"
 msgstr ""
 
-#: build/block/index.js:229
-msgid "Link Target"
-msgstr ""
-
-#: build/block/index.js:232
-msgid "None"
-msgstr ""
-
-#: build/block/index.js:238
-msgid "MyStudies"
-msgstr ""
-
-#: build/block/index.js:243
+#: build/block/index.js:1
 msgid "Show Title"
 msgstr ""
 
-#: build/block/index.js:248
+#: build/block/index.js:1
 msgid "Language"
 msgstr ""
 
-#: build/block/index.js:251
+#: build/block/index.js:1
 msgid "Default"
 msgstr ""
 
-#: build/block/index.js:254
+#: build/block/index.js:1
 msgid "German"
 msgstr ""
 
-#: build/block/index.js:257
+#: build/block/index.js:1
 msgid "English"
 msgstr ""
 
-#: build/block/index.js:263
-#: build/block/index.js:271
+#: build/block/index.js:1
 msgid "Select items"
 msgstr ""
 
-#: build/block/index.js:279
+#: build/block/index.js:1
 msgid "Filter Programs"
 msgstr ""
 
-#: build/block/index.js:282
+#: build/block/index.js:1
 msgid "Faculties"
 msgstr ""
 

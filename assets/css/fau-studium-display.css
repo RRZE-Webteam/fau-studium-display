@@ -833,7 +833,7 @@
     display: block;
     border: none;
     font-size: var(--P-Body-Text, 1.125rem);
-    padding: 0;
+    padding: var(--Spacing-2x, 0.5rem);
   }
 }
 @media (min-width: 679px) {
@@ -908,7 +908,7 @@
 }
 @media (min-width: 679px) {
   .fau-studium-display table.degree-program-table td.program-degree, .fau-studium-display table.degree-program-table td.program-start, .fau-studium-display table.degree-program-table td.program-location, .fau-studium-display table.degree-program-table td.program-adm-req {
-    padding: 0;
+    padding: var(--Spacing-2x, 0.5rem);
   }
 }
 .fau-studium-display table.degree-program-table td.program-adm-req:after {
