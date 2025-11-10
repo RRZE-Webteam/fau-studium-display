@@ -959,6 +959,11 @@
   color: #fff;
   padding: 0;
 }
+.fau-studium-display ul.degree-program-grid li:before {
+  content: "";
+  height: 0;
+  width: 0;
+}
 .fau-studium-display ul.degree-program-grid li p {
   padding: 0;
   margin: 0 0 0.5rem;

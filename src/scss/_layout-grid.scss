@@ -28,6 +28,11 @@
             background: var(--FAU-Col-FAU-Blau-100, #04316A);
             color: #fff;
             padding: 0;
+            &:before {
+                content: '';
+                height: 0;
+                width: 0;
+            }
             p {
                 padding: 0;
                 margin: 0 0 0.5rem;
