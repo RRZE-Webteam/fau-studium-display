@@ -7,10 +7,6 @@ use Fau\DegreeProgram\Display\Utils;
 use function Fau\DegreeProgram\Display\Config\get_output_fields;
 use function Fau\DegreeProgram\Display\Config\get_labels;
 
-//print "<pre>"; var_dump($data);print "</pre>";
-//print "<pre>"; var_dump($atts);print "</pre>";
-//exit;
-
 $show_search = isset($atts['showSearch']) && $atts['showSearch'] == '1';
 if (empty($data) && !$show_search)
     return;
@@ -18,7 +14,6 @@ if (empty($data) && !$show_search)
 $items = $atts['selectedItemsGrid'] ?? [];
 $lang = $atts['language'] ?? 'de';
 $labels = get_labels($lang);
-//var_dump($labels); exit;
 
 $program_grid = '';
 

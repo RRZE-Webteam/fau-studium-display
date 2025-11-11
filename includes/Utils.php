@@ -54,7 +54,6 @@ class Utils
 
     public static function renderSearchForm($prefilter = [], $filter_items = [], $lang = 'de', $display = 'table'): string
     {
-        //var_dump($prefilter);
         $getParams = Utils::array_map_recursive('sanitize_text_field', $_GET);
         $data = new Data();
         $degrees = !empty($prefilter['degree']) ? $prefilter['degree'] : $data->get_meta_list('degree_parents', $lang);
@@ -231,23 +230,9 @@ class Utils
         $programs_filtered = [];
         $search_in_text = isset($filter['search_text']) && $filter['search_text'] == 'on';
 
-        foreach ($programs as $id => $program) {
+        $programs = Utils::text_search($programs, $filter, $search_in_text);
 
-            // Text search
-            if (!empty($filter['search'])) {
-                $search_term = strtolower(sanitize_text_field($filter['search']));
-                $search_target = $program['title'] ?? '';
-                if ($search_in_text) {
-                    $search_target .= $program['entry_text'] ?? '';
-                    foreach ($program['content'] ?? [] as $content_item) {
-                        $search_target .= $content_item['description'] ?? '';
-                    }
-                }
-                $search_target = strtolower(strip_tags($search_target));
-                if (!str_contains($search_target, $search_term)) {
-                    continue;
-                }
-            }
+        foreach ($programs as $id => $program) {
 
             // Attribute search
             $filterMap = [
@@ -513,8 +498,6 @@ class Utils
     public static function map_post_type_data($program_id, $lang = 'de') {
         $program = get_post($program_id);
         $program_meta = get_post_meta($program_id);
-        //print "<pre>"; var_dump($program_id); print "</pre>";
-        //print "<pre>"; var_dump($program_meta); print "</pre>";
         if (empty($program_meta)) {
             return [];
         }
@@ -888,5 +871,28 @@ class Utils
         $locale = get_locale();
         $locale_parts = explode('_', $locale);
         return $locale_parts[ 0 ] ?? $locale;
+    }
+
+    public static function text_search($programs, $filter = [], $search_in_text = false) {
+
+        if (empty($filter[ 'search' ]))
+            return $programs;
+
+        $programs_filtered = [];
+        foreach ($programs as $id => $program) {
+            $search_term   = strtolower(sanitize_text_field($filter[ 'search' ]));
+            $search_target = $program[ 'title' ] ?? '';
+            if ($search_in_text) {
+                $search_target .= $program[ 'entry_text' ] ?? '';
+                foreach ($program[ 'content' ] ?? [] as $content_item) {
+                    $search_target .= $content_item[ 'description' ] ?? '';
+                }
+            }
+            $search_target = strtolower(strip_tags($search_target));
+            if ( str_contains($search_target, $search_term)) {
+                $programs_filtered[$id] = $program;
+            }
+        }
+        return $programs_filtered;
     }
 }

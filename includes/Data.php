@@ -43,7 +43,6 @@ class Data
             $filter = array_merge($filterBlock, $getParams);
 
             $data = $this->get_programs($lang, $filter);
-            //$data = Utils::filterPrograms($programs, $filter);
         }
 
         return $data;
@@ -94,6 +93,7 @@ class Data
     public function get_programs($lang = 'de', $filter = []) {
         $data = [];
         $tax_query = [];
+        $search_in_text = isset($filter['search_text']) && $filter['search_text'] == 'on';
 
         if (!empty($filter)) {
             $tax_query = ['relation' => 'OR'];
@@ -108,16 +108,19 @@ class Data
             }
         }
 
+        $args = [
+            'post_type'      => 'degree-program',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'orderby'        => 'title',
+            'order'          => 'ASC',
+            'tax_query'      => $tax_query,
+        ];
+
         // if on meinstudium.fau.de -> get local post type (studiengang)
         if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
-            $programs = get_posts([
-                'post_type'      => 'studiengang',
-                'post_status'    => 'publish',
-                'posts_per_page' => -1,
-                'orderby'        => 'title',
-                'order'          => 'ASC',
-                'tax_query'      => $tax_query,
-            ]);
+            $args['post_type'] = 'studiengang';
+            $programs = get_posts($args);
             foreach ($programs as $program) {
                 $data[$program->ID] = Utils::map_post_type_data($program->ID, $lang);
             }
@@ -125,14 +128,7 @@ class Data
         }
 
         // else get imported degree programs (post type 'degree-program')
-        $programs_imported = get_posts([
-            'post_type'      => 'degree-program',
-            'post_status'    => 'publish',
-            'posts_per_page' => -1,
-            'orderby'        => 'title',
-            'order'          => 'ASC',
-            'tax_query'      => $tax_query,
-        ]);
+        $programs_imported = get_posts($args);
 
         if (!empty($programs_imported)) {
             switch ($lang) {
@@ -141,17 +137,17 @@ class Data
                         $data[$program->ID] = get_post_meta($program->ID, 'program_data_en', true);
                         $data[$program->ID]['_thumbnail_rendered'] = get_the_post_thumbnail($program->ID, 'full');
                     }
-                    return $data;
                 case 'de':
                 default:
                     foreach ($programs_imported as $program) {
                         $data[$program->ID] = get_post_meta($program->ID, 'program_data_de', true);
                         $data[$program->ID]['_thumbnail_rendered'] = get_the_post_thumbnail($program->ID, 'full');
                     }
-                    return $data;
             }
         }
-        return $data;
+
+        return Utils::text_search($data, $filter, $search_in_text);
+
     }
 
     public function get_meta_list($meta, $lang = 'de') {

@@ -61,8 +61,8 @@ class CPT
             register_taxonomy($taxonomy, self::POST_TYPE, [
                 'label'        => $label,
                 'public'       => true,
-                //'show_ui'      => false,
-                'show_ui'      => true,
+                'show_ui'      => false,
+                //'show_ui'      => true,
                 'show_in_rest' => true,
                 'hierarchical' => true
             ]);
@@ -93,7 +93,6 @@ class CPT
     public function degree_program_metabox($post)
     {
         $aPostMeta = get_post_meta($post->ID, 'program_data_de', true);
-        //print "<pre>"; var_dump($aPostMeta); print "</pre>";
         if (!isset($aPostMeta['title'])) {
             echo __('No data available', 'fau-studium-display');
             return;
@@ -106,7 +105,6 @@ class CPT
     public function degree_program_metabox_english($post)
     {
         $aPostMeta = get_post_meta($post->ID, 'program_data_en', true);
-        //print "<pre>"; var_dump($aPostMeta); print "</pre>";
         if (!isset($aPostMeta['title'])) {
             echo __('No data available', 'fau-studium-display');
             return;

@@ -1,4 +1,8 @@
 .fau-studium-display {
+    &.degree-program-grid {
+        width: 1320px;
+        max-width: 100vw;
+    }
     p.items-found {
         padding: 0;
     }
