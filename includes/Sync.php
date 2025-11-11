@@ -46,8 +46,23 @@ class Sync
 
         if ( !is_wp_error($result) && $result > 0) {
             if (!empty($program['featured_image']['url'])) {
-                $attachment_id = Utils::import_image_from_url($program[ 'featured_image' ][ 'url' ], $result);
-                set_post_thumbnail($result, $attachment_id);
+                $thumbnail_id = get_post_thumbnail_id($result);
+                if ($thumbnail_id) {
+                    // thumbnail already exists -> check if it has changed
+                    $old_filename = basename(get_attached_file($thumbnail_id));
+                    $new_filename = basename($program['featured_image']['url']);
+                    if ($old_filename != $new_filename) {
+                        // image has changed -> replace it
+                        wp_delete_attachment($thumbnail_id, true);
+                        delete_post_thumbnail($result);
+                        $attachment_id = Utils::import_image_from_url($program[ 'featured_image' ][ 'url' ], $result);
+                        set_post_thumbnail($result, $attachment_id);
+                    }
+                } else {
+                    // no thumbnail -> upload it
+                    $attachment_id = Utils::import_image_from_url($program[ 'featured_image' ][ 'url' ], $result);
+                    set_post_thumbnail($result, $attachment_id);
+                }
             }
             if (!empty($program['degree']['name'])) {
                 Utils::assign_post_term($result, 'degree', esc_attr($program['degree']['name']), ($program[ 'degree' ][ 'parent' ][ 'name' ] ?? null));
