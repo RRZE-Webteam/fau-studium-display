@@ -26,6 +26,8 @@ class Main
             new CPT();
         }
         new Shortcode();
+        $cron = new Cron();
+        $cron->init();
     }
 
 

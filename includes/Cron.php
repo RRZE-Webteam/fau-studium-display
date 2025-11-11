@@ -15,7 +15,7 @@ class Cron
         date_default_timezone_set('Europe/Berlin');
 
         if (!wp_next_scheduled('fau_studium_display_sync_programs')) {
-            wp_schedule_event(strtotime('today 11:20'), 'daily', 'fau_studium_display_sync_programs');
+            wp_schedule_event(strtotime('today 4:00'), 'daily', 'fau_studium_display_sync_programs');
         }
 
     }
