@@ -23,7 +23,7 @@ $end = min(($offset + $length), $total);
 $num_pages = ceil($total / $length);
 $pagination_string = sprintf(
     __("%s to %s of %s", 'fau-studium-display'),
-    '<p class="pagination-info"><span class="pagination-number">' . ($offset + 1) . '</span>',
+    '<p class="pagination-info" id="degree_program_results"><span class="pagination-number">' . ($offset + 1) . '</span>',
     '<span class="pagination-number">' . $end . '</span>',
     '<span class="pagination-number">' . $total . '</span></p>'
 );
