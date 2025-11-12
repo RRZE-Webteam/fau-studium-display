@@ -8,9 +8,6 @@ use function Fau\DegreeProgram\Display\Config\get_constants;
 use function \Fau\DegreeProgram\Display\Config\get_labels;
 use function \Fau\DegreeProgram\Display\Config\get_meinstudium_options;
 
-//print "<pre>"; print_r($atts); print "</pre>";
-//print "<pre>"; var_dump($data); print "</pre>";
-
 if (empty($atts['degreeProgram'])) {
     print '<div class="components-placeholder is-large">' . __('Please select a degree program.', 'fau-studium-display') . '</div>';
     return;
@@ -27,7 +24,6 @@ $labels = get_labels($lang);
 $descriptions = get_labels($lang, 'description');
 $constants = get_constants($lang);
 $meinstudium_options = get_meinstudium_options($lang);
-//print "<pre>"; var_dump($labels); print "</pre>";
 
 $number_of_students_raw = $data['number_of_students']['name'] ?? '';
 if (!empty($number_of_students_raw)) {
@@ -222,9 +218,10 @@ $content_html .= '<!-- /wp:rrze-elements/collapsibles -->';
 $content .= do_blocks($content_html);
 $content .= '</div></div>';
 
-$quicklinks[0] = '<!-- wp:button -->
+/*$quicklinks[0] = '<!-- wp:button -->
             <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $content_id . '">' . $content_title . '</a></div>
-            <!-- /wp:button -->';
+            <!-- /wp:button -->';*/
+$quicklinks[0] = '{"id":"","title":"' . $content_title . '","description":"","url":"#' . $content_id . '","facultyColor":"default"}';
 
 // Videos
 if (in_array('videos', $items) && !empty($data['videos'])) {
@@ -286,9 +283,10 @@ if (in_array('admission_requirements_application', $items)) {
         $admission_requirements_application_title = ($labels['application_for_program'] ?? 'application_for_program');
         $admission_requirements_application_id = sanitize_title($admission_requirements_application_title);
         $admission_requirements_application .= '<div class="program-admission width-small"><h3>' . ($labels['admission_requirements_application'] ?? 'admission_requirements_application') . '</h3>';
-        $quicklinks[2] = '<!-- wp:button -->
+        /*$quicklinks[2] = '<!-- wp:button -->
             <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $admission_requirements_application_id . '">' . $admission_requirements_application_title . '</a></div>
-            <!-- /wp:button -->';
+            <!-- /wp:button -->';*/
+        $quicklinks[2] = '{"id":"","title":"' . $admission_requirements_application_title . '","description":"","url":"#' . $admission_requirements_application_id . '","facultyColor":"default"}';
 
         if (!empty($admission_requirements)) {
             $admission_requirements_application .= '<h4>' . ($labels['admission_requirements'] ?? 'admission_requirements') . '</h4><ul class="wp-block-list">';
@@ -525,9 +523,10 @@ if (in_array('links.downloads', $items)) {
 if (!empty($student_advice . $useful_links)) {
     $student_advice_title = ($labels['student_advice_more'] ?? 'student_advice_more');
     $student_advice_id = sanitize_title($student_advice_title);
-    $quicklinks[3] = '<!-- wp:button -->
+    /*$quicklinks[3] = '<!-- wp:button -->
             <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $student_advice_id . '">' . $student_advice_title . '</a></div>
-            <!-- /wp:button -->';
+            <!-- /wp:button -->';*/
+    $quicklinks[3] = '{"id":"","title":"' . $student_advice_title . '","description":"","url":"#' . $student_advice_id . '","facultyColor":"default"}';
 }
 
 // Links Additional
@@ -644,7 +643,8 @@ if (in_array('benefits', $items)) {
 
         // Quicklinks
         echo '<div class="quicklinks width-large">';
-        echo do_blocks('<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"space-between","orientation":"horizontal"}} --><div class="wp-block-buttons">' . implode('', $quicklinks) . '</div><!-- /wp:buttons -->');
+        //echo do_blocks('<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"space-between","orientation":"horizontal"}} --><div class="wp-block-buttons">' . implode('', $quicklinks) . '</div><!-- /wp:buttons -->');
+        echo do_blocks('<!-- wp:fau-elemental/fau-big-button {"teaserSize":"large","items":[' . implode(',', $quicklinks) . ']} /-->');
         echo '</div>';
 
         // Details / content

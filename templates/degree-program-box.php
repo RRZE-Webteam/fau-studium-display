@@ -4,9 +4,6 @@ defined('ABSPATH') || exit;
 
 use function \Fau\DegreeProgram\Display\Config\get_labels;
 
-//var_dump($data);
-//var_dump($atts);
-
 if (empty($atts['degreeProgram'])) {
     print '<div class="components-placeholder is-large">' . __('Please select a degree program.', 'fau-studium-display') . '</div>';
     return;
@@ -18,7 +15,6 @@ if (empty($data)) {
 
 $lang = $atts[ 'language' ] ?? 'de';
 $labels = get_labels($lang);
-//print "<pre>"; var_dump($labels); print "</pre>";
 
 $number_of_students_raw = $data['number_of_students']['name'] ?? '';
 if (!empty($number_of_students_raw)) {

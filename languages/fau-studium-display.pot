@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.
 msgid ""
 msgstr ""
-"Project-Id-Version: FAU Studium Display 1.0.5\n"
+"Project-Id-Version: FAU Studium Display 1.0.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fau-studium-display\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-10-28T12:45:13+00:00\n"
+"POT-Creation-Date: 2025-11-12T14:53:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: fau-studium-display\n"
@@ -62,7 +62,7 @@ msgid "Degree Programs"
 msgstr ""
 
 #: includes/CPT.php:49
-#: build/block/index.js:288
+#: build/block/index.js:1
 msgid "Degrees"
 msgstr ""
 
@@ -71,7 +71,7 @@ msgid "Subject groups"
 msgstr ""
 
 #: includes/CPT.php:51
-#: build/block/index.js:294
+#: build/block/index.js:1
 msgid "Special ways to study"
 msgstr ""
 
@@ -107,12 +107,12 @@ msgstr ""
 msgid "Post Meta English"
 msgstr ""
 
-#: includes/CPT.php:98
-#: includes/CPT.php:111
+#: includes/CPT.php:97
+#: includes/CPT.php:109
 msgid "No data available"
 msgstr ""
 
-#: includes/Main.php:120
+#: includes/Main.php:122
 msgid "RRZE"
 msgstr ""
 
@@ -143,7 +143,7 @@ msgid "What format should the list view use?"
 msgstr ""
 
 #: includes/Settings.php:106
-#: build/block/index.js:210
+#: build/block/index.js:1
 msgid "Show Search"
 msgstr ""
 
@@ -164,12 +164,12 @@ msgid "Archive Format"
 msgstr ""
 
 #: includes/Settings.php:129
-#: build/block/index.js:198
+#: build/block/index.js:1
 msgid "Grid"
 msgstr ""
 
 #: includes/Settings.php:130
-#: build/block/index.js:201
+#: build/block/index.js:1
 msgid "Table"
 msgstr ""
 
@@ -178,7 +178,6 @@ msgid "Show/Hide Grid Items"
 msgstr ""
 
 #: includes/Settings.php:149
-#: build/block/index.js:235
 msgid "Single View"
 msgstr ""
 
@@ -247,131 +246,147 @@ msgstr ""
 msgid "No posts selected"
 msgstr ""
 
-#: includes/Utils.php:165
+#: includes/Utils.php:197
 msgid "Selected filters"
 msgstr ""
 
-#: includes/Utils.php:250
+#: includes/Utils.php:282
 msgid "Apply filter"
 msgstr ""
 
-#: templates/degree-program-box.php:11
-#: templates/degree-program-full.php:14
+#: templates/degree-program-box.php:8
+#: templates/degree-program-full.php:12
 msgid "Please select a degree program."
 msgstr ""
 
-#: templates/degree-program-box.php:15
-#: templates/degree-program-full.php:18
+#: templates/degree-program-box.php:12
+#: templates/degree-program-full.php:16
 msgid "No data available."
 msgstr ""
 
-#: templates/degree-program-full.php:540
+#: templates/degree-program-full.php:422
+#: templates/degree-program-full.php:459
+msgid "Read more about %s"
+msgstr ""
+
+#: templates/degree-program-full.php:611
 msgid "More than 275"
 msgstr ""
 
-#: templates/degree-program-full.php:540
+#: templates/degree-program-full.php:611
 msgid "degree programs"
 msgstr ""
 
-#: templates/degree-program-full.php:541
+#: templates/degree-program-full.php:612
 msgid "International"
 msgstr ""
 
-#: templates/degree-program-full.php:541
+#: templates/degree-program-full.php:612
 msgid "partnerships"
 msgstr ""
 
-#: templates/degree-program-full.php:542
+#: templates/degree-program-full.php:613
 msgid "Close ties"
 msgstr ""
 
-#: templates/degree-program-full.php:542
+#: templates/degree-program-full.php:613
 msgid "to industry"
 msgstr ""
 
-#: templates/degree-program-full.php:543
+#: templates/degree-program-full.php:614
 msgid "Cooperative bachelor's program"
 msgstr ""
 
-#: templates/degree-program-full.php:543
+#: templates/degree-program-full.php:614
 msgid "available"
 msgstr ""
 
-#: templates/degree-program-grid.php:112
-#: templates/degree-program-table.php:119
+#: templates/degree-program-grid.php:25
+msgid "%s to %s of %s"
+msgstr ""
+
+#: templates/degree-program-grid.php:85
+msgid "Read more"
+msgstr ""
+
+#: templates/degree-program-grid.php:120
+#: templates/degree-program-table.php:108
 msgid "No degree programs found."
 msgstr ""
 
-#: build/block/index.js:184
+#: templates/degree-program-grid.php:126
+msgid "Degree program pagination"
+msgstr ""
+
+#: templates/degree-program-grid.php:128
+msgid "Previous page"
+msgstr ""
+
+#: templates/degree-program-grid.php:134
+msgid "Page %d"
+msgstr ""
+
+#: templates/degree-program-grid.php:138
+msgid "Next page"
+msgstr ""
+
+#: build/block/index.js:1
 msgid "General Settings"
 msgstr ""
 
-#: build/block/index.js:187
+#: build/block/index.js:1
 msgid "Format"
 msgstr ""
 
-#: build/block/index.js:190
+#: build/block/index.js:1
 msgid "Full"
 msgstr ""
 
-#: build/block/index.js:195
+#: build/block/index.js:1
 msgid "Infobox"
 msgstr ""
 
-#: build/block/index.js:204
+#: build/block/index.js:1
 msgid "List"
 msgstr ""
 
-#: build/block/index.js:215
+#: build/block/index.js:1
 msgid "Search Filters"
 msgstr ""
 
-#: build/block/index.js:223
+#: build/block/index.js:1
 msgid "Degree Program"
 msgstr ""
 
-#: build/block/index.js:229
-msgid "Link Target"
-msgstr ""
-
-#: build/block/index.js:232
-msgid "None"
-msgstr ""
-
-#: build/block/index.js:238
-msgid "MyStudies"
-msgstr ""
-
-#: build/block/index.js:243
+#: build/block/index.js:1
 msgid "Show Title"
 msgstr ""
 
-#: build/block/index.js:248
+#: build/block/index.js:1
 msgid "Language"
 msgstr ""
 
-#: build/block/index.js:251
+#: build/block/index.js:1
 msgid "Default"
 msgstr ""
 
-#: build/block/index.js:254
+#: build/block/index.js:1
 msgid "German"
 msgstr ""
 
-#: build/block/index.js:257
+#: build/block/index.js:1
 msgid "English"
 msgstr ""
 
-#: build/block/index.js:263
-#: build/block/index.js:271
+#: build/block/index.js:1
 msgid "Select items"
 msgstr ""
 
-#: build/block/index.js:279
+#: build/block/index.js:1
 msgid "Filter Programs"
 msgstr ""
 
-#: build/block/index.js:282
+#: build/block/index.js:1
 msgid "Faculties"
 msgstr ""
 
@@ -379,12 +394,12 @@ msgstr ""
 msgid "No program selected. Please select at least one program to import."
 msgstr ""
 
-#: src/js/fau-studium-display-admin.js:112
-#: src/js/fau-studium-display-admin.js:122
+#: src/js/fau-studium-display-admin.js:109
+#: src/js/fau-studium-display-admin.js:119
 msgid "No program selected. Please select at least one program."
 msgstr ""
 
-#: src/js/fau-studium-display-admin.js:124
+#: src/js/fau-studium-display-admin.js:121
 msgid "Are you sure you want to delete %d selected degree programs?"
 msgstr ""
 

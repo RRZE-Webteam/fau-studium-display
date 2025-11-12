@@ -54,7 +54,6 @@ class Utils
 
     public static function renderSearchForm($prefilter = [], $filter_items = [], $lang = 'de', $display = 'table'): string
     {
-        //var_dump($prefilter);
         $getParams = Utils::array_map_recursive('sanitize_text_field', $_GET);
         $data = new Data();
         $degrees = !empty($prefilter['degree']) ? $prefilter['degree'] : $data->get_meta_list('degree_parents', $lang);
@@ -62,32 +61,9 @@ class Utils
 
         $attributes = !empty($prefilter['attribute']) ? $prefilter['attribute'] : $data->get_meta_list('attributes', $lang);
         $labels = get_labels($lang);
-        if (empty($filter_items)) {
-            $filter_items = get_output_fields('search-filters');
-        }
+
         $display = ($display == 'table') ? 'table' : 'grid';
-
-        $filters = [
-            ['key' => 'degree', 'label' => ($labels['degree']), 'data' => $degrees],
-            ['key' => 'subject_group', 'label' => ($labels['subject_group']), 'data' => $subject_groups],
-            ['key' => 'attribute', 'label' => ($labels['attributes']), 'data' => $attributes],
-            ['key' => 'admission_requirements', 'label' => ($labels['admission_requirements']), 'data' => $data->get_meta_list('admission_requirements', $lang)],
-            ['key' => 'semester', 'label' => ($labels['start']), 'data' => $data->get_meta_list('start_semesters', $lang)],
-            ['key' => 'study_location', 'label' => ($labels['location']), 'data' => $data->get_meta_list('study_locations', $lang)],
-            ['key' => 'teaching_language', 'label' => ($labels['teaching_language']), 'data' => $data->get_meta_list('teaching_languages', $lang)],
-            ['key' => 'faculty', 'label' => ($labels['faculty']), 'data' => $data->get_meta_list('faculties', $lang)],
-            ['key' => 'german_language_skills_for_international_students', 'label' => ($labels['german_language_skills_for_international_students']), 'data' => $data->get_meta_list('german_language_skills', $lang)],
-            //['key' => 'area', 'label' => ($labels['area'] ?? 'area'), 'data' => $api->get_areas_of_study()],
-        ];
-
-        foreach ($filters as $i => $filter) {
-            if (!in_array($filter['key'], $filter_items)) {
-                unset($filters[$i]);
-            }
-        }
-
-        $filters_default = array_slice($filters, 0, 4);
-        $filters_extended = array_slice($filters, 4);
+        $filters_selected = [];
 
         if (is_post_type_archive('degree-program')) {
             $url = get_post_type_archive_link( 'degree-program' );
@@ -95,7 +71,7 @@ class Utils
             $url = get_permalink();
         }
 
-        $output = '<form method="get" class="program-search" action="' . esc_url($url) . '">';
+        $output = '<form method="get" class="program-search" action="' . esc_url($url) . '#degree_program_results">';
         $search = (!empty($getParams['search']) ? sanitize_text_field($getParams['search']) : '');
         $search_in_text = (!empty($getParams['search_text']) && $getParams['search_text'] == 'on' ? ' checked ' : '');
 
@@ -108,54 +84,73 @@ class Utils
                    . '</div>';
 
         // Filter options
-        $output .= '<div class="search-filter"><p class="label">' . $labels['filter_options'] . '</p>';
-        if (count($filters_extended) > 0) {
-            $output .= '<button type="button" class="extended-search-toggle">'
-                       . '<span class="button-label">' . $labels['more_filter_options'] . '</span>'
-                       . '<span class="icon-wrapper icon-plus" aria-hidden="true"></span></button>';
-        }
+        if (!empty($filter_items)) {
+            $filters = [
+                ['key' => 'degree', 'label' => ($labels[ 'degree' ]), 'data' => $degrees],
+                ['key' => 'subject_group', 'label' => ($labels[ 'subject_group' ]), 'data' => $subject_groups],
+                ['key' => 'attribute', 'label' => ($labels[ 'attributes' ]), 'data' => $attributes],
+                ['key'   => 'admission_requirements',
+                 'label' => ($labels[ 'admission_requirements' ]),
+                 'data'  => $data->get_meta_list('admission_requirements', $lang)
+                ],
+                ['key'   => 'semester',
+                 'label' => ($labels[ 'start' ]),
+                 'data'  => $data->get_meta_list('start_semesters', $lang)
+                ],
+                ['key'   => 'study_location',
+                 'label' => ($labels[ 'location' ]),
+                 'data'  => $data->get_meta_list('study_locations', $lang)
+                ],
+                ['key'   => 'teaching_language',
+                 'label' => ($labels[ 'teaching_language' ]),
+                 'data'  => $data->get_meta_list('teaching_languages', $lang)
+                ],
+                ['key'   => 'faculty',
+                 'label' => ($labels[ 'faculty' ]),
+                 'data'  => $data->get_meta_list('faculties', $lang)
+                ],
+                ['key'   => 'german_language_skills_for_international_students',
+                 'label' => ($labels[ 'german_language_skills_for_international_students' ]),
+                 'data'  => $data->get_meta_list('german_language_skills', $lang)
+                ],
+                //['key' => 'area', 'label' => ($labels['area'] ?? 'area'), 'data' => $api->get_areas_of_study()],
+            ];
 
-        $output .= '<div class="flex-wrapper">';
-
-        $filters_selected = [];
-
-        // Filter sections default
-        foreach ($filters_default as $filter) {
-            // Don't show filters with only one option
-            if (count($filter['data']) < 2) {
-                continue;
+            foreach ($filters as $i => $filter) {
+                if ( ! in_array($filter[ 'key' ], $filter_items)) {
+                    unset($filters[ $i ]);
+                }
             }
-            $filter_active = !empty($getParams[$filter['key']]);
-            if ($filter_active) {
-                $filters_selected[$filter['key']] = $getParams[$filter['key']];
-                $selected = array_map('sanitize_text_field', $getParams[$filter['key']]);
-            } else {
-                $selected = [];
-            }
-            $output .= self::renderChecklistSection(
-                $filter['key'],
-                $filter['label'],
-                $filter['data'],
-                $selected,
-            );
-        }
 
-        if (count($filters_extended) > 0) {
-            // Settings links + Filter sections extended
-            $filters_extended_html  = '';
-            foreach ($filters_extended as $filter) {
+            $filters_default  = array_slice($filters, 0, 4);
+            $filters_extended = array_slice($filters, 4);
+
+            $output .= '<div class="search-filter"><p class="label">' . $labels[ 'filter_options' ] . '</p>';
+            if (count($filters_extended) > 0) {
+                $output .= '<button type="button" class="extended-search-toggle">'
+                           . '<span class="button-label">' . $labels[ 'more_filter_options' ] . '</span>'
+                           . '<span class="icon-wrapper icon-plus" aria-hidden="true"></span></button>';
+            }
+
+            $output .= '<div class="flex-wrapper">';
+
+            // Filter sections default
+            foreach ($filters_default as $filter) {
                 // Don't show filters with only one option
-                if (count($filter['data']) < 2) {
+                if (count($filter[ 'data' ]) < 2) {
                     continue;
                 }
                 $filter_active = ! empty($getParams[ $filter[ 'key' ] ]);
                 if ($filter_active) {
-                    $filters_selected[$filter['key']] = $getParams[$filter['key']];
-                    $selected = array_map('sanitize_text_field', $getParams[$filter['key']]);
+                    $filters_selected[ $filter[ 'key' ] ] = $getParams[ $filter[ 'key' ] ];
+                    $selected                             = array_map(
+                        'sanitize_text_field',
+                        $getParams[ $filter[ 'key' ] ]
+                    );
                 } else {
                     $selected = [];
                 }
-                $filters_extended_html .= self::renderChecklistSection(
+                $output .= self::renderChecklistSection(
                     $filter[ 'key' ],
                     $filter[ 'label' ],
                     $filter[ 'data' ],
@@ -163,27 +158,66 @@ class Utils
                 );
             }
 
-            $output .= '</div>'; // .flex-wrapper
-
-            $output .= '<div class="extended-search"><div class="flex-wrapper">' . $filters_extended_html . '</div></div>';
-        } else {
-            $output .= '</div>';
-        }
-
-        if (!empty($filters_selected)) {
-            $current_url = ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-            $output .= '<div class="filters-selected">'
-                . '<p class="filter-selected-title">' . __('Selected filters', 'fau-studium-display') . '</p>';
-            foreach ($filters_selected as $filter_key => $filter_selected) {
-                foreach ($filter_selected as $filter_item) {
-                    $cleared_url = str_replace('&' . $filter_key . '%5B%5D=' . urlencode($filter_item), '', $current_url);
-                    $output .= '<a class="filter-selected" data-key="' . $filter_key . '" data-value="' . $filter_item . '" href="' . $cleared_url . '">'  . $filter_item . '</a>';
+            if (count($filters_extended) > 0) {
+                // Settings links + Filter sections extended
+                $filters_extended_html = '';
+                foreach ($filters_extended as $filter) {
+                    // Don't show filters with only one option
+                    if (count($filter[ 'data' ]) < 2) {
+                        continue;
+                    }
+                    $filter_active = ! empty($getParams[ $filter[ 'key' ] ]);
+                    if ($filter_active) {
+                        $filters_selected[ $filter[ 'key' ] ] = $getParams[ $filter[ 'key' ] ];
+                        $selected                             = array_map(
+                            'sanitize_text_field',
+                            $getParams[ $filter[ 'key' ] ]
+                        );
+                    } else {
+                        $selected = [];
+                    }
+                    $filters_extended_html .= self::renderChecklistSection(
+                        $filter[ 'key' ],
+                        $filter[ 'label' ],
+                        $filter[ 'data' ],
+                        $selected,
+                    );
                 }
+
+                $output .= '</div>'; // .flex-wrapper
+
+                $output .= '<div class="extended-search"><div class="flex-wrapper">' . $filters_extended_html . '</div></div>';
+            } else {
+                $output .= '</div>';
             }
-            $output .= '<a class="filter-selected delete-all" data-key="all" data-value="all" href="' . $url . '">'  . $labels['delete_all'] . '</a>';
-            $output .= '</div>';
+
+            if ( ! empty($filters_selected) || ! empty($search)) {
+                $current_url = (is_ssl() ? 'https://' : 'http://') . $_SERVER[ 'HTTP_HOST' ] . $_SERVER[ 'REQUEST_URI' ];
+                $output      .= '<div class="filters-selected">'
+                                . '<p class="filter-selected-title">' . __(
+                                    'Selected filters',
+                                    'fau-studium-display'
+                                ) . '</p>';
+                if ( ! empty($search)) {
+                    $cleared_url = str_replace('?search=' . urlencode($search), '?search=', $current_url);
+                    $output      .= '<a class="filter-selected" data-key="search" data-value="' . $search . '" href="' . $cleared_url . '">' . $search . '</a>';
+                }
+                foreach ($filters_selected as $filter_key => $filter_selected) {
+                    foreach ($filter_selected as $filter_item) {
+                        $cleared_url = str_replace(
+                            '&' . $filter_key . '%5B%5D=' . urlencode($filter_item),
+                            '',
+                            $current_url
+                        );
+                        $output      .= '<a class="filter-selected" data-key="' . $filter_key . '" data-value="' . $filter_item . '" href="' . $cleared_url . '">' . $filter_item . '</a>';
+                    }
+                }
+                $output .= '<a class="filter-selected delete-all" data-key="all" data-value="all" href="' . $url . '">' . $labels[ 'delete_all' ] . '</a>';
+                $output .= '</div>';
+            }
+            $output .= '</div>'; //.search-filter
         }
-        $output .= '</div>'; //.search-filter
+
         $output .= '<p class="display-settings">' . $labels['display']
                     . '<button type="submit" class="display-settings-table' . ($display == 'table' ? ' active' : '') . '" name="display" value="table" title="' . $labels['display_table'] . '">' . $labels['display_table'] . '</button>'
                     . '<button type="submit" class="display-settings-grid' . ($display == 'grid' ? ' active' : '') . '" name="display" value="grid" title="' . $labels['display_grid'] . '">' . $labels['display_grid'] . '</button>'
@@ -196,23 +230,9 @@ class Utils
         $programs_filtered = [];
         $search_in_text = isset($filter['search_text']) && $filter['search_text'] == 'on';
 
-        foreach ($programs as $id => $program) {
+        $programs = Utils::text_search($programs, $filter, $search_in_text);
 
-            // Text search
-            if (!empty($filter['search'])) {
-                $search_term = strtolower(sanitize_text_field($filter['search']));
-                $search_target = $program['title'] ?? '';
-                if ($search_in_text) {
-                    $search_target .= $program['entry_text'] ?? '';
-                    foreach ($program['content'] ?? [] as $content_item) {
-                        $search_target .= $content_item['description'] ?? '';
-                    }
-                }
-                $search_target = strtolower(strip_tags($search_target));
-                if (!str_contains($search_target, $search_term)) {
-                    continue;
-                }
-            }
+        foreach ($programs as $id => $program) {
 
             // Attribute search
             $filterMap = [
@@ -360,11 +380,11 @@ class Utils
                 ];
             }
         } else {
-            $degrees       = $parents ? (new Data)->get_meta_list('degree_parents') : (new Data)->get_meta_list('degrees');
+            $degrees       = (new Data)->get_taxonomy_list('degree', $parents);
             foreach ($degrees as $degree) {
                 $degreeOptions[] = [
                     'label' => $degree,
-                    'value' => $degree,
+                    'value' => str_replace('- ', '', $degree),
                 ];
             }
         }
@@ -393,7 +413,7 @@ class Utils
                 ];
             }
         } else {
-            $faculties = (new Data)->get_meta_list('faculties');
+            $faculties = (new Data)->get_taxonomy_list('faculty');
             foreach ($faculties as $faculty) {
                 $facultyOptions[] = [
                     'label' => $faculty,
@@ -418,7 +438,7 @@ class Utils
                 ];
             }
         } else {
-            $attributes = (new Data)->get_meta_list('attributes');
+            $attributes = (new Data)->get_taxonomy_list('attribute');
             foreach ($attributes as $attribute) {
                 $attributeOptions[] = [
                     'label' => $attribute,
@@ -478,8 +498,6 @@ class Utils
     public static function map_post_type_data($program_id, $lang = 'de') {
         $program = get_post($program_id);
         $program_meta = get_post_meta($program_id);
-        //print "<pre>"; var_dump($program_id); print "</pre>";
-        //print "<pre>"; var_dump($program_meta); print "</pre>";
         if (empty($program_meta)) {
             return [];
         }
@@ -853,5 +871,28 @@ class Utils
         $locale = get_locale();
         $locale_parts = explode('_', $locale);
         return $locale_parts[ 0 ] ?? $locale;
+    }
+
+    public static function text_search($programs, $filter = [], $search_in_text = false) {
+
+        if (empty($filter[ 'search' ]))
+            return $programs;
+
+        $programs_filtered = [];
+        foreach ($programs as $id => $program) {
+            $search_term   = strtolower(sanitize_text_field($filter[ 'search' ]));
+            $search_target = $program[ 'title' ] ?? '';
+            if ($search_in_text) {
+                $search_target .= $program[ 'entry_text' ] ?? '';
+                foreach ($program[ 'content' ] ?? [] as $content_item) {
+                    $search_target .= $content_item[ 'description' ] ?? '';
+                }
+            }
+            $search_target = strtolower(strip_tags($search_target));
+            if ( str_contains($search_target, $search_term)) {
+                $programs_filtered[$id] = $program;
+            }
+        }
+        return $programs_filtered;
     }
 }

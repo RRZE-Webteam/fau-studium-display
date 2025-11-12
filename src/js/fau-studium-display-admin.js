@@ -98,16 +98,13 @@ jQuery(document).ready(function($) {
 
     programsImported.on('click', 'button#update-selected-button', function(e) {
         e.preventDefault();
-        $(this).append('<span class="dashicons dashicons-update search-spinner spin" title="Updating">Updating</span>').addClass('button-disabled');
-        programsImported.find('button, a.button').addClass('button-disabled');
         const checkedIds = $('input[type="checkbox"][name^="batch-manage"]:checked')
             .map(function() { return $(this).val(); })
             .get();
         if (checkedIds.length > 0) {
             $.each(checkedIds, function(index, id) {
-                $('#degree-programs-imported div.program-item[data-post_id="' + id + '"] a.update-degree-program').find('span.dashicons-update').addClass('spin');
+                $('a.update-degree-program[data-post_id="' + id + '"]').trigger('click');
             });
-            sync_degree_programs([], checkedIds);
         } else {
             alert(__('No program selected. Please select at least one program.', 'fau-studium-display'));
         }

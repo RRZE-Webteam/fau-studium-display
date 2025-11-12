@@ -26,6 +26,8 @@ class Main
             new CPT();
         }
         new Shortcode();
+        $cron = new Cron();
+        $cron->init();
     }
 
 
@@ -44,7 +46,7 @@ class Main
         // get degree program lists for combobox
         $degree_programs = Utils::get_program_options();
         $facultyOptions = Utils::get_faculty_options();
-        $degreeOptions = Utils::get_degree_options(true);
+        $degreeOptions = Utils::get_degree_options();
         $attributeOptions = Utils::get_attribute_options();
 
         // get display options from config

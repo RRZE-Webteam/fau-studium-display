@@ -13,8 +13,6 @@ class Data
 
         } else {
 
-            $programs = $this->get_programs($lang);
-
             // Filter from block settings
             $filterBlock = [];
             if (!empty($atts['selectedFaculties'])) {
@@ -39,11 +37,12 @@ class Data
                 $getParams = Utils::array_map_recursive('urldecode', $_GET);
                 $getParams = Utils::array_map_recursive('sanitize_text_field', $getParams);
             } else {
-                $_GET = [];
+                $getParams = [];
             }
             $getParams = array_filter($getParams);
             $filter = array_merge($filterBlock, $getParams);
-            $data = Utils::filterPrograms($programs, $filter);
+
+            $data = $this->get_programs($lang, $filter);
         }
 
         return $data;
@@ -91,18 +90,37 @@ class Data
         return $api->get_localized_data($program, $lang);*/
     }
 
-    public function get_programs($lang = 'de') {
+    public function get_programs($lang = 'de', $filter = []) {
         $data = [];
+        $tax_query = [];
+        $search_in_text = isset($filter['search_text']) && $filter['search_text'] == 'on';
+
+        if (!empty($filter)) {
+            $tax_query = ['relation' => 'OR'];
+            foreach ($filter as $key => $value) {
+                if (taxonomy_exists($key)) {
+                    $tax_query[] = [
+                        'taxonomy' => $key,
+                        'field'    => 'name',
+                        'terms'    => $value
+                    ];
+                }
+            }
+        }
+
+        $args = [
+            'post_type'      => 'degree-program',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'orderby'        => 'title',
+            'order'          => 'ASC',
+            'tax_query'      => $tax_query,
+        ];
 
         // if on meinstudium.fau.de -> get local post type (studiengang)
         if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
-            $programs = get_posts([
-                'post_type'      => 'studiengang',
-                'post_status'    => 'publish',
-                'posts_per_page' => -1,
-                'orderby'        => 'title',
-                'order'          => 'ASC'
-            ]);
+            $args['post_type'] = 'studiengang';
+            $programs = get_posts($args);
             foreach ($programs as $program) {
                 $data[$program->ID] = Utils::map_post_type_data($program->ID, $lang);
             }
@@ -110,13 +128,7 @@ class Data
         }
 
         // else get imported degree programs (post type 'degree-program')
-        $programs_imported = get_posts([
-            'post_type'      => 'degree-program',
-            'post_status'    => 'publish',
-            'posts_per_page' => -1,
-            'orderby'        => 'title',
-            'order'          => 'ASC'
-        ]);
+        $programs_imported = get_posts($args);
 
         if (!empty($programs_imported)) {
             switch ($lang) {
@@ -125,17 +137,17 @@ class Data
                         $data[$program->ID] = get_post_meta($program->ID, 'program_data_en', true);
                         $data[$program->ID]['_thumbnail_rendered'] = get_the_post_thumbnail($program->ID, 'full');
                     }
-                    return $data;
                 case 'de':
                 default:
                     foreach ($programs_imported as $program) {
                         $data[$program->ID] = get_post_meta($program->ID, 'program_data_de', true);
                         $data[$program->ID]['_thumbnail_rendered'] = get_the_post_thumbnail($program->ID, 'full');
                     }
-                    return $data;
             }
         }
-        return $data;
+
+        return Utils::text_search($data, $filter, $search_in_text);
+
     }
 
     public function get_meta_list($meta, $lang = 'de') {
@@ -212,5 +224,40 @@ class Data
         $meta_list = array_unique($meta_list);
         sort($meta_list);
         return $meta_list;
+    }
+
+    public function get_taxonomy_list($taxonomy = '', $parents_only = false): array
+    {
+        if (empty($taxonomy)) {
+            return [];
+        }
+        $terms = get_terms( [
+            'taxonomy' => $taxonomy,
+            'hide_empty' => true,
+            'orderby' => 'name',
+            'order' => 'ASC',
+            'parent' => '0',
+        ] );
+        if (is_wp_error($terms)) {
+            return [];
+        }
+        $taxonomy_list = [];
+
+        if ($parents_only) {
+            foreach ($terms as $term) {
+                $taxonomy_list[$term->term_id] = $term->name;
+            }
+            return $taxonomy_list;
+        }
+
+        foreach ($terms as $term) {
+            $taxonomy_list[$term->term_id] = $term->name;
+            $children = get_term_children($term->term_id, $taxonomy);
+            foreach ($children as $child_id) {
+                $child = get_term($child_id, $taxonomy);
+                $taxonomy_list[$child->term_id] = '- ' . $child->name;
+            }
+        }
+        return $taxonomy_list;
     }
 }

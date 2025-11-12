@@ -7,11 +7,6 @@ use Fau\DegreeProgram\Display\Utils;
 use function Fau\DegreeProgram\Display\Config\get_output_fields;
 use function Fau\DegreeProgram\Display\Config\get_labels;
 
-//print "<pre>"; var_dump($data); print "</pre>";
-//print "<pre>"; var_dump($atts); print "</pre>";
-//print "<pre>"; print_r($atts); print "</pre>";
-//exit;
-
 $show_search = isset($atts['showSearch']) && $atts['showSearch'] == '1';
 
 if (empty($data) && !$show_search)
@@ -19,7 +14,6 @@ if (empty($data) && !$show_search)
 
 $lang = $atts['language'] ?? 'de';
 $labels = get_labels($lang);
-//var_dump($labels); exit;
 
 $program_table = '';
 
@@ -49,8 +43,8 @@ foreach ($data as $post_id => $program) {
     }
 
     $table_content = '<td class="image-title">';
-    if (!empty($program['_thumbnail_rendered'] . $title)) {
-        $table_content .= $program[ '_thumbnail_rendered' ] . $title;
+    if (!empty($title)) {
+        $table_content .= $title;
     }
     $table_content .= '</td>';
 
@@ -79,7 +73,6 @@ foreach ($data as $post_id => $program) {
     }
     $table_content .= '</td>';
 
-    //print "<pre>"; var_dump($program); print "</pre>";
     $program_table .= sprintf('<tr>%s</tr>',
                              //$program['link'],
                              $table_content
@@ -91,7 +84,7 @@ $program_table .= '</tbody>'
 
 <section class="fau-studium-display degree-program-table">
 
-    <?php if (isset($atts['showSearch']) && $atts['showSearch'] == '1') :
+    <?php if ($show_search) :
 
         $prefilter = array_map(function ($v) use ($atts) {
             return $atts[ $v ];
@@ -100,7 +93,8 @@ $program_table .= '</tbody>'
         echo Utils::renderSearchForm($prefilter, $filter_items, $lang, 'table');
 
         $count = count($data);
-        echo '<p class="items-found">' . sprintf($count == 1 ? $labels['num_programs_found_singular'] : $labels['num_programs_found_plural'], $count) . '</p>';
+        echo '<p class="items-found" id="degree_program_results">' . sprintf($count == 1 ? $labels['num_programs_found_singular'] : $labels['num_programs_found_plural'], $count) . '</p>';
+
     endif; ?>
 
     <?php if (!empty($data)) : ?>

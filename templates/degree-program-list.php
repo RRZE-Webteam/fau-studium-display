@@ -2,8 +2,6 @@
 
 defined('ABSPATH') || exit;
 
-//print "<pre>";var_dump($data); print "</pre>";exit;
-
 $program_list = '';
 foreach ($data as $post_id => $program) {
 

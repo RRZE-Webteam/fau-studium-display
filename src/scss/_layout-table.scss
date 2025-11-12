@@ -1,4 +1,8 @@
 .fau-studium-display {
+    &.degree-program-table {
+        max-width: min(100vw, 1320px);
+        margin-inline: var(--faue_wide-max-width_bleed_minimal_inline-margin, max(calc(calc(max(2.5rem, calc(100cqw /2 - 870px /2))*-1) + 2.5rem),calc(1320px*-1/2 - 870px*-1/2)));
+    }
     p.items-found {
         padding: 0;
     }
@@ -29,7 +33,7 @@
                 display: block;
                 border: none;
                 font-size: var(--P-Body-Text, 1.125rem);
-                padding: 0;
+                padding: var(--Spacing-2x, 0.5rem);
             }
             @media (min-width: 679px) {
                 display: table-cell;
@@ -37,64 +41,18 @@
             &:first-child {
                 width: auto;
             }
-            &.image-title {
-                padding-left: 0;
-                font-weight: bold;
-                @media (min-width: 992px) {
-                    display: grid;
-                    grid-template-columns: 80px 1fr;
-                    grid-column-gap: 16px;
-                    font-weight: normal;
-                }
-                img {
-                    aspect-ratio: 16/9;
-                    object-fit: cover;
-                    width: 100%;
-                    height: auto;
-                    @media (min-width: 679px) {
-                        aspect-ratio: 1/1;
-                        width: 80px;
-                        height: auto;
-                        box-shadow: none;
-                        float: left;
-                        margin-right: 8px;
-                        margin-bottom: 8px;
-                    }
-                    @media (min-width: 992px) {
-                        margin-bottom: 0;
-                    }
-                }
-                .program-title {
-                    display: block;
-                    //align-self: center;
-                    color: var(--FAU_Col_FAU-Blau, #04316A);
-                    font-size: var(--P-Body-Text, 1.125rem);
-                    background: #fff;
-                    position: relative;
-                    top: -2em;
-                    margin: 0 var(--Spacing-4x, 1rem) calc(var(--Spacing-8x, 2rem)*-1);
-                    padding: var(--Spacing-2x, .5rem);
-                    @media (min-width: 679px) {
-                        position: static;
-                        margin: 0 0 8px;
-                        padding: 0;
-                        background: transparent;
-                        font-size: unset;
-                    }
-                    @media (min-width: 992px) {
-                        font-size: unset;
-                        margin-bottom: 0;
-                    }
-                }
-            }
+            &.image-title,
             &.program-degree,
             &.program-start,
             &.program-location,
             &.program-adm-req {
                 padding: 0 var(--Spacing-6x, 1.5rem);
                 @media (min-width: 679px) {
-                    padding: 0;
+                    padding: var(--Spacing-4x, 1rem) var(--Spacing-2x, 0.5rem);
                 }
+            }
+            &.image-title {
+                font-weight: bold;
             }
             &.program-degree {
                 @media (min-width: 768px) {

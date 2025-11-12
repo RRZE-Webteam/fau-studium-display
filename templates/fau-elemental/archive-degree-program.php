@@ -31,7 +31,7 @@ $content = $output->renderOutput($atts);
 
 get_header(); ?>
 
-<main class="wp-block-group archive-page">
+<main class="archive-page">
     <header class="blog-header is-layout-flow">
         <h1 class="blog-title">
             <?php 

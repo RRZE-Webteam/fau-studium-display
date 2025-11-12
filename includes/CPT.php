@@ -10,8 +10,8 @@ class CPT
 
     public function __construct()
     {
-        add_action( 'init', [$this, 'register_post_type'] );
-        add_action('init', [$this, 'register_taxonomies']);
+        add_action('init', [$this, 'register_post_type'], 9);
+        add_action('init', [$this, 'register_taxonomies'], 9);
         add_action('add_meta_boxes', [$this, 'render_metabox']);
         add_action('admin_menu', [$this, 'disable_new_posts']);
         add_filter( 'query_vars', [$this, 'register_custom_query_vars'] );
@@ -93,7 +93,6 @@ class CPT
     public function degree_program_metabox($post)
     {
         $aPostMeta = get_post_meta($post->ID, 'program_data_de', true);
-        //print "<pre>"; var_dump($aPostMeta); print "</pre>";
         if (!isset($aPostMeta['title'])) {
             echo __('No data available', 'fau-studium-display');
             return;
@@ -106,7 +105,6 @@ class CPT
     public function degree_program_metabox_english($post)
     {
         $aPostMeta = get_post_meta($post->ID, 'program_data_en', true);
-        //print "<pre>"; var_dump($aPostMeta); print "</pre>";
         if (!isset($aPostMeta['title'])) {
             echo __('No data available', 'fau-studium-display');
             return;

@@ -1,4 +1,8 @@
 .fau-studium-display {
+    &.degree-program-grid {
+        max-width: min(100vw, 1320px);
+        margin-inline: var(--faue_wide-max-width_bleed_minimal_inline-margin, max(calc(calc(max(2.5rem, calc(100cqw /2 - 870px /2))*-1) + 2.5rem),calc(1320px*-1/2 - 870px*-1/2)));
+    }
     p.items-found {
         padding: 0;
     }
@@ -28,6 +32,11 @@
             background: var(--FAU-Col-FAU-Blau-100, #04316A);
             color: #fff;
             padding: 0;
+            &:before {
+                content: '';
+                height: 0;
+                width: 0;
+            }
             p {
                 padding: 0;
                 margin: 0 0 0.5rem;

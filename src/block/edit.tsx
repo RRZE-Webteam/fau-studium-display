@@ -104,8 +104,8 @@ const Edit = ({
             ? selectedSearchFilters.filter((v: string) => v !== value)
             : [...selectedSearchFilters, value];
 
-        setAttributes({ selectedSearchFilters: [...updated] });
-
+        //setAttributes({ selectedSearchFilters: [...updated] });
+        setAttributes({ selectedSearchFilters: updated.length > 0 ? updated : [] });
     };
 
     const toggleFaculties = (value: string) => {
