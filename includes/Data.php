@@ -96,7 +96,7 @@ class Data
         $search_in_text = isset($filter['search_text']) && $filter['search_text'] == 'on';
 
         if (!empty($filter)) {
-            $tax_query = ['relation' => 'OR'];
+            $tax_query = ['relation' => 'AND'];
             foreach ($filter as $key => $value) {
                 if (taxonomy_exists($key)) {
                     $tax_query[] = [
