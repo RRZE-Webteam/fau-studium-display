@@ -15,6 +15,20 @@ $items = $atts['selectedItemsGrid'] ?? [];
 $lang = $atts['language'] ?? 'de';
 $labels = get_labels($lang);
 
+$total = count($data);
+$page = isset($_GET['pagenum']) ? (int)$_GET['pagenum'] : 1;
+$length = 12;
+$offset = ($page - 1) * $length;
+$end = min(($offset + $length), $total);
+$num_pages = ceil($total / $length);
+$pagination_string = sprintf(
+    __("%s to %s of %s", 'fau-studium-display'),
+    '<p class="pagination-info"><span class="pagination-number">' . ($offset + 1) . '</span>',
+    '<span class="pagination-number">' . $end . '</span>',
+    '<span class="pagination-number">' . $total . '</span></p>'
+);
+$data = array_slice($data, $offset, $length);
+
 $program_grid = '';
 
 foreach ($data as $post_id => $program) {
@@ -84,7 +98,7 @@ foreach ($data as $post_id => $program) {
 
 <section class="fau-studium-display degree-program-grid">
 
-    <?php if (isset($atts['showSearch']) && $atts['showSearch'] == '1') :
+    <?php if ($show_search) :
 
         $prefilter = array_map(function ($v) use ($atts) {
             return $atts[ $v ];
@@ -92,8 +106,7 @@ foreach ($data as $post_id => $program) {
         $filter_items = $atts['selectedSearchFilters'] ?? [];
         echo Utils::renderSearchForm($prefilter, $filter_items, $lang, 'grid');
 
-        $count = count($data);
-        echo '<p class="items-found" id="degree_program_results">' . sprintf($count == 1 ? $labels['num_programs_found_singular'] : $labels['num_programs_found_plural'], $count) . '</p>';
+        echo $pagination_string;
 
     endif; ?>
 
@@ -107,5 +120,24 @@ foreach ($data as $post_id => $program) {
         <p><?php _e('No degree programs found.', 'fau-studium-display'); ?></p>
 
     <?php endif; ?>
+
+    <?php if ($show_search) :
+        $current_url = home_url( add_query_arg( null, null ) );
+        echo '<nav class="fau-pagination" role="navigation" aria-label="' . __('Degree program pagination', 'fau-studium-display') . '"><div class="pagination-wrapper">';
+        if ($page > 1) {
+            echo '<a href="' . add_query_arg('pagenum', ($page - 1), $current_url) . '" class="page-number prev" aria-label="' . __('Previous page', 'fau-studium-display') . '"><span class="pagination-icon pagination-icon-prev"></span></a>';
+        }
+        for ($i = 1; $i <= $num_pages; $i++) {
+            if ($page == $i) {
+                echo '<span class="page-number current" aria-current="page">' . $i . '</span>';
+            } else {
+                echo '<a href="' . add_query_arg('pagenum', $i, $current_url) . '" class="page-number" aria-label="' . sprintf(__('Page %d', 'fau-studium-display'), $i) . '">' . $i . '</a>';
+            }
+        }
+        if ($page < $num_pages) {
+            echo '<a href="' . add_query_arg('pagenum', ($page + 1), $current_url) . '" class="page-number next" aria-label="' . __('Next page', 'fau-studium-display') . '"><span class="pagination-icon pagination-icon-next"></span></a>';
+        }
+        echo '</div></nav>';
+    endif; ?>
 
 </section>

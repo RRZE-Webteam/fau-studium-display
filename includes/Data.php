@@ -37,7 +37,7 @@ class Data
                 $getParams = Utils::array_map_recursive('urldecode', $_GET);
                 $getParams = Utils::array_map_recursive('sanitize_text_field', $getParams);
             } else {
-                $_GET = [];
+                $getParams = [];
             }
             $getParams = array_filter($getParams);
             $filter = array_merge($filterBlock, $getParams);

@@ -1853,6 +1853,9 @@
 .fau-studium-display .program-search .display-settings button:hover:before, .fau-studium-display .program-search .display-settings button:focus:before, .fau-studium-display .program-search .display-settings button:active:before {
   background-color: #fff;
 }
+.fau-studium-display .pagination-number {
+  font-weight: 700;
+}
 
 .post-type-archive-degree-program .fau-studium-display {
   padding: 0 var(--Spacing-4x, 1rem);
