@@ -27,7 +27,7 @@ $pagination_string = sprintf(
     '<span class="pagination-number">' . $end . '</span>',
     '<span class="pagination-number">' . $total . '</span></p>'
 );
-$data = array_slice($data, $offset, $length);
+$data = array_slice($data, $offset, $length, true);
 
 $program_grid = '';
 
