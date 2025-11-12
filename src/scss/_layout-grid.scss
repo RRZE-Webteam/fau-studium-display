@@ -1,7 +1,7 @@
 .fau-studium-display {
     &.degree-program-grid {
-        width: 1320px;
-        max-width: 100vw;
+        max-width: min(100vw, 1320px);
+        margin-inline: var(--faue_wide-max-width_bleed_minimal_inline-margin, max(calc(calc(max(2.5rem, calc(100cqw /2 - 870px /2))*-1) + 2.5rem),calc(1320px*-1/2 - 870px*-1/2)));
     }
     p.items-found {
         padding: 0;
