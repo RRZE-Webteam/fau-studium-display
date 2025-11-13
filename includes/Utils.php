@@ -882,13 +882,13 @@ class Utils
         foreach ($programs as $id => $program) {
             $search_term   = strtolower(sanitize_text_field($filter[ 'search' ]));
             $search_target = $program[ 'title' ] ?? '';
+            foreach ($program[ 'keywords' ] ?? [] as $keyword) {
+                $search_target .= ' ' . $keyword;
+            }
             if ($search_in_text) {
                 $search_target .= $program[ 'entry_text' ] ?? '';
                 foreach ($program[ 'content' ] ?? [] as $content_item) {
-                    $search_target .= $content_item[ 'description' ] ?? '';
-                }
-                foreach ($program[ 'keywords' ] ?? [] as $keyword) {
-                    $search_target .= ' ' . $keyword;
+                    $search_target .= ' ' . $content_item[ 'description' ] ?? '';
                 }
             }
             $search_target = strtolower(strip_tags($search_target));
