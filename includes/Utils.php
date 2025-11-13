@@ -78,7 +78,7 @@ class Utils
         // Search input
         $output .= '<label for="fau_studium_search" class="label" xmlns="http://www.w3.org/1999/html">' . $labels['search_title'] . '</label>'
                    . '<div class="search-title">'
-                   . '<input type="text" name="search" id="fau_studium_search" value="' . $search . '" placeholder="' . $labels['search_placeholder'] . '" />'
+                   . '<input type="search" name="search" id="fau_studium_search" value="' . $search . '" placeholder="' . $labels['search_placeholder'] . '" />'
                    . '<button type="submit">' . $labels['search_button'] . '</button>'
                    . '<p class="search-in-text"><label><input type="checkbox" name="search_text" value="on" ' . $search_in_text . '>' . $labels['text_search'] . '</label></p>'
                    . '</div>';
@@ -886,6 +886,9 @@ class Utils
                 $search_target .= $program[ 'entry_text' ] ?? '';
                 foreach ($program[ 'content' ] ?? [] as $content_item) {
                     $search_target .= $content_item[ 'description' ] ?? '';
+                }
+                foreach ($program[ 'keywords' ] ?? [] as $keyword) {
+                    $search_target .= ' ' . $keyword;
                 }
             }
             $search_target = strtolower(strip_tags($search_target));

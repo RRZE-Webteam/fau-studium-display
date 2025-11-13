@@ -975,6 +975,9 @@
   flex-grow: 1;
   align-items: end;
 }
+.fau-studium-display .fau-pagination .pagination-wrapper {
+  flex-wrap: wrap;
+}
 .fau-theme .fau-studium-display ul.degree-program-grid * {
   font-size: var(--font-size-normal, 1rem);
 }
@@ -1076,16 +1079,8 @@
 }
 
 .fau-studium-display.degree-program-full {
-  width: 1320px;
-  max-width: 100vw;
+  max-width: min(100vw, 1320px);
   margin-bottom: var(--Spacing-8x, 2rem);
-}
-@media (min-width: 769px) {
-  .fau-studium-display.degree-program-full {
-    margin-top: var(--Spacing-10x, 2.5rem);
-    margin-right: var(--Spacing-10x, 2.5rem);
-    margin-left: var(--Spacing-10x, 2.5rem);
-  }
 }
 @media (min-width: 992px) {
   .fau-studium-display.degree-program-full {

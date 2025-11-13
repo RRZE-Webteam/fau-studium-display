@@ -24,6 +24,10 @@
       "type": "array",
       "default": []
     },
+    "selectedDegreePrograms": {
+      "type": "array",
+      "default": []
+    },
     "language": {
       "type": "string",
       "default": ""
