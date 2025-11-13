@@ -379,9 +379,12 @@
                     height: 48px;
                     background-color: var(--FAU-Col-FAU-Blau-25, #C0CBDA);
                 }
-                &.display-settings-table:before {
-                    mask-image: url(../svg/list.svg);
-                    -webkit-mask-image: url(../svg/list.svg);
+                &.display-settings-table {
+                    margin-left: var(--Spacing-2x, .5rem);
+                    &:before {
+                        mask-image: url(../svg/list.svg);
+                        -webkit-mask-image: url(../svg/list.svg);
+                    }
                 }
                 &.display-settings-grid:before {
                     mask-image: url(../svg/grid.svg);

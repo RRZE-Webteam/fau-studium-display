@@ -34,6 +34,8 @@
             width: 100vw;
             left: 50%;
             margin-left: -50vw;
+            box-sizing: border-box;
+            padding: var(--Spacing-4x, 1rem);
         }
 
         h2, h2:first-child {
@@ -199,6 +201,7 @@
             h3 {
                 color: #fff;
                 font-size: var(--H-Heading-2, 2rem);
+                margin-bottom: 0;
             }
 
             .student-advice {
@@ -299,7 +302,6 @@
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
                 margin-top: 0;
                 background-color: var(--FAU_Col_FAU-Blau, #04316A);
-                padding: 0 16px 16px;
                 @media screen and (min-width: 768px) {
                     grid-template-columns: repeat(2, 1fr);
                 }
@@ -417,10 +419,18 @@
             }
         }
         .student-advice-more {
+            .useful-links {
+                padding: 0;
+            }
             .wp-block-fau-elemental-fau-teaser-grid {
                 margin-bottom: 32px;
                 .fau-teaser-grid {
-                    gap: 32px;
+                    grid-template-columns: repeat(1, 1fr);
+                    gap: 16px;
+                    @media (min-width: 768px) {
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: 32px;
+                    }
                 }
             }
         }

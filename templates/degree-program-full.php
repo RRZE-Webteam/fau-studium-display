@@ -680,8 +680,8 @@ if (in_array('benefits', $items)) {
 
             // Useful Links
             if (!empty($useful_links)) {
-                echo '<div class="useful-links width-large">'
-                     . '<h3>' . ($labels['useful_links'] ?? 'useful_links') . '</h3>'
+                echo '<h3 class="width-large">' . ($labels['useful_links'] ?? 'useful_links') . '</h3>'
+                     . '<div class="useful-links width-large">'
                      . $useful_links
                      . '</div>';
             }
