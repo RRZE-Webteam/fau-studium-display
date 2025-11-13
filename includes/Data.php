@@ -15,6 +15,9 @@ class Data
 
             // Filter from block settings
             $filterBlock = [];
+            if (!empty($atts['selectedDegreePrograms'])) {
+                $filterBlock['degreePrograms'] = $atts['selectedDegreePrograms'];
+            }
             if (!empty($atts['selectedFaculties'])) {
                 $filterBlock['faculty'] = $atts['selectedFaculties'];
             }
@@ -92,10 +95,23 @@ class Data
 
     public function get_programs($lang = 'de', $filter = []) {
         $data = [];
+        $meta_query = [];
         $tax_query = [];
         $search_in_text = isset($filter['search_text']) && $filter['search_text'] == 'on';
 
-        if (!empty($filter)) {
+        $args = [
+            'post_type'      => 'degree-program',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'orderby'        => 'title',
+            'order'          => 'ASC',
+        ];
+
+        if (!empty($filter['degreePrograms'])) {
+            $args['meta_key'] = 'program_id';
+            $args['meta_value'] = $filter['degreePrograms'];
+            $args['compare'] = 'IN';
+        } elseif (!empty($filter)) {
             $tax_query = ['relation' => 'AND'];
             foreach ($filter as $key => $value) {
                 if (taxonomy_exists($key)) {
@@ -106,16 +122,8 @@ class Data
                     ];
                 }
             }
+            $args['tax_query'] = $tax_query;
         }
-
-        $args = [
-            'post_type'      => 'degree-program',
-            'post_status'    => 'publish',
-            'posts_per_page' => -1,
-            'orderby'        => 'title',
-            'order'          => 'ASC',
-            'tax_query'      => $tax_query,
-        ];
 
         // if on meinstudium.fau.de -> get local post type (studiengang)
         if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {

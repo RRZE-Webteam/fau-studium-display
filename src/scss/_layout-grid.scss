@@ -101,6 +101,10 @@
         }
     }
 
+    .fau-pagination .pagination-wrapper {
+        flex-wrap: wrap;
+    }
+
     .fau-theme & {
         ul.degree-program-grid * {
             font-size: var(--font-size-normal, 1rem);

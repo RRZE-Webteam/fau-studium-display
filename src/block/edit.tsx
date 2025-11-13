@@ -23,6 +23,7 @@ interface BlockAttributes {
     selectedFaculties: string[];
     selectedDegrees: string[];
     selectedSpecialWays: string[];
+    selectedDegreePrograms: string[];
     language: string;
     format: string;
     showSearch : boolean;
@@ -38,17 +39,17 @@ const Edit = ({
               }: BlockEditProps<BlockAttributes>) => {
     const blockProps = useBlockProps();
     const { degreeProgram, language, format = 'full', showSearch, showTitle = true } = attributes;
-    const [degreePrograms, setDegreePrograms] = useState(() => fauStudiumData?.degreePrograms ?? []);
     const [itemsGrid, setItemsGrid] = useState(() => fauStudiumData?.itemsGridOptions ?? []);
     const [itemsFull, setItemsFull] = useState(() => fauStudiumData?.itemsFullOptions ?? []);
     const [searchFilters, setSearchFilters] = useState(() => fauStudiumData?.searchFilters ?? []);
     const [faculties] = useState(() => fauStudiumData?.facultiesOptions ?? []);
     const [degrees] = useState(() => fauStudiumData?.degreesOptions ?? []);
     const [specialWays] = useState(() => fauStudiumData?.specialWaysOptions ?? []);
+    const [degreePrograms] = useState(() => fauStudiumData?.degreePrograms ?? []);
     const {selectedItemsGrid = ["teaser_image", "title", "subtitle", "degree", "start", "admission_requirements", "area_of_study"]} = attributes;
     const {selectedItemsFull = ["teaser_image", "title", "subtitle", "entry_text", "fact_sheet", "content.about", "content.structure", "content.specializations", "content.qualities_and_skills", "content.why_should_study", "content.career_prospects", "content.special_features", "combinations", "videos", "info_internationals_link", "admission_requirements_application", "apply_now_link", "student_advice", "subject_specific_advice", "links.organizational", "links.downloads", "links.additional_information", "benefits"]} = attributes;
     const {selectedSearchFilters = ["admission-requirement", "attribute", "degree", "german-language-skills-for-international-students", "faculty", "semester", "study-location", "subject-group", "teaching-language"]} = attributes;
-    const {selectedFaculties = [], selectedDegrees = [], selectedSpecialWays = []} = attributes;
+    const {selectedFaculties = [], selectedDegrees = [], selectedSpecialWays = [], selectedDegreePrograms = []} = attributes;
     const [selectedFormat, setSelectedFormat] = useState<string>(format);
 
     const onChangeFormat = (value: string | null | undefined) => {
@@ -132,6 +133,15 @@ const Edit = ({
             : [...selectedSpecialWays, value];
 
         setAttributes({ selectedSpecialWays: [...updated] });
+
+    };
+
+    const toggleDegreePrograms = (value: string) => {
+        const updated = selectedDegreePrograms.includes(value)
+            ? selectedDegreePrograms.filter((v: string) => v !== value)
+            : [...selectedDegreePrograms, value];
+
+        setAttributes({ selectedDegreePrograms: [...updated] });
 
     };
 
@@ -240,41 +250,59 @@ const Edit = ({
                     </PanelBody>
                 )}
 
-                <PanelBody title={__('Filter Programs', 'fau-studium-display')} initialOpen={true}>
-                    <h3>{__('Faculties', 'fau-studium-display')}</h3>
-                    {faculties.map((item: { label: string; value: string }) => (
-                        <CheckboxControl
-                            key={item.value}
-                            label={item.label}
-                            checked={selectedFaculties.includes(item.value)}
-                            onChange={() => toggleFaculties(item.value)}
-                        />
-                    ))}
+                {(selectedFormat === "grid"
+                    || selectedFormat === "table"
+                    || selectedFormat === "list") && (
 
-                    <hr />
+                    <PanelBody title={__('Filter Programs', 'fau-studium-display')} initialOpen={false}>
+                        <h3>{__('Faculties', 'fau-studium-display')}</h3>
+                        {faculties.map((item: { label: string; value: string }) => (
+                            <CheckboxControl
+                                key={item.value}
+                                label={item.label}
+                                checked={selectedFaculties.includes(item.value)}
+                                onChange={() => toggleFaculties(item.value)}
+                            />
+                        ))}
 
-                    <h3>{__('Degrees', 'fau-studium-display')}</h3>
-                    {degrees.map((item: { label: string; value: string }) => (
-                        <CheckboxControl
-                            key={item.value}
-                            label={item.label}
-                            checked={selectedDegrees.includes(item.value)}
-                            onChange={() => toggleDegrees(item.value)}
-                        />
-                    ))}
+                        <hr />
 
-                    <hr />
+                        <h3>{__('Degrees', 'fau-studium-display')}</h3>
+                        {degrees.map((item: { label: string; value: string }) => (
+                            <CheckboxControl
+                                key={item.value}
+                                label={item.label}
+                                checked={selectedDegrees.includes(item.value)}
+                                onChange={() => toggleDegrees(item.value)}
+                            />
+                        ))}
 
-                    <h3>{__('Special ways to study', 'fau-studium-display')}</h3>
-                    {specialWays.map((item: { label: string; value: string }) => (
-                        <CheckboxControl
-                            key={item.value}
-                            label={item.label}
-                            checked={selectedSpecialWays.includes(item.value)}
-                            onChange={() => toggleSpecialWays(item.value)}
-                        />
-                    ))}
-                </PanelBody>
+                        <hr />
+
+                        <h3>{__('Special ways to study', 'fau-studium-display')}</h3>
+                        {specialWays.map((item: { label: string; value: string }) => (
+                            <CheckboxControl
+                                key={item.value}
+                                label={item.label}
+                                checked={selectedSpecialWays.includes(item.value)}
+                                onChange={() => toggleSpecialWays(item.value)}
+                            />
+                        ))}
+
+                        <hr />
+
+                        <h3>{__('Degree Programs', 'fau-studium-display')}</h3>
+                        {degreePrograms.map((item: { label: string; value: string }) => (
+                            <CheckboxControl
+                                key={item.value}
+                                label={item.label}
+                                checked={selectedDegreePrograms.includes(item.value)}
+                                onChange={() => toggleDegreePrograms(item.value)}
+                            />
+                        ))}
+                    </PanelBody>
+
+                )}
 
             </InspectorControls>
 
