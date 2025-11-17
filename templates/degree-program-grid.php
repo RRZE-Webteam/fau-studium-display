@@ -133,17 +133,28 @@ foreach ($data as $post_id => $program) {
         if ($page > 1) {
             echo '<a href="' . add_query_arg('pagenum', ($page - 1), $current_url) . '" class="page-number prev" aria-label="' . __('Previous page', 'fau-studium-display') . '"><span class="pagination-icon pagination-icon-prev"></span></a>';
         }
-        $ellipsis_done = false;
+        $ellipsis1_done = false;
+        $ellipsis2_done = false;
         for ($i = 1; $i <= $num_pages; $i++) {
             if ($page == $i) {
                 echo '<span class="page-number current" aria-current="page">' . $i . '</span>';
-            } elseif ($i > 3 && $i < ($num_pages - 2)) {
-                if (!$ellipsis_done) {
-                    echo '<span class="page-ellipsis" aria-hidden="true">...</span>';
-                    $ellipsis_done = true;
-                }
-            } else {
+            } elseif ($i == 1 ||
+                      $i == $num_pages ||
+                      $i == $page - 1 ||
+                      $i == $page + 1 ||
+                      ($page == 1 && in_array($i, [3, $num_pages - 2, $num_pages - 1])) ||
+                      ($page == $num_pages && $i == $num_pages - 2)
+                ) {
                 echo '<a href="' . add_query_arg('pagenum', $i, $current_url) . '" class="page-number" aria-label="' . sprintf(__('Page %d', 'fau-studium-display'), $i) . '">' . $i . '</a>';
+            } else {
+                if ($page < $i && !$ellipsis1_done) {
+                    echo '<span class="page-ellipsis" aria-hidden="true">...</span>';
+                    $ellipsis1_done = true;
+                }
+                if ($page > $i && !$ellipsis2_done) {
+                    echo '<span class="page-ellipsis" aria-hidden="true">...</span>';
+                    $ellipsis2_done = true;
+                }
             }
         }
         if ($page < $num_pages) {
