@@ -1174,24 +1174,28 @@
   height: auto;
 }
 .fau-studium-display.degree-program-full .program-header {
+  box-sizing: border-box;
+  width: 90%;
   max-width: 934px;
-  margin: 0 16px -32px;
-  padding: 16px;
+  margin: 0 auto -32px;
+  padding: var(--Spacing-3x, 0.75rem);
   background-color: #fff;
   color: var(--FAU_Col_FAU-Blau, #04316A);
 }
+@media screen and (min-width: 394px) {
+  .fau-studium-display.degree-program-full .program-header {
+    padding: var(--Spacing-2x, 0.5rem) var(--Spacing-4x, 1rem);
+  }
+}
 @media screen and (min-width: 768px) {
   .fau-studium-display.degree-program-full .program-header {
-    padding: 32px;
+    padding: var(--Spacing-4x, 1rem) var(--Spacing-8x, 2rem);
   }
 }
-@media screen and (min-width: 992px) {
-  .fau-studium-display.degree-program-full .program-header {
-    margin-left: auto;
-    margin-right: auto;
-  }
+.fau-studium-display.degree-program-full .program-header h1 {
+  font-size: 1.75rem;
 }
-@media (max-width: 768px) {
+@media (min-width: 394px) {
   .fau-studium-display.degree-program-full .program-header h1 {
     font-size: 2.5rem;
   }
@@ -1200,6 +1204,7 @@
   color: var(--FAU_Col_FAU-Blau, #04316A);
   margin: 0;
   padding: 0;
+  line-height: 1.5;
 }
 .fau-studium-display.degree-program-full .program-subtitle {
   padding-top: 0;
@@ -1222,6 +1227,7 @@
 .fau-studium-display.degree-program-full .fact-sheet {
   padding: 40px 16px 16px;
   margin-top: 56px;
+  box-sizing: border-box;
 }
 .fau-studium-display.degree-program-full .quicklinks {
   margin-top: 3em;
@@ -1483,6 +1489,10 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 32px;
   }
+}
+
+.fau-elemental.single-degree-program main {
+  --faue_minimal_inline-margin: 0;
 }
 
 .fau-studium-display .program-search {

@@ -96,20 +96,22 @@
         }
 
         .program-header {
+            box-sizing: border-box;
+            width: 90%;
             max-width: calc(870px + 64px);
-            margin: 0 16px -32px;
-            padding: 16px;
+            margin: 0 auto -32px;
+            padding: var(--Spacing-3x, 0.75rem);
             background-color: #fff;
             color: var(--FAU_Col_FAU-Blau, #04316A);
-            @media screen and (min-width: 768px) {
-                padding: 32px;
+            @media screen and (min-width: 394px) {
+                padding: var(--Spacing-2x, 0.5rem) var(--Spacing-4x, 1rem);
             }
-            @media screen and (min-width: 992px) {
-                margin-left: auto;
-                margin-right: auto;
+            @media screen and (min-width: 768px) {
+                padding: var(--Spacing-4x, 1rem) var(--Spacing-8x, 2rem);
             }
             h1 {
-                @media (max-width: 768px) {
+                font-size: 1.75rem;
+                @media (min-width: 394px) {
                     font-size: 2.5rem;
                 }
             }
@@ -117,6 +119,7 @@
                 color: var(--FAU_Col_FAU-Blau, #04316A);
                 margin: 0;
                 padding: 0;
+                line-height: 1.5;
             }
         }
 
@@ -145,6 +148,7 @@
         .fact-sheet {
             padding: 40px 16px 16px;
             margin-top: 56px;
+            box-sizing: border-box;
             @media screen and (min-width: 768px) {
                 //padding: 40px 32px 32px;
             }
@@ -434,5 +438,13 @@
                 }
             }
         }
+    }
+}
+
+.fau-elemental.single-degree-program {
+    main {
+        //@media (max-width: 393px) {
+            --faue_minimal_inline-margin: 0;
+        //}
     }
 }
