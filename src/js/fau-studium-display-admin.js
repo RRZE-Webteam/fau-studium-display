@@ -1,7 +1,5 @@
 const { __, _x, _n, sprintf } = wp.i18n;
 
-//console.log(__('Test', 'fau-studium-display'));
-
 jQuery(document).ready(function($) {
 
     let searchResults = $('#degree-program-results');
@@ -67,12 +65,8 @@ jQuery(document).ready(function($) {
             .map(function() { return $(this).data('id'); })
             .get();
         if (checkedIds.length > 0) {
-            searchResults.find('button, a.button').addClass('button-disabled');
-            searchResults.find('input[type="checkbox"][name^="batch-import"]').addClass('disabled');
             $.each(checkedIds, function(index, id) {
-                searchResults.find('div.program-item[data-program_id="' + id + '"] span.dashicons-plus')
-                    .removeClass('dashicons-plus')
-                    .addClass('dashicons-update').addClass('spin');
+                $('a.add-degree-program[data-id="' + id + '"]').trigger('click');
             });
             sync_degree_programs(checkedIds, []);
         } else {
