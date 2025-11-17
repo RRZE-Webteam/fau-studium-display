@@ -753,8 +753,8 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'benefits' => [
             'labels' => [
-                'de' => 'Deine Vorteile an der FAU',
-                'en' => 'Your Benefits at FAU'
+                'de' => 'Vorteile des Studiums an der FAU',
+                'en' => 'Benefits of studying at FAU'
             ]
         ],
         'how_to_apply' => [
@@ -872,8 +872,8 @@ function get_constants($lang = 'de') {
             'en' => plugin()->getUrl() . 'assets/img/student-advice-specific.jpg'
         ],
         'benefits-fau-title' => [
-            'de' => 'Deine Vorteile an der FAU',
-            'en' => 'Your Benefits at FAU'
+            'de' => 'Vorteile des Studiums an der FAU',
+            'en' => 'Benefits of studying at FAU'
         ],
         'benefits-fau-text' => [
             'de' => 'Die FAU bietet Ihnen mit über 275 Studiengängen eine inspirierende Lernumgebung, studentische Gemeinschaft und zahlreiche Möglichkeiten, Ihre Leidenschaft zu entdecken.',

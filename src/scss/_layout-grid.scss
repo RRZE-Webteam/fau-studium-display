@@ -106,17 +106,19 @@
     }
 
     .fau-theme & {
+        margin: 0 auto;
         ul.degree-program-grid * {
             font-size: var(--font-size-normal, 1rem);
-        }
-        .wp-block-buttons {
-            .wp-block-button__link {
-                margin: 0;
-                background-color: var(----color-zentral-dunkler, #004A9F);
-                color: var(--color-primary-dunkler-kontrast, #fff);
-                &:hover, &:focus, &:active {
-                    background-color: var(--color-button-hover-bg, #041E42);
-                    color: var(--color-button-hover-text, #fff);
+            .wp-block-buttons {
+                .wp-block-button__link {
+                    margin: 0;
+                    background-color: var(----color-zentral-dunkler, #004A9F);
+                    color: var(--color-primary-dunkler-kontrast, #fff);
+
+                    &:hover, &:focus, &:active {
+                        background-color: var(--color-button-hover-bg, #041E42);
+                        color: var(--color-button-hover-text, #fff);
+                    }
                 }
             }
         }

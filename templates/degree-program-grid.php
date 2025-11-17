@@ -18,16 +18,22 @@ $labels = get_labels($lang);
 $total = count($data);
 $page = isset($_GET['pagenum']) ? (int)$_GET['pagenum'] : 1;
 $length = 12;
+$num_pages = ceil($total / $length);
+if ($page > $num_pages) {
+    $page = $num_pages;
+}
 $offset = ($page - 1) * $length;
 $end = min(($offset + $length), $total);
-$num_pages = ceil($total / $length);
+
 $pagination_string = $total > 0 ? sprintf(
     __("%s to %s of %s", 'fau-studium-display'),
     '<p class="pagination-info" id="degree_program_results"><span class="pagination-number">' . ($offset + 1) . '</span>',
     '<span class="pagination-number">' . $end . '</span>',
     '<span class="pagination-number">' . $total . '</span></p>'
 ) : '';
-$data = array_slice($data, $offset, $length, true);
+if ($show_search) {
+    $data = array_slice($data, $offset, $length, true);
+}
 
 $program_grid = '';
 
@@ -127,9 +133,15 @@ foreach ($data as $post_id => $program) {
         if ($page > 1) {
             echo '<a href="' . add_query_arg('pagenum', ($page - 1), $current_url) . '" class="page-number prev" aria-label="' . __('Previous page', 'fau-studium-display') . '"><span class="pagination-icon pagination-icon-prev"></span></a>';
         }
+        $ellipsis_done = false;
         for ($i = 1; $i <= $num_pages; $i++) {
             if ($page == $i) {
                 echo '<span class="page-number current" aria-current="page">' . $i . '</span>';
+            } elseif ($i > 3 && $i < ($num_pages - 2)) {
+                if (!$ellipsis_done) {
+                    echo '<span class="page-ellipsis" aria-hidden="true">...</span>';
+                    $ellipsis_done = true;
+                }
             } else {
                 echo '<a href="' . add_query_arg('pagenum', $i, $current_url) . '" class="page-number" aria-label="' . sprintf(__('Page %d', 'fau-studium-display'), $i) . '">' . $i . '</a>';
             }
