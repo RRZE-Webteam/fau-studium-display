@@ -27,7 +27,7 @@ $end = min(($offset + $length), $total);
 
 $pagination_string = $total > 0 ? sprintf(
     __("%s to %s of %s", 'fau-studium-display'),
-    '<p class="pagination-info" id="degree_program_results"><span class="pagination-number">' . ($offset + 1) . '</span>',
+    '<p class="pagination-info"><span class="pagination-number">' . ($offset + 1) . '</span>',
     '<span class="pagination-number">' . $end . '</span>',
     '<span class="pagination-number">' . $total . '</span></p>'
 ) : '';
@@ -111,8 +111,7 @@ foreach ($data as $post_id => $program) {
         }, ['faculty' => 'selectedFaculties', 'degree' => 'selectedDegrees', 'attribute' => 'selectedSpecialWays']);
         $filter_items = $atts['selectedSearchFilters'] ?? [];
         echo Utils::renderSearchForm($prefilter, $filter_items, $lang, 'grid');
-
-        echo $pagination_string;
+        echo '<span id="degree_program_results"></span>' . $pagination_string;
 
     endif; ?>
 
@@ -128,7 +127,7 @@ foreach ($data as $post_id => $program) {
     <?php endif; ?>
 
     <?php if ($show_search && $num_pages > 1) :
-        $current_url = home_url( add_query_arg( null, null ) );
+        $current_url = home_url( add_query_arg( null, null ) ) . '#degree_program_results';
         echo '<nav class="fau-pagination" role="navigation" aria-label="' . __('Degree program pagination', 'fau-studium-display') . '"><div class="pagination-wrapper">';
         if ($page > 1) {
             echo '<a href="' . add_query_arg('pagenum', ($page - 1), $current_url) . '" class="page-number prev" aria-label="' . __('Previous page', 'fau-studium-display') . '"><span class="pagination-icon pagination-icon-prev"></span></a>';
