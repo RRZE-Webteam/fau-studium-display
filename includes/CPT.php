@@ -61,8 +61,8 @@ class CPT
             register_taxonomy($taxonomy, self::POST_TYPE, [
                 'label'        => $label,
                 'public'       => true,
-                'show_ui'      => false,
-                //'show_ui'      => true,
+                //'show_ui'      => false,
+                'show_ui'      => true,
                 'show_in_rest' => true,
                 'hierarchical' => true
             ]);
