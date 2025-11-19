@@ -1494,6 +1494,11 @@
 .fau-elemental.single-degree-program main {
   --faue_minimal_inline-margin: 0;
 }
+@media (min-width: 1320px) {
+  .fau-elemental.single-degree-program main {
+    margin-top: var(--Spacing-8x, 2rem);
+  }
+}
 
 .fau-studium-display .program-search {
   width: 100%;

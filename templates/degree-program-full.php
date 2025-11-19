@@ -593,18 +593,11 @@ if (in_array('benefits', $items)) {
                                 } /-->'
         );
     } else {
-        $benefits_fau .= do_blocks('<div class="width-large"><!-- wp:media-text {
-        "mediaPosition":"right",
-        "mediaId":0,
-        "mediaLink":"' . $benefits_fau_image . '",
-        "mediaType":"image",
-        "mediaWidth":50,
-        "style":{"spacing":{"margin":{"right":"0","left":"0","top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}}} -->
-        <div class="wp-block-media-text has-media-on-the-right is-stacked-on-mobile" style="margin-top:var(--wp--preset--spacing--60);margin-right:0;margin-bottom:var(--wp--preset--spacing--60);margin-left:0;grid-template-columns:auto 50%"><div class="wp-block-media-text__content">
-        <!-- wp:heading --><h3 class="wp-block-heading">' . $constants[ 'benefits-fau-title' ] . '</h3><!-- /wp:heading -->
-        <!-- wp:paragraph {"placeholder":"Content…"} --><p>' . $constants[ 'benefits-fau-text' ] . '</p><!-- /wp:paragraph --></div>
-        <figure class="wp-block-media-text__media"><img src="' . $benefits_fau_image . '" alt="" class="wp-image-0 size-full"/></figure></div>
-        <!-- /wp:media-text --></div>');
+        $benefits_fau .= do_blocks('<div class="width-large"><!-- wp:fau-elemental/fau-big-teaser {
+            "headline":"' . $constants[ 'benefits-fau-title' ] . '",
+            "teaserText":"' . $constants[ 'benefits-fau-text' ] . '",
+            "image":{"id":"","url":"' . $benefits_fau_image . '","alt":""}
+            } /--></div>');
     }
 
     $benefits_fau .= do_blocks('<!-- wp:rrze-elements/iconbox-row -->
