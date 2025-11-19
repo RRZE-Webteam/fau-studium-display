@@ -478,8 +478,8 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Student advice center'
             ],
             'description' => [
-                'de' => 'Die Zentrale Studienberatung ist die erste Anlaufstelle zu allen Fragen rund ums Studium und den Studieneinstieg.',
-                'en' => 'The Central Student Advisory Service is the first point of contact for all questions concerning your studies and the start of your degree program.',
+                'de' => 'Die Zentrale Studienberatung ist die erste Anlaufstelle zu allen Fragen rund ums Studium.',
+                'en' => 'The Central Student Advisory Service is the first point of contact for all questions concerning your studies.',
             ],
         ],
         'subject_specific_advice' => [

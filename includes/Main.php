@@ -50,7 +50,7 @@ class Main
         $attributeOptions = Utils::get_attribute_options();
 
         // get display options from config
-        $labels = get_labels('de');
+        $labels = get_labels(Utils::get_short_locale());
 
         $items_grid = get_output_fields('grid');
         $items_grid_formatted = [];

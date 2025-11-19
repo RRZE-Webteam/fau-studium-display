@@ -145,6 +145,7 @@ class Data
                         $data[$program->ID] = get_post_meta($program->ID, 'program_data_en', true);
                         $data[$program->ID]['_thumbnail_rendered'] = get_the_post_thumbnail($program->ID, 'full');
                     }
+                    break;
                 case 'de':
                 default:
                     foreach ($programs_imported as $program) {
