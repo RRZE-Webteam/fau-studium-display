@@ -473,7 +473,6 @@ if (in_array('links.organizational', $items)) {
     $fields_organizational = [
         'start_of_semester',
         'semester_dates',
-        'examinations_office',
         'semester_fee',
         'service_centers',
         'abroad_opportunities',

@@ -253,6 +253,7 @@ const Edit = ({
                     || selectedFormat === "list") && (
 
                     <PanelBody title={__('Filter Programs', 'fau-studium-display')} initialOpen={false}>
+                        <div key="facultiesWrapper">
                         <h3>{__('Faculties', 'fau-studium-display')}</h3>
                         {faculties.map((item: { label: string; value: string }) => (
                             <CheckboxControl
@@ -262,9 +263,11 @@ const Edit = ({
                                 onChange={() => toggleFaculties(item.value)}
                             />
                         ))}
+                        </div>
 
                         <hr />
 
+                        <div key="degreesWrapper">
                         <h3>{__('Degrees', 'fau-studium-display')}</h3>
                         {degrees.map((item: { label: string; value: string }) => (
                             <CheckboxControl
@@ -274,9 +277,11 @@ const Edit = ({
                                 onChange={() => toggleDegrees(item.value)}
                             />
                         ))}
+                        </div>
 
                         <hr />
 
+                        <div key="specialWaysWrapper">
                         <h3>{__('Special ways to study', 'fau-studium-display')}</h3>
                         {specialWays.map((item: { label: string; value: string }) => (
                             <CheckboxControl
@@ -286,18 +291,20 @@ const Edit = ({
                                 onChange={() => toggleSpecialWays(item.value)}
                             />
                         ))}
-
+                        </div>
                         <hr />
 
+                        <div key="degreeProgramsWrapper">
                         <h3>{__('Degree Programs', 'fau-studium-display')}</h3>
-                        {degreePrograms.map((item: { label: string; value: string }) => (
-                            <CheckboxControl
-                                key={item.value}
-                                label={item.label}
-                                checked={selectedDegreePrograms.includes(item.value)}
-                                onChange={() => toggleDegreePrograms(item.value)}
-                            />
-                        ))}
+                            {degreePrograms.map((item: { label: string; value: string }) => (
+                                <CheckboxControl
+                                    key={item.value}
+                                    label={item.label}
+                                    checked={selectedDegreePrograms.includes(item.value)}
+                                    onChange={() => toggleDegreePrograms(item.value)}
+                                />
+                            ))}
+                        </div>
                     </PanelBody>
 
                 )}
