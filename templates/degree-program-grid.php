@@ -111,7 +111,7 @@ foreach ($data as $post_id => $program) {
         }, ['faculty' => 'selectedFaculties', 'degree' => 'selectedDegrees', 'attribute' => 'selectedSpecialWays']);
         $filter_items = $atts['selectedSearchFilters'] ?? [];
         echo Utils::renderSearchForm($prefilter, $filter_items, $lang, 'grid');
-        echo '<span id="degree_program_results"></span>' . $pagination_string;
+        echo '<div id="degree_program_results"></div>' . $pagination_string;
 
     endif; ?>
 

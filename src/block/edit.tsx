@@ -164,8 +164,7 @@ const Edit = ({
                     />
 
                     {(selectedFormat === "grid"
-                        || selectedFormat === "table"
-                        || selectedFormat === "list") && (
+                        || selectedFormat === "table") && (
                         <ToggleControl
                             label={__('Show Search', 'fau-studium-display')}
                             checked={!!showSearch}
@@ -175,8 +174,7 @@ const Edit = ({
 
                     {showSearch &&
                         (selectedFormat === "grid"
-                        || selectedFormat === "table"
-                        || selectedFormat === "list") && (
+                        || selectedFormat === "table") && (
                         <>
                         <h3>{__('Search Filters', 'fau-studium-display')}</h3>
                         {searchFilters.map((item: { label: string; value: string }) => (
