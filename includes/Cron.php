@@ -12,10 +12,11 @@ class Cron
     }
 
     public static function scheduleDegreeProgramCrons() {
-        date_default_timezone_set('Europe/Berlin');
+        $wp_tz = wp_timezone();
+        $dt = new \DateTime('today 4:00', $wp_tz);
 
         if (!wp_next_scheduled('fau_studium_display_sync_programs')) {
-            wp_schedule_event(strtotime('today 4:00'), 'daily', 'fau_studium_display_sync_programs');
+            wp_schedule_event($dt->getTimestamp(), 'daily', 'fau_studium_display_sync_programs');
         }
 
     }
