@@ -89,7 +89,7 @@ class API
         $transient_name = 'fau_studium_display_' . $meta;
         $meta_list = get_transient($transient_name);
 
-        if ($meta_list === false) {
+        if (empty($meta_list)) {
             $meta_list = [];
             $programs  = $this->get_programs();
             foreach ($programs as $program) {
