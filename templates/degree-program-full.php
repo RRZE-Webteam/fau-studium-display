@@ -18,6 +18,7 @@ if (empty($data)) {
 }
 
 $theme_family = Utils::getThemeFamily() != 'fau-elemental' ? '-default' : '';
+$theme_family = Utils::getThemeFamily();
 $items = $atts['selectedItemsFull'] ?? [];
 $lang = $atts[ 'language' ] ?? 'de';
 $labels = get_labels($lang);
@@ -341,9 +342,8 @@ if (in_array('admission_requirements_application', $items)) {
 // Info Internationals
 if (in_array('info_internationals_link', $items)) {
     if ($theme_family == 'fau-elemental') {
-        $cta_internationals = '<div class="width-full">'
-              . do_blocks('<!-- wp:group {"className":"is-style-dark","layout":{"type":"constrained"}} -->
-            <div class="wp-block-group is-style-dark">
+        $cta_internationals = do_blocks('<!-- wp:group {"className":"is-style-dark","layout":{"type":"constrained"}} -->
+            <div class="width-full wp-block-group is-style-dark">
             <!-- wp:fau-elemental/fau-big-teaser {
             "headline":"' . ($labels['how_to_apply_internationals_title'] ?? 'how_to_apply_internationals_title') . '",
             "teaserText":"' . ($labels['all_information_internationals'] ?? 'all_information_internationals') . '",
@@ -351,8 +351,7 @@ if (in_array('info_internationals_link', $items)) {
             "linkUrl":"' . ($data['notes_for_international_applicants']['link_url'] ?? '') . '",
             "image":{"url":"' . $constants['internationals-image'] . '","alt":""}
             } /--></div>
-            <!-- /wp:group -->')
-            . '</div>';
+            <!-- /wp:group -->');
     } else {
         $cta_internationals = '<div class="width-medium">'
             . do_blocks('<!-- wp:rrze-elements/cta {
@@ -474,7 +473,6 @@ if (in_array('links.organizational', $items)) {
     $fields_organizational = [
         'start_of_semester',
         'semester_dates',
-        'examinations_office',
         'semester_fee',
         'service_centers',
         'abroad_opportunities',
@@ -586,18 +584,25 @@ if (in_array('benefits', $items)) {
 
     if ($theme_family == 'fau-elemental') {
         $benefits_fau .= do_blocks(
-            '<!-- wp:fau-elemental/fau-big-teaser {
+            '<div class="width-large"><!-- wp:fau-elemental/fau-big-teaser {
                                 "headline":"' . $constants[ 'benefits-fau-title' ] . '",
                                 "teaserText":"' . $constants[ 'benefits-fau-text' ] . '",
                                 "image":{"url":"' . $benefits_fau_image . '","alt":""}
-                                } /-->'
+                                } /--></div>'
         );
     } else {
-        $benefits_fau .= do_blocks('<div class="width-large"><!-- wp:fau-elemental/fau-big-teaser {
-            "headline":"' . $constants[ 'benefits-fau-title' ] . '",
-            "teaserText":"' . $constants[ 'benefits-fau-text' ] . '",
-            "image":{"id":"","url":"' . $benefits_fau_image . '","alt":""}
-            } /--></div>');
+        $benefits_fau .= do_blocks('<div class="width-large"><!-- wp:media-text {
+        "mediaPosition":"right",
+        "mediaId":0,
+        "mediaLink":"' . $benefits_fau_image . '",
+        "mediaType":"image",
+        "mediaWidth":50,
+        "style":{"spacing":{"margin":{"right":"0","left":"0","top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}}} -->
+        <div class="wp-block-media-text has-media-on-the-right is-stacked-on-mobile" style="margin-top:var(--wp--preset--spacing--60);margin-right:0;margin-bottom:var(--wp--preset--spacing--60);margin-left:0;grid-template-columns:auto 50%"><div class="wp-block-media-text__content">
+        <!-- wp:heading --><h3 class="wp-block-heading">' . $constants[ 'benefits-fau-title' ] . '</h3><!-- /wp:heading -->
+        <!-- wp:paragraph {"placeholder":"Content…"} --><p>' . $constants[ 'benefits-fau-text' ] . '</p><!-- /wp:paragraph --></div>
+        <figure class="wp-block-media-text__media"><img src="' . $benefits_fau_image . '" alt="" class="wp-image-0 size-full"/></figure></div>
+        <!-- /wp:media-text --></div>');
     }
 
     $benefits_fau .= do_blocks('<!-- wp:rrze-elements/iconbox-row -->

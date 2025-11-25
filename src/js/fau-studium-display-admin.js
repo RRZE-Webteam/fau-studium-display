@@ -67,8 +67,8 @@ jQuery(document).ready(function($) {
         if (checkedIds.length > 0) {
             $.each(checkedIds, function(index, id) {
                 $('a.add-degree-program[data-id="' + id + '"]').trigger('click');
+                $('input#batch-import-' + id).remove();
             });
-            sync_degree_programs(checkedIds, []);
         } else {
             alert(__('No program selected. Please select at least one program to import.', 'fau-studium-display'));
         }
