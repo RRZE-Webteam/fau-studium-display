@@ -87,8 +87,8 @@ class API
 
     public function get_meta_list($meta) {
         $transient_name = 'fau_studium_display_' . $meta;
-        //$meta_list = get_transient($transient_name);
-        $meta_list = '';
+        $meta_list = get_transient($transient_name);
+
         if (empty($meta_list)) {
             $meta_list = [];
             $programs  = $this->get_programs();
