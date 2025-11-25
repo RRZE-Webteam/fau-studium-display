@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-13T10:02:46+00:00\n"
+"POT-Creation-Date: 2025-11-25T17:15:28+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: fau-studium-display\n"
@@ -35,25 +35,29 @@ msgid "RRZE Webteam"
 msgstr ""
 
 #. translators: 1: Server WordPress version number, 2: Required WordPress version number.
-#: fau-studium-display.php:202
+#: fau-studium-display.php:204
 msgid "The server is running WordPress version %1$s. The plugin requires at least WordPress version %2$s."
 msgstr ""
 
 #. translators: 1: Server PHP version number, 2: Required PHP version number.
-#: fau-studium-display.php:212
+#: fau-studium-display.php:214
 msgid "The server is running PHP version %1$s. The plugin requires at least PHP version %2$s."
 msgstr ""
 
+#: fau-studium-display.php:223
+msgid "FAU Studium Display is not compatible with FAU Degree Program Output. Deactivate FAU Degree Program Output before activating FAU Studium Display."
+msgstr ""
+
 #. translators: 1: The plugin name, 2: The error string.
-#: fau-studium-display.php:227
+#: fau-studium-display.php:232
 msgid "Plugins: %1$s: %2$s"
 msgstr ""
 
-#: includes/API.php:37
+#: includes/API.php:36
 msgid "Empty response from API"
 msgstr ""
 
-#: includes/API.php:66
+#: includes/API.php:65
 msgid "-- Please select --"
 msgstr ""
 
@@ -113,8 +117,16 @@ msgstr ""
 msgid "No data available"
 msgstr ""
 
-#: includes/Main.php:122
+#: includes/Main.php:123
 msgid "RRZE"
+msgstr ""
+
+#: includes/Main.php:210
+msgid "This plugin is not compatible with FAU Studium Display and therefore cannot be activated."
+msgstr ""
+
+#: includes/Main.php:211
+msgid "Incompatible Plugin"
 msgstr ""
 
 #: includes/Settings.php:47
@@ -265,69 +277,69 @@ msgstr ""
 msgid "No data available."
 msgstr ""
 
-#: templates/degree-program-full.php:422
-#: templates/degree-program-full.php:459
+#: templates/degree-program-full.php:421
+#: templates/degree-program-full.php:458
 msgid "Read more about %s"
 msgstr ""
 
-#: templates/degree-program-full.php:611
+#: templates/degree-program-full.php:609
 msgid "More than 275"
 msgstr ""
 
-#: templates/degree-program-full.php:611
+#: templates/degree-program-full.php:609
 msgid "degree programs"
 msgstr ""
 
-#: templates/degree-program-full.php:612
+#: templates/degree-program-full.php:610
 msgid "International"
 msgstr ""
 
-#: templates/degree-program-full.php:612
+#: templates/degree-program-full.php:610
 msgid "partnerships"
 msgstr ""
 
-#: templates/degree-program-full.php:613
+#: templates/degree-program-full.php:611
 msgid "Close ties"
 msgstr ""
 
-#: templates/degree-program-full.php:613
+#: templates/degree-program-full.php:611
 msgid "to industry"
 msgstr ""
 
-#: templates/degree-program-full.php:614
+#: templates/degree-program-full.php:612
 msgid "Cooperative bachelor's program"
 msgstr ""
 
-#: templates/degree-program-full.php:614
+#: templates/degree-program-full.php:612
 msgid "available"
 msgstr ""
 
-#: templates/degree-program-grid.php:25
+#: templates/degree-program-grid.php:29
 msgid "%s to %s of %s"
 msgstr ""
 
-#: templates/degree-program-grid.php:85
+#: templates/degree-program-grid.php:91
 msgid "Read more"
 msgstr ""
 
-#: templates/degree-program-grid.php:120
+#: templates/degree-program-grid.php:125
 #: templates/degree-program-table.php:108
 msgid "No degree programs found."
 msgstr ""
 
-#: templates/degree-program-grid.php:126
+#: templates/degree-program-grid.php:131
 msgid "Degree program pagination"
 msgstr ""
 
-#: templates/degree-program-grid.php:128
+#: templates/degree-program-grid.php:133
 msgid "Previous page"
 msgstr ""
 
-#: templates/degree-program-grid.php:134
+#: templates/degree-program-grid.php:147
 msgid "Page %d"
 msgstr ""
 
-#: templates/degree-program-grid.php:138
+#: templates/degree-program-grid.php:160
 msgid "Next page"
 msgstr ""
 
@@ -391,16 +403,16 @@ msgstr ""
 msgid "Faculties"
 msgstr ""
 
-#: src/js/fau-studium-display-admin.js:79
+#: src/js/fau-studium-display-admin.js:73
 msgid "No program selected. Please select at least one program to import."
 msgstr ""
 
-#: src/js/fau-studium-display-admin.js:109
-#: src/js/fau-studium-display-admin.js:119
+#: src/js/fau-studium-display-admin.js:103
+#: src/js/fau-studium-display-admin.js:113
 msgid "No program selected. Please select at least one program."
 msgstr ""
 
-#: src/js/fau-studium-display-admin.js:121
+#: src/js/fau-studium-display-admin.js:115
 msgid "Are you sure you want to delete %d selected degree programs?"
 msgstr ""
 

@@ -182,6 +182,8 @@ function loaded()
     if (
         ! $wpCompatibe = is_wp_version_compatible(plugin()->getRequiresWP())
                          || ! $phpCompatible = is_php_version_compatible(plugin()->getRequiresPHP())
+                         || is_plugin_active('FAU-Studium-Embed/fau-degree-program-output.php')
+                         || is_plugin_active_for_network('FAU-Studium-Embed/fau-degree-program-output.php')
     ) {
         // If the system requirements are not met, add an action to display an admin notice.
         add_action('init', function () use ($wpCompatibe, $phpCompatible) {
@@ -216,6 +218,9 @@ function loaded()
                         PHP_VERSION,
                         plugin()->getRequiresPHP()
                     );
+                } elseif (is_plugin_active('FAU-Studium-Embed/fau-degree-program-output.php')
+                          || is_plugin_active_for_network('FAU-Studium-Embed/fau-degree-program-output.php')) {
+                    $error = __('FAU Studium Display is not compatible with FAU Degree Program Output. Deactivate FAU Degree Program Output before activating FAU Studium Display.', 'fau-studium-display');
                 }
 
                 // Display the error notice in the admin area.

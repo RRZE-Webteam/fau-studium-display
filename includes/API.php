@@ -8,7 +8,6 @@ class API
 
     public function __construct() {
         $this->api_url = 'https://meinstudium.fau.de/wp-json/fau/v1/degree-program';
-        //$this->api_url = 'http://localhost/wp/meinstudium/wp-json/fau/v1/degree-program';
     }
 
     public static function isUsingNetworkKey()
