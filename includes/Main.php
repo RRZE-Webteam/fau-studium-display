@@ -21,8 +21,9 @@ class Main
         add_filter('block_categories_all', [$this, 'rrzeBlockCategory'], 10, 2);
         add_filter('single_template', [__CLASS__, 'include_single_template']);
         add_filter('archive_template', [__CLASS__, 'include_archive_template']);
+        add_action('activate_plugin', [$this, 'activate_plugin']);
 
-        if (!is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+        if (!is_plugin_active('FAU-Studium/fau-degree-program.php') && !is_plugin_active_for_network('FAU-Studium/fau-degree-program.php')) {
             new CPT();
         }
         new Shortcode();
@@ -199,4 +200,17 @@ class Main
         return $template_path;
     }
 
+    public function activate_plugin($plugin): void
+    {
+        // Don't activate FAU-Studiengangsanzeige/FAU-Studium-Embed!!!
+        $blocked_plugin = 'FAU-Studium-Embed/fau-degree-program-output.php';
+        if ($plugin === $blocked_plugin) {
+            deactivate_plugins($blocked_plugin);
+            wp_die(
+                __('This plugin is not compatible with FAU Studium Display and therefore cannot be activated.', 'fau-studium-display'),
+                __('Incompatible Plugin', 'fau-studium-display'),
+                array('back_link' => true)
+            );
+        }
+    }
 }

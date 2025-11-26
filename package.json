@@ -1,6 +1,6 @@
 {
   "name": "fau-studium-display",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "main": "build/index.js",
   "scripts": {
     "build": "wp-scripts build",

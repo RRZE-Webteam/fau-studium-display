@@ -4,7 +4,7 @@
 Plugin Name: FAU Studium Display
 Plugin URI: https://github.com/RRZE-Webteam/fau-studium-display
 Description: Plugin for displaying the degree program information on websites.
-Version: 1.0.12
+Version: 1.0.13
 Author: RRZE Webteam
 License: GNU General Public License v3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -79,6 +79,16 @@ add_action('plugins_loaded', __NAMESPACE__ . '\loaded');
 function activation()
 {
     // Use this if you need to perform tasks on activation.
+
+    // Don't activate FAU Studium Display if FAU-Studiengangsanzeige/FAU-Studium-Embed is already active!!!
+    if (is_plugin_active('FAU-Studium-Embed/fau-degree-program-output.php')
+        || is_plugin_active_for_network('FAU-Studium-Embed/fau-degree-program-output.php')) {
+        wp_die(
+            __('FAU Studium Display is not compatible with FAU Degree Program Output. Deactivate FAU Degree Program Output before activating FAU Studium Display.', 'fau-studium-display'),
+            __('Incompatible Plugin', 'fau-studium-display'),
+            array('back_link' => true)
+        );
+    }
 }
 
 /**
