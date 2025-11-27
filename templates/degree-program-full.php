@@ -341,7 +341,7 @@ if (in_array('admission_requirements_application', $items)) {
 
 // Info Internationals
 if (in_array('info_internationals_link', $items)) {
-    if ($theme_family == 'fau-elemental') {
+    /*if ($theme_family == 'fau-elemental') {
         $cta_internationals = do_blocks('<!-- wp:group {"className":"is-style-dark","layout":{"type":"constrained"}} -->
             <div class="width-full wp-block-group is-style-dark">
             <!-- wp:fau-elemental/fau-big-teaser {
@@ -352,7 +352,7 @@ if (in_array('info_internationals_link', $items)) {
             "image":{"url":"' . $constants['internationals-image'] . '","alt":""}
             } /--></div>
             <!-- /wp:group -->');
-    } else {
+    } else {*/
         $cta_internationals = '<div class="width-medium">'
             . do_blocks('<!-- wp:rrze-elements/cta {
             "url":"' . $constants['internationals-image'] . '",
@@ -363,7 +363,7 @@ if (in_array('info_internationals_link', $items)) {
             "buttonText":"' . ($labels['button_internationals'] ?? 'button_internationals') . '"
             } /-->')
             . '</div>';
-    }
+    /*}*/
     
 } else {
     $cta_internationals = '';
