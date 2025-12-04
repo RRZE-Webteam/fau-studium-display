@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.
 msgid ""
 msgstr ""
-"Project-Id-Version: FAU Studium Display 1.0.14\n"
+"Project-Id-Version: FAU Studium Display 1.0.15\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fau-studium-display\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-25T17:15:28+00:00\n"
+"POT-Creation-Date: 2025-12-04T16:03:59+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: fau-studium-display\n"
@@ -34,22 +34,27 @@ msgstr ""
 msgid "RRZE Webteam"
 msgstr ""
 
+#: fau-studium-display.php:87
+msgid "FAU Studium Display is not compatible with FAU Degree Program Output. Deactivate FAU Degree Program Output before activating FAU Studium Display."
+msgstr ""
+
+#: fau-studium-display.php:88
+#: includes/Main.php:211
+msgid "Incompatible Plugin"
+msgstr ""
+
 #. translators: 1: Server WordPress version number, 2: Required WordPress version number.
-#: fau-studium-display.php:204
+#: fau-studium-display.php:212
 msgid "The server is running WordPress version %1$s. The plugin requires at least WordPress version %2$s."
 msgstr ""
 
 #. translators: 1: Server PHP version number, 2: Required PHP version number.
-#: fau-studium-display.php:214
+#: fau-studium-display.php:222
 msgid "The server is running PHP version %1$s. The plugin requires at least PHP version %2$s."
 msgstr ""
 
-#: fau-studium-display.php:223
-msgid "FAU Studium Display is not compatible with FAU Degree Program Output. Deactivate FAU Degree Program Output before activating FAU Studium Display."
-msgstr ""
-
 #. translators: 1: The plugin name, 2: The error string.
-#: fau-studium-display.php:232
+#: fau-studium-display.php:237
 msgid "Plugins: %1$s: %2$s"
 msgstr ""
 
@@ -66,54 +71,54 @@ msgstr ""
 msgid "Degree Programs"
 msgstr ""
 
-#: includes/CPT.php:49
+#: includes/CPT.php:53
 #: build/block/index.js:1
 msgid "Degrees"
 msgstr ""
 
-#: includes/CPT.php:50
+#: includes/CPT.php:54
 msgid "Subject groups"
 msgstr ""
 
-#: includes/CPT.php:51
+#: includes/CPT.php:55
 #: build/block/index.js:1
 msgid "Special ways to study"
 msgstr ""
 
-#: includes/CPT.php:52
+#: includes/CPT.php:56
 msgid "Admission requirements"
 msgstr ""
 
-#: includes/CPT.php:53
+#: includes/CPT.php:57
 msgid "Start of degree program"
 msgstr ""
 
-#: includes/CPT.php:54
+#: includes/CPT.php:58
 msgid "Study location"
 msgstr ""
 
-#: includes/CPT.php:55
+#: includes/CPT.php:59
 msgid "Teaching language"
 msgstr ""
 
-#: includes/CPT.php:56
+#: includes/CPT.php:60
 msgid "Faculty"
 msgstr ""
 
-#: includes/CPT.php:57
+#: includes/CPT.php:61
 msgid "German language skills"
 msgstr ""
 
-#: includes/CPT.php:76
+#: includes/CPT.php:80
 msgid "Post Meta German"
 msgstr ""
 
-#: includes/CPT.php:85
+#: includes/CPT.php:89
 msgid "Post Meta English"
 msgstr ""
 
-#: includes/CPT.php:97
-#: includes/CPT.php:109
+#: includes/CPT.php:101
+#: includes/CPT.php:113
 msgid "No data available"
 msgstr ""
 
@@ -123,10 +128,6 @@ msgstr ""
 
 #: includes/Main.php:210
 msgid "This plugin is not compatible with FAU Studium Display and therefore cannot be activated."
-msgstr ""
-
-#: includes/Main.php:211
-msgid "Incompatible Plugin"
 msgstr ""
 
 #: includes/Settings.php:47
@@ -168,7 +169,7 @@ msgstr ""
 #: includes/Settings.php:146
 #: includes/Settings.php:166
 #: includes/Settings.php:250
-#: includes/Settings.php:365
+#: includes/Settings.php:372
 msgid "Select / Deselect All"
 msgstr ""
 
@@ -207,7 +208,7 @@ msgid "Import degree programs"
 msgstr ""
 
 #: includes/Settings.php:186
-#: includes/Settings.php:378
+#: includes/Settings.php:385
 msgid "Import"
 msgstr ""
 
@@ -232,6 +233,7 @@ msgid "Search"
 msgstr ""
 
 #: includes/Settings.php:235
+#: includes/Settings.php:391
 msgid "No degree programs found"
 msgstr ""
 
@@ -251,11 +253,19 @@ msgstr ""
 msgid "Delete selected"
 msgstr ""
 
-#: includes/Settings.php:366
+#: includes/Settings.php:356
+msgid "No degree programs found. Please try again later."
+msgstr ""
+
+#: includes/Settings.php:359
+msgid "API Error. Please try again later."
+msgstr ""
+
+#: includes/Settings.php:373
 msgid "Import selected"
 msgstr ""
 
-#: includes/Settings.php:437
+#: includes/Settings.php:449
 msgid "No posts selected"
 msgstr ""
 
@@ -403,16 +413,16 @@ msgstr ""
 msgid "Faculties"
 msgstr ""
 
-#: src/js/fau-studium-display-admin.js:73
+#: src/js/fau-studium-display-admin.js:74
 msgid "No program selected. Please select at least one program to import."
 msgstr ""
 
-#: src/js/fau-studium-display-admin.js:103
-#: src/js/fau-studium-display-admin.js:113
+#: src/js/fau-studium-display-admin.js:104
+#: src/js/fau-studium-display-admin.js:114
 msgid "No program selected. Please select at least one program."
 msgstr ""
 
-#: src/js/fau-studium-display-admin.js:115
+#: src/js/fau-studium-display-admin.js:116
 msgid "Are you sure you want to delete %d selected degree programs?"
 msgstr ""
 

@@ -25,30 +25,31 @@ jQuery(document).ready(function($) {
         //let language = $('input[name="language"]:checked').val();
 
         $.ajax({
-            url: program_ajax.ajax_url,
-            type: 'POST',
-            data: {
-                action: 'program_search',
-                _ajax_nonce: program_ajax.nonce,
-                faculties: selectedFaculties,
-                degrees: selectedDegrees,
-                //language: language,
-            },
-            success: function(response) {
-                if (response.success) {
-                    $('div#degree-program-results').html(response.data.message);
-                } else {
+                url: program_ajax.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'program_search',
+                    _ajax_nonce: program_ajax.nonce,
+                    faculties: selectedFaculties,
+                    degrees: selectedDegrees,
+                    //language: language,
+                },
+                success: function(response) {
+                    if (response.success) {
+                        $('div#degree-program-results').html(response.data.message);
+                    } else {
+                        $this.removeClass('button-disabled');
+                    }
                     $this.removeClass('button-disabled');
+                    $('span.search-spinner').remove();
+                },
+                error: function(response) {
+                    $('div#degree-program-results').html(response.responseJSON.data);
+                    $this.removeClass('button-disabled');
+                    $('span.search-spinner').remove();
+                    //console.log('AJAX-Fehler');
+                    //console.log(response.responseJSON.data);
                 }
-                $this.removeClass('button-disabled');
-                $('span.search-spinner').remove();
-            },
-            error: function(response) {
-                $this.removeClass('button-disabled');
-                $('span.search-spinner').remove();
-                //console.log('AJAX-Fehler');
-                //console.log(response);
-            }
         });
     });
 
