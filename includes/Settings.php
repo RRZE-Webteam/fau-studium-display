@@ -352,6 +352,13 @@ class Settings
         $api = new API();
         $programs = $api->get_programs(false, $atts);
 
+        if (empty($programs)) {
+            wp_send_json_error(__('No degree programs found. Please try again later.', 'fau-studium-display'), '500');
+        }
+        if (is_wp_error($programs)) {
+            wp_send_json_error(__('API Error. Please try again later.', 'fau-studium-display'), '500');
+        }
+
         global $wpdb;
         $imported_ids = $wpdb->get_col( "
             SELECT pm.meta_value
@@ -379,7 +386,12 @@ class Settings
                        . '</div>';
         }
 
-        $response['message'] = $output;
+
+        if (strlen($output) < 300) {
+            $response['message'] = __('No degree programs found', 'fau-studium-display');
+        } else {
+            $response['message'] = $output;
+        }
         wp_send_json_success($response);
     }
 

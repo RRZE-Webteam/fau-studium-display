@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2025-06-12 12:41+0000\n"
-"PO-Revision-Date: 2025-11-25 17:17+0000\n"
+"PO-Revision-Date: 2025-12-04 16:05+0000\n"
 "Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz/\n"
@@ -23,9 +23,13 @@ msgstr "%s bis %s von %s"
 msgid "-- Please select --"
 msgstr "-- Bitte auswählen --"
 
-#: includes/CPT.php:52
+#: includes/CPT.php:56
 msgid "Admission requirements"
 msgstr "Zugangsvoraussetzung"
+
+#: includes/Settings.php:359
+msgid "API Error. Please try again later."
+msgstr "Fehler in der Schnittstelle. Bitte probieren Sie es später nochmal."
 
 #: includes/Utils.php:282
 msgid "Apply filter"
@@ -39,7 +43,7 @@ msgstr "Archiv-Format"
 msgid "Archive View"
 msgstr "Archiv-Ansicht"
 
-#: src/js/fau-studium-display-admin.js:115
+#: src/js/fau-studium-display-admin.js:116
 msgid "Are you sure you want to delete %d selected degree programs?"
 msgstr "Möchten Sie wirklich %d Studiengänge löschen?"
 
@@ -80,7 +84,7 @@ msgstr "Studiengänge"
 msgid "degree programs"
 msgstr "Studiengänge"
 
-#: includes/CPT.php:49 build/block/index.js:1
+#: includes/CPT.php:53 build/block/index.js:1
 msgid "Degrees"
 msgstr "Abschlüsse"
 
@@ -104,7 +108,7 @@ msgstr "Englisch"
 msgid "Faculties"
 msgstr "Fakultäten"
 
-#: includes/CPT.php:56
+#: includes/CPT.php:60
 msgid "Faculty"
 msgstr "Fakultät"
 
@@ -113,7 +117,7 @@ msgstr "Fakultät"
 msgid "FAU Studium Display"
 msgstr "FAU Studium Display"
 
-#: fau-studium-display.php:223
+#: fau-studium-display.php:87
 msgid ""
 "FAU Studium Display is not compatible with FAU Degree Program Output. "
 "Deactivate FAU Degree Program Output before activating FAU Studium Display."
@@ -142,7 +146,7 @@ msgstr "Allgemeine Einstellungen"
 msgid "German"
 msgstr "Deutsch"
 
-#: includes/CPT.php:57
+#: includes/CPT.php:61
 msgid "German language skills"
 msgstr "Deutschkenntnisse"
 
@@ -155,7 +159,7 @@ msgstr "Kacheln"
 msgid "https://github.com/RRZE-Webteam/fau-studium-display"
 msgstr "https://github.com/RRZE-Webteam/fau-studium-display"
 
-#: includes/Settings.php:186 includes/Settings.php:378
+#: includes/Settings.php:186 includes/Settings.php:385
 msgid "Import"
 msgstr "Importieren"
 
@@ -163,11 +167,11 @@ msgstr "Importieren"
 msgid "Import degree programs"
 msgstr "Studiengänge importieren"
 
-#: includes/Settings.php:366
+#: includes/Settings.php:373
 msgid "Import selected"
 msgstr "Ausgewählte importieren"
 
-#: includes/Main.php:211
+#: fau-studium-display.php:88 includes/Main.php:211
 msgid "Incompatible Plugin"
 msgstr "Inkompatibles Plugin"
 
@@ -215,7 +219,7 @@ msgstr "Mehr als 275"
 msgid "Next page"
 msgstr "Nächste Seite"
 
-#: includes/CPT.php:97 includes/CPT.php:109
+#: includes/CPT.php:101 includes/CPT.php:113
 msgid "No data available"
 msgstr "Keine Daten vorhanden"
 
@@ -223,7 +227,7 @@ msgstr "Keine Daten vorhanden"
 msgid "No data available."
 msgstr "Keine Daten verfügbar."
 
-#: includes/Settings.php:235
+#: includes/Settings.php:235 includes/Settings.php:391
 msgid "No degree programs found"
 msgstr "Keine Studiengänge gefunden"
 
@@ -231,18 +235,24 @@ msgstr "Keine Studiengänge gefunden"
 msgid "No degree programs found."
 msgstr "Keine Studiengänge gefunden."
 
-#: includes/Settings.php:437
+#: includes/Settings.php:356
+msgid "No degree programs found. Please try again later."
+msgstr ""
+"Aktuell liefert die Schnittstelle keine Daten. Bitte probieren Sie es später "
+"nochmal."
+
+#: includes/Settings.php:449
 msgid "No posts selected"
 msgstr "Keine Studiengänge ausgewählt."
 
-#: src/js/fau-studium-display-admin.js:73
+#: src/js/fau-studium-display-admin.js:74
 msgid "No program selected. Please select at least one program to import."
 msgstr ""
 "Kein Studiengang ausgewählt. Bitte wählen Sie mindestens einen Studiengang "
 "zum importieren."
 
-#: src/js/fau-studium-display-admin.js:103
-#: src/js/fau-studium-display-admin.js:113
+#: src/js/fau-studium-display-admin.js:104
+#: src/js/fau-studium-display-admin.js:114
 msgid "No program selected. Please select at least one program."
 msgstr ""
 "Kein Studiengang ausgewählt. Bitte wählen Sie mindestens einen Studiengang."
@@ -265,15 +275,15 @@ msgid "Plugin for displaying the degree program information on websites."
 msgstr "Plugin zur Darstellung von Studiengangsinformationen"
 
 #. translators: 1: The plugin name, 2: The error string.
-#: fau-studium-display.php:232
+#: fau-studium-display.php:237
 msgid "Plugins: %1$s: %2$s"
 msgstr "Plugins: %1$s: %2$s"
 
-#: includes/CPT.php:85
+#: includes/CPT.php:89
 msgid "Post Meta English"
 msgstr "Post-Meta-Daten englisch"
 
-#: includes/CPT.php:76
+#: includes/CPT.php:80
 msgid "Post Meta German"
 msgstr "Post-Meta-Daten deutsch"
 
@@ -312,7 +322,7 @@ msgstr "Filteroptionen"
 
 #: includes/Settings.php:122 includes/Settings.php:146
 #: includes/Settings.php:166 includes/Settings.php:250
-#: includes/Settings.php:365
+#: includes/Settings.php:372
 msgid "Select / Deselect All"
 msgstr "Alle auswählen / abwählen"
 
@@ -365,19 +375,19 @@ msgstr "Detail-Elemente ein-/ausblenden"
 msgid "Single View"
 msgstr "Detail-Ansicht"
 
-#: includes/CPT.php:51 build/block/index.js:1
+#: includes/CPT.php:55 build/block/index.js:1
 msgid "Special ways to study"
 msgstr "Besondere Studienformen"
 
-#: includes/CPT.php:53
+#: includes/CPT.php:57
 msgid "Start of degree program"
 msgstr "Studienbeginn"
 
-#: includes/CPT.php:54
+#: includes/CPT.php:58
 msgid "Study location"
 msgstr "Studienort"
 
-#: includes/CPT.php:50
+#: includes/CPT.php:54
 msgid "Subject groups"
 msgstr "Fächergruppen"
 
@@ -389,12 +399,12 @@ msgstr "Sync"
 msgid "Table"
 msgstr "Tabelle"
 
-#: includes/CPT.php:55
+#: includes/CPT.php:59
 msgid "Teaching language"
 msgstr "Unterrichtssprache"
 
 #. translators: 1: Server PHP version number, 2: Required PHP version number.
-#: fau-studium-display.php:214
+#: fau-studium-display.php:222
 msgid ""
 "The server is running PHP version %1$s. The plugin requires at least PHP "
 "version %2$s."
@@ -403,7 +413,7 @@ msgstr ""
 "Version %2$s."
 
 #. translators: 1: Server WordPress version number, 2: Required WordPress version number.
-#: fau-studium-display.php:204
+#: fau-studium-display.php:212
 msgid ""
 "The server is running WordPress version %1$s. The plugin requires at least "
 "WordPress version %2$s."

@@ -29,7 +29,7 @@ class CPT
             'label'             => __('Degree Programs', 'fau-studium-display'),
             'hierarchical'       => false,
             'public'             => true,
-            //'show_ui'            => false,
+            'show_ui'            => false,
             'supports'           => ['title', 'thumbnail'],
             'menu_icon'          => 'dashicons-portfolio',
             'capability_type'    => 'page',
@@ -39,6 +39,10 @@ class CPT
             'rewrite'            => ['slug' => $slug],
             'show_in_rest'       => false,
         ];
+
+        if (is_plugin_active('rrze-multilang/rrze-multilang.php') || is_plugin_active_for_network('rrze-multilang/rrze-multilang.php')) {
+            $args['show_ui'] = true;
+        }
 
         register_post_type(self::POST_TYPE, $args);
     }
