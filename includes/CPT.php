@@ -22,8 +22,8 @@ class CPT
 
     public function register_post_type()
     {
-        $settings = get_option('fau-studium-display-settings');
-        $slug = (isset($settings['slug']) && $settings['slug'] != '') ? $settings['slug'] : 'degree-program';
+        $settings = get_option('fau-studium-display_layout');
+        $slug = (isset($settings['post_type_slug']) && $settings['post_type_slug'] != '') ? $settings['post_type_slug'] : 'studiengang';
 
         $args = [
             'label'             => __('Degree Programs', 'fau-studium-display'),

@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v3.
 msgid ""
 msgstr ""
-"Project-Id-Version: FAU Studium Display 1.0.15\n"
+"Project-Id-Version: FAU Studium Display 1.0.16\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fau-studium-display\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-04T16:03:59+00:00\n"
+"POT-Creation-Date: 2025-12-10T16:06:09+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: fau-studium-display\n"
@@ -140,7 +140,7 @@ msgid "Layout"
 msgstr ""
 
 #: includes/Settings.php:60
-#: includes/Settings.php:173
+#: includes/Settings.php:186
 msgid "Sync"
 msgstr ""
 
@@ -149,123 +149,132 @@ msgid "Save changes"
 msgstr ""
 
 #: includes/Settings.php:99
+#: includes/Settings.php:106
+msgid "Slug"
+msgstr ""
+
+#: includes/Settings.php:107
+msgid "Slug (part of the URL) for the degree program post type"
+msgstr ""
+
+#: includes/Settings.php:112
 msgid "Archive View"
 msgstr ""
 
-#: includes/Settings.php:100
+#: includes/Settings.php:113
 msgid "What format should the list view use?"
 msgstr ""
 
-#: includes/Settings.php:106
+#: includes/Settings.php:119
 #: build/block/index.js:1
 msgid "Show Search"
 msgstr ""
 
-#: includes/Settings.php:117
+#: includes/Settings.php:130
 msgid "Show/Hide Search Filters"
 msgstr ""
 
-#: includes/Settings.php:122
-#: includes/Settings.php:146
-#: includes/Settings.php:166
-#: includes/Settings.php:250
-#: includes/Settings.php:372
+#: includes/Settings.php:135
+#: includes/Settings.php:159
+#: includes/Settings.php:179
+#: includes/Settings.php:263
+#: includes/Settings.php:385
 msgid "Select / Deselect All"
 msgstr ""
 
-#: includes/Settings.php:126
+#: includes/Settings.php:139
 msgid "Archive Format"
 msgstr ""
 
-#: includes/Settings.php:129
+#: includes/Settings.php:142
 #: build/block/index.js:1
 msgid "Grid"
 msgstr ""
 
-#: includes/Settings.php:130
+#: includes/Settings.php:143
 #: build/block/index.js:1
 msgid "Table"
 msgstr ""
 
-#: includes/Settings.php:141
+#: includes/Settings.php:154
 msgid "Show/Hide Grid Items"
 msgstr ""
 
-#: includes/Settings.php:149
+#: includes/Settings.php:162
 msgid "Single View"
 msgstr ""
 
-#: includes/Settings.php:150
+#: includes/Settings.php:163
 msgid "Select the elements to be shown in single view"
 msgstr ""
 
-#: includes/Settings.php:161
+#: includes/Settings.php:174
 msgid "Show/Hide Single Items"
 msgstr ""
 
-#: includes/Settings.php:179
+#: includes/Settings.php:192
 msgid "Import degree programs"
 msgstr ""
 
-#: includes/Settings.php:186
-#: includes/Settings.php:385
+#: includes/Settings.php:199
+#: includes/Settings.php:398
 msgid "Import"
 msgstr ""
 
-#: includes/Settings.php:193
+#: includes/Settings.php:206
 msgid "Manage Imported Degree Programs"
 msgstr ""
 
-#: includes/Settings.php:200
+#: includes/Settings.php:213
 msgid "Manage Imported"
 msgstr ""
 
-#: includes/Settings.php:218
+#: includes/Settings.php:231
 msgid "Select Faculty (optional)"
 msgstr ""
 
-#: includes/Settings.php:223
+#: includes/Settings.php:236
 msgid "Select Degree (optional)"
 msgstr ""
 
-#: includes/Settings.php:228
+#: includes/Settings.php:241
 msgid "Search"
 msgstr ""
 
-#: includes/Settings.php:235
-#: includes/Settings.php:391
+#: includes/Settings.php:248
+#: includes/Settings.php:404
 msgid "No degree programs found"
 msgstr ""
 
-#: includes/Settings.php:241
+#: includes/Settings.php:254
 msgid "Update"
 msgstr ""
 
-#: includes/Settings.php:245
+#: includes/Settings.php:258
 msgid "Delete"
 msgstr ""
 
-#: includes/Settings.php:251
+#: includes/Settings.php:264
 msgid "Update selected"
 msgstr ""
 
-#: includes/Settings.php:252
+#: includes/Settings.php:265
 msgid "Delete selected"
 msgstr ""
 
-#: includes/Settings.php:356
+#: includes/Settings.php:369
 msgid "No degree programs found. Please try again later."
 msgstr ""
 
-#: includes/Settings.php:359
+#: includes/Settings.php:372
 msgid "API Error. Please try again later."
 msgstr ""
 
-#: includes/Settings.php:373
+#: includes/Settings.php:386
 msgid "Import selected"
 msgstr ""
 
-#: includes/Settings.php:449
+#: includes/Settings.php:462
 msgid "No posts selected"
 msgstr ""
 

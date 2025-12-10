@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2025-06-12 12:41+0000\n"
-"PO-Revision-Date: 2025-12-04 16:05+0000\n"
+"PO-Revision-Date: 2025-12-10 16:07+0000\n"
 "Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz/\n"
@@ -27,7 +27,7 @@ msgstr "-- Bitte auswählen --"
 msgid "Admission requirements"
 msgstr "Zugangsvoraussetzung"
 
-#: includes/Settings.php:359
+#: includes/Settings.php:372
 msgid "API Error. Please try again later."
 msgstr "Fehler in der Schnittstelle. Bitte probieren Sie es später nochmal."
 
@@ -35,11 +35,11 @@ msgstr "Fehler in der Schnittstelle. Bitte probieren Sie es später nochmal."
 msgid "Apply filter"
 msgstr "Filter anwenden"
 
-#: includes/Settings.php:126
+#: includes/Settings.php:139
 msgid "Archive Format"
 msgstr "Archiv-Format"
 
-#: includes/Settings.php:99
+#: includes/Settings.php:112
 msgid "Archive View"
 msgstr "Archiv-Ansicht"
 
@@ -88,11 +88,11 @@ msgstr "Studiengänge"
 msgid "Degrees"
 msgstr "Abschlüsse"
 
-#: includes/Settings.php:245
+#: includes/Settings.php:258
 msgid "Delete"
 msgstr "Löschen"
 
-#: includes/Settings.php:252
+#: includes/Settings.php:265
 msgid "Delete selected"
 msgstr "Ausgewählte löschen"
 
@@ -150,7 +150,7 @@ msgstr "Deutsch"
 msgid "German language skills"
 msgstr "Deutschkenntnisse"
 
-#: includes/Settings.php:129 build/block/index.js:1
+#: includes/Settings.php:142 build/block/index.js:1
 msgid "Grid"
 msgstr "Kacheln"
 
@@ -159,15 +159,15 @@ msgstr "Kacheln"
 msgid "https://github.com/RRZE-Webteam/fau-studium-display"
 msgstr "https://github.com/RRZE-Webteam/fau-studium-display"
 
-#: includes/Settings.php:186 includes/Settings.php:385
+#: includes/Settings.php:199 includes/Settings.php:398
 msgid "Import"
 msgstr "Importieren"
 
-#: includes/Settings.php:179
+#: includes/Settings.php:192
 msgid "Import degree programs"
 msgstr "Studiengänge importieren"
 
-#: includes/Settings.php:373
+#: includes/Settings.php:386
 msgid "Import selected"
 msgstr "Ausgewählte importieren"
 
@@ -199,11 +199,11 @@ msgstr "Weniger Filteroptionen"
 msgid "List"
 msgstr "Liste"
 
-#: includes/Settings.php:200
+#: includes/Settings.php:213
 msgid "Manage Imported"
 msgstr "Importierte Studiengänge verwalten"
 
-#: includes/Settings.php:193
+#: includes/Settings.php:206
 msgid "Manage Imported Degree Programs"
 msgstr "Importierte Studiengänge verwalten"
 
@@ -227,7 +227,7 @@ msgstr "Keine Daten vorhanden"
 msgid "No data available."
 msgstr "Keine Daten verfügbar."
 
-#: includes/Settings.php:235 includes/Settings.php:391
+#: includes/Settings.php:248 includes/Settings.php:404
 msgid "No degree programs found"
 msgstr "Keine Studiengänge gefunden"
 
@@ -235,13 +235,13 @@ msgstr "Keine Studiengänge gefunden"
 msgid "No degree programs found."
 msgstr "Keine Studiengänge gefunden."
 
-#: includes/Settings.php:356
+#: includes/Settings.php:369
 msgid "No degree programs found. Please try again later."
 msgstr ""
 "Aktuell liefert die Schnittstelle keine Daten. Bitte probieren Sie es später "
 "nochmal."
 
-#: includes/Settings.php:449
+#: includes/Settings.php:462
 msgid "No posts selected"
 msgstr "Keine Studiengänge ausgewählt."
 
@@ -312,7 +312,7 @@ msgstr "RRZE Webteam"
 msgid "Save changes"
 msgstr "Änderungen speichern"
 
-#: includes/Settings.php:228
+#: includes/Settings.php:241
 msgid "Search"
 msgstr "Suche"
 
@@ -320,17 +320,17 @@ msgstr "Suche"
 msgid "Search Filters"
 msgstr "Filteroptionen"
 
-#: includes/Settings.php:122 includes/Settings.php:146
-#: includes/Settings.php:166 includes/Settings.php:250
-#: includes/Settings.php:372
+#: includes/Settings.php:135 includes/Settings.php:159
+#: includes/Settings.php:179 includes/Settings.php:263
+#: includes/Settings.php:385
 msgid "Select / Deselect All"
 msgstr "Alle auswählen / abwählen"
 
-#: includes/Settings.php:223
+#: includes/Settings.php:236
 msgid "Select Degree (optional)"
 msgstr "Abschluss auswählen (optional)"
 
-#: includes/Settings.php:218
+#: includes/Settings.php:231
 msgid "Select Faculty (optional)"
 msgstr "Fakultät auswählen (optional)"
 
@@ -338,7 +338,7 @@ msgstr "Fakultät auswählen (optional)"
 msgid "Select items"
 msgstr "Elemente auswählen"
 
-#: includes/Settings.php:150
+#: includes/Settings.php:163
 msgid "Select the elements to be shown in single view"
 msgstr ""
 "Suche die Elemente aus, die in der Detail-Ansicht angezeigt werden sollen."
@@ -351,7 +351,7 @@ msgstr "Ausgewählte Filter"
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: includes/Settings.php:106 build/block/index.js:1
+#: includes/Settings.php:119 build/block/index.js:1
 msgid "Show Search"
 msgstr "Suche anzeigen"
 
@@ -359,21 +359,29 @@ msgstr "Suche anzeigen"
 msgid "Show Title"
 msgstr "Titel anzeigen"
 
-#: includes/Settings.php:141
+#: includes/Settings.php:154
 msgid "Show/Hide Grid Items"
 msgstr "Kachel-Elemente ein-/ausblenden"
 
-#: includes/Settings.php:117
+#: includes/Settings.php:130
 msgid "Show/Hide Search Filters"
 msgstr "Filter in der Suche ein-/ausblenden"
 
-#: includes/Settings.php:161
+#: includes/Settings.php:174
 msgid "Show/Hide Single Items"
 msgstr "Detail-Elemente ein-/ausblenden"
 
-#: includes/Settings.php:149
+#: includes/Settings.php:162
 msgid "Single View"
 msgstr "Detail-Ansicht"
+
+#: includes/Settings.php:99 includes/Settings.php:106
+msgid "Slug"
+msgstr "Slug"
+
+#: includes/Settings.php:107
+msgid "Slug (part of the URL) for the degree program post type"
+msgstr "Slug (Teil der URL) für den Post-Type Studiengang"
 
 #: includes/CPT.php:55 build/block/index.js:1
 msgid "Special ways to study"
@@ -391,11 +399,11 @@ msgstr "Studienort"
 msgid "Subject groups"
 msgstr "Fächergruppen"
 
-#: includes/Settings.php:60 includes/Settings.php:173
+#: includes/Settings.php:60 includes/Settings.php:186
 msgid "Sync"
 msgstr "Sync"
 
-#: includes/Settings.php:130 build/block/index.js:1
+#: includes/Settings.php:143 build/block/index.js:1
 msgid "Table"
 msgstr "Tabelle"
 
@@ -433,14 +441,14 @@ msgstr ""
 msgid "to industry"
 msgstr "mit der Wirtschaft"
 
-#: includes/Settings.php:241
+#: includes/Settings.php:254
 msgid "Update"
 msgstr "Aktualisieren"
 
-#: includes/Settings.php:251
+#: includes/Settings.php:264
 msgid "Update selected"
 msgstr "Ausgewählte aktualisieren"
 
-#: includes/Settings.php:100
+#: includes/Settings.php:113
 msgid "What format should the list view use?"
 msgstr "In welchem Format soll die Archiv-Ansicht dargestellt werden?"
