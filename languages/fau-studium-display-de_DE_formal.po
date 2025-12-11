@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2025-06-12 12:41+0000\n"
-"PO-Revision-Date: 2025-12-04 16:05+0000\n"
+"PO-Revision-Date: 2025-12-11 11:13+0000\n"
 "Language: de_DE_formal\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz/\n"
@@ -26,7 +26,7 @@ msgstr "%s bis %s von %s"
 msgid "-- Please select --"
 msgstr "-- Bitte auswählen --"
 
-#: includes/CPT.php:56
+#: includes/CPT.php:59
 msgid "Admission requirements"
 msgstr "Zugangsvoraussetzung"
 
@@ -80,7 +80,7 @@ msgstr "Studiengang"
 msgid "Degree program pagination"
 msgstr "Studiengangs-Seitennummerierung"
 
-#: includes/CPT.php:29 build/block/index.js:1
+#: includes/CPT.php:32 build/block/index.js:1
 msgid "Degree Programs"
 msgstr "Studiengänge"
 
@@ -88,7 +88,7 @@ msgstr "Studiengänge"
 msgid "degree programs"
 msgstr "Studiengänge"
 
-#: includes/CPT.php:53 build/block/index.js:1
+#: includes/CPT.php:56 build/block/index.js:1
 msgid "Degrees"
 msgstr "Abschlüsse"
 
@@ -112,7 +112,7 @@ msgstr "Englisch"
 msgid "Faculties"
 msgstr "Fakultäten"
 
-#: includes/CPT.php:60
+#: includes/CPT.php:63
 msgid "Faculty"
 msgstr "Fakultät"
 
@@ -150,7 +150,7 @@ msgstr "Allgemeine Einstellungen"
 msgid "German"
 msgstr "Deutsch"
 
-#: includes/CPT.php:61
+#: includes/CPT.php:64
 msgid "German language skills"
 msgstr "Deutschkenntnisse"
 
@@ -223,7 +223,7 @@ msgstr "Mehr als 275"
 msgid "Next page"
 msgstr "Nächste Seite"
 
-#: includes/CPT.php:101 includes/CPT.php:113
+#: includes/CPT.php:104 includes/CPT.php:116
 msgid "No data available"
 msgstr "Keine Daten vorhanden"
 
@@ -284,11 +284,11 @@ msgstr "Plugin zur Darstellung von Studiengangsinformationen"
 msgid "Plugins: %1$s: %2$s"
 msgstr "Plugins: %1$s: %2$s"
 
-#: includes/CPT.php:89
+#: includes/CPT.php:92
 msgid "Post Meta English"
 msgstr "Post-Meta-Daten englisch"
 
-#: includes/CPT.php:80
+#: includes/CPT.php:83
 msgid "Post Meta German"
 msgstr "Post-Meta-Daten deutsch"
 
@@ -381,19 +381,19 @@ msgstr "Detail-Elemente ein-/ausblenden"
 msgid "Single View"
 msgstr "Detail-Ansicht"
 
-#: includes/CPT.php:55 build/block/index.js:1
+#: includes/CPT.php:58 build/block/index.js:1
 msgid "Special ways to study"
 msgstr "Besondere Studienformen"
 
-#: includes/CPT.php:57
+#: includes/CPT.php:60
 msgid "Start of degree program"
 msgstr "Studienbeginn"
 
-#: includes/CPT.php:58
+#: includes/CPT.php:61
 msgid "Study location"
 msgstr "Studienort"
 
-#: includes/CPT.php:54
+#: includes/CPT.php:57
 msgid "Subject groups"
 msgstr "Fächergruppen"
 
@@ -405,7 +405,7 @@ msgstr "Sync"
 msgid "Table"
 msgstr "Tabelle"
 
-#: includes/CPT.php:59
+#: includes/CPT.php:62
 msgid "Teaching language"
 msgstr "Unterrichtssprache"
 
