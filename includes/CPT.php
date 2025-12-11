@@ -6,7 +6,10 @@ defined('ABSPATH') || exit;
 
 class CPT
 {
-    const POST_TYPE = 'degree-program';
+    const string POST_TYPE = 'degree-program';
+    private $post_type_slug;
+    private $site_language;
+
 
     public function __construct()
     {
@@ -17,14 +20,15 @@ class CPT
         add_filter( 'query_vars', [$this, 'register_custom_query_vars'] );
         add_filter('redirect_canonical', [$this, 'archive_redirect_canonical'], 10, 2);
         add_filter('request', [$this, 'preserve_archive_filters']);
+        add_filter('get_canonical_url', [$this, 'modify_canonical_url'], 10, 2 );
+        add_filter( 'post_row_actions', [$this, 'remove_quick_edit_for_degree_program'], 10, 2 );
 
+        $this->site_language = substr( get_locale(), 0, 2 );
+        $this->post_type_slug = $this->site_language == 'de' ? 'studiengang' : 'degree-program';
     }
 
     public function register_post_type()
     {
-        $settings = get_option('fau-studium-display_layout');
-        $slug = (isset($settings['post_type_slug']) && $settings['post_type_slug'] != '') ? $settings['post_type_slug'] : 'studiengang';
-
         $args = [
             'label'             => __('Degree Programs', 'fau-studium-display'),
             'hierarchical'       => false,
@@ -36,7 +40,7 @@ class CPT
             'has_archive'        => true,
             'exclude_from_search' => false,
             'publicly_queryable' => true,
-            'rewrite'            => ['slug' => $slug],
+            'rewrite'            => ['slug' => $this->post_type_slug],
             'show_in_rest'       => false,
         ];
 
@@ -121,12 +125,7 @@ class CPT
     public function disable_new_posts()
     {
         global $submenu;
-
         unset($submenu['edit.php?post_type=degree-program'][10]);
-
-        if (isset($_GET['post_type']) && $_GET['post_type'] == 'degree-program') {
-            echo '<style type="text/css">.page-title-action {display:none;}</style>';
-        }
     }
 
     public function register_custom_query_vars( $vars ) {
@@ -180,6 +179,22 @@ class CPT
         }
 
         return $query_vars;
+    }
+
+    public function modify_canonical_url( $canonical_url, $post ) {
+        if ($post->post_type == self::POST_TYPE) {
+            $domain = $this->site_language == 'de' ? 'https://fau.de/studiengang/' : 'https://fau.eu/degree-program/';
+            $canonical_url = $domain . basename(get_permalink());
+        }
+        return $canonical_url;
+    }
+
+    public function remove_quick_edit_for_degree_program( $actions, $post ) {
+        if ( $post->post_type == self::POST_TYPE ) {
+            unset( $actions['inline hide-if-no-js'] ); // Quick Edit
+            unset( $actions['inline'] );               // fallback
+        }
+        return $actions;
     }
 
 }

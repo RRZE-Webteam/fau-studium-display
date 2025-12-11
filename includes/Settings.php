@@ -96,19 +96,6 @@ class Settings
                                            'parent_slug' => $this->slug,
                                        ]);
         $layout_options->add_field( [
-                                        'name' => __('Slug', 'fau-studium-display'),
-                                        //'desc' => __('', 'fau-studium-display'),
-                                        'type' => 'title',
-                                        'id'   => 'slug_heading'
-                                    ] );
-        $layout_options->add_field([
-                                       'id' => 'post_type_slug',
-                                       'name' => __('Slug', 'fau-studium-display'),
-                                       'desc' => __('Slug (part of the URL) for the degree program post type', 'fau-studium-display'),
-                                       'type' => 'text',
-                                       'default' => 'studiengang',
-                                   ]);
-        $layout_options->add_field( [
                                         'name' => __('Archive View', 'fau-studium-display'),
                                         'desc' => __('What format should the list view use?', 'fau-studium-display'),
                                         'type' => 'title',

@@ -1,6 +1,12 @@
 .post-type-degree-program #postimagediv {
   display: none;
 }
+.post-type-degree-program a.page-title-action,
+.post-type-degree-program #edit-slug-buttons,
+.post-type-degree-program #minor-publishing-actions,
+.post-type-degree-program #misc-publishing-actions {
+  display: none;
+}
 
 .settings_page_fau-studium-display .button-disabled {
   pointer-events: none;
