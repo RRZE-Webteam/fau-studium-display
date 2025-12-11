@@ -2,6 +2,12 @@
     #postimagediv {
         display: none;
     }
+    a.page-title-action,
+    #edit-slug-buttons,
+    #minor-publishing-actions,
+    #misc-publishing-actions {
+        display: none;
+    }
 }
 
 
