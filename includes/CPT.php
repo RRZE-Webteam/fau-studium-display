@@ -21,6 +21,7 @@ class CPT
         add_filter('redirect_canonical', [$this, 'archive_redirect_canonical'], 10, 2);
         add_filter('request', [$this, 'preserve_archive_filters']);
         add_filter('get_canonical_url', [$this, 'modify_canonical_url'], 10, 2 );
+        add_filter( 'the_seo_framework_meta_render_data', [$this, 'modify_tsf_canonical_url'], 10, 2 );
         add_filter( 'post_row_actions', [$this, 'remove_quick_edit_for_degree_program'], 10, 2 );
 
         $this->site_language = substr( get_locale(), 0, 2 );
@@ -187,6 +188,15 @@ class CPT
             $canonical_url = $domain . basename(get_permalink());
         }
         return $canonical_url;
+    }
+
+    public function modify_tsf_canonical_url( $tags_render_data, $context ) {
+        $post = get_post();
+        if ($post->post_type == self::POST_TYPE) {
+            $domain = $this->site_language == 'de' ? 'https://fau.de/studiengang/' : 'https://fau.eu/degree-program/';
+            $tags_render_data[ 'canonical' ][ 'attributes' ][ 'href' ] = $domain . basename(get_permalink());
+        }
+        return $tags_render_data;
     }
 
     public function remove_quick_edit_for_degree_program( $actions, $post ) {
