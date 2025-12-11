@@ -4,7 +4,7 @@
 Plugin Name: FAU Studium Display
 Plugin URI: https://github.com/RRZE-Webteam/fau-studium-display
 Description: Plugin for displaying the degree program information on websites.
-Version: 1.0.17
+Version: 1.0.18
 Author: RRZE Webteam
 License: GNU General Public License v3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
