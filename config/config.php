@@ -444,8 +444,8 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'url' => [
             'labels' => [
-                'de' => 'URL',
-                'en' => 'URL'
+                'de' => 'Webseite des Studiengangs',
+                'en' => 'Website of the degree program'
             ]
         ],
         /*'department' => [

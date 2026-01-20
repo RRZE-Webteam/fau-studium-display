@@ -530,7 +530,7 @@ if (!empty($student_advice . $useful_links)) {
 // Links Additional
 if (in_array('links.additional_information', $items)) {
     $fields_additional = [
-        'link',
+        'url',
         'examinations_office', //
         'department',
         'faculty', ///
@@ -540,7 +540,7 @@ if (in_array('links.additional_information', $items)) {
     $links_additional = [];
     foreach ($fields_additional as $item) {
         switch ($item) {
-            case 'link':
+            case 'url':
             case 'department':
                 if ( ! empty($data[ $item ])) {
                     $links_additional[ $item ] = '<a href="' . $data[ $item ] . '">' . ($labels[ $item ] ?? $item) . '</a>';
