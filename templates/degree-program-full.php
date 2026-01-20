@@ -430,11 +430,11 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
 
     // Button Subject Specific Student Advice
     if (in_array('subject_specific_advice', $items)
-        && ! empty($data[ 'subject_specific_advice' ][ 'link_text' ])
+        && (! empty($data[ 'subject_specific_advice' ][ 'link_text' ]) || ! empty($data[ 'subject_specific_advice' ][ 'name' ]))
         && ! empty($data[ 'subject_specific_advice' ][ 'link_url' ])) {
         $subject_specific_advice_img = $constants[ 'specific-student-advice-image' ] ?? '';
         $subject_specific_advice_text = $descriptions[ 'subject_specific_advice' ] ?? '';
-        $subject_specific_advice_link_text = $data[ 'subject_specific_advice' ][ 'link_text' ];
+        $subject_specific_advice_link_text = !empty($data[ 'subject_specific_advice' ][ 'link_text' ]) ? $data[ 'subject_specific_advice' ][ 'link_text' ] : (!empty($data[ 'subject_specific_advice' ][ 'name' ]) ? $data[ 'subject_specific_advice' ][ 'name' ] : '');
         $subject_specific_advice_link_url  = $data[ 'subject_specific_advice' ][ 'link_url' ];
 
         $student_advice .= '<a class="teaser-item-link teaser-item" href="' . $subject_specific_advice_link_url . '">
