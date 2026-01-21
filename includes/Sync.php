@@ -35,8 +35,10 @@ class Sync
 
         $title = esc_attr($program['title'] . (isset($program['degree']['abbreviation']) ? ' (' . $program['degree']['abbreviation'] . ')' : ''));
 
+        $author = get_post_field('post_author', $post_id);
         $result = wp_insert_post([
            'ID' => $post_id,
+           'post_author' => $author,
            'post_title' => $title,
            'post_status' => 'publish',
            'post_type' => 'degree-program',
