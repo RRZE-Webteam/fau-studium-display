@@ -430,11 +430,11 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
 
     // Button Subject Specific Student Advice
     if (in_array('subject_specific_advice', $items)
-        && ! empty($data[ 'subject_specific_advice' ][ 'link_text' ])
+        && (! empty($data[ 'subject_specific_advice' ][ 'link_text' ]) || ! empty($data[ 'subject_specific_advice' ][ 'name' ]))
         && ! empty($data[ 'subject_specific_advice' ][ 'link_url' ])) {
         $subject_specific_advice_img = $constants[ 'specific-student-advice-image' ] ?? '';
         $subject_specific_advice_text = $descriptions[ 'subject_specific_advice' ] ?? '';
-        $subject_specific_advice_link_text = $data[ 'subject_specific_advice' ][ 'link_text' ];
+        $subject_specific_advice_link_text = !empty($data[ 'subject_specific_advice' ][ 'link_text' ]) ? $data[ 'subject_specific_advice' ][ 'link_text' ] : (!empty($data[ 'subject_specific_advice' ][ 'name' ]) ? $data[ 'subject_specific_advice' ][ 'name' ] : '');
         $subject_specific_advice_link_url  = $data[ 'subject_specific_advice' ][ 'link_url' ];
 
         $student_advice .= '<a class="teaser-item-link teaser-item" href="' . $subject_specific_advice_link_url . '">
@@ -530,7 +530,7 @@ if (!empty($student_advice . $useful_links)) {
 // Links Additional
 if (in_array('links.additional_information', $items)) {
     $fields_additional = [
-        'link',
+        'url',
         'examinations_office', //
         'department',
         'faculty', ///
@@ -540,7 +540,7 @@ if (in_array('links.additional_information', $items)) {
     $links_additional = [];
     foreach ($fields_additional as $item) {
         switch ($item) {
-            case 'link':
+            case 'url':
             case 'department':
                 if ( ! empty($data[ $item ])) {
                     $links_additional[ $item ] = '<a href="' . $data[ $item ] . '">' . ($labels[ $item ] ?? $item) . '</a>';
