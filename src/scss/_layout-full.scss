@@ -87,6 +87,11 @@
             }
         }
 
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
         img.attachment-fau-featured,
         img.wp-post-image {
             aspect-ratio: 2.35/1;
@@ -377,6 +382,7 @@
             padding-top: 0;
         }
         div.wp-block-rrze-elements-counter-row {
+            margin-left: auto;
             margin-right: auto;
             margin-top: 32px;
         }
@@ -448,5 +454,15 @@
             margin-top: var(--Spacing-8x, 2rem);
         }
 
+    }
+}
+.fau-elemental.page {
+    .fau-studium-display.degree-program-full {
+        img.wp-post-image {
+            max-width: var(--wide-max-width);
+            margin-left: var(--faue_wide-max-width_bleed_inline-margin);
+            margin-right: var(--faue_wide-max-width_bleed_inline-margin);
+            width: var(--wide-max-width);
+        }
     }
 }
