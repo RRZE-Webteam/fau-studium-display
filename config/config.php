@@ -640,8 +640,8 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'not_possible' => [
             'labels' => [
-                'de' => 'not possible',
-                'en' => 'nicht möglich'
+                'de' => 'nicht möglich',
+                'en' => 'not possible'
             ]
         ],
         'language_skills' => [

@@ -216,6 +216,7 @@ foreach ($content_fields as $field) {
     }
 }
 $content_html .= '<!-- /wp:rrze-elements/collapsibles -->';
+$content_html = str_replace('sizes="auto,', 'sizes="', $content_html);
 $content .= do_blocks($content_html);
 $content .= '</div></div>';
 
@@ -338,6 +339,7 @@ if (in_array('admission_requirements_application', $items)) {
 } else {
     $admission_requirements_application = '';
 }
+$admission_requirements_application = str_replace('sizes="auto,', 'sizes="', $admission_requirements_application);
 
 // Info Internationals
 if (in_array('info_internationals_link', $items)) {
