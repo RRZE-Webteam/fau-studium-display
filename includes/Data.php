@@ -98,6 +98,10 @@ class Data
         $meta_query = [];
         $tax_query = [];
         $search_in_text = isset($filter['search_text']) && $filter['search_text'] == 'on';
+        if (!empty($filter['semester'])) {
+            $filter['start'] = $filter['semester'];
+            unset($filter['semester']);
+        }
 
         $args = [
             'post_type'      => 'degree-program',
