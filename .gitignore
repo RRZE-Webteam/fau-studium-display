@@ -47,8 +47,9 @@ wp-config.php
 # uncomment the next line
 #/wp-content/themes
 
-node_modules
-package-lock.json
+/node_modules
+/package-lock.json
 *.po~
 *.pot~
 /composer.lock
+.DS_Store
