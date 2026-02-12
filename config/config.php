@@ -705,13 +705,13 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'organizational' => [
             'labels' => [
-                'de' => 'Organisatorisch',
+                'de' => 'Organisatorisches',
                 'en' => 'Organizational'
             ]
         ],
         'links.organizational' => [
             'labels' => [
-                'de' => 'Links: Organisatorisch',
+                'de' => 'Links: Organisatorisches',
                 'en' => 'Links: Organizational'
             ]
         ],

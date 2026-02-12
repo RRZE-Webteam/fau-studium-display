@@ -52,3 +52,4 @@ package-lock.json
 *.po~
 *.pot~
 /composer.lock
+.DS_Store
