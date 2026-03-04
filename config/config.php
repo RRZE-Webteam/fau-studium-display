@@ -23,7 +23,6 @@ function get_output_fields($format = '') {
             'content.special_features',
             'combinations',
             'videos',
-            'info_internationals_link',
             'admission_requirements_application',
             'apply_now_link',
             'student_advice',

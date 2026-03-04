@@ -158,7 +158,7 @@ if (in_array('fact_sheet', $items)) {
 
     $fact_sheet = '<div class="fact-sheet width-small">
             <div class="icon-thumbtack"></div>
-            <h1>' . ($labels['fact_sheet'] ?? 'fact_sheet') . '</h1>';
+            <h2>' . ($labels['fact_sheet'] ?? 'fact_sheet') . '</h2>';
     if (!empty($fact_list)) {
         $fact_sheet .= '<dl class="facts">' . $fact_list . '</dl>';
     }
@@ -179,7 +179,7 @@ $content_fields = array_intersect($content_fields_all, $items);
 
 $content_title = ($labels['program_overview'] ?? 'program_overview');
 $content_id = sanitize_title($content_title);
-$content = '<div class="width-large"><h2 id="' . $content_id . '">' . $content_title . '</h2>'
+$content = '<div class="width-large"><h2 class="wp-block-fau-elemental-fau-meta-headline" id="' . $content_id . '">' . $content_title . '</h2>'
            . '<div class="program-details width-small">';
 if (in_array('content.about', $items)) {
     $content .= '<h3>' . ($labels['about'] ?? 'about') . '</h3><div itemprop="description">' . do_shortcode($data['content']['about']['description']) .  '</div>';
@@ -402,8 +402,9 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
         $student_advice_link_url  = $data[ 'student_advice' ][ 'link_url' ] ?? '';
 
         if ( ! empty($student_advice_img . $student_advice_text . $student_advice_link_text . $student_advice_link_url)) {
+            $arialabledebyid = hash('md5', $student_advice_text);
             $student_advice .= '<a class="teaser-item-link teaser-item" href="' . $student_advice_link_url . '">
-                <article class="post-teaser" tabindex="0" role="button" aria-labelledby="teaser-title-42">
+                <article class="post-teaser" tabindex="0" role="button" aria-labelledby="' . $arialabledebyid . '">
                     <div class="teaser-image-wrapper">
                         <div class="teaser-image">
                             <img decoding="async" src="' . $constants[ 'general-student-advice-image' ] . '" alt="" loading="lazy">
@@ -412,7 +413,7 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
                     <div class="teaser-content-wrapper">
                         <div class="teaser-content">
                             <div class="content-column">
-                                <h4 class="clamp-3" id="teaser-title-42">' . $student_advice_link_text . '</h4>
+                                <h3 class="clamp-3" id="' . $arialabledebyid . '">' . $student_advice_link_text . '</h3>
                                 <div class="excerpt clamp-3">
                                     <span class="visually-hidden">' . $student_advice_text . '</span>
                                     <span aria-hidden="true">' . $student_advice_text . '</span>
@@ -438,9 +439,10 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
         $subject_specific_advice_text = $descriptions[ 'subject_specific_advice' ] ?? '';
         $subject_specific_advice_link_text = !empty($data[ 'subject_specific_advice' ][ 'link_text' ]) ? $data[ 'subject_specific_advice' ][ 'link_text' ] : (!empty($data[ 'subject_specific_advice' ][ 'name' ]) ? $data[ 'subject_specific_advice' ][ 'name' ] : '');
         $subject_specific_advice_link_url  = $data[ 'subject_specific_advice' ][ 'link_url' ];
+        $arialabledebyid = hash('md5', $subject_specific_advice_text);
 
         $student_advice .= '<a class="teaser-item-link teaser-item" href="' . $subject_specific_advice_link_url . '">
-                <article class="post-teaser" tabindex="0" role="button" aria-labelledby="teaser-title-42">
+                <article class="post-teaser" tabindex="0" role="button" aria-labelledby="' . $arialabledebyid . '">
                     <div class="teaser-image-wrapper">
                         <div class="teaser-image">
                             <img decoding="async" src="' . $subject_specific_advice_img . '" alt="" loading="lazy">
@@ -449,7 +451,7 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
                     <div class="teaser-content-wrapper">
                         <div class="teaser-content">
                             <div class="content-column">
-                                <h4 class="clamp-3" id="teaser-title-42">' . $subject_specific_advice_link_text . '</h4>
+                                <h3 class="clamp-3" id="' . $arialabledebyid . '">' . $subject_specific_advice_link_text . '</h3>
                                 <div class="excerpt clamp-3">
                                     <span class="visually-hidden">' . $subject_specific_advice_text . '</span>
                                     <span aria-hidden="true">' . $subject_specific_advice_text . '</span>
@@ -582,7 +584,7 @@ if (in_array('links.additional_information', $items)) {
 if (in_array('benefits', $items)) {
 
     $benefits_fau_image = $constants[ 'benefits-fau-image' ];
-    $benefits_fau = '<div class="benefits width-full"><h2>' . ($labels['studies'] ?? 'studies'). '</h2>';
+    $benefits_fau = '<div class="benefits width-full"><h2 class="wp-block-fau-elemental-fau-meta-headline">' . ($labels['studies'] ?? 'studies'). '</h2>';
 
     if ($theme_family == 'fau-elemental') {
         $benefits_fau .= do_blocks(
@@ -654,11 +656,11 @@ if (in_array('benefits', $items)) {
         echo $videos;
 
         if (!empty($cta_internationals.$admission_requirements_application.$apply_now)) {
-            echo '<h2 id="' . $admission_requirements_application_id . '">' . $admission_requirements_application_title . '</h2>';
+            echo '<h2 class="wp-block-fau-elemental-fau-meta-headline" id="' . $admission_requirements_application_id . '">' . $admission_requirements_application_title . '</h2>';
         }
 
         // Internationals
-        echo $cta_internationals;
+        //echo $cta_internationals;
 
         // Admission
         if (!empty($admission_requirements_application)) {
@@ -671,7 +673,7 @@ if (in_array('benefits', $items)) {
         // Student advice + more
         if (!empty($student_advice . $useful_links)) {
             echo '<div class="student-advice-more width-full">'
-                . '<h2 id="' . $student_advice_id . '">' . $student_advice_title . '</h2>';
+                . '<h2 class="wp-block-fau-elemental-fau-meta-headline" id="' . $student_advice_id . '">' . $student_advice_title . '</h2>';
 
             // Student advice
             if (!empty($student_advice)) {

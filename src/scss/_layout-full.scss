@@ -38,7 +38,7 @@
             padding: var(--Spacing-4x, 1rem);
         }
 
-        h2, h2:first-child {
+        /*h2, h2:first-child {
             color: var(--FAU-Col-FAU-Dunkelblau-100, #041E42);
             font-size: var(--P-Body-Text, 1.125rem);
             margin-top: 3em;
@@ -63,7 +63,7 @@
             &:target {
                 padding-top: 0 !important;
             }
-        }
+        }*/
         h3:not(.fau-big-teaser__headline):not(.accordion-heading) {
             padding: 0;
             margin-bottom: 1em;
@@ -157,6 +157,10 @@
             @media screen and (min-width: 768px) {
                 //padding: 40px 32px 32px;
             }
+            h2 {
+                margin-top: 0;
+                font-size: var(--H-Heading-5, 18px);
+            }
         }
 
         .quicklinks {
@@ -166,7 +170,7 @@
         .program-combinations,
         .program-limited-combinations {
             @media(min-width: 480px) {
-                columns: 200px 3;
+                columns: 200px 2;
                 column-gap: 4em;
             }
         }
