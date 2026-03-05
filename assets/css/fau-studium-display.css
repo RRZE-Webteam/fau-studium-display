@@ -1128,11 +1128,11 @@
   max-width: 1000px;
   margin: 32px auto 0;
 }
-.fau-studium-display.degree-program-full .width-large {
+.fau-studium-display.degree-program-full .width-large, .fau-theme .fau-studium-display.degree-program-full div.wp-block-fau-elemental-fau-meta-headline {
   margin: 32px auto 0;
 }
 @media screen and (min-width: 992px) {
-  .fau-studium-display.degree-program-full .width-large {
+  .fau-studium-display.degree-program-full .width-large, .fau-theme .fau-studium-display.degree-program-full div.wp-block-fau-elemental-fau-meta-headline {
     padding: 0 32px;
     max-width: 1320px;
   }
@@ -1145,11 +1145,11 @@
   box-sizing: border-box;
   padding: var(--Spacing-4x, 1rem);
 }
-.fau-studium-display.degree-program-full h3:not(.fau-big-teaser__headline):not(.accordion-heading) {
+.fau-studium-display.degree-program-full h2:not(.fau-big-teaser__headline):not(.accordion-heading) {
   padding: 0;
   margin-bottom: 1em;
 }
-.fau-studium-display.degree-program-full h4 {
+.fau-studium-display.degree-program-full h3 {
   padding-left: 0;
   padding-right: 0;
 }
@@ -1255,10 +1255,14 @@
   background-color: var(--FAU-Col-FAU-Dunkelblau-12_5, #DFE2E7);
   padding: 16px;
 }
-.fau-studium-display.degree-program-full .program-admission h3 {
+.fau-studium-display.degree-program-full .program-admission h2 {
   color: var(--FAU_Col_FAU-Blau, #04316A);
+  font-size: var(--H-Heading-3, 1.5rem);
   margin-top: 0;
   padding-top: 0;
+}
+.fau-studium-display.degree-program-full .program-admission h3 {
+  font-size: var(--H-Heading-4, 1.25rem);
 }
 .fau-studium-display.degree-program-full .program-admission li {
   padding: 0;
@@ -1281,7 +1285,6 @@
 }
 .fau-studium-display.degree-program-full .student-advice-more h3 {
   color: #fff;
-  font-size: var(--H-Heading-2, 2rem);
   margin-bottom: 0;
 }
 .fau-studium-display.degree-program-full .student-advice-more .student-advice {
@@ -1399,13 +1402,15 @@
   color: #fff;
   letter-spacing: 0.02em;
 }
-.fau-studium-display.degree-program-full .student-advice-more .useful-links h3 {
-  grid-column-start: 1;
-  grid-column-end: end;
-  font-size: var(--H-Heading-2, 2rem);
+.fau-studium-display.degree-program-full .student-advice-more .useful-links h2 {
+  grid-column: 1/-1;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
-.fau-studium-display.degree-program-full .student-advice-more .useful-links h4 {
+.fau-studium-display.degree-program-full .student-advice-more .useful-links h3 {
   font-size: var(--H-Heading-4, 1.25rem);
+  margin-top: 0;
+  margin-bottom: 1em;
 }
 .fau-studium-display.degree-program-full .student-advice-more .useful-links ul {
   margin: 0;
@@ -1413,6 +1418,9 @@
 }
 .fau-studium-display.degree-program-full .student-advice-more .useful-links li {
   list-style-type: none;
+}
+.fau-studium-display.degree-program-full .student-advice-more .useful-links li:before {
+  background-color: var(--FAU_Col_FAU-Blau, #04316A);
 }
 .fau-studium-display.degree-program-full .student-advice-more .useful-links a {
   text-decoration: none;
@@ -1446,6 +1454,26 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 32px;
+}
+.fau-theme .fau-studium-display div.wp-block-fau-elemental-fau-meta-headline {
+  font-weight: bold;
+  display: flex;
+  align-items: center; /* vertikale Mitte */
+  gap: 1em;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.fau-theme .fau-studium-display div.wp-block-fau-elemental-fau-meta-headline:after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: var(--FAU_Col_FAU-Blau, #04316A);
+}
+.fau-theme .fau-studium-display .student-advice-more h3 {
+  font-size: var(--font-size-h3, 1.3125rem);
+}
+.fau-theme .fau-studium-display .student-advice-more div.wp-block-fau-elemental-fau-meta-headline:after {
+  background: #fff;
 }
 .fau-theme .fau-studium-display .fau-teaser-grid .teaser-content-wrapper {
   background-color: var(--FAU_Col_FAU-Blau, #04316A);

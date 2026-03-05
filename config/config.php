@@ -381,6 +381,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'CTA: Information for Internationals'
             ]
         ],
+        'admission_intro' => [
+            'labels' => [
+                'de' => 'Die folgenden Informationen richten sich an deutsche Bewerbende sowie Bildungsinländer/-innen.  Für internationale Studieninteressierte können abweichende Regelungen und Fristen gelten.',
+                'en' => 'The following information is intended for German applicants as well as domestic applicants with foreign educational qualifications. Different regulations and deadlines may apply to international prospective students.'
+            ]
+        ],
         'admission_requirements' => [
             'labels' => [
                 'de' => 'Zugang',

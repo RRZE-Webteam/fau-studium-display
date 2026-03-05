@@ -179,10 +179,10 @@ $content_fields = array_intersect($content_fields_all, $items);
 
 $content_title = ($labels['program_overview'] ?? 'program_overview');
 $content_id = sanitize_title($content_title);
-$content = '<div class="width-large"><h2 class="wp-block-fau-elemental-fau-meta-headline" id="' . $content_id . '">' . $content_title . '</h2>'
+$content = '<div class="width-large"><div class="wp-block-fau-elemental-fau-meta-headline" id="' . $content_id . '">' . $content_title . '</div>'
            . '<div class="program-details width-small">';
 if (in_array('content.about', $items)) {
-    $content .= '<h3>' . ($labels['about'] ?? 'about') . '</h3><div itemprop="description">' . do_shortcode($data['content']['about']['description']) .  '</div>';
+    $content .= '<h2>' . ($labels['about'] ?? 'about') . '</h2><div itemprop="description">' . do_shortcode($data['content']['about']['description']) .  '</div>';
 }
 
 $content_html = '<!-- wp:rrze-elements/collapsibles {"hstart":3,"expandLabel":"Alle ausklappen"} -->';
@@ -284,14 +284,15 @@ if (in_array('admission_requirements_application', $items)) {
 
         $admission_requirements_application_title = ($labels['application_for_program'] ?? 'application_for_program');
         $admission_requirements_application_id = sanitize_title($admission_requirements_application_title);
-        $admission_requirements_application .= '<div class="program-admission width-small"><h3>' . ($labels['admission_requirements_application'] ?? 'admission_requirements_application') . '</h3>';
+        $admission_requirements_application .= '<div class="program-admission width-small"><h2>' . ($labels['admission_requirements_application'] ?? 'admission_requirements_application') . '</h2>';
         /*$quicklinks[2] = '<!-- wp:button -->
             <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $admission_requirements_application_id . '">' . $admission_requirements_application_title . '</a></div>
             <!-- /wp:button -->';*/
         $quicklinks[2] = '{"id":"","title":"' . $admission_requirements_application_title . '","description":"","url":"#' . $admission_requirements_application_id . '","facultyColor":"default"}';
+        $admission_requirements_application .= '<p>' . ($labels['admission_intro'] ?? '') . '</p>';
 
         if (!empty($admission_requirements)) {
-            $admission_requirements_application .= '<h4>' . ($labels['admission_requirements'] ?? 'admission_requirements') . '</h4><ul class="wp-block-list">';
+            $admission_requirements_application .= '<h3>' . ($labels['admission_requirements'] ?? 'admission_requirements') . '</h3><ul class="wp-block-list">';
             foreach ($admission_requirements as $requirement) {
                 $admission_requirements_application .= '<li>' . $requirement . '</li>';
             }
@@ -299,7 +300,7 @@ if (in_array('admission_requirements_application', $items)) {
         }
 
         if (!empty($deadlines)) {
-            $admission_requirements_application .= '<h4>' . ($labels['application_deadline'] ?? 'application_deadline') . '</h4><ul class="wp-block-list">';
+            $admission_requirements_application .= '<h3>' . ($labels['application_deadline'] ?? 'application_deadline') . '</h3><ul class="wp-block-list">';
             foreach ($deadlines as $deadline) {
                 $admission_requirements_application .= '<li itemprop="applicationDeadline">' . strip_tags($deadline) . '</li>';
             }
@@ -307,7 +308,7 @@ if (in_array('admission_requirements_application', $items)) {
         }
 
         if (!empty($language_skills)) {
-            $admission_requirements_application .= '<h4>' . ($labels['language_skills'] ?? 'language_skills') . '</h4><ul class="wp-block-list">';
+            $admission_requirements_application .= '<h3>' . ($labels['language_skills'] ?? 'language_skills') . '</h3><ul class="wp-block-list">';
             foreach ($language_skills as $skill) {
                 $admission_requirements_application .= '<li>' . $skill . '</li>';
             }
@@ -315,12 +316,12 @@ if (in_array('admission_requirements_application', $items)) {
         }
 
         if (!empty($content_related_master_requirements)) {
-            $admission_requirements_application .= '<h4>' . ($labels['content_related_master_requirements'] ?? 'content_related_master_requirements') . '</h4>'
+            $admission_requirements_application .= '<h3>' . ($labels['content_related_master_requirements'] ?? 'content_related_master_requirements') . '</h3>'
                 . $content_related_master_requirements;
         }
 
         if (!empty($admission_details)) {
-            $admission_requirements_application .= '<h4>' . ($labels['details_and_notes'] ?? 'details_and_notes') . '</h4>'
+            $admission_requirements_application .= '<h3>' . ($labels['details_and_notes'] ?? 'details_and_notes') . '</h3>'
                 . $admission_details;
         }
 
@@ -413,7 +414,7 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
                     <div class="teaser-content-wrapper">
                         <div class="teaser-content">
                             <div class="content-column">
-                                <h3 class="clamp-3" id="' . $arialabledebyid . '">' . $student_advice_link_text . '</h3>
+                                <h2 class="clamp-3" id="' . $arialabledebyid . '">' . $student_advice_link_text . '</h2>
                                 <div class="excerpt clamp-3">
                                     <span class="visually-hidden">' . $student_advice_text . '</span>
                                     <span aria-hidden="true">' . $student_advice_text . '</span>
@@ -451,7 +452,7 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
                     <div class="teaser-content-wrapper">
                         <div class="teaser-content">
                             <div class="content-column">
-                                <h3 class="clamp-3" id="' . $arialabledebyid . '">' . $subject_specific_advice_link_text . '</h3>
+                                <h2 class="clamp-3" id="' . $arialabledebyid . '">' . $subject_specific_advice_link_text . '</h2>
                                 <div class="excerpt clamp-3">
                                     <span class="visually-hidden">' . $subject_specific_advice_text . '</span>
                                     <span aria-hidden="true">' . $subject_specific_advice_text . '</span>
@@ -490,7 +491,7 @@ if (in_array('links.organizational', $items)) {
     }
     if (!empty($links_organizational)) {
         $useful_links .= '<div class="useful-links-organizational">'
-            . '<h4>' . ($labels['organizational'] ?? 'organizational') . '</h4>'
+            . '<h3>' . ($labels['organizational'] ?? 'organizational') . '</h3>'
             . '<ul class="wp-block-list">';
         foreach ($links_organizational as $link) {
             $useful_links .= '<li>' . $link . '</li>';
@@ -513,7 +514,7 @@ if (in_array('links.downloads', $items)) {
     }
     if (!empty($links_downloads)) {
         $useful_links .= '<div class="useful-links-downloads">'
-            . '<h4>' . ($labels['downloads'] ?? 'downloads') . '</h4>'
+            . '<h3>' . ($labels['downloads'] ?? 'downloads') . '</h3>'
             . '<ul class="wp-block-list">';
         foreach ($links_downloads as $link) {
             $useful_links .= '<li>' . $link . '</li>';
@@ -571,7 +572,7 @@ if (in_array('links.additional_information', $items)) {
     }
     if (!empty($links_additional)) {
         $useful_links .= '<div class="useful-links-additional">'
-            . '<h4>' . ($labels['additional_information'] ?? 'additional_information') . '</h4>'
+            . '<h3>' . ($labels['additional_information'] ?? 'additional_information') . '</h3>'
             . '<ul class="wp-block-list">';
         foreach ($links_additional as $link) {
             $useful_links .= '<li>' . $link . '</li>';
@@ -584,11 +585,12 @@ if (in_array('links.additional_information', $items)) {
 if (in_array('benefits', $items)) {
 
     $benefits_fau_image = $constants[ 'benefits-fau-image' ];
-    $benefits_fau = '<div class="benefits width-full"><h2 class="wp-block-fau-elemental-fau-meta-headline">' . ($labels['studies'] ?? 'studies'). '</h2>';
+    $benefits_fau = '<div class="benefits width-full"><div class="wp-block-fau-elemental-fau-meta-headline">' . ($labels['studies'] ?? 'studies'). '</div>';
 
     if ($theme_family == 'fau-elemental') {
         $benefits_fau .= do_blocks(
             '<div class="width-large"><!-- wp:fau-elemental/fau-big-teaser {
+                                "headlineLevel":"h2",
                                 "headline":"' . $constants[ 'benefits-fau-title' ] . '",
                                 "teaserText":"' . $constants[ 'benefits-fau-text' ] . '",
                                 "image":{"url":"' . $benefits_fau_image . '","alt":""}
@@ -603,7 +605,7 @@ if (in_array('benefits', $items)) {
         "mediaWidth":50,
         "style":{"spacing":{"margin":{"right":"0","left":"0","top":"var:preset|spacing|60","bottom":"var:preset|spacing|60"}}}} -->
         <div class="wp-block-media-text has-media-on-the-right is-stacked-on-mobile" style="margin-top:var(--wp--preset--spacing--60);margin-right:0;margin-bottom:var(--wp--preset--spacing--60);margin-left:0;grid-template-columns:auto 50%"><div class="wp-block-media-text__content">
-        <!-- wp:heading --><h3 class="wp-block-heading">' . $constants[ 'benefits-fau-title' ] . '</h3><!-- /wp:heading -->
+        <!-- wp:heading --><h2 class="wp-block-heading">' . $constants[ 'benefits-fau-title' ] . '</h2><!-- /wp:heading -->
         <!-- wp:paragraph {"placeholder":"Content…"} --><p>' . $constants[ 'benefits-fau-text' ] . '</p><!-- /wp:paragraph --></div>
         <figure class="wp-block-media-text__media"><img src="' . $benefits_fau_image . '" alt="" class="wp-image-0 size-full"/></figure></div>
         <!-- /wp:media-text --></div>');
@@ -656,7 +658,7 @@ if (in_array('benefits', $items)) {
         echo $videos;
 
         if (!empty($cta_internationals.$admission_requirements_application.$apply_now)) {
-            echo '<h2 class="wp-block-fau-elemental-fau-meta-headline" id="' . $admission_requirements_application_id . '">' . $admission_requirements_application_title . '</h2>';
+            echo '<div class="wp-block-fau-elemental-fau-meta-headline" id="' . $admission_requirements_application_id . '">' . $admission_requirements_application_title . '</div>';
         }
 
         // Internationals
@@ -672,8 +674,8 @@ if (in_array('benefits', $items)) {
 
         // Student advice + more
         if (!empty($student_advice . $useful_links)) {
-            echo '<div class="student-advice-more width-full">'
-                . '<h2 class="wp-block-fau-elemental-fau-meta-headline" id="' . $student_advice_id . '">' . $student_advice_title . '</h2>';
+            echo '<div class="student-advice-more is-style-dark width-full">'
+                . '<div class="wp-block-fau-elemental-fau-meta-headline" id="' . $student_advice_id . '">' . $student_advice_title . '</div>';
 
             // Student advice
             if (!empty($student_advice)) {
@@ -682,8 +684,8 @@ if (in_array('benefits', $items)) {
 
             // Useful Links
             if (!empty($useful_links)) {
-                echo '<h3 class="width-large">' . ($labels['useful_links'] ?? 'useful_links') . '</h3>'
-                     . '<div class="useful-links width-large">'
+                echo '<div class="useful-links width-large">'
+                     . '<h2>' . ($labels['useful_links'] ?? 'useful_links') . '</h2>'
                      . $useful_links
                      . '</div>';
             }
