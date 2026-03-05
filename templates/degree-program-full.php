@@ -41,6 +41,7 @@ if (!empty($standard_duration)) {
     $standard_duration_months = $standard_duration % 2;
     $standard_duration_iso = 'P'.$standard_duration_years.'Y'.($standard_duration_months > 0 ? $standard_duration_months . 'M' : '');
 }
+$quicklinks = [];
 
 /*
  * Build items
@@ -174,56 +175,90 @@ if (in_array('fact_sheet', $items)) {
 }
 
 // Content Collapsibles
-$content_fields_all = ['content.structure', 'content.specializations', 'content.qualities_and_skills', 'content.why_should_study', 'content.career_prospects', 'special_features', 'combinations'];
-$content_fields = array_intersect($content_fields_all, $items);
+if (in_array('content.about', $items)
+    || in_array('content.structure', $items)
+    || in_array('content.specializations', $items)
+    || in_array('content.qualities_and_skills', $items)
+    || in_array('content.why_should_study', $items)
+    || in_array('content.career_prospects', $items)
+    || in_array('special_features', $items)
+    || in_array('combinations', $items)) {
 
-$content_title = ($labels['program_overview'] ?? 'program_overview');
-$content_id = sanitize_title($content_title);
-$content = '<div class="width-large"><div class="wp-block-fau-elemental-fau-meta-headline" id="' . $content_id . '">' . $content_title . '</div>'
-           . '<div class="program-details width-small">';
-if (in_array('content.about', $items)) {
-    $content .= '<h2>' . ($labels['about'] ?? 'about') . '</h2><div itemprop="description">' . do_shortcode($data['content']['about']['description']) .  '</div>';
-}
+    $content_fields_all = [
+        'content.structure',
+        'content.specializations',
+        'content.qualities_and_skills',
+        'content.why_should_study',
+        'content.career_prospects',
+        'special_features',
+        'combinations'
+    ];
+    $content_fields     = array_intersect($content_fields_all, $items);
 
-$content_html = '<!-- wp:rrze-elements/collapsibles {"hstart":3,"expandLabel":"Alle ausklappen"} -->';
-foreach ($content_fields as $field) {
-    $field_name = str_replace('content.', '', $field);
-    if (!empty($data['content'][$field_name]['description'])) {
-        $content_html .= '<!-- wp:rrze-elements/collapse {"hstart":3,"title":"' . ($labels[$field_name] ?? $field_name) . '","jumpName":"' . sanitize_title($labels[$field_name] ?? $field_name) . '","isCustomJumpname":true} --><!-- wp:paragraph -->
-        ' . $data['content'][$field_name]['description']
-        . '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
+    $content_title = ($labels[ 'program_overview' ] ?? 'program_overview');
+    $content_id    = sanitize_title($content_title);
+    $content       = '<div class="width-large"><div class="wp-block-fau-elemental-fau-meta-headline" id="' . $content_id . '">' . $content_title . '</div>'
+                     . '<div class="program-details width-small">';
+
+    if (in_array('content.about', $items)) {
+        $content .= '<h2>' . ($labels[ 'about' ] ?? 'about') . '</h2><div itemprop="description">' . do_shortcode(
+                $data[ 'content' ][ 'about' ][ 'description' ]
+            ) . '</div>';
     }
-    if ($field == 'combinations' && (!empty($data['combinations']) || !empty($data['limited_combinations']))) {
-        $content_html .= '<!-- wp:rrze-elements/collapse {"hstart":3,"title":"' . ($labels[$field_name] ?? $field_name) . '","jumpName":"' . sanitize_title($labels[$field_name] ?? $field_name) . '","isCustomJumpname":true} --><!-- wp:paragraph -->';
-        if (!empty($data['combinations'])) {
-            $content_html .= '<h4>' . ($labels['content.combinations'] ?? 'combinations') . '</h4><ul class="program-combinations wp-block-list">';
-            foreach ($data['combinations'] as $combination) {
-                $content_html .= sprintf('<li><a href="%s">%s</a></li>', $combination['url'], $combination['title']);
-            }
-            $content_html .= '</ul>';
-            $content_html .= !empty($descriptions['content.combinations']) ? '<p>' . $descriptions['content.combinations'] . '</p>' : '';
-        }
-        if (!empty($data['limited_combinations'])) {
-            $content_html .= '<h4>' . ($labels['content.limited_combinations'] ?? 'limited_combinations') . '</h4><ul class="program-limited-combinations wp-block-list">';
-            foreach ($data['limited_combinations'] as $limited_combination) {
-                $content_html .= sprintf('<li><a href="%s">%s</a></li>', $limited_combination['url'], $limited_combination['title']);
-            }
-            $content_html .= '</ul>';
-            $content_html .= !empty($descriptions['content.limited_combinations']) ? '<p>' . $descriptions['content.limited_combinations'] . '</p>' : '';
-        }
-        $content_html .= '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
 
+    $content_html = '<!-- wp:rrze-elements/collapsibles {"hstart":3,"expandLabel":"Alle ausklappen"} -->';
+    foreach ($content_fields as $field) {
+        $field_name = str_replace('content.', '', $field);
+        if ( ! empty($data[ 'content' ][ $field_name ][ 'description' ])) {
+            $content_html .= '<!-- wp:rrze-elements/collapse {"hstart":3,"title":"' . ($labels[ $field_name ] ?? $field_name) . '","jumpName":"' . sanitize_title(
+                    $labels[ $field_name ] ?? $field_name
+                ) . '","isCustomJumpname":true} --><!-- wp:paragraph -->
+        ' . $data[ 'content' ][ $field_name ][ 'description' ]
+                             . '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
+        }
+        if ($field == 'combinations' && ( ! empty($data[ 'combinations' ]) || ! empty($data[ 'limited_combinations' ]))) {
+            $content_html .= '<!-- wp:rrze-elements/collapse {"hstart":3,"title":"' . ($labels[ $field_name ] ?? $field_name) . '","jumpName":"' . sanitize_title(
+                    $labels[ $field_name ] ?? $field_name
+                ) . '","isCustomJumpname":true} --><!-- wp:paragraph -->';
+            if ( ! empty($data[ 'combinations' ])) {
+                $content_html .= '<h4>' . ($labels[ 'content.combinations' ] ?? 'combinations') . '</h4><ul class="program-combinations wp-block-list">';
+                foreach ($data[ 'combinations' ] as $combination) {
+                    $content_html .= sprintf(
+                        '<li><a href="%s">%s</a></li>',
+                        $combination[ 'url' ],
+                        $combination[ 'title' ]
+                    );
+                }
+                $content_html .= '</ul>';
+                $content_html .= ! empty($descriptions[ 'content.combinations' ]) ? '<p>' . $descriptions[ 'content.combinations' ] . '</p>' : '';
+            }
+            if ( ! empty($data[ 'limited_combinations' ])) {
+                $content_html .= '<h4>' . ($labels[ 'content.limited_combinations' ] ?? 'limited_combinations') . '</h4><ul class="program-limited-combinations wp-block-list">';
+                foreach ($data[ 'limited_combinations' ] as $limited_combination) {
+                    $content_html .= sprintf(
+                        '<li><a href="%s">%s</a></li>',
+                        $limited_combination[ 'url' ],
+                        $limited_combination[ 'title' ]
+                    );
+                }
+                $content_html .= '</ul>';
+                $content_html .= ! empty($descriptions[ 'content.limited_combinations' ]) ? '<p>' . $descriptions[ 'content.limited_combinations' ] . '</p>' : '';
+            }
+            $content_html .= '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
+        }
     }
-}
-$content_html .= '<!-- /wp:rrze-elements/collapsibles -->';
-$content_html = str_replace('sizes="auto,', 'sizes="', $content_html);
-$content .= do_blocks($content_html);
-$content .= '</div></div>';
+    $content_html .= '<!-- /wp:rrze-elements/collapsibles -->';
+    $content_html = str_replace('sizes="auto,', 'sizes="', $content_html);
+    $content      .= do_blocks($content_html);
+    $content      .= '</div></div>';
 
-/*$quicklinks[0] = '<!-- wp:button -->
-            <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $content_id . '">' . $content_title . '</a></div>
-            <!-- /wp:button -->';*/
-$quicklinks[0] = '{"id":"","title":"' . $content_title . '","description":"","url":"#' . $content_id . '","facultyColor":"default"}';
+    /*$quicklinks[0] = '<!-- wp:button -->
+                <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $content_id . '">' . $content_title . '</a></div>
+                <!-- /wp:button -->';*/
+    $quicklinks[ 0 ] = '{"id":"","title":"' . $content_title . '","description":"","url":"#' . $content_id . '","facultyColor":"default"}';
+} else {
+    $content = '';
+}
 
 // Videos
 if (in_array('videos', $items) && !empty($data['videos'])) {
@@ -646,10 +681,17 @@ if (in_array('benefits', $items)) {
         echo $fact_sheet;
 
         // Quicklinks
-        echo '<div class="quicklinks width-large">';
-        //echo do_blocks('<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"space-between","orientation":"horizontal"}} --><div class="wp-block-buttons">' . implode('', $quicklinks) . '</div><!-- /wp:buttons -->');
-        echo do_blocks('<!-- wp:fau-elemental/fau-big-button {"teaserSize":"large","items":[' . implode(',', $quicklinks) . ']} /-->');
-        echo '</div>';
+        if ( ! empty($quicklinks)) {
+            echo '<div class="quicklinks width-large">';
+            //echo do_blocks('<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"space-between","orientation":"horizontal"}} --><div class="wp-block-buttons">' . implode('', $quicklinks) . '</div><!-- /wp:buttons -->');
+            echo do_blocks(
+                '<!-- wp:fau-elemental/fau-big-button {"teaserSize":"large","items":[' . implode(
+                    ',',
+                    $quicklinks
+                ) . ']} /-->'
+            );
+            echo '</div>';
+        }
 
         // Details / content
         echo $content;
