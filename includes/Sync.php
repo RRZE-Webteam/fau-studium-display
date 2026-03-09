@@ -57,12 +57,12 @@ class Sync
                         // image has changed -> replace it
                         wp_delete_attachment($thumbnail_id, true);
                         delete_post_thumbnail($result);
-                        $attachment_id = Utils::import_image_from_url($program[ 'featured_image' ][ 'url' ], $result);
+                        $attachment_id = Utils::import_image_from_url($program[ 'featured_image' ][ 'url' ], $result, $program[ 'featured_image' ][ 'id' ]);
                         set_post_thumbnail($result, $attachment_id);
                     }
                 } else {
                     // no thumbnail -> upload it
-                    $attachment_id = Utils::import_image_from_url($program[ 'featured_image' ][ 'url' ], $result);
+                    $attachment_id = Utils::import_image_from_url($program[ 'featured_image' ][ 'url' ], $result, $program[ 'featured_image' ][ 'id' ]);
                     set_post_thumbnail($result, $attachment_id);
                 }
             }

@@ -2,7 +2,7 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "fau-studium/display",
-	"version": "1.0.22",
+	"version": "1.1.0",
 	"title": "FAU-Studium Display",
 	"category": "rrze",
 	"description": "",
@@ -55,7 +55,7 @@
 		"selectedItemsFull": {
 			"type": "array",
 			"default": [
-				"teaser_image", "title", "subtitle", "entry_text", "fact_sheet", "content.about", "content.structure", "content.specializations", "content.qualities_and_skills", "content.why_should_study", "content.career_prospects", "content.special_features", "combinations", "videos", "info_internationals_link", "admission_requirements_application", "apply_now_link", "student_advice", "subject_specific_advice", "links.organizational", "links.downloads", "links.additional_information", "benefits"
+				"teaser_image", "title", "subtitle", "entry_text", "fact_sheet", "content.about", "content.structure", "content.specializations", "content.qualities_and_skills", "content.why_should_study", "content.career_prospects", "content.special_features", "combinations", "videos", "admission_requirements_application", "apply_now_link", "student_advice", "subject_specific_advice", "links.organizational", "links.downloads", "links.additional_information", "benefits"
 			]
 		},
 		"selectedSearchFilters" : {

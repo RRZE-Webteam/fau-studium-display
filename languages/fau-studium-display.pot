@@ -1,15 +1,15 @@
-# Copyright (C) 2025 RRZE Webteam
+# Copyright (C) 2026 RRZE Webteam
 # This file is distributed under the GNU General Public License v3.
 msgid ""
 msgstr ""
-"Project-Id-Version: FAU Studium Display 1.0.22\n"
+"Project-Id-Version: FAU Studium Display 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fau-studium-display\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-12-11T11:11:48+00:00\n"
+"POT-Creation-Date: 2026-03-09T15:46:05+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: fau-studium-display\n"
@@ -58,67 +58,67 @@ msgstr ""
 msgid "Plugins: %1$s: %2$s"
 msgstr ""
 
-#: includes/API.php:36
+#: includes/API.php:38
 msgid "Empty response from API"
 msgstr ""
 
-#: includes/API.php:65
+#: includes/API.php:67
 msgid "-- Please select --"
 msgstr ""
 
-#: includes/CPT.php:32
+#: includes/CPT.php:34
 #: build/block/index.js:1
 msgid "Degree Programs"
 msgstr ""
 
-#: includes/CPT.php:56
+#: includes/CPT.php:58
 #: build/block/index.js:1
 msgid "Degrees"
 msgstr ""
 
-#: includes/CPT.php:57
+#: includes/CPT.php:59
 msgid "Subject groups"
 msgstr ""
 
-#: includes/CPT.php:58
+#: includes/CPT.php:60
 #: build/block/index.js:1
 msgid "Special ways to study"
 msgstr ""
 
-#: includes/CPT.php:59
+#: includes/CPT.php:61
 msgid "Admission requirements"
 msgstr ""
 
-#: includes/CPT.php:60
+#: includes/CPT.php:62
 msgid "Start of degree program"
 msgstr ""
 
-#: includes/CPT.php:61
+#: includes/CPT.php:63
 msgid "Study location"
 msgstr ""
 
-#: includes/CPT.php:62
+#: includes/CPT.php:64
 msgid "Teaching language"
 msgstr ""
 
-#: includes/CPT.php:63
+#: includes/CPT.php:65
 msgid "Faculty"
 msgstr ""
 
-#: includes/CPT.php:64
+#: includes/CPT.php:66
 msgid "German language skills"
 msgstr ""
 
-#: includes/CPT.php:83
+#: includes/CPT.php:85
 msgid "Post Meta German"
 msgstr ""
 
-#: includes/CPT.php:92
+#: includes/CPT.php:94
 msgid "Post Meta English"
 msgstr ""
 
-#: includes/CPT.php:104
-#: includes/CPT.php:116
+#: includes/CPT.php:106
+#: includes/CPT.php:118
 msgid "No data available"
 msgstr ""
 
@@ -278,50 +278,54 @@ msgid "Apply filter"
 msgstr ""
 
 #: templates/degree-program-box.php:8
-#: templates/degree-program-full.php:12
+#: templates/degree-program-full.php:13
 msgid "Please select a degree program."
 msgstr ""
 
 #: templates/degree-program-box.php:12
-#: templates/degree-program-full.php:16
+#: templates/degree-program-full.php:17
 msgid "No data available."
 msgstr ""
 
-#: templates/degree-program-full.php:421
-#: templates/degree-program-full.php:458
+#: templates/degree-program-full.php:471
+#: templates/degree-program-full.php:509
 msgid "Read more about %s"
 msgstr ""
 
-#: templates/degree-program-full.php:609
+#: templates/degree-program-full.php:661
 msgid "More than 275"
 msgstr ""
 
-#: templates/degree-program-full.php:609
+#: templates/degree-program-full.php:661
 msgid "degree programs"
 msgstr ""
 
-#: templates/degree-program-full.php:610
+#: templates/degree-program-full.php:662
 msgid "International"
 msgstr ""
 
-#: templates/degree-program-full.php:610
+#: templates/degree-program-full.php:662
 msgid "partnerships"
 msgstr ""
 
-#: templates/degree-program-full.php:611
+#: templates/degree-program-full.php:663
 msgid "Close ties"
 msgstr ""
 
-#: templates/degree-program-full.php:611
+#: templates/degree-program-full.php:663
 msgid "to industry"
 msgstr ""
 
-#: templates/degree-program-full.php:612
+#: templates/degree-program-full.php:664
 msgid "Cooperative bachelor's program"
 msgstr ""
 
-#: templates/degree-program-full.php:612
+#: templates/degree-program-full.php:664
 msgid "available"
+msgstr ""
+
+#: templates/degree-program-full.php:752
+msgid "Image sources"
 msgstr ""
 
 #: templates/degree-program-grid.php:29
