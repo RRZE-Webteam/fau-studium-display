@@ -1455,6 +1455,27 @@
   margin-right: auto;
   margin-top: 32px;
 }
+.fau-studium-display.degree-program-full .image-credits {
+  font-size: small;
+  padding-top: 1em;
+  margin-top: 2em;
+  border-top: 1px solid #9E9E9E;
+}
+.fau-studium-display.degree-program-full .image-credits ul {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.fau-studium-display.degree-program-full .image-credits ul li {
+  display: inline-block;
+  list-style-type: none;
+  font-size: small;
+}
+.fau-studium-display.degree-program-full .image-credits ul li:not(:last-child)::after {
+  content: ", ";
+  white-space: break-spaces;
+}
 .fau-theme .fau-studium-display div.wp-block-fau-elemental-fau-meta-headline {
   font-weight: bold;
   display: flex;

@@ -449,7 +449,7 @@ class Utils
         return $attributeOptions;
     }
 
-    public static function import_image_from_url($image_url, $post_id)
+    public static function import_image_from_url($image_url, $post_id, $image_id = null)
     {
         require_once(ABSPATH . 'wp-admin/includes/image.php');
         require_once(ABSPATH . 'wp-admin/includes/file.php');
@@ -486,6 +486,30 @@ class Utils
 
         // Datei in die Mediathek hochladen
         $attachment_id = media_handle_sideload($file_array, $post_id);
+        if (!is_wp_error($attachment_id) && $image_id != null) {
+            $attachment_meta = (new API())->get_media_data($image_id);
+            if (is_array($attachment_meta) && !empty($attachment_meta)) {
+                if (!empty($attachment_meta['media_details']['image_meta'])) {
+                    $image_meta    = $attachment_meta['media_details']['image_meta'];
+                    $media_details = ['image_meta' => $image_meta];
+                    update_post_meta($attachment_id, 'media_details', $media_details);
+                }
+                if (!empty($attachment_meta[ 'alt_text' ])) {
+                    update_post_meta($attachment_id, 'alt_text', $attachment_meta[ 'alt_text' ]);
+                    update_post_meta($attachment_id, '_wp_attachment_image_alt', $attachment_meta[ 'alt_text' ]);
+                }
+            }
+            $admins = get_users([
+                'role' => 'administrator',
+                'number' => 1
+            ]);
+            if (!empty($admins)) {
+                wp_update_post([
+                    'ID' => $attachment_id,
+                    'post_author' => $admins[0]->ID
+                ]);
+            }
+        }
 
         // Bei Fehler temporäre Datei löschen
         if (is_wp_error($attachment_id)) {

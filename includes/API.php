@@ -5,9 +5,11 @@ namespace Fau\DegreeProgram\Display;
 class API
 {
     private $api_url;
+    private $api_media_url;
 
     public function __construct() {
         $this->api_url = 'https://meinstudium.fau.de/wp-json/fau/v1/degree-program';
+        $this->api_media_url = 'https://meinstudium.fau.de/wp-json/wp/v2/media';
     }
 
     public static function isUsingNetworkKey()
@@ -168,6 +170,15 @@ class API
             set_transient($transient_name, $meta_list, DAY_IN_SECONDS);
         }
         return $meta_list;
+    }
+
+    public function get_media_data($media_id) {
+        $response = wp_remote_get($this->api_media_url.'/'.$media_id);
+        if (is_wp_error($response) || empty($response)) {
+            return [];
+        }
+
+        return json_decode(wp_remote_retrieve_body($response), true);
     }
 
 }

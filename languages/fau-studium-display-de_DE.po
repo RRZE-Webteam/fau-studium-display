@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2025-06-12 12:41+0000\n"
-"PO-Revision-Date: 2025-12-11 11:12+0000\n"
+"PO-Revision-Date: 2026-03-09 15:47+0000\n"
 "Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz/\n"
@@ -19,11 +19,11 @@ msgstr ""
 msgid "%s to %s of %s"
 msgstr "%s bis %s von %s"
 
-#: includes/API.php:65
+#: includes/API.php:67
 msgid "-- Please select --"
 msgstr "-- Bitte auswählen --"
 
-#: includes/CPT.php:59
+#: includes/CPT.php:61
 msgid "Admission requirements"
 msgstr "Zugangsvoraussetzung"
 
@@ -47,7 +47,7 @@ msgstr "Archiv-Ansicht"
 msgid "Are you sure you want to delete %d selected degree programs?"
 msgstr "Möchten Sie wirklich %d Studiengänge löschen?"
 
-#: templates/degree-program-full.php:612
+#: templates/degree-program-full.php:664
 msgid "available"
 msgstr "dual studieren"
 
@@ -56,11 +56,11 @@ msgctxt "block title"
 msgid "FAU-Studium Display"
 msgstr "FAU-Studium Display"
 
-#: templates/degree-program-full.php:611
+#: templates/degree-program-full.php:663
 msgid "Close ties"
 msgstr "Enge Verknüpfung"
 
-#: templates/degree-program-full.php:612
+#: templates/degree-program-full.php:664
 msgid "Cooperative bachelor's program"
 msgstr "Bachelorverbundstudium"
 
@@ -76,15 +76,15 @@ msgstr "Studiengang"
 msgid "Degree program pagination"
 msgstr "Studiengangs-Seitennummerierung"
 
-#: includes/CPT.php:32 build/block/index.js:1
+#: includes/CPT.php:34 build/block/index.js:1
 msgid "Degree Programs"
 msgstr "Studiengänge"
 
-#: templates/degree-program-full.php:609
+#: templates/degree-program-full.php:661
 msgid "degree programs"
 msgstr "Studiengänge"
 
-#: includes/CPT.php:56 build/block/index.js:1
+#: includes/CPT.php:58 build/block/index.js:1
 msgid "Degrees"
 msgstr "Abschlüsse"
 
@@ -96,7 +96,7 @@ msgstr "Löschen"
 msgid "Delete selected"
 msgstr "Ausgewählte löschen"
 
-#: includes/API.php:36
+#: includes/API.php:38
 msgid "Empty response from API"
 msgstr "Leere Antwort von der API"
 
@@ -108,7 +108,7 @@ msgstr "Englisch"
 msgid "Faculties"
 msgstr "Fakultäten"
 
-#: includes/CPT.php:63
+#: includes/CPT.php:65
 msgid "Faculty"
 msgstr "Fakultät"
 
@@ -146,7 +146,7 @@ msgstr "Allgemeine Einstellungen"
 msgid "German"
 msgstr "Deutsch"
 
-#: includes/CPT.php:64
+#: includes/CPT.php:66
 msgid "German language skills"
 msgstr "Deutschkenntnisse"
 
@@ -158,6 +158,10 @@ msgstr "Kacheln"
 #: fau-studium-display.php
 msgid "https://github.com/RRZE-Webteam/fau-studium-display"
 msgstr "https://github.com/RRZE-Webteam/fau-studium-display"
+
+#: templates/degree-program-full.php:752
+msgid "Image sources"
+msgstr "Bildnachweise"
 
 #: includes/Settings.php:186 includes/Settings.php:385
 msgid "Import"
@@ -179,7 +183,7 @@ msgstr "Inkompatibles Plugin"
 msgid "Infobox"
 msgstr "Infobox"
 
-#: templates/degree-program-full.php:610
+#: templates/degree-program-full.php:662
 msgid "International"
 msgstr "Internationale"
 
@@ -211,7 +215,7 @@ msgstr "Importierte Studiengänge verwalten"
 msgid "More filter options"
 msgstr "Mehr Filteroptionen"
 
-#: templates/degree-program-full.php:609
+#: templates/degree-program-full.php:661
 msgid "More than 275"
 msgstr "Mehr als 275"
 
@@ -219,11 +223,11 @@ msgstr "Mehr als 275"
 msgid "Next page"
 msgstr "Nächste Seite"
 
-#: includes/CPT.php:104 includes/CPT.php:116
+#: includes/CPT.php:106 includes/CPT.php:118
 msgid "No data available"
 msgstr "Keine Daten vorhanden"
 
-#: templates/degree-program-box.php:12 templates/degree-program-full.php:16
+#: templates/degree-program-box.php:12 templates/degree-program-full.php:17
 msgid "No data available."
 msgstr "Keine Daten verfügbar."
 
@@ -261,11 +265,11 @@ msgstr ""
 msgid "Page %d"
 msgstr "Seite %d"
 
-#: templates/degree-program-full.php:610
+#: templates/degree-program-full.php:662
 msgid "partnerships"
 msgstr "Partnerschaften"
 
-#: templates/degree-program-box.php:8 templates/degree-program-full.php:12
+#: templates/degree-program-box.php:8 templates/degree-program-full.php:13
 msgid "Please select a degree program."
 msgstr "Bitte wählen Sie einen Studiengang aus."
 
@@ -279,11 +283,11 @@ msgstr "Plugin zur Darstellung von Studiengangsinformationen"
 msgid "Plugins: %1$s: %2$s"
 msgstr "Plugins: %1$s: %2$s"
 
-#: includes/CPT.php:92
+#: includes/CPT.php:94
 msgid "Post Meta English"
 msgstr "Post-Meta-Daten englisch"
 
-#: includes/CPT.php:83
+#: includes/CPT.php:85
 msgid "Post Meta German"
 msgstr "Post-Meta-Daten deutsch"
 
@@ -295,7 +299,7 @@ msgstr "Vorherige Seite"
 msgid "Read more"
 msgstr "Mehr erfahren"
 
-#: templates/degree-program-full.php:421 templates/degree-program-full.php:458
+#: templates/degree-program-full.php:471 templates/degree-program-full.php:509
 msgid "Read more about %s"
 msgstr "Mehr über %s erfahren"
 
@@ -375,19 +379,19 @@ msgstr "Detail-Elemente ein-/ausblenden"
 msgid "Single View"
 msgstr "Detail-Ansicht"
 
-#: includes/CPT.php:58 build/block/index.js:1
+#: includes/CPT.php:60 build/block/index.js:1
 msgid "Special ways to study"
 msgstr "Besondere Studienformen"
 
-#: includes/CPT.php:60
+#: includes/CPT.php:62
 msgid "Start of degree program"
 msgstr "Studienbeginn"
 
-#: includes/CPT.php:61
+#: includes/CPT.php:63
 msgid "Study location"
 msgstr "Studienort"
 
-#: includes/CPT.php:57
+#: includes/CPT.php:59
 msgid "Subject groups"
 msgstr "Fächergruppen"
 
@@ -399,7 +403,7 @@ msgstr "Sync"
 msgid "Table"
 msgstr "Tabelle"
 
-#: includes/CPT.php:62
+#: includes/CPT.php:64
 msgid "Teaching language"
 msgstr "Unterrichtssprache"
 
@@ -429,7 +433,7 @@ msgstr ""
 "Dieses Plugin ist nicht kompatibel mit FAU Studium Display und kann daher "
 "nicht aktiviert werden."
 
-#: templates/degree-program-full.php:611
+#: templates/degree-program-full.php:663
 msgid "to industry"
 msgstr "mit der Wirtschaft"
 

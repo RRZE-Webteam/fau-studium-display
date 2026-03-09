@@ -2,6 +2,7 @@
 
 defined('ABSPATH') || exit;
 
+use Fau\DegreeProgram\Display\API;
 use Fau\DegreeProgram\Display\Utils;
 
 use function Fau\DegreeProgram\Display\Config\get_constants;
@@ -38,10 +39,11 @@ if (!empty($number_of_students_raw)) {
 $standard_duration = $data['standard_duration'] ?? '';
 if (!empty($standard_duration)) {
     $standard_duration_years = floor((int)$standard_duration/2);
-    $standard_duration_months = $standard_duration % 2;
+    $standard_duration_months = (int)$standard_duration % 2;
     $standard_duration_iso = 'P'.$standard_duration_years.'Y'.($standard_duration_months > 0 ? $standard_duration_months . 'M' : '');
 }
 $quicklinks = [];
+$image_credits = [];
 
 /*
  * Build items
@@ -49,7 +51,16 @@ $quicklinks = [];
 
 // Thumbnail
 if (in_array('teaser_image', $items)) {
+    global $post_id;
     $thumbnail = !empty($data[ '_thumbnail_rendered' ]) ? $data[ '_thumbnail_rendered' ] : $data[ 'featured_image' ][ 'rendered' ];
+    $attachment_id = get_post_thumbnail_id($post_id);
+    $attachment_meta = wp_get_attachment_metadata($attachment_id);
+    $attachment_url = wp_get_attachment_url($attachment_id);
+    if (!empty($attachment_meta['image_meta']['credit'])) {
+        $image_credits[] = '<a href="' . $attachment_url . '">' . $attachment_meta['image_meta']['credit'] . '</a>';
+    } elseif (!empty($attachment_meta['image_meta']['copyright'])) {
+        $image_credits[] = '<a href="' . $attachment_url . '">' . $attachment_meta['image_meta']['copyright'] . '</a>';
+    }
 } else {
     $thumbnail = '';
 }
@@ -735,8 +746,13 @@ if (in_array('benefits', $items)) {
             echo '</div>';
         }
 
-        //
+        // FAU benefits
         echo $benefits_fau;
+
+        // Image credits
+        if (!empty($image_credits)) {
+            echo '<div class="image-credits"><span class="copyright-info-label">' . __('Image sources', 'fau-studium-display') . ': <ul><li>' . implode('</li><li>', $image_credits) . '</li></ul></div>';
+        }
         ?>
 
     </div>
