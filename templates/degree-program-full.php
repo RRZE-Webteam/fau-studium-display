@@ -439,7 +439,7 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
 
     $class_student_advice = $theme_family == 'fau-elemental' ? '' : ' width-large ';
 
-    $student_advice = '<div class="' . $class_student_advice . 'wp-block-group is-style-dark is-layout-constrained wp-block-group-is-layout-constrained"><section class="fau-list-item wp-block-fau-elemental-fau-teaser-grid" aria-label="Inhaltsgitter" role="region"><div class="fau-teaser-grid teaser-grid layout-2s layout-2s-left" aria-label="Inhalt">';
+    $student_advice = '<div class="' . $class_student_advice . 'wp-block-group is-style-dark is-layout-constrained wp-block-group-is-layout-constrained"><section class="fau-list-item wp-block-fau-elemental-fau-teaser-grid" role="region"><div class="fau-teaser-grid teaser-grid layout-2s layout-2s-left">';
 
     // Button Student Advice
     if (in_array('student_advice', $items)) {
@@ -537,7 +537,7 @@ if (in_array('links.organizational', $items)) {
     }
     if (!empty($links_organizational)) {
         $useful_links .= '<div class="useful-links-organizational">'
-            . '<h3>' . ($labels['organizational'] ?? 'organizational') . '</h3>'
+            . '<p class="heading">' . ($labels['organizational'] ?? 'organizational') . '</p>'
             . '<ul class="wp-block-list">';
         foreach ($links_organizational as $link) {
             $useful_links .= '<li>' . $link . '</li>';
@@ -560,7 +560,7 @@ if (in_array('links.downloads', $items)) {
     }
     if (!empty($links_downloads)) {
         $useful_links .= '<div class="useful-links-downloads">'
-            . '<h3>' . ($labels['downloads'] ?? 'downloads') . '</h3>'
+            . '<p class="heading">' . ($labels['downloads'] ?? 'downloads') . '</p>'
             . '<ul class="wp-block-list">';
         foreach ($links_downloads as $link) {
             $useful_links .= '<li>' . $link . '</li>';
@@ -618,7 +618,7 @@ if (in_array('links.additional_information', $items)) {
     }
     if (!empty($links_additional)) {
         $useful_links .= '<div class="useful-links-additional">'
-            . '<h3>' . ($labels['additional_information'] ?? 'additional_information') . '</h3>'
+            . '<p class="heading">' . ($labels['additional_information'] ?? 'additional_information') . '</p>'
             . '<ul class="wp-block-list">';
         foreach ($links_additional as $link) {
             $useful_links .= '<li>' . $link . '</li>';

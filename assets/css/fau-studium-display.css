@@ -1398,6 +1398,10 @@
     grid-column-gap: 32px;
   }
 }
+.fau-studium-display.degree-program-full .student-advice-more .useful-links p.heading {
+  font-weight: bold;
+  padding-bottom: 0.5em;
+}
 .fau-studium-display.degree-program-full .student-advice-more .useful-links * {
   color: #fff;
   letter-spacing: 0.02em;
@@ -1532,6 +1536,9 @@
 }
 .fau-theme .fau-studium-display .student-advice-more .useful-links {
   padding: 0;
+}
+.fau-theme .fau-studium-display .student-advice-more ul.wp-block-list {
+  margin-bottom: 1em;
 }
 .fau-theme .fau-studium-display .student-advice-more .wp-block-fau-elemental-fau-teaser-grid {
   margin-bottom: 32px;
