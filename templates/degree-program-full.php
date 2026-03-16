@@ -439,7 +439,7 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
 
     $class_student_advice = $theme_family == 'fau-elemental' ? '' : ' width-large ';
 
-    $student_advice = '<div class="' . $class_student_advice . 'wp-block-group is-style-dark is-layout-constrained wp-block-group-is-layout-constrained"><section class="fau-list-item wp-block-fau-elemental-fau-teaser-grid" role="region"><div class="fau-teaser-grid teaser-grid layout-2s layout-2s-left">';
+    $student_advice = '<div class="' . $class_student_advice . 'wp-block-group is-style-dark is-layout-constrained wp-block-group-is-layout-constrained"><section class="fau-list-item wp-block-fau-elemental-fau-teaser-grid"><div class="fau-teaser-grid teaser-grid layout-2s layout-2s-left">';
 
     // Button Student Advice
     if (in_array('student_advice', $items)) {
