@@ -51,9 +51,12 @@ class Sync
                 $thumbnail_id = get_post_thumbnail_id($result);
                 if ($thumbnail_id) {
                     // thumbnail already exists -> check if it has changed
-                    $old_filename = basename(get_attached_file($thumbnail_id));
+                    $old_file = get_attached_file($thumbnail_id);
+                    $old_filename = basename($old_file);
+                    $old_filesize = filesize($old_file);
                     $new_filename = basename($program['featured_image']['url']);
-                    if ($old_filename != $new_filename) {
+                    $new_filesize = filesize($program['featured_image']['url']);
+                    if (($old_filename != $new_filename) || ($old_filesize != $new_filesize)) {
                         // image has changed -> replace it
                         wp_delete_attachment($thumbnail_id, true);
                         delete_post_thumbnail($result);
