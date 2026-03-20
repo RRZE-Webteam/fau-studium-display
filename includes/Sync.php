@@ -55,7 +55,12 @@ class Sync
                     $old_filename = basename($old_file);
                     $old_filesize = filesize($old_file);
                     $new_filename = basename($program['featured_image']['url']);
-                    $new_filesize = filesize($program['featured_image']['url']);
+                    $response = wp_remote_head( $program['featured_image']['url'] );
+                    if ( ! is_wp_error( $response ) ) {
+                        $new_filesize = wp_remote_retrieve_header( $response, 'content-length' );
+                    } else {
+                        $new_filesize = 0;
+                    }
                     if (($old_filename != $new_filename) || ($old_filesize != $new_filesize)) {
                         // image has changed -> replace it
                         wp_delete_attachment($thumbnail_id, true);
