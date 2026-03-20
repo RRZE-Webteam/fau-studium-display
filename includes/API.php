@@ -8,14 +8,8 @@ class API
     private $api_media_url;
 
     public function __construct() {
-        $this->api_url = 'https://meinstudium.fau.de/wp-json/fau/v1/degree-program';
-        $remote = wp_remote_get($this->api_url);
-        if (is_wp_error($remote) || wp_remote_retrieve_response_code($remote) != 200) {
-            $this->api_url = 'https://studiengangsverwaltung.zuv.fau.de/wp-json/fau/v1/degree-program';
-            $this->api_media_url = 'https://studiengangsverwaltung.zuv.fau.de/wp-json/wp/v2/media';
-        } else {
-            $this->api_media_url = 'https://meinstudium.fau.de/wp-json/wp/v2/media';
-        }
+        $this->api_url = 'https://studiengangsverwaltung.zuv.fau.de/wp-json/fau/v1/degree-program';
+        $this->api_media_url = 'https://studiengangsverwaltung.zuv.fau.de/wp-json/wp/v2/media';
     }
 
     public static function isUsingNetworkKey()
