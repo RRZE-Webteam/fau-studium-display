@@ -143,19 +143,15 @@ class Data
         $programs_imported = get_posts($args);
 
         if (!empty($programs_imported)) {
-            switch ($lang) {
-                case 'en':
-                    foreach ($programs_imported as $program) {
-                        $data[$program->ID] = get_post_meta($program->ID, 'program_data_en', true);
-                        $data[$program->ID]['_thumbnail_rendered'] = get_the_post_thumbnail($program->ID, 'full');
-                    }
-                    break;
-                case 'de':
-                default:
-                    foreach ($programs_imported as $program) {
-                        $data[$program->ID] = get_post_meta($program->ID, 'program_data_de', true);
-                        $data[$program->ID]['_thumbnail_rendered'] = get_the_post_thumbnail($program->ID, 'full');
-                    }
+            $meta_key = ($lang === 'en') ? 'program_data_en' : 'program_data_de';
+
+            foreach ($programs_imported as $program) {
+                $multilang = get_post_meta($program->ID, '_rrze_multilang_single_locale', true);
+                if (!empty($multilang) && !str_starts_with($multilang, $lang)) {
+                    continue;
+                }
+                $data[$program->ID] = get_post_meta($program->ID, $meta_key, true);
+                $data[$program->ID]['_thumbnail_rendered'] = get_the_post_thumbnail($program->ID, 'full');
             }
         }
 
@@ -224,7 +220,11 @@ class Data
                     }
                     break;
                 case 'admission_requirements':
-                    $meta_list[] = $post_meta['admission_requirement_link']['parent']['name'] ?? $post_meta['admission_requirement_link']['name'];
+                    if (!empty($post_meta['admission_requirement_link']['parent']['name'])) {
+                        $meta_list[] = $post_meta['admission_requirement_link']['parent']['name'];
+                    } elseif (!empty($post_meta['admission_requirement_link']['name'])) {
+                        $meta_list[] = $post_meta['admission_requirement_link']['name'];
+                    }
                     break;
                 case 'german_language_skills':
                     if (!empty($post_meta['german_language_skills_for_international_students']['name'])) {

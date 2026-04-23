@@ -3,6 +3,7 @@
 defined('ABSPATH') || exit;
 
 use Fau\DegreeProgram\Display\API;
+//use Fau\DegreeProgram\Display\Filters;
 use Fau\DegreeProgram\Display\Utils;
 
 use function Fau\DegreeProgram\Display\Config\get_constants;
@@ -57,9 +58,11 @@ if (in_array('teaser_image', $items)) {
     $attachment_meta = wp_get_attachment_metadata($attachment_id);
     $attachment_url = wp_get_attachment_url($attachment_id);
     if (!empty($attachment_meta['image_meta']['credit'])) {
-        $image_credits[] = '<a href="' . $attachment_url . '">' . $attachment_meta['image_meta']['credit'] . '</a>';
+        $image_credits[$attachment_url] = $attachment_meta['image_meta']['credit'];
+        //Filters::pushCopyright($attachment_meta['image_meta']['credit'], $attachment_id);
     } elseif (!empty($attachment_meta['image_meta']['copyright'])) {
-        $image_credits[] = '<a href="' . $attachment_url . '">' . $attachment_meta['image_meta']['copyright'] . '</a>';
+        $image_credits[$attachment_url] = $attachment_meta['image_meta']['copyright'];
+        //Filters::pushCopyright($attachment_meta['image_meta']['copyright'], $attachment_id);
     }
 } else {
     $thumbnail = '';
@@ -430,6 +433,13 @@ if (in_array('apply_now_link', $items) && !empty($data['apply_now_link']['link_u
         $apply_now = '<div class="program-apply-now width-medium">'
                       . do_blocks('<!-- wp:rrze-elements/cta {"url":"' . esc_url($apply_now_image) . '","buttonUrl":"' . esc_url($apply_now_link_url) . '","alt":"","title":"' . esc_attr($apply_now_title) . '","subtitle":"' . esc_attr($apply_now_text) . '","buttonText":"' . esc_attr($apply_now_link_text) . '"} /-->')
                       . '</div>';
+        if ($apply_now_image !== '') {
+            $exif = exif_read_data($apply_now_image);
+            if ($exif && isset($exif['COMPUTED']['Copyright'])) {
+                //Filters::pushCopyright(esc_html($exif['COMPUTED']['Copyright']), 0);
+                $image_credits[$apply_now_image] = esc_html($exif['COMPUTED']['Copyright']);
+            }
+        }
     }
 }
 
@@ -475,6 +485,13 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
                     </div>
                 </article>
             </a>';
+            if ($student_advice_img !== '') {
+                $exif = exif_read_data($student_advice_img);
+                if ($exif && isset($exif['COMPUTED']['Copyright'])) {
+                    //Filters::pushCopyright(esc_html($exif['COMPUTED']['Copyright']), 0);
+                    $image_credits[$student_advice_img] = esc_html($exif['COMPUTED']['Copyright']);
+                }
+            }
         }
     }
 
@@ -483,6 +500,13 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
         && (! empty($data[ 'subject_specific_advice' ][ 'link_text' ]) || ! empty($data[ 'subject_specific_advice' ][ 'name' ]))
         && ! empty($data[ 'subject_specific_advice' ][ 'link_url' ])) {
         $subject_specific_advice_img = $constants[ 'specific-student-advice-image' ] ?? '';
+        if ($subject_specific_advice_img !== '') {
+            $exif = exif_read_data($subject_specific_advice_img);
+            if ($exif && isset($exif['COMPUTED']['Copyright'])) {
+                //Filters::pushCopyright(esc_html($exif['COMPUTED']['Copyright']), 0);
+                $image_credits[$subject_specific_advice_img] = esc_html($exif['COMPUTED']['Copyright']);
+            }
+        }
         $subject_specific_advice_text = $descriptions[ 'subject_specific_advice' ] ?? '';
         $subject_specific_advice_link_text = !empty($data[ 'subject_specific_advice' ][ 'link_text' ]) ? $data[ 'subject_specific_advice' ][ 'link_text' ] : (!empty($data[ 'subject_specific_advice' ][ 'name' ]) ? $data[ 'subject_specific_advice' ][ 'name' ] : '');
         $subject_specific_advice_link_url  = $data[ 'subject_specific_advice' ][ 'link_url' ];
@@ -642,6 +666,13 @@ if (in_array('benefits', $items)) {
                                 "image":{"url":"' . $benefits_fau_image . '","alt":""}
                                 } /--></div>'
         );
+        if ($benefits_fau_image !== '') {
+            $exif = exif_read_data($benefits_fau_image);
+            if ($exif && isset($exif['COMPUTED']['Copyright'])) {
+                //Filters::pushCopyright(esc_html($exif['COMPUTED']['Copyright']), 0);
+                $image_credits[$benefits_fau_image] = esc_html($exif['COMPUTED']['Copyright']);
+            }
+        }
     } else {
         $benefits_fau .= do_blocks('<div class="width-large"><!-- wp:media-text {
         "mediaPosition":"right",
@@ -751,7 +782,13 @@ if (in_array('benefits', $items)) {
 
         // Image credits
         if (!empty($image_credits)) {
-            echo '<div class="image-credits"><span class="copyright-info-label">' . __('Image sources', 'fau-studium-display') . ': <ul><li>' . implode('</li><li>', $image_credits) . '</li></ul></div>';
+            echo '<div class="image-credits"><span class="copyright-info-label">' . __('Image sources', 'fau-studium-display') . ': <ul>';
+            $i = 1;
+            foreach ($image_credits as $url => $image_credit) {
+                echo '<li><a href="' . $url . '">' . $image_credit . '</a> <sup>' . $i .'</sup></li>';
+                $i++;
+            }
+            echo '</ul></div>';
         }
         ?>
 
