@@ -74,6 +74,10 @@ class Sync
                     set_post_thumbnail($result, $attachment_id);
                 }
             }
+            $taxonomies = get_object_taxonomies(get_post_type($result));
+            foreach ($taxonomies as $taxonomy) {
+                wp_set_object_terms($result, [], $taxonomy);
+            }
             if (!empty($program['degree']['name'])) {
                 Utils::assign_post_term($result, 'degree', esc_attr($program['degree']['name']), ($program[ 'degree' ][ 'parent' ][ 'name' ] ?? null));
             }

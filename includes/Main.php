@@ -36,6 +36,7 @@ class Main
     {
         $settings = new Settings($this->pluginFile);
         $settings->onLoaded();
+        //Filters::register();
     }
 
 

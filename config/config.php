@@ -893,8 +893,8 @@ function get_constants($lang = 'de') {
             'en' => 'https://fau.eu'
         ],
         'benefits-fau-image' => [
-            'de' => plugin()->getUrl() . 'assets/img/benefits-fau.png',
-            'en' => plugin()->getUrl() . 'assets/img/benefits-fau.png'
+            'de' => plugin()->getUrl() . 'assets/img/benefits-fau.jpg',
+            'en' => plugin()->getUrl() . 'assets/img/benefits-fau.jpg'
         ],
         'features-1-text' => [
             'de' => 'Mehr als 275 Studiengänge',
