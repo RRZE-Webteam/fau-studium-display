@@ -253,9 +253,17 @@ class Settings
         foreach ($this->programs as $post) {
             $title = $post->post_title;
             $program_id = get_post_meta($post->ID, 'program_id', true);
+            $lang_code = '';
+            $multilang_mode = Utils::get_multilang_mode();
+            if ($multilang_mode == 'single') {
+                $lang_raw = get_post_meta($post->ID, '_rrze_multilang_single_locale', true);
+                if (!empty($lang_raw)) {
+                    $lang_code = ' <span class="lang-code">[' . $lang_raw . ']</span>';
+                }
+            }
             echo '<div class="program-item manage-program" data-post_id="' . $post->ID . '">'
                  . '<div class="program-check"><input type="checkbox" value="' . $post->ID . '" name="batch-manage[]" id="batch-manage-' . $post->ID . '">' . '</div>'
-                . '<div class="program-title">' . $title . '</div>'
+                . '<div class="program-title">' . $title . $lang_code . '</div>'
                 . '<div class="program-buttons">';
             foreach ($buttons as $task => $button) {
                 echo '<a class="' . $task . '-degree-program button" data-id="' . $program_id . '" data-task="' . $task . '" data-post_id="' . $post->ID . '"><span class="dashicons ' . $button['icon'] . '"></span> ' . $button['label'] . '</a>';

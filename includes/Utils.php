@@ -142,10 +142,11 @@ class Utils
                 }
                 $filter_active = ! empty($getParams[ $filter[ 'key' ] ]);
                 if ($filter_active) {
-                    $filters_selected[ $filter[ 'key' ] ] = $getParams[ $filter[ 'key' ] ];
+                    $current_filter_key = is_array($getParams[ $filter[ 'key' ] ]) ? $getParams[ $filter[ 'key' ] ] : [$getParams[ $filter[ 'key' ] ]];
+                    $filters_selected[ $filter[ 'key' ] ] = $current_filter_key;
                     $selected                             = array_map(
                         'sanitize_text_field',
-                        $getParams[ $filter[ 'key' ] ]
+                        $current_filter_key
                     );
                 } else {
                     $selected = [];
@@ -168,10 +169,11 @@ class Utils
                     }
                     $filter_active = ! empty($getParams[ $filter[ 'key' ] ]);
                     if ($filter_active) {
-                        $filters_selected[ $filter[ 'key' ] ] = $getParams[ $filter[ 'key' ] ];
+                        $current_filter_key = is_array($getParams[ $filter[ 'key' ] ]) ? $getParams[ $filter[ 'key' ] ] : [$getParams[ $filter[ 'key' ] ]];
+                        $filters_selected[ $filter[ 'key' ] ] = $current_filter_key;
                         $selected                             = array_map(
                             'sanitize_text_field',
-                            $getParams[ $filter[ 'key' ] ]
+                            $current_filter_key
                         );
                     } else {
                         $selected = [];
@@ -924,11 +926,17 @@ class Utils
     }
 
     public static function get_multilang_mode() {
-        if (!is_plugin_active('rrze-multilang/rrze-multilang.php') && !is_plugin_active_for_network('rrze-multilang/rrze-multilang.php')) {
-            return 'none';
-        }
-        $multilang_meta = get_option('rrze_multilang_postmeta');
         $multilang_mode = 'none';
+
+        if (!is_plugin_active('rrze-multilang/rrze-multilang.php') && !is_plugin_active_for_network('rrze-multilang/rrze-multilang.php')) {
+            return $multilang_mode;
+        }
+
+        $multilang_meta = get_option('rrze_multilang_postmeta');
+        if (empty($multilang_meta['post_types']) || !in_array('degree-program', $multilang_meta['post_types'])) {
+            return $multilang_mode;
+        }
+
         if (!empty($multilang_meta) && isset($multilang_meta['multilang_mode'])) {
             switch ($multilang_meta['multilang_mode']) {
                 case '2':

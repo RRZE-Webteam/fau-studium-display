@@ -1,14 +1,12 @@
-const { __, _x, _n, _nx } = wp.i18n;
-
 jQuery(document).ready(function($) {
-    $('.checklist-toggle').bind('mousedown', function(event) {
+    $('.fau-studium-display .checklist-toggle').bind('mousedown', function(event) {
         event.preventDefault();
         let $checklist = $(this).parent();
         toggleChecklist($checklist);
     });
 
     // Keyboard navigation for accordions
-    $('.checklist-toggle').keydown(function(event) {
+    $('.fau-studium-display .checklist-toggle').keydown(function(event) {
         if (event.keyCode == 32 || event.keyCode == 13) {
             event.preventDefault();
             let $checklist = $(this).parent();
@@ -22,11 +20,11 @@ jQuery(document).ready(function($) {
         $($checklist).children().find('.dashicons.dashicons-arrow-down-alt2').toggleClass('dashicons-arrow-up-alt2');
     }
 
-    $('.extended-search-toggle').bind('mousedown', function(event) {
+    $('.fau-studium-display .extended-search-toggle').bind('mousedown', function(event) {
         event.preventDefault();
         toggleExtendedSearch($(this));
     });
-    $('.extended-search-toggle').keydown(function(event) {
+    $('.fau-studium-display .extended-search-toggle').keydown(function(event) {
         if (event.keyCode == 32 || event.keyCode == 13) {
             event.preventDefault();
             toggleExtendedSearch($(this));
@@ -40,6 +38,7 @@ jQuery(document).ready(function($) {
     }
 
     function toggleExtendedSearch($this) {
+        const { __, _x, _n, _nx } = wp.i18n;
         $this.toggleClass('active');
         const icon = $this.find('.icon-wrapper');
         icon.toggleClass('icon-plus icon-minus');

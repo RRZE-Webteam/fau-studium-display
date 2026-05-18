@@ -55,6 +55,10 @@
   font-weight: bold;
   flex: 70% 0 1;
 }
+.settings_page_fau-studium-display #degree-programs-imported .program-item .program-title .lang-code,
+.settings_page_fau-studium-display #degree-program-results .program-item .program-title .lang-code {
+  font-weight: normal;
+}
 .settings_page_fau-studium-display #degree-programs-imported .program-item .program-buttons,
 .settings_page_fau-studium-display #degree-program-results .program-item .program-buttons {
   flex: 30% 0 1;

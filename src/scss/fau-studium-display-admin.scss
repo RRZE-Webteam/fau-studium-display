@@ -57,6 +57,9 @@
             .program-title {
                 font-weight: bold;
                 flex: 70% 0 1;
+                .lang-code {
+                    font-weight: normal;
+                }
             }
             .program-buttons {
                 flex: 30% 0 1;
