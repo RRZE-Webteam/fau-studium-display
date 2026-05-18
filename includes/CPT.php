@@ -73,7 +73,10 @@ class CPT
                 'show_ui'      => false,
                 //'show_ui'      => true,
                 'show_in_rest' => true,
-                'hierarchical' => true
+                'hierarchical' => true,
+                'has_archive'  => false,
+                'rewrite'     => false,
+                'query_var'   => $taxonomy,
             ]);
         }
     }

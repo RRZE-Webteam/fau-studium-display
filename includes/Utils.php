@@ -142,10 +142,11 @@ class Utils
                 }
                 $filter_active = ! empty($getParams[ $filter[ 'key' ] ]);
                 if ($filter_active) {
-                    $filters_selected[ $filter[ 'key' ] ] = $getParams[ $filter[ 'key' ] ];
+                    $current_filter_key = is_array($getParams[ $filter[ 'key' ] ]) ? $getParams[ $filter[ 'key' ] ] : [$getParams[ $filter[ 'key' ] ]];
+                    $filters_selected[ $filter[ 'key' ] ] = $current_filter_key;
                     $selected                             = array_map(
                         'sanitize_text_field',
-                        $getParams[ $filter[ 'key' ] ]
+                        $current_filter_key
                     );
                 } else {
                     $selected = [];
@@ -168,10 +169,11 @@ class Utils
                     }
                     $filter_active = ! empty($getParams[ $filter[ 'key' ] ]);
                     if ($filter_active) {
-                        $filters_selected[ $filter[ 'key' ] ] = $getParams[ $filter[ 'key' ] ];
+                        $current_filter_key = is_array($getParams[ $filter[ 'key' ] ]) ? $getParams[ $filter[ 'key' ] ] : [$getParams[ $filter[ 'key' ] ]];
+                        $filters_selected[ $filter[ 'key' ] ] = $current_filter_key;
                         $selected                             = array_map(
                             'sanitize_text_field',
-                            $getParams[ $filter[ 'key' ] ]
+                            $current_filter_key
                         );
                     } else {
                         $selected = [];
