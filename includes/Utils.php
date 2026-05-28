@@ -903,11 +903,11 @@ class Utils
 
         if (empty($filter[ 'search' ]))
             return $programs;
-
+        $search_term   = strtolower(sanitize_text_field($filter[ 'search' ]));#
         $programs_filtered = [];
         foreach ($programs as $id => $program) {
-            $search_term   = strtolower(sanitize_text_field($filter[ 'search' ]));
             $search_target = $program[ 'title' ] ?? '';
+            $search_target .= $program[ 'subtitle' ] ?? '';
             foreach ($program[ 'keywords' ] ?? [] as $keyword) {
                 $search_target .= ' ' . $keyword;
             }
@@ -918,7 +918,7 @@ class Utils
                 }
             }
             $search_target = strtolower(strip_tags($search_target));
-            if ( str_contains($search_target, $search_term)) {
+            if (mb_stripos($search_target, $search_term)) {
                 $programs_filtered[$id] = $program;
             }
         }
