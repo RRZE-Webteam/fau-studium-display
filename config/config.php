@@ -561,8 +561,8 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Possible overlaps in the timetable'
             ],
             'description' => [
-                'de' => 'Wenn Sie diese Fächer kombinieren, könnten sich einzelne Veranstaltungen in ihrem Stundenplan überschneiden. Deshalb empfehlen wir Ihnen vor Studienstart das <a href="https://www.fau.de/studium/studienangebot/bachelor/#infos-zum-bachelorstudium-an-der-philosophischen-fakultaet-und-fachbereich-theologie">Beratungsangebot der Zentralen Studienberatung und des Studien-Service-Centers</a> in Anspruch zu nehmen.',
-                'en' => 'If you combine these subjects, individual courses may overlap in your timetable. That is why we recommend that you take advantage of the <a href="https://www.fau.eu/studying/degree-programs/bachelors-degree-programs/#bachelor-phil">advisory services offered by the Central Student Advisory Service and the Student Service Center</a> before starting your studies.'
+                'de' => 'Bei der Kombination dieser Fächer sind Überschneidungen einzelner Lehrveranstaltungen im Stundenplan möglich. Daher empfiehlt sich vor Studienbeginn die Inanspruchnahme des <a href="https://www.fau.de/studium/studienangebot/bachelor/#infos-zum-bachelorstudium-an-der-philosophischen-fakultaet-und-fachbereich-theologie">Beratungsangebots der Zentralen Studienberatung und des Studien-Service-Centers</a>.',
+                'en' => 'When combining these subjects, scheduling conflicts between individual courses may occur. Therefore, it is recommended to make use of the <a href="https://www.fau.eu/studying/degree-programs/bachelors-degree-programs/#bachelor-phil">advisory services offered by the Student Advice Center and the Student Service Center</a> before starting the degree program.'
             ]
         ],
         'notes_for_international_applicants' => [
