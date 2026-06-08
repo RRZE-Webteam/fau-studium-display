@@ -907,7 +907,7 @@ class Utils
         $programs_filtered = [];
         foreach ($programs as $id => $program) {
             $search_target = $program[ 'title' ] ?? '';
-            $search_target .= $program[ 'subtitle' ] ?? '';
+            $search_target .= ' ' . $program[ 'subtitle' ] ?? '';
             foreach ($program[ 'keywords' ] ?? [] as $keyword) {
                 $search_target .= ' ' . $keyword;
             }
@@ -918,7 +918,7 @@ class Utils
                 }
             }
             $search_target = strtolower(strip_tags($search_target));
-            if (mb_stripos($search_target, $search_term)) {
+            if (mb_stripos($search_target, $search_term) !== false) {
                 $programs_filtered[$id] = $program;
             }
         }
