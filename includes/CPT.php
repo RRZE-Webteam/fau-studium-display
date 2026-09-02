@@ -186,7 +186,7 @@ class CPT
     }
 
     public function modify_canonical_url( $canonical_url, $post ) {
-        if ($post->post_type == self::POST_TYPE) {
+        if (isset($post->post_type) && $post->post_type == self::POST_TYPE) {
             $domain = $this->site_language == 'de' ? 'https://fau.de/studiengang/' : 'https://fau.eu/degree-program/';
             $canonical_url = $domain . basename(get_permalink());
         }
@@ -195,7 +195,7 @@ class CPT
 
     public function modify_tsf_canonical_url( $tags_render_data, $context ) {
         $post = get_post();
-        if ($post->post_type == self::POST_TYPE) {
+        if (isset($post->post_type) && $post->post_type == self::POST_TYPE) {
             $domain = $this->site_language == 'de' ? 'https://fau.de/studiengang/' : 'https://fau.eu/degree-program/';
             $tags_render_data[ 'canonical' ][ 'attributes' ][ 'href' ] = $domain . basename(get_permalink());
         }
@@ -203,7 +203,7 @@ class CPT
     }
 
     public function remove_quick_edit_for_degree_program( $actions, $post ) {
-        if ( $post->post_type == self::POST_TYPE ) {
+        if (isset($post->post_type) && $post->post_type == self::POST_TYPE ) {
             unset( $actions['inline hide-if-no-js'] ); // Quick Edit
             unset( $actions['inline'] );               // fallback
         }

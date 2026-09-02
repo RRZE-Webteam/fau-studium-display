@@ -705,7 +705,7 @@ if (in_array('benefits', $items)) {
  */
 
 ?>
-<section class="fau-studium-display degree-program-full" itemtype="https://schema.org/EducationalOccupationalProgram https://schema.org/Course" itemscope>
+<section class="fau-studium-display degree-program-full" itemtype="https://schema.org/EducationalOccupationalProgram" itemscope>
 
     <?php echo $thumbnail; ?>
 

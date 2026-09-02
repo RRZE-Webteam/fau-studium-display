@@ -116,6 +116,18 @@ class Data
             $args['meta_value'] = $filter['degreePrograms'];
             $args['compare'] = 'IN';
         } elseif (!empty($filter)) {
+            if (isset($filter['admission_requirements'])) {
+                $filter['admission_requirement'] = $filter['admission_requirements'];
+                unset($filter['admission_requirements']);
+            }
+            if (isset($filter['study_location'])) {
+                $filter['location'] = $filter['study_location'];
+                unset($filter['study_location']);
+            }
+            if (isset($filter['german_language_skills_for_international_students'])) {
+                $filter['german_language_skills'] = $filter['german_language_skills_for_international_students'];
+                unset($filter['german_language_skills_for_international_students']);
+            }
             $tax_query = ['relation' => 'AND'];
             foreach ($filter as $key => $value) {
                 if (taxonomy_exists($key)) {
