@@ -1175,6 +1175,13 @@
   width: 100%;
   height: auto;
 }
+.fau-studium-display.degree-program-full figure:has(> img):before {
+  background-color: unset;
+  content: unset;
+  height: unset;
+  position: unset;
+  width: unset;
+}
 .fau-studium-display.degree-program-full .program-header {
   box-sizing: border-box;
   width: 90%;

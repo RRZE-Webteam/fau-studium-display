@@ -374,15 +374,19 @@ if (in_array('admission_requirements_application', $items)) {
                 . $admission_details;
         }
 
-        $admission_requirements_application .= do_blocks('<!-- wp:buttons -->
+        if (!in_array('Weiterbildungs-/berufsbegleitender Studiengang', $data['attributes'])) {
+            $admission_requirements_application .= do_blocks(
+                '<!-- wp:buttons -->
             <div class="wp-block-buttons"><!-- wp:button -->
-            <div class="wp-block-button"><a href="' . $constants['how-to-apply-link'] . '" class="wp-block-button__link wp-element-button">' . ($labels['how_to_apply'] ?? 'how_to_apply') . '</a></div>
+            <div class="wp-block-button"><a href="' . $constants[ 'how-to-apply-link' ] . '" class="wp-block-button__link wp-element-button">' . ($labels[ 'how_to_apply' ] ?? 'how_to_apply') . '</a></div>
             <!-- /wp:button --></div>
             <!-- /wp:buttons --><!-- wp:buttons -->
             <div class="wp-block-buttons"><!-- wp:button -->
-            <div class="wp-block-button"><a href="' . ($data['notes_for_international_applicants']['link_url'] ?? '') . '" class="wp-block-button__link wp-element-button">' . ($labels['how_to_apply_internationals'] ?? 'how_to_apply_internationals') . '</a></div>
+            <div class="wp-block-button"><a href="' . ($data[ 'notes_for_international_applicants' ][ 'link_url' ] ?? '') . '" class="wp-block-button__link wp-element-button">' . ($labels[ 'how_to_apply_internationals' ] ?? 'how_to_apply_internationals') . '</a></div>
             <!-- /wp:button --></div>
-            <!-- /wp:buttons -->');
+            <!-- /wp:buttons -->'
+            );
+        }
         $admission_requirements_application .= '</div>';
 
     }

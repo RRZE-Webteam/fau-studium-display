@@ -100,6 +100,14 @@
             height: auto;
         }
 
+        figure:has(>img):before {
+            background-color: unset;
+            content: unset;
+            height: unset;
+            position: unset;
+            width: unset;
+        }
+
         .program-header {
             box-sizing: border-box;
             width: 90%;
