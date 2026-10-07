@@ -273,6 +273,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Subject groups'
             ]
         ],
+        'news' => [
+            'labels' => [
+                'de' => 'Aktuelles',
+                'en' => 'News'
+            ]
+        ],
         'videos' => [
             'labels' => [
                 'de' => 'Videos',

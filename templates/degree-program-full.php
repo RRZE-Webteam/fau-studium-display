@@ -171,6 +171,17 @@ if (in_array('fact_sheet', $items)) {
         'value' => $data['content']['special_features']['description'] ?? ''
     ];
 
+    $news = [];
+    if (!empty($data['news'])) {
+        $today = wp_date('Y-m-d');
+        if (!empty($data['news_expiry_date']) && $data['news_expiry_date'] >= $today) {
+            $news = [
+                'label' => $labels['news'] ?? 'news',
+                'value' => $data['news'],
+            ];
+        }
+    }
+
     $fact_sheet = '<div class="fact-sheet width-small">
             <div class="icon-thumbtack"></div>
             <h2>' . ($labels['fact_sheet'] ?? 'fact_sheet') . '</h2>';
@@ -181,6 +192,12 @@ if (in_array('fact_sheet', $items)) {
         $fact_sheet .= '<dl class="special-features">'
             . '<dt>' . $special_features['label'] . '</dt>'
             . '<dd>' . $special_features['value'] . '</dd>'
+            . '</dl>';
+    }
+    if (!empty($news)) {
+        $fact_sheet .= '<dl class="special-features">'
+            . '<dt>' . $news['label'] . '</dt>'
+            . '<dd>' . $news['value'] . '</dd>'
             . '</dl>';
     }
     $fact_sheet .= '</div>';
