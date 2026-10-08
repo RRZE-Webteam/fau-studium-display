@@ -734,8 +734,8 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'links.downloads' => [
             'labels' => [
-                'de' => 'Links: Downloads',
-                'en' => 'Links: Downloads'
+                'de' => 'Wo finde ich Modulhandbuch und Prüfungsordnung?',
+                'en' => 'Where can I find the module handbook and the examination regulations?'
             ]
         ],
         'additional_information' => [
@@ -808,6 +808,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
             'labels' => [
                 'de' => 'Studium',
                 'en' => 'Studies'
+            ]
+        ],
+        'text_module_handbook' => [
+            'labels' => [
+                'de' => '<p>Das <strong>Modulhandbuch</strong> gibt einen Überblick über die einzelnen Veranstaltungen aller Module des Studiengangs und enthält Informationen zu deren Inhalten, Lernzielen, Umfang und Prüfungsleistungen.</p><p>Die <strong>Prüfungsordnung</strong> legt die rechtlichen und organisatorischen Rahmenbedingungen des Studiengangs fest. Sie regelt rechtsverbindlich unter anderem die Prüfungen, Zulassungsvoraussetzungen, Fristen und Wiederholungsmöglichkeiten. Sie enthält die Modulverlaufspläne.</p><p>Die jeweils geltenden Dokumente finden Sie hier:</p>',
+                'en' => '<p>The <strong>module handbook</strong> provides an overview of the individual courses within all modules of the degree programme and contains information on their content, learning objectives, scope and assessment requirements.</p><p>The <strong>examination regulations</strong> set out the legal and organisational framework for the degree programme. They contain legally binding provisions governing, among other things, examinations, admission requirements, deadlines and options for retaking examinations. They also include the module progression plans.</p><p>The currently applicable documents can be found here:</p>'
             ]
         ]
     ];

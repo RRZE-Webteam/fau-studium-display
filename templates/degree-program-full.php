@@ -202,6 +202,7 @@ if (in_array('content.about', $items)
     || in_array('content.qualities_and_skills', $items)
     || in_array('content.why_should_study', $items)
     || in_array('content.career_prospects', $items)
+    || in_array('links.downloads', $items)
     || in_array('content.special_features', $items)
     || in_array('combinations', $items)) {
 
@@ -211,10 +212,17 @@ if (in_array('content.about', $items)
         'content.qualities_and_skills',
         'content.why_should_study',
         'content.career_prospects',
+        'links.downloads',
         'content.special_features',
         'combinations'
     ];
     $content_fields     = array_intersect($content_fields_all, $items);
+
+    if (in_array('content.structure', $items)
+        && !empty($data[ 'content' ][ 'structure' ][ 'description' ])
+        && !empty($data['url'])) {
+            $data[ 'content' ][ 'structure' ][ 'description' ] .= '<!-- wp:buttons --><div class="wp-block-buttons"><!-- wp:button --><div class="wp-block-button"><a href="' . $data['url'] . '" class="wp-block-button__link wp-element-button">' . ($labels[ 'url' ] ?? 'url') . '</a></div><!-- /wp:button --></div><!-- /wp:buttons -->';
+    }
 
     $content_title = ($labels[ 'program_overview' ] ?? 'program_overview');
     $content_id    = sanitize_title($content_title);
@@ -265,6 +273,32 @@ if (in_array('content.about', $items)
                 $content_html .= '</ul>';
                 $content_html .= ! empty($descriptions[ 'content.limited_combinations' ]) ? '<p>' . $descriptions[ 'content.limited_combinations' ] . '</p>' : '';
             }
+            $content_html .= '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
+        }
+        if ($field == 'links.downloads') {
+            $fields_downloads = [
+                'module_handbook',
+                'examination_regulations'
+            ];
+            $links_downloads  = [];
+            foreach ($fields_downloads as $item) {
+                if ( ! empty($data[ $item ])) {
+                    $links_downloads[ $item ] = '<!-- wp:buttons --><div class="wp-block-buttons"><!-- wp:button --><div class="wp-block-button"><a href="' . $data[ $item ] . '" class="wp-block-button__link wp-element-button">' . ($labels[ $item ] ?? $item) . '</a></div><!-- /wp:button --></div><!-- /wp:buttons -->';
+                }
+            }
+            if (empty($links_downloads)) {
+                continue;
+            }
+            $link_buttons = implode('', $links_downloads);
+
+            $content_html .= '<!-- wp:rrze-elements/collapse {"hstart":3,"title":"' . ($labels[ $field_name ] ?? $field_name) . '","jumpName":"' . sanitize_title(
+                    $labels[ $field_name ] ?? $field_name
+                ) . '","isCustomJumpname":true} --><!-- wp:paragraph -->';
+
+            $content_html .= $labels['text_module_handbook'] ?? '';
+
+            $content_html .= do_blocks($link_buttons);
+
             $content_html .= '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
         }
     }
@@ -575,29 +609,6 @@ if (in_array('links.organizational', $items)) {
             . '<p class="heading">' . ($labels['organizational'] ?? 'organizational') . '</p>'
             . '<ul class="wp-block-list">';
         foreach ($links_organizational as $link) {
-            $useful_links .= '<li>' . $link . '</li>';
-        }
-        $useful_links .= '</ul></div>';
-    }
-}
-
-// Links: Downloads
-if (in_array('links.downloads', $items)) {
-    $fields_downloads = [
-        'module_handbook',
-        'examination_regulations'
-    ];
-    $links_downloads  = [];
-    foreach ($fields_downloads as $item) {
-        if ( ! empty($data[ $item ])) {
-            $links_downloads[ $item ] = '<a href="' . $data[ $item ] . '">' . ($labels[ $item ] ?? $item) . '</a>';
-        }
-    }
-    if (!empty($links_downloads)) {
-        $useful_links .= '<div class="useful-links-downloads">'
-            . '<p class="heading">' . ($labels['downloads'] ?? 'downloads') . '</p>'
-            . '<ul class="wp-block-list">';
-        foreach ($links_downloads as $link) {
             $useful_links .= '<li>' . $link . '</li>';
         }
         $useful_links .= '</ul></div>';
