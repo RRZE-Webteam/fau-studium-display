@@ -166,10 +166,6 @@ if (in_array('fact_sheet', $items)) {
                           . '<dd' . (isset($fact['itemprop']) ? ' itemprop="' . $fact['itemprop'] . '"' : '') . (isset($fact['itemprop_content']) ? ' content="'.$fact['itemprop_content'].'"' : '') . '>' . $fact['value'] . '</dd></div>';
         }
     }
-    $special_features = [
-        'label' => $labels['special_features'] ?? 'special_features',
-        'value' => $data['content']['special_features']['description'] ?? ''
-    ];
 
     $news = [];
     if (!empty($data['news'])) {
@@ -187,12 +183,6 @@ if (in_array('fact_sheet', $items)) {
             <h2>' . ($labels['fact_sheet'] ?? 'fact_sheet') . '</h2>';
     if (!empty($fact_list)) {
         $fact_sheet .= '<dl class="facts">' . $fact_list . '</dl>';
-    }
-    if (!empty($special_features['value'])) {
-        $fact_sheet .= '<dl class="special-features">'
-            . '<dt>' . $special_features['label'] . '</dt>'
-            . '<dd>' . $special_features['value'] . '</dd>'
-            . '</dl>';
     }
     if (!empty($news)) {
         $fact_sheet .= '<dl class="special-features">'
@@ -212,7 +202,7 @@ if (in_array('content.about', $items)
     || in_array('content.qualities_and_skills', $items)
     || in_array('content.why_should_study', $items)
     || in_array('content.career_prospects', $items)
-    || in_array('special_features', $items)
+    || in_array('content.special_features', $items)
     || in_array('combinations', $items)) {
 
     $content_fields_all = [
@@ -221,7 +211,7 @@ if (in_array('content.about', $items)
         'content.qualities_and_skills',
         'content.why_should_study',
         'content.career_prospects',
-        'special_features',
+        'content.special_features',
         'combinations'
     ];
     $content_fields     = array_intersect($content_fields_all, $items);
