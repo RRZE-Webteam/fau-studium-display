@@ -1,92 +1,313 @@
 # Copyright (C) 2026 RRZE Webteam
 # This file is distributed under the GNU General Public License v3.
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: FAU Studium Display 1.1.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fau-studium-display\n"
+"Project-Id-Version: FAU Studium Display 1.3.4\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/fau-studium-"
+"display\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-09T15:46:05+00:00\n"
+"POT-Creation-Date: 2026-10-08 14:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: Loco https://localise.biz/\n"
 "X-Domain: fau-studium-display\n"
+"\n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;"
 
-#. Plugin Name of the plugin
-#: fau-studium-display.php
-msgid "FAU Studium Display"
-msgstr ""
-
-#. Plugin URI of the plugin
-#: fau-studium-display.php
-msgid "https://github.com/RRZE-Webteam/fau-studium-display"
-msgstr ""
-
-#. Description of the plugin
-#: fau-studium-display.php
-msgid "Plugin for displaying the degree program information on websites."
-msgstr ""
-
-#. Author of the plugin
-#: fau-studium-display.php
-msgid "RRZE Webteam"
-msgstr ""
-
-#: fau-studium-display.php:87
-msgid "FAU Studium Display is not compatible with FAU Degree Program Output. Deactivate FAU Degree Program Output before activating FAU Studium Display."
-msgstr ""
-
-#: fau-studium-display.php:88
-#: includes/Main.php:211
-msgid "Incompatible Plugin"
-msgstr ""
-
-#. translators: 1: Server WordPress version number, 2: Required WordPress version number.
-#: fau-studium-display.php:212
-msgid "The server is running WordPress version %1$s. The plugin requires at least WordPress version %2$s."
-msgstr ""
-
-#. translators: 1: Server PHP version number, 2: Required PHP version number.
-#: fau-studium-display.php:222
-msgid "The server is running PHP version %1$s. The plugin requires at least PHP version %2$s."
-msgstr ""
-
-#. translators: 1: The plugin name, 2: The error string.
-#: fau-studium-display.php:237
-msgid "Plugins: %1$s: %2$s"
-msgstr ""
-
-#: includes/API.php:38
-msgid "Empty response from API"
+#: templates/degree-program-grid.php:29
+#, php-format
+msgid "%s to %s of %s"
 msgstr ""
 
 #: includes/API.php:67
 msgid "-- Please select --"
 msgstr ""
 
+#: includes/CPT.php:61
+msgid "Admission requirements"
+msgstr ""
+
+#: includes/Settings.php:367
+msgid "API Error. Please try again later."
+msgstr ""
+
+#: includes/Utils.php:284
+msgid "Apply filter"
+msgstr ""
+
+#: includes/Settings.php:126
+msgid "Archive Format"
+msgstr ""
+
+#: includes/Settings.php:99
+msgid "Archive View"
+msgstr ""
+
+#: templates/degree-program-full.php:736
+msgid "available"
+msgstr ""
+
+#: build/block/block.json:1
+msgctxt "block description"
+msgid ""
+msgstr ""
+
+#: src/block/block.json:1
+msgctxt "block description"
+msgid "Add degree program information on your site."
+msgstr ""
+
+#: build/block/block.json:1 src/block/block.json:1
+msgctxt "block title"
+msgid "FAU-Studium Display"
+msgstr ""
+
+#: templates/degree-program-full.php:735
+msgid "Close ties"
+msgstr ""
+
+#: templates/degree-program-full.php:736
+msgid "Cooperative bachelor's program"
+msgstr ""
+
+#: templates/degree-program-grid.php:131
+msgid "Degree program pagination"
+msgstr ""
+
 #: includes/CPT.php:34
-#: build/block/index.js:1
 msgid "Degree Programs"
 msgstr ""
 
+#: templates/degree-program-full.php:733
+msgid "degree programs"
+msgstr ""
+
 #: includes/CPT.php:58
-#: build/block/index.js:1
 msgid "Degrees"
 msgstr ""
 
-#: includes/CPT.php:59
-msgid "Subject groups"
+#: includes/Settings.php:245
+msgid "Delete"
+msgstr ""
+
+#: includes/Settings.php:252
+msgid "Delete selected"
+msgstr ""
+
+#: includes/API.php:38
+msgid "Empty response from API"
+msgstr ""
+
+#: includes/CPT.php:65
+msgid "Faculty"
+msgstr ""
+
+#. Name of the plugin
+msgid "FAU Studium Display"
+msgstr ""
+
+#: fau-studium-display.php:87
+msgid ""
+"FAU Studium Display is not compatible with FAU Degree Program Output. "
+"Deactivate FAU Degree Program Output before activating FAU Studium Display."
+msgstr ""
+
+#: includes/CPT.php:66
+msgid "German language skills"
+msgstr ""
+
+#: includes/Settings.php:129
+msgid "Grid"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://github.com/RRZE-Webteam/fau-studium-display"
+msgstr ""
+
+#: templates/degree-program-full.php:839
+msgid "Image sources"
+msgstr ""
+
+#: includes/Settings.php:186 includes/Settings.php:393
+msgid "Import"
+msgstr ""
+
+#: includes/Settings.php:179
+msgid "Import degree programs"
+msgstr ""
+
+#: includes/Settings.php:381
+msgid "Import selected"
+msgstr ""
+
+#: fau-studium-display.php:88 includes/Main.php:212
+msgid "Incompatible Plugin"
+msgstr ""
+
+#: templates/degree-program-full.php:734
+msgid "International"
+msgstr ""
+
+#: templates/degree-program-full.php:831
+msgid "Last modified"
+msgstr ""
+
+#: includes/Settings.php:58 includes/Settings.php:93
+msgid "Layout"
+msgstr ""
+
+#: includes/Settings.php:200
+msgid "Manage Imported"
+msgstr ""
+
+#: includes/Settings.php:193
+msgid "Manage Imported Degree Programs"
+msgstr ""
+
+#: templates/degree-program-full.php:733
+msgid "More than 275"
+msgstr ""
+
+#: templates/degree-program-grid.php:160
+msgid "Next page"
+msgstr ""
+
+#: includes/CPT.php:109 includes/CPT.php:121
+msgid "No data available"
+msgstr ""
+
+#: templates/degree-program-box.php:12 templates/degree-program-full.php:18
+msgid "No data available."
+msgstr ""
+
+#: includes/Settings.php:235 includes/Settings.php:399
+msgid "No degree programs found"
+msgstr ""
+
+#: templates/degree-program-grid.php:125 templates/degree-program-table.php:108
+msgid "No degree programs found."
+msgstr ""
+
+#: includes/Settings.php:364
+msgid "No degree programs found. Please try again later."
+msgstr ""
+
+#: includes/Settings.php:457
+msgid "No posts selected"
+msgstr ""
+
+#: templates/degree-program-grid.php:147
+msgid "Page %d"
+msgstr ""
+
+#: templates/degree-program-full.php:734
+msgid "partnerships"
+msgstr ""
+
+#: templates/degree-program-box.php:8 templates/degree-program-full.php:14
+msgid "Please select a degree program."
+msgstr ""
+
+#. Description of the plugin
+msgid "Plugin for displaying the degree program information on websites."
+msgstr ""
+
+#. 1: The plugin name, 2: The error string.
+#: fau-studium-display.php:237
+#, php-format
+msgid "Plugins: %1$s: %2$s"
+msgstr ""
+
+#: includes/CPT.php:97
+msgid "Post Meta English"
+msgstr ""
+
+#: includes/CPT.php:88
+msgid "Post Meta German"
+msgstr ""
+
+#: templates/degree-program-grid.php:133
+msgid "Previous page"
+msgstr ""
+
+#: templates/degree-program-grid.php:91
+msgid "Read more"
+msgstr ""
+
+#: templates/degree-program-full.php:545 templates/degree-program-full.php:597
+#, php-format
+msgid "Read more about %s"
+msgstr ""
+
+#: includes/Main.php:124
+msgid "RRZE"
+msgstr ""
+
+#. Author of the plugin
+msgid "RRZE Webteam"
+msgstr ""
+
+#: includes/Settings.php:72
+msgid "Save changes"
+msgstr ""
+
+#: includes/Settings.php:228
+msgid "Search"
+msgstr ""
+
+#: includes/Settings.php:122 includes/Settings.php:146
+#: includes/Settings.php:166 includes/Settings.php:250
+#: includes/Settings.php:380
+msgid "Select / Deselect All"
+msgstr ""
+
+#: includes/Settings.php:223
+msgid "Select Degree (optional)"
+msgstr ""
+
+#: includes/Settings.php:218
+msgid "Select Faculty (optional)"
+msgstr ""
+
+#: includes/Settings.php:150
+msgid "Select the elements to be shown in single view"
+msgstr ""
+
+#: includes/Utils.php:199
+msgid "Selected filters"
+msgstr ""
+
+#: includes/Settings.php:47
+msgid "Settings"
+msgstr ""
+
+#: includes/Settings.php:106
+msgid "Show Search"
+msgstr ""
+
+#: includes/Settings.php:141
+msgid "Show/Hide Grid Items"
+msgstr ""
+
+#: includes/Settings.php:117
+msgid "Show/Hide Search Filters"
+msgstr ""
+
+#: includes/Settings.php:161
+msgid "Show/Hide Single Items"
+msgstr ""
+
+#: includes/Settings.php:149
+msgid "Single View"
 msgstr ""
 
 #: includes/CPT.php:60
-#: build/block/index.js:1
 msgid "Special ways to study"
-msgstr ""
-
-#: includes/CPT.php:61
-msgid "Admission requirements"
 msgstr ""
 
 #: includes/CPT.php:62
@@ -97,349 +318,56 @@ msgstr ""
 msgid "Study location"
 msgstr ""
 
+#: includes/CPT.php:59
+msgid "Subject groups"
+msgstr ""
+
+#: includes/Settings.php:60 includes/Settings.php:173
+msgid "Sync"
+msgstr ""
+
+#: includes/Settings.php:130
+msgid "Table"
+msgstr ""
+
 #: includes/CPT.php:64
 msgid "Teaching language"
 msgstr ""
 
-#: includes/CPT.php:65
-msgid "Faculty"
+#. 1: Server PHP version number, 2: Required PHP version number.
+#: fau-studium-display.php:222
+#, php-format
+msgid ""
+"The server is running PHP version %1$s. The plugin requires at least PHP "
+"version %2$s."
 msgstr ""
 
-#: includes/CPT.php:66
-msgid "German language skills"
+#. 1: Server WordPress version number, 2: Required WordPress version number.
+#: fau-studium-display.php:212
+#, php-format
+msgid ""
+"The server is running WordPress version %1$s. The plugin requires at least "
+"WordPress version %2$s."
 msgstr ""
 
-#: includes/CPT.php:85
-msgid "Post Meta German"
+#: includes/Main.php:211
+msgid ""
+"This plugin is not compatible with FAU Studium Display and therefore cannot "
+"be activated."
 msgstr ""
 
-#: includes/CPT.php:94
-msgid "Post Meta English"
-msgstr ""
-
-#: includes/CPT.php:106
-#: includes/CPT.php:118
-msgid "No data available"
-msgstr ""
-
-#: includes/Main.php:123
-msgid "RRZE"
-msgstr ""
-
-#: includes/Main.php:210
-msgid "This plugin is not compatible with FAU Studium Display and therefore cannot be activated."
-msgstr ""
-
-#: includes/Settings.php:47
-msgid "Settings"
-msgstr ""
-
-#: includes/Settings.php:58
-#: includes/Settings.php:93
-msgid "Layout"
-msgstr ""
-
-#: includes/Settings.php:60
-#: includes/Settings.php:173
-msgid "Sync"
-msgstr ""
-
-#: includes/Settings.php:72
-msgid "Save changes"
-msgstr ""
-
-#: includes/Settings.php:99
-msgid "Archive View"
-msgstr ""
-
-#: includes/Settings.php:100
-msgid "What format should the list view use?"
-msgstr ""
-
-#: includes/Settings.php:106
-#: build/block/index.js:1
-msgid "Show Search"
-msgstr ""
-
-#: includes/Settings.php:117
-msgid "Show/Hide Search Filters"
-msgstr ""
-
-#: includes/Settings.php:122
-#: includes/Settings.php:146
-#: includes/Settings.php:166
-#: includes/Settings.php:250
-#: includes/Settings.php:372
-msgid "Select / Deselect All"
-msgstr ""
-
-#: includes/Settings.php:126
-msgid "Archive Format"
-msgstr ""
-
-#: includes/Settings.php:129
-#: build/block/index.js:1
-msgid "Grid"
-msgstr ""
-
-#: includes/Settings.php:130
-#: build/block/index.js:1
-msgid "Table"
-msgstr ""
-
-#: includes/Settings.php:141
-msgid "Show/Hide Grid Items"
-msgstr ""
-
-#: includes/Settings.php:149
-msgid "Single View"
-msgstr ""
-
-#: includes/Settings.php:150
-msgid "Select the elements to be shown in single view"
-msgstr ""
-
-#: includes/Settings.php:161
-msgid "Show/Hide Single Items"
-msgstr ""
-
-#: includes/Settings.php:179
-msgid "Import degree programs"
-msgstr ""
-
-#: includes/Settings.php:186
-#: includes/Settings.php:385
-msgid "Import"
-msgstr ""
-
-#: includes/Settings.php:193
-msgid "Manage Imported Degree Programs"
-msgstr ""
-
-#: includes/Settings.php:200
-msgid "Manage Imported"
-msgstr ""
-
-#: includes/Settings.php:218
-msgid "Select Faculty (optional)"
-msgstr ""
-
-#: includes/Settings.php:223
-msgid "Select Degree (optional)"
-msgstr ""
-
-#: includes/Settings.php:228
-msgid "Search"
-msgstr ""
-
-#: includes/Settings.php:235
-#: includes/Settings.php:391
-msgid "No degree programs found"
+#: templates/degree-program-full.php:735
+msgid "to industry"
 msgstr ""
 
 #: includes/Settings.php:241
 msgid "Update"
 msgstr ""
 
-#: includes/Settings.php:245
-msgid "Delete"
-msgstr ""
-
 #: includes/Settings.php:251
 msgid "Update selected"
 msgstr ""
 
-#: includes/Settings.php:252
-msgid "Delete selected"
-msgstr ""
-
-#: includes/Settings.php:356
-msgid "No degree programs found. Please try again later."
-msgstr ""
-
-#: includes/Settings.php:359
-msgid "API Error. Please try again later."
-msgstr ""
-
-#: includes/Settings.php:373
-msgid "Import selected"
-msgstr ""
-
-#: includes/Settings.php:449
-msgid "No posts selected"
-msgstr ""
-
-#: includes/Utils.php:197
-msgid "Selected filters"
-msgstr ""
-
-#: includes/Utils.php:282
-msgid "Apply filter"
-msgstr ""
-
-#: templates/degree-program-box.php:8
-#: templates/degree-program-full.php:13
-msgid "Please select a degree program."
-msgstr ""
-
-#: templates/degree-program-box.php:12
-#: templates/degree-program-full.php:17
-msgid "No data available."
-msgstr ""
-
-#: templates/degree-program-full.php:471
-#: templates/degree-program-full.php:509
-msgid "Read more about %s"
-msgstr ""
-
-#: templates/degree-program-full.php:661
-msgid "More than 275"
-msgstr ""
-
-#: templates/degree-program-full.php:661
-msgid "degree programs"
-msgstr ""
-
-#: templates/degree-program-full.php:662
-msgid "International"
-msgstr ""
-
-#: templates/degree-program-full.php:662
-msgid "partnerships"
-msgstr ""
-
-#: templates/degree-program-full.php:663
-msgid "Close ties"
-msgstr ""
-
-#: templates/degree-program-full.php:663
-msgid "to industry"
-msgstr ""
-
-#: templates/degree-program-full.php:664
-msgid "Cooperative bachelor's program"
-msgstr ""
-
-#: templates/degree-program-full.php:664
-msgid "available"
-msgstr ""
-
-#: templates/degree-program-full.php:752
-msgid "Image sources"
-msgstr ""
-
-#: templates/degree-program-grid.php:29
-msgid "%s to %s of %s"
-msgstr ""
-
-#: templates/degree-program-grid.php:91
-msgid "Read more"
-msgstr ""
-
-#: templates/degree-program-grid.php:125
-#: templates/degree-program-table.php:108
-msgid "No degree programs found."
-msgstr ""
-
-#: templates/degree-program-grid.php:131
-msgid "Degree program pagination"
-msgstr ""
-
-#: templates/degree-program-grid.php:133
-msgid "Previous page"
-msgstr ""
-
-#: templates/degree-program-grid.php:147
-msgid "Page %d"
-msgstr ""
-
-#: templates/degree-program-grid.php:160
-msgid "Next page"
-msgstr ""
-
-#: build/block/index.js:1
-msgid "General Settings"
-msgstr ""
-
-#: build/block/index.js:1
-msgid "Format"
-msgstr ""
-
-#: build/block/index.js:1
-msgid "Full"
-msgstr ""
-
-#: build/block/index.js:1
-msgid "Infobox"
-msgstr ""
-
-#: build/block/index.js:1
-msgid "List"
-msgstr ""
-
-#: build/block/index.js:1
-msgid "Search Filters"
-msgstr ""
-
-#: build/block/index.js:1
-msgid "Degree Program"
-msgstr ""
-
-#: build/block/index.js:1
-msgid "Show Title"
-msgstr ""
-
-#: build/block/index.js:1
-msgid "Language"
-msgstr ""
-
-#: build/block/index.js:1
-msgid "Default"
-msgstr ""
-
-#: build/block/index.js:1
-msgid "German"
-msgstr ""
-
-#: build/block/index.js:1
-msgid "English"
-msgstr ""
-
-#: build/block/index.js:1
-msgid "Select items"
-msgstr ""
-
-#: build/block/index.js:1
-msgid "Filter Programs"
-msgstr ""
-
-#: build/block/index.js:1
-msgid "Faculties"
-msgstr ""
-
-#: src/js/fau-studium-display-admin.js:74
-msgid "No program selected. Please select at least one program to import."
-msgstr ""
-
-#: src/js/fau-studium-display-admin.js:104
-#: src/js/fau-studium-display-admin.js:114
-msgid "No program selected. Please select at least one program."
-msgstr ""
-
-#: src/js/fau-studium-display-admin.js:116
-msgid "Are you sure you want to delete %d selected degree programs?"
-msgstr ""
-
-#: src/js/fau-studium-display.js:48
-msgid "Less filter options"
-msgstr ""
-
-#: src/js/fau-studium-display.js:48
-msgid "More filter options"
-msgstr ""
-
-#: build/block/block.json
-#: src/block/block.json
-msgctxt "block title"
-msgid "FAU-Studium Display"
+#: includes/Settings.php:100
+msgid "What format should the list view use?"
 msgstr ""

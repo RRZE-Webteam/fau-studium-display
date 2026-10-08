@@ -780,6 +780,18 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Application process for internationals'
             ]
         ],
+        'how_to_apply_1st_semester' => [
+            'labels' => [
+                'de' => 'Bewerbungsprozess 1. Semester',
+                'en' => 'Application process 1st semester'
+            ]
+        ],
+        'how_to_apply_higher_semester' => [
+            'labels' => [
+                'de' => 'Bewerbungsprozess höhere Semester',
+                'en' => 'Application process higher semester'
+            ]
+        ],
         'how_to_apply_internationals_title' => [
             'labels' => [
                 'de' => 'Bewerbung für Internationale',

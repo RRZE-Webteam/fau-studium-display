@@ -333,14 +333,27 @@ if (in_array('videos', $items) && !empty($data['videos'])) {
 if (in_array('admission_requirements_application', $items)) {
 
     $admission_requirements = [];
+    $application_process_buttons = [];
     if (!empty($data['admission_requirements']['bachelor_or_teaching_degree'])) {
         $admission_requirements['bachelor_or_teaching_degree'] = $labels['1st_semester'] . ': ' . $data['admission_requirements']['bachelor_or_teaching_degree']['link_text'];
+        $application_process_buttons[] = [
+            'text' => $labels['how_to_apply_1st_semester'],
+            'url' => $data['admission_requirements']['bachelor_or_teaching_degree']['link_url'],
+        ];
     }
     if (!empty($data['admission_requirements']['teaching_degree_higher_semester'])) {
         $admission_requirements['teaching_degree_higher_semester'] = $labels['higher_semesters'] . ': ' . $data['admission_requirements']['teaching_degree_higher_semester']['link_text'];
+        $application_process_buttons[] = [
+            'text' => $labels['how_to_apply_higher_semester'],
+            'url' => $data['admission_requirements']['teaching_degree_higher_semester']['link_url'],
+        ];
     }
     if (!empty($data['admission_requirements']['master'])) {
         $admission_requirements['master'] = 'Master: ' . $data['admission_requirements']['master']['link_text'];
+        $application_process_buttons[] = [
+            'text' => $labels['how_to_apply'],
+            'url' => $data['admission_requirements']['master']['link_url'],
+        ];
     }
 
     if (empty($data['application_deadline_winter_semester']) && empty($data['application_deadline_summer_semester'])) {
@@ -415,8 +428,14 @@ if (in_array('admission_requirements_application', $items)) {
                 . $admission_details;
         }
 
-        if (!in_array('Weiterbildungs-/berufsbegleitender Studiengang', $data['attributes'])) {
-            $admission_requirements_application .= do_blocks(
+        if (!in_array('Weiterbildungs-/berufsbegleitender Studiengang', $data['attributes']) && !empty($application_process_buttons)) {
+            $how_to_apply_buttons = '';
+            foreach($application_process_buttons as $button) {
+                $how_to_apply_buttons .= '<!-- wp:buttons --><div class="wp-block-buttons"><!-- wp:button --><div class="wp-block-button"><a href="' . $button['url'] . '" class="wp-block-button__link wp-element-button">' . $button['text'] . '</a></div><!-- /wp:button --></div><!-- /wp:buttons -->';
+            }
+            $admission_requirements_application .= do_blocks($how_to_apply_buttons);
+
+            /*$admission_requirements_application .= do_blocks(
                 '<!-- wp:buttons -->
             <div class="wp-block-buttons"><!-- wp:button -->
             <div class="wp-block-button"><a href="' . $constants[ 'how-to-apply-link' ] . '" class="wp-block-button__link wp-element-button">' . ($labels[ 'how_to_apply' ] ?? 'how_to_apply') . '</a></div>
@@ -426,7 +445,7 @@ if (in_array('admission_requirements_application', $items)) {
             <div class="wp-block-button"><a href="' . ($data[ 'notes_for_international_applicants' ][ 'link_url' ] ?? '') . '" class="wp-block-button__link wp-element-button">' . ($labels[ 'how_to_apply_internationals' ] ?? 'how_to_apply_internationals') . '</a></div>
             <!-- /wp:button --></div>
             <!-- /wp:buttons -->'
-            );
+            );*/
         }
         $admission_requirements_application .= '</div>';
 
@@ -802,6 +821,19 @@ if (in_array('benefits', $items)) {
         // FAU benefits
         echo $benefits_fau;
 
+
+        echo '<div class="post-meta ">
+    <div class="post-meta-wrapper">
+        <div class="post-meta-inner">';
+        // Last modified
+        if (!empty($data['modified'])) {
+            echo '<div class="post-last-update">
+                <span class="date-label">' . __('Last modified', 'fau-studium-display') . ': </span>
+                <time datetime="' . esc_html($data['modified']) . '" class="post-date">'
+                 . wp_date(get_option('date_format') . ' - ' . get_option('time_format'), strtotime($data['modified']))
+                 . '</time>
+            </div>';
+            }
         // Image credits
         if (!empty($image_credits)) {
             echo '<div class="image-credits"><span class="copyright-info-label">' . __('Image sources', 'fau-studium-display') . ': <ul>';
@@ -812,6 +844,11 @@ if (in_array('benefits', $items)) {
             }
             echo '</ul></div>';
         }
+        echo '</div>
+    </div>
+</div>';
+
+
         ?>
 
     </div>
