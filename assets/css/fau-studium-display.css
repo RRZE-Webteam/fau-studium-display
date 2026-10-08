@@ -1057,16 +1057,16 @@
   break-inside: avoid; /* verhindert Spaltenumbruch innerhalb dieses Blocks */
   page-break-inside: avoid; /* für Print */
   display: flow-root;
+  margin-bottom: 0.5em;
 }
 .fau-studium-display.degree-program-box dl.facts dt, .fau-studium-display.degree-program-full .fact-sheet dl.facts dt {
   margin: 0;
-  float: left;
-  clear: left;
   font-weight: bold;
+  line-height: 1.5;
 }
 .fau-studium-display.degree-program-box dl.facts dd, .fau-studium-display.degree-program-full .fact-sheet dl.facts dd {
-  float: left;
-  margin-left: 1rem;
+  margin-left: 2rem;
+  line-height: 1.5;
 }
 .fau-studium-display.degree-program-box dl.special-features, .fau-studium-display.degree-program-full .fact-sheet dl.special-features {
   font-size: var(--P-Body-Text, 1.125rem);
