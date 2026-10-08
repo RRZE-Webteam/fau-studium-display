@@ -215,7 +215,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'number_of_students' => [
             'labels' => [
-                'de' => 'Größe',
+                'de' => 'Gesamtzahl der Studierenden',
                 'en' => 'Number of students'
             ]
         ],
