@@ -1233,6 +1233,9 @@
     margin-right: auto;
   }
 }
+.fau-studium-display.degree-program-full .apply-now-button {
+  margin-top: var(--Spacing-8x, 2rem);
+}
 .fau-studium-display.degree-program-full .fact-sheet {
   padding: 40px 16px 16px;
   margin-top: 56px;
@@ -2023,7 +2026,7 @@
   max-width: 100%;
 }
 .fau-elemental.single-degree-program .wp-block-buttons {
-  margin-bottom: var(----Spacing-2x, 0.5rem);
+  margin-bottom: var(--Spacing-2x, 0.5rem);
 }
 
 /*# sourceMappingURL=fau-studium-display.css.map */

@@ -519,8 +519,9 @@ if (in_array('info_internationals_link', $items)) {
     $cta_internationals = '';
 }
 
-// Apply now!
-$apply_now = '';
+// Apply now CTA + Button
+$apply_now_cta = '';
+$apply_now_button = '';
 if (in_array('apply_now_link', $items) && ! empty($data[ 'apply_now_link' ][ 'link_url' ])) {
     $apply_now_title     = $constants[ 'apply-now-title' ];
     $apply_now_text      = $constants[ 'apply-now-text' ];
@@ -528,7 +529,7 @@ if (in_array('apply_now_link', $items) && ! empty($data[ 'apply_now_link' ][ 'li
     $apply_now_link_url  = $data[ 'apply_now_link' ][ 'link_url' ];
     $apply_now_image     = $constants[ 'apply-now-image' ];
     if ( ! empty($apply_now_title . $apply_now_text . $apply_now_link_text . $apply_now_link_url . $apply_now_image)) {
-        $apply_now = '<div class="program-apply-now width-medium">'
+        $apply_now_cta = '<div class="program-apply-now width-medium">'
                      . do_blocks(
                          '<!-- wp:rrze-elements/cta {"url":"' . esc_url($apply_now_image) . '","buttonUrl":"' . esc_url(
                              $apply_now_link_url
@@ -544,6 +545,11 @@ if (in_array('apply_now_link', $items) && ! empty($data[ 'apply_now_link' ][ 'li
                 $image_credits[ $apply_now_image ] = esc_html($exif[ 'COMPUTED' ][ 'Copyright' ]);
             }
         }
+        $apply_now_button_html = sprintf('<!-- wp:buttons {"className":"apply-now-button","layout":{"type":"flex","justifyContent":"center"}} --><div class="wp-block-buttons apply-now-button"><!-- wp:button {"className":"is-style-primary"} --><div class="wp-block-button is-style-primary"><a class="wp-block-button__link wp-element-button" href="%1$s">%2$s</a></div><!-- /wp:button --></div><!-- /wp:buttons -->',
+            $apply_now_link_url,
+            $apply_now_link_text
+        );
+        $apply_now_button = do_blocks($apply_now_button_html);
     }
 }
 
@@ -915,6 +921,9 @@ if (in_array('benefits', $items)) {
         // Entry text
         echo $entry_text;
 
+        // Apply now button
+        echo $apply_now_button;
+
         // Fact sheet
         echo $fact_sheet;
 
@@ -937,7 +946,7 @@ if (in_array('benefits', $items)) {
         // Videos
         echo $videos;
 
-        if ( ! empty($cta_internationals . $admission_requirements_application . $apply_now)) {
+        if ( ! empty($cta_internationals . $admission_requirements_application . $apply_now_cta)) {
             echo '<div class="wp-block-fau-elemental-fau-meta-headline" id="' . $admission_requirements_application_id . '">' . $admission_requirements_application_title . '</div>';
         }
 
@@ -950,7 +959,7 @@ if (in_array('benefits', $items)) {
         }
 
         // Apply now CTA
-        echo $apply_now;
+        echo $apply_now_cta;
 
         // Student advice + more
         if ( ! empty($student_advice . $useful_links)) {
