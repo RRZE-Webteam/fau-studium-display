@@ -166,6 +166,7 @@
                         mask-image: url(../svg/chevron-down.svg);
                         -webkit-mask-image: url(../svg/chevron-down.svg);
                         background-color: #fff;
+                        transition: rotate .5s ease-in-out;
                     }
                 }
                 .dashicons {
@@ -176,6 +177,11 @@
                     color: var(--color-ghostbutton-hover-text, #ffffff);
                     .dashicons {
                         color: inherit;
+                    }
+                }
+                &.active {
+                    .icon-wrapper:before {
+                        rotate: z 180deg;
                     }
                 }
             }

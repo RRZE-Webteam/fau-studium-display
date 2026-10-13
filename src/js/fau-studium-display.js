@@ -2,7 +2,9 @@ jQuery(document).ready(function($) {
     $('.fau-studium-display .checklist-toggle').bind('mousedown', function(event) {
         event.preventDefault();
         let $checklist = $(this).parent();
+        let $other_checklists = $('.fau-studium-display .checklist').parent().not($checklist);
         toggleChecklist($checklist);
+        closeChecklists($other_checklists);
     });
 
     // Keyboard navigation for accordions
@@ -10,7 +12,9 @@ jQuery(document).ready(function($) {
         if (event.keyCode == 32 || event.keyCode == 13) {
             event.preventDefault();
             let $checklist = $(this).parent();
+            let $other_checklists = $('.fau-studium-display .checklist').parent().not($checklist);
             toggleChecklist($checklist);
+            closeChecklists($other_checklists);
         }
     });
 
@@ -18,6 +22,12 @@ jQuery(document).ready(function($) {
         $($checklist).children('.checklist-toggle').toggleClass('active');
         $($checklist).children('.checklist').slideToggle();
         $($checklist).children().find('.dashicons.dashicons-arrow-down-alt2').toggleClass('dashicons-arrow-up-alt2');
+    }
+
+    function closeChecklists($checklists) {
+        $checklists.children('.checklist-toggle').removeClass('active');
+        $checklists.children('.checklist').slideUp();
+        $checklists.children().find('.dashicons.dashicons-arrow-down-alt2').removeClass('dashicons-arrow-up-alt2');
     }
 
     $('.fau-studium-display .extended-search-toggle').bind('mousedown', function(event) {

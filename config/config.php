@@ -489,8 +489,8 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Student advice center'
             ],
             'description' => [
-                'de' => 'Die Zentrale Studienberatung ist die erste Anlaufstelle zu allen Fragen rund ums Studium.',
-                'en' => 'The Central Student Advisory Service is the first point of contact for all questions concerning your studies.',
+                'de' => 'Die erste Anlaufstelle zu allen Fragen rund ums Studium.',
+                'en' => 'The first point of contact for all questions concerning your studies.',
             ],
         ],
         'subject_specific_advice' => [
@@ -501,6 +501,16 @@ function get_labels ($lang = 'de', $task = 'labels') {
             'description' => [
                 'de' => 'Fachbezogene Beratung für Fragen rund um das Fach und die Studienplanung.',
                 'en' => 'Subject-specific advising for questions related to your field of study and study planning.',
+            ],
+        ],
+        'program_coordinator' => [
+            'labels' => [
+                'de' => 'Studiengangskoordinator/in',
+                'en' => 'Program coordinator'
+            ],
+            'description' => [
+                'de' => 'Hier fehlt noch Text',
+                'en' => 'Text missing'
             ],
         ],
         'service_centers' => [

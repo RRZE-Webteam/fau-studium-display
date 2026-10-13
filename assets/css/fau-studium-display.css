@@ -1280,9 +1280,6 @@
   padding-top: 32px;
   color: #fff;
 }
-.fau-studium-display.degree-program-full .student-advice-more * {
-  color: #fff;
-}
 .fau-studium-display.degree-program-full .student-advice-more h2 {
   color: #fff;
   margin-top: 0;
@@ -1381,6 +1378,27 @@
 }
 .fau-studium-display.degree-program-full .student-advice-more .student-advice .alert {
   margin-bottom: 0;
+}
+@media (min-width: 782px) {
+  .fau-studium-display.degree-program-full .student-advice-more .fau-big-button-teaser-group {
+    height: 100%;
+  }
+  .fau-studium-display.degree-program-full .student-advice-more .fau-big-button-teaser-group .fau-big-button-teaser-group__buttons {
+    grid-template-columns: none;
+    height: 100%;
+    justify-content: space-between;
+  }
+}
+@media (min-width: 782px) {
+  .fau-studium-display.degree-program-full .student-advice-more .wp-block-image {
+    height: 100%;
+  }
+  .fau-studium-display.degree-program-full .student-advice-more .wp-block-image img {
+    height: 100%;
+  }
+}
+.fau-studium-display.degree-program-full .student-advice-more .wp-block-columns {
+  max-width: 100%;
 }
 .fau-studium-display.degree-program-full .student-advice-more .useful-links {
   display: grid;
@@ -1747,6 +1765,7 @@
   mask-image: url(../svg/chevron-down.svg);
   -webkit-mask-image: url(../svg/chevron-down.svg);
   background-color: #fff;
+  transition: rotate 0.5s ease-in-out;
 }
 .fau-studium-display .program-search div[class^=filter-] button.checklist-toggle .dashicons {
   vertical-align: text-bottom;
@@ -1757,6 +1776,9 @@
 }
 .fau-studium-display .program-search div[class^=filter-] button.checklist-toggle:hover .dashicons, .fau-studium-display .program-search div[class^=filter-] button.checklist-toggle:focus .dashicons, .fau-studium-display .program-search div[class^=filter-] button.checklist-toggle:active .dashicons {
   color: inherit;
+}
+.fau-studium-display .program-search div[class^=filter-] button.checklist-toggle.active .icon-wrapper:before {
+  rotate: z 180deg;
 }
 .fau-studium-display .program-search div[class^=filter-] .filter-count {
   display: inline-block;
