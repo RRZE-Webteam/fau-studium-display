@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2025-06-12 12:41+0000\n"
-"PO-Revision-Date: 2026-10-08 14:48+0000\n"
+"PO-Revision-Date: 2026-10-19 12:21+0000\n"
 "Language: de_DE_formal\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Loco https://localise.biz/\n"
@@ -19,7 +19,6 @@ msgstr ""
 "X-Loco-Template-Mode: PO,JSON\n"
 
 #: templates/degree-program-grid.php:29
-#, php-format
 msgid "%s to %s of %s"
 msgstr "%s bis %s von %s"
 
@@ -47,34 +46,30 @@ msgstr "Archiv-Format"
 msgid "Archive View"
 msgstr "Archiv-Ansicht"
 
+#: src/js/fau-studium-display-admin.js:116
 #: src/js/fau-studium-display-admin.js:1
 msgid "Are you sure you want to delete %d selected degree programs?"
 msgstr "Möchten Sie wirklich %d Studiengänge löschen?"
 
-#: templates/degree-program-full.php:736
+#: templates/degree-program-full.php:894
 msgid "available"
 msgstr "dual studieren"
 
-#: build/block/block.json:1
-msgctxt "block description"
-msgid ""
-msgstr ""
-
-#: src/block/block.json:1
+#: build/block/block.json src/block/block.json
 msgctxt "block description"
 msgid "Add degree program information on your site."
 msgstr "Studiengangsinformationen einfügen"
 
-#: build/block/block.json:1 src/block/block.json:1
+#: build/block/block.json src/block/block.json
 msgctxt "block title"
 msgid "FAU-Studium Display"
 msgstr "FAU-Studium Display"
 
-#: templates/degree-program-full.php:735
+#: templates/degree-program-full.php:887
 msgid "Close ties"
 msgstr "Enge Verknüpfung"
 
-#: templates/degree-program-full.php:736
+#: templates/degree-program-full.php:891
 msgid "Cooperative bachelor's program"
 msgstr "Bachelorverbundstudium"
 
@@ -94,7 +89,7 @@ msgstr "Studiengangs-Seitennummerierung"
 msgid "Degree Programs"
 msgstr "Studiengänge"
 
-#: templates/degree-program-full.php:733
+#: templates/degree-program-full.php:882
 msgid "degree programs"
 msgstr "Studiengänge"
 
@@ -126,7 +121,8 @@ msgstr "Fakultäten"
 msgid "Faculty"
 msgstr "Fakultät"
 
-#. Name of the plugin
+#. Plugin Name of the plugin
+#: fau-studium-display.php
 msgid "FAU Studium Display"
 msgstr "FAU Studium Display"
 
@@ -167,11 +163,12 @@ msgstr "Deutschkenntnisse"
 msgid "Grid"
 msgstr "Kacheln"
 
-#. URI of the plugin
+#. Plugin URI of the plugin
+#: fau-studium-display.php
 msgid "https://github.com/RRZE-Webteam/fau-studium-display"
 msgstr "https://github.com/RRZE-Webteam/fau-studium-display"
 
-#: templates/degree-program-full.php:839
+#: templates/degree-program-full.php:1008
 msgid "Image sources"
 msgstr "Bildnachweise"
 
@@ -195,7 +192,7 @@ msgstr "Inkompatibles Plugin"
 msgid "Infobox"
 msgstr "Infobox"
 
-#: templates/degree-program-full.php:734
+#: templates/degree-program-full.php:883
 msgid "International"
 msgstr "Internationale"
 
@@ -203,7 +200,7 @@ msgstr "Internationale"
 msgid "Language"
 msgstr "Sprache"
 
-#: templates/degree-program-full.php:831
+#: templates/degree-program-full.php:997
 msgid "Last modified"
 msgstr "Zuletzt aktualisiert"
 
@@ -211,7 +208,7 @@ msgstr "Zuletzt aktualisiert"
 msgid "Layout"
 msgstr "Layout"
 
-#: src/js/fau-studium-display.js:1
+#: src/js/fau-studium-display.js:57 src/js/fau-studium-display.js:1
 msgid "Less filter options"
 msgstr "Weniger Filteroptionen"
 
@@ -227,11 +224,15 @@ msgstr "Importierte Studiengänge verwalten"
 msgid "Manage Imported Degree Programs"
 msgstr "Importierte Studiengänge verwalten"
 
-#: src/js/fau-studium-display.js:1
+#: src/js/fau-studium-display.js:57 src/js/fau-studium-display.js:1
 msgid "More filter options"
 msgstr "Mehr Filteroptionen"
 
-#: templates/degree-program-full.php:733
+#: templates/degree-program-full.php:471
+msgid "More information"
+msgstr "Mehr Informationen"
+
+#: templates/degree-program-full.php:879
 msgid "More than 275"
 msgstr "Mehr als 275"
 
@@ -243,7 +244,7 @@ msgstr "Nächste Seite"
 msgid "No data available"
 msgstr "Keine Daten vorhanden"
 
-#: templates/degree-program-box.php:12 templates/degree-program-full.php:18
+#: templates/degree-program-box.php:12 templates/degree-program-full.php:22
 msgid "No data available."
 msgstr "Keine Daten verfügbar."
 
@@ -265,12 +266,14 @@ msgstr ""
 msgid "No posts selected"
 msgstr "Keine Studiengänge ausgewählt."
 
-#: src/js/fau-studium-display-admin.js:1
+#: src/js/fau-studium-display-admin.js:74 src/js/fau-studium-display-admin.js:1
 msgid "No program selected. Please select at least one program to import."
 msgstr ""
 "Kein Studiengang ausgewählt. Bitte wählen Sie mindestens einen Studiengang "
 "zum importieren."
 
+#: src/js/fau-studium-display-admin.js:104
+#: src/js/fau-studium-display-admin.js:114
 #: src/js/fau-studium-display-admin.js:1
 msgid "No program selected. Please select at least one program."
 msgstr ""
@@ -280,7 +283,7 @@ msgstr ""
 msgid "Page %d"
 msgstr "Seite %d"
 
-#: templates/degree-program-full.php:734
+#: templates/degree-program-full.php:886
 msgid "partnerships"
 msgstr "Partnerschaften"
 
@@ -289,12 +292,12 @@ msgid "Please select a degree program."
 msgstr "Bitte wählen Sie einen Studiengang aus."
 
 #. Description of the plugin
+#: fau-studium-display.php
 msgid "Plugin for displaying the degree program information on websites."
 msgstr "Plugin zur Darstellung von Studiengangsinformationen"
 
-#. 1: The plugin name, 2: The error string.
+#. translators: 1: The plugin name, 2: The error string.
 #: fau-studium-display.php:237
-#, php-format
 msgid "Plugins: %1$s: %2$s"
 msgstr "Plugins: %1$s: %2$s"
 
@@ -314,16 +317,12 @@ msgstr "Vorherige Seite"
 msgid "Read more"
 msgstr "Mehr erfahren"
 
-#: templates/degree-program-full.php:545 templates/degree-program-full.php:597
-#, php-format
-msgid "Read more about %s"
-msgstr "Mehr über %s erfahren"
-
 #: includes/Main.php:124
 msgid "RRZE"
 msgstr "RRZE"
 
 #. Author of the plugin
+#: fau-studium-display.php
 msgid "RRZE Webteam"
 msgstr "RRZE Webteam"
 
@@ -423,9 +422,8 @@ msgstr "Tabelle"
 msgid "Teaching language"
 msgstr "Unterrichtssprache"
 
-#. 1: Server PHP version number, 2: Required PHP version number.
+#. translators: 1: Server PHP version number, 2: Required PHP version number.
 #: fau-studium-display.php:222
-#, php-format
 msgid ""
 "The server is running PHP version %1$s. The plugin requires at least PHP "
 "version %2$s."
@@ -433,9 +431,8 @@ msgstr ""
 "Auf dem Server läuft PHP Version %1$s. Dieses Plugin benötigt mindestens PHP "
 "Version %2$s."
 
-#. 1: Server WordPress version number, 2: Required WordPress version number.
+#. translators: 1: Server WordPress version number, 2: Required WordPress version number.
 #: fau-studium-display.php:212
-#, php-format
 msgid ""
 "The server is running WordPress version %1$s. The plugin requires at least "
 "WordPress version %2$s."
@@ -451,7 +448,7 @@ msgstr ""
 "Dieses Plugin ist nicht kompatibel mit FAU Studium Display und kann daher "
 "nicht aktiviert werden."
 
-#: templates/degree-program-full.php:735
+#: templates/degree-program-full.php:890
 msgid "to industry"
 msgstr "mit der Wirtschaft"
 
