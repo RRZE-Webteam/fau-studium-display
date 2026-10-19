@@ -468,7 +468,7 @@ if (in_array('admission_requirements_application', $items)) {
             foreach ($application_process_buttons as $button) {
                 $how_to_apply_buttons .= '<!-- wp:buttons --><div class="wp-block-buttons"><!-- wp:button --><div class="wp-block-button"><a href="' . $button[ 'url' ] . '" class="wp-block-button__link wp-element-button">' . $button[ 'text' ] . '</a></div><!-- /wp:button --></div><!-- /wp:buttons -->';
             }
-            $admission_requirements_application .= do_blocks($how_to_apply_buttons);
+            $admission_requirements_application .= '<h3>' . __('More information', 'fau-studium-display') . '</h3>' . do_blocks($how_to_apply_buttons);
             /*$admission_requirements_application .= do_blocks(
                 '<!-- wp:buttons -->
             <div class="wp-block-buttons"><!-- wp:button -->
@@ -545,11 +545,12 @@ if (in_array('apply_now_link', $items) && ! empty($data[ 'apply_now_link' ][ 'li
                 $image_credits[ $apply_now_image ] = esc_html($exif[ 'COMPUTED' ][ 'Copyright' ]);
             }
         }
-        $apply_now_button_html = sprintf('<!-- wp:buttons {"className":"apply-now-button","layout":{"type":"flex","justifyContent":"center"}} --><div class="wp-block-buttons apply-now-button"><!-- wp:button {"className":"is-style-primary"} --><div class="wp-block-button is-style-primary"><a class="wp-block-button__link wp-element-button" href="%1$s">%2$s</a></div><!-- /wp:button --></div><!-- /wp:buttons -->',
+        /*$apply_now_button_html = sprintf('<!-- wp:buttons {"className":"apply-now-button","layout":{"type":"flex","justifyContent":"center"}} --><div class="wp-block-buttons apply-now-button"><!-- wp:button {"className":"is-style-primary"} --><div class="wp-block-button is-style-primary"><a class="wp-block-button__link wp-element-button" href="%1$s">%2$s</a></div><!-- /wp:button --></div><!-- /wp:buttons -->',
             $apply_now_link_url,
             $apply_now_link_text
         );
-        $apply_now_button = do_blocks($apply_now_button_html);
+        $apply_now_button = do_blocks($apply_now_button_html);*/
+        $quicklinks[ 99 ] = '{"id":"","title":"' . $apply_now_link_text . '","description":"","url":"' . $apply_now_link_url . '","facultyColor":"default"}';
     }
 }
 
@@ -922,17 +923,18 @@ if (in_array('benefits', $items)) {
         echo $entry_text;
 
         // Apply now button
-        echo $apply_now_button;
+        //echo $apply_now_button;
 
         // Fact sheet
         echo $fact_sheet;
 
         // Quicklinks
         if ( ! empty($quicklinks)) {
+            ksort($quicklinks);
             echo '<div class="quicklinks width-large">';
             //echo do_blocks('<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"space-between","orientation":"horizontal"}} --><div class="wp-block-buttons">' . implode('', $quicklinks) . '</div><!-- /wp:buttons -->');
             echo do_blocks(
-                '<!-- wp:fau-elemental/fau-big-button {"teaserSize":"large","items":[' . implode(
+                '<!-- wp:fau-elemental/fau-big-button {"items":[' . implode(
                     ',',
                     $quicklinks
                 ) . ']} /-->'

@@ -505,8 +505,8 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'program_coordinator' => [
             'labels' => [
-                'de' => 'Studiengangskoordinator/in',
-                'en' => 'Program coordinator'
+                'de' => 'Fachstudienberatung',
+                'en' => 'Subject advisor '
             ],
             'description' => [
                 'de' => 'Hier fehlt noch Text',
@@ -792,20 +792,20 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'how_to_apply_1st_semester' => [
             'labels' => [
-                'de' => 'Bewerbungsprozess 1. Semester',
-                'en' => 'Application process 1st semester'
+                'de' => 'Bewerbung für das 1. Fachsemester',
+                'en' => 'Applying for the first semester'
             ]
         ],
         'how_to_apply_higher_semester' => [
             'labels' => [
-                'de' => 'Bewerbungsprozess höhere Semester',
-                'en' => 'Application process higher semester'
+                'de' => 'Bewerbung für höhere Fachsemester',
+                'en' => 'Applying for higher semesters'
             ]
         ],
         'how_to_apply_internationals_title' => [
             'labels' => [
                 'de' => 'Bewerbung für Internationale',
-                'en' => 'Application for internationals'
+                'en' => 'Applying for international students'
             ]
         ],
         'all_information_internationals' => [
