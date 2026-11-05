@@ -14,6 +14,11 @@
 .settings_page_fau-studium-display #degree-search-button {
   margin-top: 1em;
 }
+.settings_page_fau-studium-display #degree-search-button span.dashicons::before {
+  line-height: 1;
+  position: relative;
+  top: -0.6em;
+}
 .settings_page_fau-studium-display span.dashicons.search-spinner {
   font-size: 2em;
   width: 1em;
@@ -70,6 +75,16 @@
 .settings_page_fau-studium-display #degree-program-results .program-item .add-degree-program span.dashicons,
 .settings_page_fau-studium-display #degree-program-results .program-item .delete-degree-program span.dashicons {
   vertical-align: middle;
+}
+.settings_page_fau-studium-display #degree-programs-imported .program-item .update-degree-program span.dashicons::before,
+.settings_page_fau-studium-display #degree-programs-imported .program-item .add-degree-program span.dashicons::before,
+.settings_page_fau-studium-display #degree-programs-imported .program-item .delete-degree-program span.dashicons::before,
+.settings_page_fau-studium-display #degree-program-results .program-item .update-degree-program span.dashicons::before,
+.settings_page_fau-studium-display #degree-program-results .program-item .add-degree-program span.dashicons::before,
+.settings_page_fau-studium-display #degree-program-results .program-item .delete-degree-program span.dashicons::before {
+  line-height: 1;
+  position: relative;
+  top: -0.6em;
 }
 .settings_page_fau-studium-display #degree-programs-imported .program-item .update-degree-program,
 .settings_page_fau-studium-display #degree-program-results .program-item .update-degree-program {

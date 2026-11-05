@@ -54,7 +54,7 @@ class Data
     public function get_single_program($program_id, $lang, $post_id = '') {
 
         // if on meinstudium.fau.de -> get local post type (studiengang)
-        if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+        if (is_plugin_active('FAU-Studium/fau-studium-editor.php') || is_plugin_active_for_network('FAU-Studium/fau-studium-editor.php')) {
             return Utils::map_post_type_data($program_id, $lang);
         }
 
@@ -142,7 +142,7 @@ class Data
         }
 
         // if on meinstudium.fau.de -> get local post type (studiengang)
-        if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+        if (is_plugin_active('FAU-Studium/fau-studium-editor.php') || is_plugin_active_for_network('FAU-Studium/fau-studium-editor.php')) {
             $args['post_type'] = 'studiengang';
             $programs = get_posts($args);
             foreach ($programs as $program) {

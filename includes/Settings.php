@@ -25,7 +25,7 @@ class Settings
             'orderby'        => 'title',
             'order'          => 'ASC',
         ]);
-        $this->fau_studium_active = is_plugin_active('FAU-Studium/fau-degree-program.php');
+        $this->fau_studium_active = (is_plugin_active('FAU-Studium/fau-studium-editor.php') || is_plugin_active_for_network('FAU-Studium/fau-studium-editor.php'));
     }
 
     public function onLoaded() {
@@ -355,7 +355,7 @@ class Settings
         $atts['faculty'] = $faculties;
         $atts['degree'] = $degrees;
 
-        $language = Utils::get_short_locale();
+        $language = (Utils::get_short_locale() == 'de' ? 'de' : 'en');
 
         $api = new API();
         $programs = $api->get_programs(false, $atts);
@@ -381,11 +381,7 @@ class Settings
             . '<button id="import-selected-button" class="button button-primary">' . __('Import selected', 'fau-studium-display') . '</button>';
         foreach ($programs as $program) {
             if (in_array($program['id'], $imported_ids)) continue;
-            if ($language == 'de') {
-                $title = esc_attr($program['title'] . (isset($program['degree']['abbreviation']) ? ' (' . $program['degree']['abbreviation'] . ')' : ''));
-            } else {
-                $title = esc_attr($program['translations']['en']['title'] . (isset($program['translations']['en']['degree']['abbreviation']) ? ' (' . $program['translations']['en']['degree']['abbreviation'] . ')' : ''));
-            }
+            $title = esc_attr($program['title_'.$language] . (isset($program['degree_abbreviation_'.$language]) ? ' (' . $program['degree_abbreviation_'.$language] . ')' : ''));
 
             $output .= '<div class="program-item add-program" data-program_id="' . $program['id'] . '">'
                        . '<div class="program-check"><input type="checkbox" value="1" name="batch-import[' . $program['id'] . ']" id="batch-import-' . $program['id'] . '" data-id="' . $program['id'] . '">' . '</div>'

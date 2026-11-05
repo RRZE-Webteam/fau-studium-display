@@ -320,7 +320,7 @@ class Utils
 
     public static function get_program_options() {
         $degreeProgramOptions = [];
-        if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+        if (is_plugin_active('FAU-Studium/fau-studium-editor.php') || is_plugin_active_for_network('FAU-Studium/fau-studium-editor.php')) {
             $degreePrograms = get_posts([
                 'posts_per_page' => -1,
                 'post_type'      => 'studiengang',
@@ -357,19 +357,19 @@ class Utils
         return $degreeProgramOptions;
     }
 
-    public static function get_degree_options($parents = false, $from_api = false) {
+    public static function get_degree_options($parents_only = false, $from_api = false) {
         $degreeOptions = [];
-        if ($from_api == true) {
-            $degrees = (new API)->get_meta_list('degree_parents');
+        if ($from_api) {
+            $degrees = (new API)->get_degrees($parents_only);
             foreach ($degrees as $degree) {
                 $degreeOptions[] = [
                     'label' => $degree,
                     'value' => $degree,
                 ];
             }
-        } elseif (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+        } elseif (is_plugin_active('FAU-Studium/fau-studium-editor.php') || is_plugin_active_for_network('FAU-Studium/fau-studium-editor.php')) {
             $degree_terms = get_terms([
-                'taxonomy'      => 'abschluss',
+                'taxonomy'      => 'degree',
                 'hide_empty' => true,
             ]);
             $child_degrees = array_filter( $degree_terms, function( $term ) {
@@ -382,7 +382,7 @@ class Utils
                 ];
             }
         } else {
-            $degrees       = (new Data)->get_taxonomy_list('degree', $parents);
+            $degrees       = (new Data)->get_taxonomy_list('degree', $parents_only);
             foreach ($degrees as $degree) {
                 $degreeOptions[] = [
                     'label' => $degree,
@@ -395,15 +395,15 @@ class Utils
 
     public static function get_faculty_options($from_api = false) {
         $facultyOptions = [];
-        if ($from_api == true) {
-            $faculties = (new API)->get_meta_list('faculties');
+        if ($from_api) {
+            $faculties = (new API)->get_faculties();
             foreach ($faculties as $faculty) {
                 $facultyOptions[] = [
                     'label' => $faculty,
                     'value' => $faculty,
                 ];
             }
-        } elseif (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+        } elseif (is_plugin_active('FAU-Studium/fau-studium-editor.php') || is_plugin_active_for_network('FAU-Studium/fau-studium-editor.php')) {
             $faculty_terms = get_terms([
                 'taxonomy'      => 'faculty',
                 'hide_empty' => true,
@@ -428,7 +428,7 @@ class Utils
 
     public static function get_attribute_options() {
         $attributeOptions = [];
-        if (is_plugin_active('FAU-Studium/fau-degree-program.php')) {
+        if (is_plugin_active('FAU-Studium/fau-studium-editor.php') || is_plugin_active_for_network('FAU-Studium/fau-studium-editor.php')) {
             $attribute_terms = get_terms([
                'taxonomy'      => 'attribute',
                'hide_empty' => true,
@@ -896,7 +896,7 @@ class Utils
     public static function get_short_locale() {
         $locale = get_locale();
         $locale_parts = explode('_', $locale);
-        return $locale_parts[ 0 ] ?? $locale;
+        return $locale_parts[ 0 ] ?? 'de';
     }
 
     public static function text_search($programs, $filter = [], $search_in_text = false) {
@@ -957,5 +957,296 @@ class Utils
         return \function_exists('\mb_strtolower')
             ? \mb_strtolower($s, 'UTF-8')
             : \strtolower($s);
+    }
+
+    private static function get_faubox_info( string $share_url ): array|\WP_Error {
+        $parts = wp_parse_url( $share_url );
+
+        if (
+            ! is_array( $parts ) ||
+            ( $parts['scheme'] ?? '' ) !== 'https' ||
+            ( $parts['host'] ?? '' ) !== 'faubox.rrze.uni-erlangen.de' ||
+            ! preg_match(
+                '~^/getlink/([a-zA-Z0-9_-]+)/?$~',
+                $parts['path'] ?? '',
+                $matches
+            )
+        ) {
+            return new \WP_Error(
+                'invalid_faubox_url',
+                'Ungültiger FAUbox-Freigabelink.'
+            );
+        }
+
+        $share_id = $matches[1];
+
+        $api_url = add_query_arg(
+            [
+                'action' => 'getFileInfo',
+                'ID'     => $share_id,
+                'json'   => 1,
+            ],
+            'https://faubox.rrze.uni-erlangen.de/wapi/filelink'
+        );
+
+        $response = wp_safe_remote_get( $api_url, [
+            'timeout' => 15,
+        ] );
+
+        if ( is_wp_error( $response ) ) {
+            return $response;
+        }
+
+        if ( wp_remote_retrieve_response_code( $response ) !== 200 ) {
+            return new \WP_Error(
+                'faubox_http_error',
+                'FAUbox konnte nicht abgerufen werden.'
+            );
+        }
+
+        $data = json_decode(
+            wp_remote_retrieve_body( $response ),
+            true
+        );
+
+        if ( ! is_array( $data ) ) {
+            return new \WP_Error(
+                'faubox_json_error',
+                'Ungültige JSON-Antwort.'
+            );
+        }
+
+        return $data;
+    }
+
+
+
+    private static function get_faubox_api_url( string $share_url ): string|\WP_Error {
+
+        $info = self::get_faubox_info( $share_url );
+
+        if ( is_wp_error( $info ) ) {
+            return $info;
+        }
+
+        $resource_url = $info['ResultSet']['Result'][0]['resourceURL'] ?? '';
+
+        if ( ! is_string( $resource_url ) || $resource_url === '' ) {
+            return new \WP_Error(
+                'faubox_missing_resource',
+                'Die FAUbox-Antwort enthält keine resourceURL.'
+            );
+        }
+
+        // Nur URLs der erwarteten FAUbox-Domain akzeptieren.
+        $parts = wp_parse_url( $resource_url );
+
+        if (
+            ! is_array( $parts ) ||
+            ( $parts['scheme'] ?? '' ) !== 'https' ||
+            ( $parts['host'] ?? '' ) !== 'faubox.rrze.uni-erlangen.de' ||
+            ! preg_match(
+                '~^/files/([a-zA-Z0-9_-]+)$~',
+                $parts['path'] ?? '',
+                $matches
+            )
+        ) {
+            return new \WP_Error(
+                'faubox_invalid_resource',
+                'Ungültige resourceURL in der FAUbox-Antwort.'
+            );
+        }
+
+        $resource_id = $matches[1];
+
+        // Freigabe-ID aus dem ursprünglichen Link extrahieren.
+        $share_path = wp_parse_url( $share_url, PHP_URL_PATH );
+
+        if (
+            ! is_string( $share_path ) ||
+            ! preg_match(
+                '~^/getlink/([a-zA-Z0-9_-]+)/?$~',
+                $share_path,
+                $share_matches
+            )
+        ) {
+            return new \WP_Error(
+                'faubox_invalid_share',
+                'Ungültiger FAUbox-Freigabelink.'
+            );
+        }
+
+        return add_query_arg(
+            [
+                'action' => 'getFiles',
+                'ID'     => $share_matches[1],
+                'json'   => 1,
+            ],
+            'https://faubox.rrze.uni-erlangen.de/wapi/filelink/'
+            . rawurlencode( $resource_id )
+        );
+    }
+
+
+    public static function get_faubox_file_list(
+        string $url,
+        int $cache_duration = HOUR_IN_SECONDS
+    ): string {
+
+        $api_url = self::get_faubox_api_url($url);
+        $parts = wp_parse_url( $api_url );
+
+        if (
+            ! is_array( $parts ) ||
+            ( $parts['scheme'] ?? '' ) !== 'https' ||
+            ( $parts['host'] ?? '' ) !== 'faubox.rrze.uni-erlangen.de' ||
+            ! str_starts_with( $parts['path'] ?? '', '/wapi/filelink/' )
+        ) {
+            return '';
+        }
+
+        $cache_key = 'faubox_' . md5( $api_url );
+        $cached = get_transient( $cache_key );
+
+        if ( false !== $cached ) {
+            return $cached;
+        }
+
+        // Query-Parameter vom Pfad trennen.
+        $base_url = 'https://faubox.rrze.uni-erlangen.de'
+                    . rtrim( $parts['path'], '/' );
+
+        $query = [];
+        wp_parse_str( $parts['query'] ?? '', $query );
+
+        // Rekursive Funktion.
+        $render_directory = function (
+            string $directory_url,
+            int $depth = 0
+        ) use ( &$render_directory, $query ): string {
+
+            if ( $depth > 10 ) {
+                return '';
+            }
+
+            $items = [];
+            $page = 1;
+            $max_pages = 1;
+
+            do {
+                $url = add_query_arg(
+                    array_merge(
+                        $query,
+                        [
+                            'action' => 'getFiles',
+                            'page'   => $page,
+                            'size'   => 50,
+                            'json'   => 1,
+                        ]
+                    ),
+                    $directory_url
+                );
+
+                $response = wp_safe_remote_get( $url, [
+                    'timeout' => 15,
+                ] );
+
+                if (
+                    is_wp_error( $response ) ||
+                    wp_remote_retrieve_response_code( $response ) !== 200
+                ) {
+                    return '';
+                }
+
+                $data = json_decode(
+                    wp_remote_retrieve_body( $response ),
+                    true
+                );
+
+                if (
+                    ! is_array( $data ) ||
+                    ! isset( $data['ResultSet']['Result'] ) ||
+                    ! is_array( $data['ResultSet']['Result'] )
+                ) {
+                    return '';
+                }
+
+                $items = array_merge(
+                    $items,
+                    $data['ResultSet']['Result']
+                );
+
+                $max_pages = min(
+                    100,
+                    max(
+                        1,
+                        (int) (
+                            $data['ResultSet']['Pageable']['maxPages'] ?? 1
+                        )
+                    )
+                );
+
+                $page++;
+
+            } while ( $page <= $max_pages );
+
+            if ( empty( $items ) ) {
+                return '';
+            }
+
+            $html = '<ul class="faubox-file-list">';
+
+            foreach ( $items as $item ) {
+                $name = $item['fileName'] ?? '';
+                $type = $item['type'] ?? '';
+
+                if ( ! is_string( $name ) || $name === '' ) {
+                    continue;
+                }
+
+                if ( $type === 'file' ) {
+                    $file_url = $item['resourceURL'] ?? '';
+
+                    if ( ! is_string( $file_url ) || $file_url === '' ) {
+                        continue;
+                    }
+
+                    $html .= sprintf(
+                        '<li><a href="%s">%s</a></li>',
+                        esc_url( $file_url ),
+                        esc_html( $name )
+                    );
+                } elseif ( $type === 'dir' ) {
+                    $subdirectory_url = $directory_url
+                                        . '/'
+                                        . rawurlencode( $name );
+
+                    $children = $render_directory(
+                        $subdirectory_url,
+                        $depth + 1
+                    );
+
+                    $html .= sprintf(
+                        '<li><strong>%s</strong>%s</li>',
+                        esc_html( $name ),
+                        $children
+                    );
+                }
+            }
+
+            return $html . '</ul>';
+        };
+
+        $html = $render_directory( $base_url );
+
+        if ( $html !== '' && $cache_duration > 0 ) {
+            set_transient(
+                $cache_key,
+                $html,
+                $cache_duration
+            );
+        }
+
+        return $html;
     }
 }

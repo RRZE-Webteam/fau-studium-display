@@ -19,6 +19,13 @@
 
     #degree-search-button {
         margin-top: 1em;
+        span.dashicons {
+            &::before {
+                line-height: 1;
+                position: relative;
+                top: -.6em;
+            }
+        }
     }
 
     span.dashicons.search-spinner {
@@ -69,6 +76,11 @@
             .delete-degree-program {
                 span.dashicons {
                     vertical-align: middle;
+                    &::before {
+                        line-height: 1;
+                        position: relative;
+                        top: -.6em;
+                    }
                 }
             }
             .update-degree-program {

@@ -904,6 +904,8 @@ if (in_array('benefits', $items)) {
  * HTML Output
  */
 
+print Utils::get_faubox_file_list('https://faubox.rrze.uni-erlangen.de/getlink/fiKr9dCXhuL8Z8eoGiqC26/');
+
 ?>
 <section class="fau-studium-display degree-program-full" itemtype="https://schema.org/EducationalOccupationalProgram"
          itemscope>
@@ -1026,3 +1028,5 @@ if (in_array('benefits', $items)) {
     </div>
 
 </section>
+
+<?php

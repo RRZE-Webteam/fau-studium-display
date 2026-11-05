@@ -8,7 +8,8 @@ class API
     private $api_media_url;
 
     public function __construct() {
-        $this->api_url = 'https://studiengangsverwaltung.zuv.fau.de/wp-json/fau/v1/degree-program';
+        //$this->api_url = 'https://studiengangsverwaltung.zuv.fau.de/wp-json/fau/v1/degree-program';
+        $this->api_url = 'http://localhost/wp/studiengangsverwaltung/wp-json/fau/v2/degree-program';
         $this->api_media_url = 'https://studiengangsverwaltung.zuv.fau.de/wp-json/wp/v2/media';
     }
 
@@ -79,6 +80,28 @@ class API
 
     public function get_program($program_id) {
         $response = wp_remote_get($this->api_url.'/'.$program_id);
+        if (is_wp_error($response) || empty($response)) {
+            return [];
+        }
+
+        return json_decode(wp_remote_retrieve_body($response), true);
+    }
+
+    public function get_faculties() {
+        $response = wp_remote_get($this->api_url.'/faculties');
+        if (is_wp_error($response) || empty($response)) {
+            return [];
+        }
+
+        return json_decode(wp_remote_retrieve_body($response), true);
+    }
+
+    public function get_degrees($parents_only = true) {
+        if ($parents_only) {
+            $response = wp_remote_get($this->api_url.'/degree-parents');
+        } else {
+            $response = wp_remote_get($this->api_url.'/degrees');
+        }
         if (is_wp_error($response) || empty($response)) {
             return [];
         }
