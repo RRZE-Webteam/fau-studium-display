@@ -11,20 +11,12 @@ class Settings
     private array $tabs;
     private string $title;
     private string $slug;
-    private array $programs = array();
     private bool $fau_studium_active;
 
     public function __construct($pluginFile) {
         $this->pluginFile = $pluginFile;
         $this->title = plugin()->getName();
         $this->slug = plugin()->getSlug();
-        $this->programs = get_posts([
-            'post_type'      => 'degree-program',
-            'posts_per_page' => -1,
-            'post_status'    => 'publish',
-            'orderby'        => 'title',
-            'order'          => 'ASC',
-        ]);
         $this->fau_studium_active = (is_plugin_active('FAU-Studium/fau-studium-editor.php') || is_plugin_active_for_network('FAU-Studium/fau-studium-editor.php'));
     }
 
@@ -37,6 +29,7 @@ class Settings
             add_action( 'cmb2_render_toggle', [$this, 'render_toggle' ], 10, 5 );
         }
         add_action('wp_ajax_program_search', [$this,'ajaxProgramSearch']);
+        add_action('wp_ajax_program_filter_options', [$this, 'ajaxProgramFilterOptions']);
         add_action('wp_ajax_program_sync', [$this,'ajaxProgramSync']);
         add_action('wp_ajax_program_delete', [$this,'ajaxProgramDelete']);
     }
@@ -176,6 +169,24 @@ class Settings
                                              'parent_slug'  => $this->slug,
                                          ]);
             $sync_options->add_field([
+                                         'name' => __('General Sync Options', 'fau-studium-display'),
+                                         //'desc' => __('', 'fau-studium-display'),
+                                         'type' => 'title',
+                                         'id'   => 'sync_options_heading'
+                                     ]);
+            $sync_options->add_field([
+                                           'id' => 'sync_languages',
+                                           'name' => esc_html__('Languages', 'fau-studium-display'),
+                                           'desc' => __('A separate degree program post will be created for each selected language.', 'fau-studium-display'),
+                                           'type' => 'multicheck',
+                                           'options' => [
+                                               'de' => __('German', 'fau-studium-display'),
+                                               'en' => __('English', 'fau-studium-display')
+                                           ],
+                                           'default' => 'de',
+                                           'select_all_button' => false,
+                                       ]);
+            $sync_options->add_field([
                                          'name' => __('Import degree programs', 'fau-studium-display'),
                                          //'desc' => __('', 'fau-studium-display'),
                                          'type' => 'title',
@@ -210,28 +221,49 @@ class Settings
     }
 
     public function render_sync_search() {
-        $facultyOptions = Utils::get_faculty_options(true);
-        $degreeOptions = Utils::get_degree_options(true, true);
-
         echo '<div class="" style="display:flex; flex-direction: row; flex-wrap: wrap; column-gap: 2em;">'
              . '<div class="">'
-             . '<h4>' . __('Select Faculty (optional)', 'fau-studium-display') . '</h4>';
-        foreach ($facultyOptions as $facultyOption) {
-            echo '<label><input type="checkbox" name="faculty[]" value="' . $facultyOption['value'] . '">' . $facultyOption['label'] . '</label><br />';
-        }
+             . '<h4>' . __('Select Faculty (optional)', 'fau-studium-display') . '</h4>'
+             . '<div id="program-faculty-options"></div>';
         echo '</div><div class="">'
-             . '<h4>' . __('Select Degree (optional)', 'fau-studium-display') . '</h4>';
-        foreach ($degreeOptions as $degreeOption) {
-            echo '<label><input type="checkbox" name="degree[]" value="' . $degreeOption['value'] . '">' . $degreeOption['label'] . '</label><br />';
-        }
+             . '<h4>' . __('Select Degree (optional)', 'fau-studium-display') . '</h4>'
+             . '<div id="program-degree-options"></div>';
+
         echo '</div></div>';
-        echo '<button id="degree-search-button" class="button">' . __('Search', 'fau-studium-display') . '</button>';
+        echo '<p id="program-filter-status" role="status"></p>';
+        echo '<button id="degree-search-button" class="button" disabled>' . __('Search', 'fau-studium-display') . '</button>';
         echo '<div id="degree-program-results"></div>';
     }
 
-    public function render_sync_imported() {
+    public function ajaxProgramFilterOptions() {
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(__('No permission', 'fau-studium-display'), 403);
+        }
+        check_ajax_referer('fau_studium_display_admin_ajax_nonce');
 
-        if (count($this->programs) < 1) {
+        $faculties = Utils::get_faculty_options(true);
+        $degrees = Utils::get_degree_options(true, true);
+        if (empty($faculties) || empty($degrees) || !is_array($faculties) || !is_array($degrees)) {
+            wp_send_json_error(__('Could not load filter options. Please try again.', 'fau-studium-display'), 502);
+        }
+
+        wp_send_json_success([
+            'faculties' => $faculties,
+            'degrees' => $degrees,
+        ]);
+    }
+
+    public function render_sync_imported() {
+        $programs = get_posts([
+            'post_type'              => 'degree-program',
+            'posts_per_page'         => -1,
+            'post_status'            => 'publish',
+            'orderby'                => 'title',
+            'order'                  => 'ASC',
+            'update_post_term_cache' => false,
+        ]);
+
+        if (count($programs) < 1) {
             _e('No degree programs found', 'fau-studium-display');
             return;
         }
@@ -250,11 +282,11 @@ class Settings
              . '<button id="manage-select-all-button" class="button">' . __('Select / Deselect All', 'fau-studium-display') . '</button>'
              . '<button id="update-selected-button" class="button button-primary">' . __('Update selected', 'fau-studium-display') . '</button>'
              . '<button id="delete-selected-button" class="button button-link-delete">' . __('Delete selected', 'fau-studium-display') . '</button>';
-        foreach ($this->programs as $post) {
+        $multilang_mode = Utils::get_multilang_mode();
+        foreach ($programs as $post) {
             $title = $post->post_title;
             $program_id = get_post_meta($post->ID, 'program_id', true);
             $lang_code = '';
-            $multilang_mode = Utils::get_multilang_mode();
             if ($multilang_mode == 'single') {
                 $lang_raw = get_post_meta($post->ID, '_rrze_multilang_single_locale', true);
                 if (!empty($lang_raw)) {

@@ -863,7 +863,7 @@ class Utils
      * @param string $term      Name des Child-Terms
      * @param string $parent    Name des Parent-Terms
      *
-     * @return int|WP_Error Term-ID des Child-Terms oder Fehler
+     * @return int|\WP_Error Term-ID des Child-Terms oder Fehler
      */
     public static function assign_post_term($post_id, $taxonomy, $term, $parent = null) {
         $parent_id = false;

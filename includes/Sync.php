@@ -14,26 +14,22 @@ class Sync
 
     public function sync_program($id, $post_id = '0') {
 
-        $meta = [];
         $program = $this->api->get_program($id);
         if (empty($program['title'])) {
             return new \WP_Error();
         }
-        $language = Utils::get_short_locale();
 
-        foreach ($program as $key => $value) {
-            if ($key != 'translations') {
-                $meta['program_data_de'][$key] = $value;
+        $meta['program_id'] = $id;
+        $meta['program_data'] = $program;
+
+        $degree_abbreviations = [];
+        $degrees = $program['degree'] ?? [];
+        foreach ($degrees as $degree) {
+            if (!empty($degree['abbreviation'])) {
+                $degree_abbreviations[] = $degree['abbreviation'];
             }
         }
-        $meta['program_data_en'] = $program['translations']['en'] ?? [];
-        $meta['program_id'] = $id;
-
-        if ($language == 'en' && isset($program['translations']['en'])) {
-            $program = $program['translations']['en'];
-        }
-
-        $title = esc_attr($program['title'] . (isset($program['degree']['abbreviation']) ? ' (' . $program['degree']['abbreviation'] . ')' : ''));
+        $title = esc_attr($program['title'] . (!empty($degree_abbreviations) ? ' (' . implode('/ ', $degree_abbreviations) . ')' : ''));
 
         $author = get_post_field('post_author', $post_id);
         $result = wp_insert_post([
@@ -78,11 +74,14 @@ class Sync
             foreach ($taxonomies as $taxonomy) {
                 wp_set_object_terms($result, [], $taxonomy);
             }
-            if (!empty($program['degree']['name'])) {
-                Utils::assign_post_term($result, 'degree', esc_attr($program['degree']['name']), ($program[ 'degree' ][ 'parent' ][ 'name' ] ?? null));
+
+            if (!empty($program['degree'][0]['name'])) {
+                foreach ($program['degree'] as $degree) {
+                    Utils::assign_post_term($result, 'degree', esc_attr($degree['name']), ($degree[ 'parent' ][ 'name' ] ?? null));
+                }
             }
-            if (!empty($program['subject_groups'])) {
-                foreach ($program['subject_groups'] as $subject_group) {
+            if (!empty($program['subject_group'])) {
+                foreach ($program['subject_group'] as $subject_group) {
                     Utils::assign_post_term($result, 'subject_group', $subject_group);
                 }
             }

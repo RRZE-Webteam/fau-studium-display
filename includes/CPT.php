@@ -70,8 +70,7 @@ class CPT
             register_taxonomy($taxonomy, self::POST_TYPE, [
                 'label'        => $label,
                 'public'       => true,
-                'show_ui'      => false,
-                //'show_ui'      => true,
+                //'show_ui'      => false,
                 'show_in_rest' => true,
                 'hierarchical' => true,
                 'has_archive'  => false,
@@ -89,34 +88,29 @@ class CPT
             [$this, 'degree_program_metabox'],
             'degree-program',
             'normal',
-            'high'
+            'high',
+            ['lang' => 'de']
         );
 
         add_meta_box(
             'degree_program_metabox_english',
             __('Post Meta English', 'fau-studium-display'),
-            [$this, 'degree_program_metabox_english'],
+            [$this, 'degree_program_metabox'],
             'degree-program',
             'normal',
-            'high'
+            'high',
+            ['lang' => 'en']
         );
     }
 
-    public function degree_program_metabox($post)
+    public function degree_program_metabox($post, $args)
     {
-        $aPostMeta = get_post_meta($post->ID, 'program_data_de', true);
-        if (!isset($aPostMeta['title'])) {
-            echo __('No data available', 'fau-studium-display');
-            return;
-        }
-        foreach ($aPostMeta as $key => $value) {
-            echo '<span><strong>' . $key . ':</strong></span><br />' . Utils::arrayToHtmlList($value) . '<hr>';
-        }
-    }
+        $lang = $args['args']['lang'] ?? 'de';
+        $lang = in_array($lang, ['de', 'en'], true) ? $lang : 'de';
 
-    public function degree_program_metabox_english($post)
-    {
-        $aPostMeta = get_post_meta($post->ID, 'program_data_en', true);
+        $aPostMeta = get_post_meta($post->ID, 'program_data', true);
+        $aPostMeta = $aPostMeta[$lang] ?? [];
+        unset($aPostMeta['settings']);
         if (!isset($aPostMeta['title'])) {
             echo __('No data available', 'fau-studium-display');
             return;

@@ -4,6 +4,56 @@ jQuery(document).ready(function($) {
 
     let searchResults = $('#degree-program-results');
     let programsImported = $('#degree-programs-imported');
+    const facultyOptions = $('#program-faculty-options');
+    const degreeOptions = $('#program-degree-options');
+    const filterStatus = $('#program-filter-status');
+    const searchButton = $('#degree-search-button');
+
+    function renderFilterOptions(container, name, options) {
+        container.empty();
+        options.forEach(function(option) {
+            $('<label>')
+                .append($('<input>', { type: 'checkbox', name: name, value: option.value }))
+                .append(document.createTextNode(option.label))
+                .appendTo(container);
+            container.append('<br>');
+        });
+    }
+
+    function loadFilterOptions() {
+        searchButton.prop('disabled', true);
+        filterStatus.text(__('Loading filter options…', 'fau-studium-display'));
+        $.ajax({
+            url: program_ajax.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'program_filter_options',
+                _ajax_nonce: program_ajax.nonce,
+            },
+            success: function(response) {
+                if (!response.success || !response.data || !Array.isArray(response.data.faculties) || !Array.isArray(response.data.degrees)) {
+                    showFilterError();
+                    return;
+                }
+                renderFilterOptions(facultyOptions, 'faculty[]', response.data.faculties);
+                renderFilterOptions(degreeOptions, 'degree[]', response.data.degrees);
+                filterStatus.empty();
+                searchButton.prop('disabled', false);
+            },
+            error: showFilterError,
+        });
+    }
+
+    function showFilterError() {
+        filterStatus.empty()
+            .append(document.createTextNode(__('Could not load filter options.', 'fau-studium-display') + ' '))
+            .append($('<button>', { type: 'button', class: 'button', text: __('Try again', 'fau-studium-display') })
+                .on('click', loadFilterOptions));
+    }
+
+    if (facultyOptions.length && degreeOptions.length) {
+        loadFilterOptions();
+    }
 
     /*
      * Search for Degree Programs to import
@@ -11,6 +61,10 @@ jQuery(document).ready(function($) {
 
     $('#degree-search-button').on('click', function(e) {
         e.preventDefault();
+
+        if ($(this).prop('disabled')) {
+            return;
+        }
 
         let $this = $(this);
         $this.append('<span class="dashicons dashicons-update search-spinner spin" title="Searching">Searching</span>').addClass('button-disabled');
