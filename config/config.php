@@ -14,13 +14,13 @@ function get_output_fields($format = '') {
             'subtitle',
             'entry_text',
             'fact_sheet',
-            'content.about',
-            'content.structure',
-            'content.specializations',
-            'content.qualities_and_skills',
-            'content.why_should_study',
-            'content.career_prospects',
-            'content.special_features',
+            'about',
+            'structure',
+            'specializations',
+            'qualities_and_skills',
+            'why_should_study',
+            'career_prospects',
+            'special_features',
             'combinations',
             'videos',
             'admission_requirements_application',
@@ -291,7 +291,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'What is the degree program about?'
             ]
         ],
-        'content.about' => [
+        'about' => [
             'labels' => [
                 'de' => 'Inhalt: Worum geht es?',
                 'en' => 'Content: About'
@@ -303,7 +303,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Design and structure'
             ]
         ],
-        'content.structure' => [
+        'structure' => [
             'labels' => [
                 'de' => 'Inhalt: Struktur',
                 'en' => 'Content: Structure'
@@ -315,7 +315,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Fields of study and specializations'
             ]
         ],
-        'content.specializations' => [
+        'specializations' => [
             'labels' => [
                 'de' => 'Inhalt: Schwerpunkte',
                 'en' => 'Content: Specializations'
@@ -327,7 +327,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Which qualities and skills do I need?'
             ]
         ],
-        'content.qualities_and_skills' => [
+        'qualities_and_skills' => [
             'labels' => [
                 'de' => 'Inhalt: Was mitbringen',
                 'en' => 'Content: Qualities and skills'
@@ -339,7 +339,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Why should I study at FAU?'
             ]
         ],
-        'content.why_should_study' => [
+        'why_should_study' => [
             'labels' => [
                 'de' => 'Inhalt: Warum FAU?',
                 'en' => 'Content: Why study at FAU?'
@@ -351,7 +351,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Which career prospects are open to me?'
             ]
         ],
-        'content.career_prospects' => [
+        'career_prospects' => [
             'labels' => [
                 'de' => 'Inhalt: Karriereperspektiven',
                 'en' => 'Content: Career prospects'
@@ -363,7 +363,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Special features'
             ]
         ],
-        'content.special_features' => [
+        'special_features' => [
             'labels' => [
                 'de' => 'Inhalt: Besondere Hinweise',
                 'en' => 'Content: Special features'
@@ -375,7 +375,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Testimonials'
             ]
         ],
-        'content.testimonials' => [
+        'testimonials' => [
             'labels' => [
                 'de' => 'Inhalt: Erfahrungsberichte',
                 'en' => 'Content: Testimonials'
@@ -555,7 +555,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Possible degree program combinations'
             ]
         ],
-        'content.combinations' => [
+        'combinations' => [
             'labels' => [
                 'de' => 'In der Regel ohne Überschneidungen',
                 'en' => 'Possible combinations without overlaps'
@@ -571,7 +571,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Limited combinations'
             ]
         ],
-        'content.limited_combinations' => [
+        'limited_combinations' => [
             'labels' => [
                 'de' => 'Mögliche Überschneidungen im Stundenplan',
                 'en' => 'Possible overlaps in the timetable'

@@ -71,15 +71,20 @@ class Data
         }
 
         if (!empty($post_id)) {
+            $program_data = get_post_meta($post_id, 'program_data', true);
+            //var_dump($program_data); exit;
             switch ($lang) {
                 case 'en':
-                    $data = get_post_meta($post_id, 'program_data_en', true);
+                    $data = $program_data['en'] ?? [];
                     break;
                 case 'de':
                 default:
-                    $data = get_post_meta($post_id, 'program_data_de', true);
+                    $data = $program_data['de'] ?? [];
             }
             $data['_thumbnail_rendered'] = get_the_post_thumbnail($post_id, 'full');
+            if (empty($data['_thumbnail_rendered'])) {
+                $data['_thumbnail_rendered'] = $program_data['featured_image']['featured_image']['rendered'] ?? '';
+            }
             $data['post_id'] = $post_id;
         }
 

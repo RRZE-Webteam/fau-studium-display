@@ -58,7 +58,9 @@ class CPT
             'degree' => __('Degrees', 'fau-studium-display'),
             'subject_group' => __('Subject groups', 'fau-studium-display'),
             'attribute' => __('Special ways to study', 'fau-studium-display'),
-            'admission_requirement' => __('Admission requirements', 'fau-studium-display'),
+            'adm_req_bachelor_teaching' => __('Requirements: Bachelor / Teaching', 'fau-studium-display'),
+            'adm_req_bachelor_teaching_higher' => __('Requirements: Bachelor / Teaching higher semester', 'fau-studium-display'),
+            'adm_req_master' => __('Requirements: Master', 'fau-studium-display'),
             'start' => __('Start of degree program', 'fau-studium-display'),
             'location' => __('Study location', 'fau-studium-display'),
             'teaching_language' => __('Teaching language', 'fau-studium-display'),
@@ -82,6 +84,15 @@ class CPT
 
     public function render_metabox()
     {
+        add_meta_box(
+            'degree_program_metabox_general',
+            __('General Information', 'fau-studium-display'),
+            [$this, 'degree_program_metabox_general'],
+            'degree-program',
+            'normal',
+            'high'
+        );
+
         add_meta_box(
             'degree_program_metabox',
             __('Post Meta German', 'fau-studium-display'),
@@ -111,6 +122,20 @@ class CPT
         $aPostMeta = get_post_meta($post->ID, 'program_data', true);
         $aPostMeta = $aPostMeta[$lang] ?? [];
         unset($aPostMeta['settings']);
+        if (!isset($aPostMeta['title'])) {
+            echo __('No data available', 'fau-studium-display');
+            return;
+        }
+        foreach ($aPostMeta as $key => $value) {
+            echo '<span><strong>' . $key . ':</strong></span><br />' . Utils::arrayToHtmlList($value) . '<hr>';
+        }
+    }
+
+    public function degree_program_metabox_general($post) {
+        $aPostMeta = get_post_meta($post->ID, 'program_data', true);
+        unset($aPostMeta['settings']);
+        unset($aPostMeta['de']);
+        unset($aPostMeta['en']);
         if (!isset($aPostMeta['title'])) {
             echo __('No data available', 'fau-studium-display');
             return;

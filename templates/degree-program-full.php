@@ -23,6 +23,8 @@ if (empty($data)) {
     return;
 }
 
+print "<pre>"; var_dump($data); print "</pre>";
+
 $theme_family        = Utils::getThemeFamily() != 'fau-elemental' ? '-default' : '';
 $theme_family        = Utils::getThemeFamily();
 $items               = $atts[ 'selectedItemsFull' ] ?? [];
@@ -32,7 +34,7 @@ $descriptions        = get_labels($lang, 'description');
 $constants           = get_constants($lang);
 $meinstudium_options = get_meinstudium_options($lang);
 
-$number_of_students_raw = $data[ 'number_of_students' ][ 'name' ] ?? '';
+$number_of_students_raw = $data[ 'number_of_students' ][0][ 'name' ] ?? '';
 if ( ! empty($number_of_students_raw)) {
     if (str_contains($number_of_students_raw, '-')) {
         $number_of_students_array = explode('-', $number_of_students_raw);
@@ -42,6 +44,9 @@ if ( ! empty($number_of_students_raw)) {
     }
 }
 $standard_duration = $data[ 'standard_duration' ] ?? '';
+$standard_duration_years = '';
+$standard_duration_months = '';
+$standard_duration_iso    = '';
 if ( ! empty($standard_duration)) {
     $standard_duration_years  = floor((int)$standard_duration / 2);
     $standard_duration_months = (int)$standard_duration % 2;
@@ -57,7 +62,7 @@ $image_credits = [];
 // Thumbnail
 if (in_array('teaser_image', $items)) {
     global $post_id;
-    $thumbnail       = ! empty($data[ '_thumbnail_rendered' ]) ? $data[ '_thumbnail_rendered' ] : $data[ 'featured_image' ][ 'rendered' ];
+    $thumbnail       = $data[ '_thumbnail_rendered' ] ?? '';
     $attachment_id   = get_post_thumbnail_id($post_id);
     $attachment_meta = wp_get_attachment_metadata($attachment_id);
     $attachment_url  = wp_get_attachment_url($attachment_id);
@@ -73,8 +78,15 @@ if (in_array('teaser_image', $items)) {
 }
 
 // Title
+$degrees = $data['degree'];
+$degree_names = [];
+$degree_abbreviations = [];
+foreach ($degrees as $degree) {
+    $degree_names[] = $degree['name'];
+    $degree_abbreviations[] = $degree['abbreviation'];
+}
 if (in_array('title', $items) && ! empty($data[ 'title' ])) {
-    $title = '<span itemprop="name">' . $data[ 'title' ] . '</span>' . (! empty($data[ 'degree' ][ 'abbreviation' ]) ? ' (' . $data[ 'degree' ][ 'abbreviation' ] . ')' : '');
+    $title = '<span itemprop="name">' . $data[ 'title' ] . '</span>' . (! empty($degree_abbreviations) ? ' (' . implode('/', $degree_abbreviations) . ')' : '');
     $title = '<h1 class="title">' . $title . '</h1>';
 } else {
     $title = '<meta name="title" itemprop="name" content="' . esc_attr($data[ 'title' ]) . '">';
@@ -95,18 +107,14 @@ $meta_data = $constants[ 'schema_termsPerYear' ]
 if ( ! empty($data[ 'url' ])) {
     $meta_data .= '<meta itemprop="url" content="' . esc_url($data[ 'url' ]) . '">';
 }
-if ( ! empty($data[ 'content' ][ 'structure' ][ 'description' ])) {
+if ( ! empty($data[ 'structure' ])) {
     $meta_data .= '<div itemprop="hasCourseInstance" itemscope itemtype="https://schema.org/CourseInstance">'
                   . '<meta itemprop="name" content="' . $labels[ 'structure' ] . '">'
                   . '<meta itemprop="courseMode" content="Onsite">'
                   . '<meta itemprop="courseWorkload" content="' . ($standard_duration_iso ?? 'P2Y') . '">'
                   . '<meta itemprop="description" content="' . strip_tags(
-                      $data[ 'content' ][ 'structure' ][ 'description' ]
+                      $data[ 'structure' ]
                   ) . '">'
-                  /*. '<div itemprop="courseSchedule" content="' . strip_tags($data['content']['structure']['description']) . '" itemscope itemtype="https://schema.org/courseSchedule">'
-                      . '<meta itemprop="repeatCount" content="' . ($standard_duration_years ?? 1) . '">'
-                      . '<meta itemprop="repeatFrequency" content="Yearly">'
-                  . '</div>'*/
                   . '</div>';
 }
 
@@ -126,10 +134,10 @@ if (in_array('fact_sheet', $items)) {
     $facts = [
         'degree'                 => [
             'label'    => $labels[ 'degree' ] ?? 'degree',
-            'value'    => $data[ 'degree' ][ 'name' ] ?? '',
+            'value'    => implode(', ', $degree_names),
             'itemprop' => 'educationalCredentialAwarded'
         ],
-        'admission_requirements' => [
+        'admission_requirements_bachelor_teaching' => [
             'label'    => $labels[ 'admission_requirements' ] ?? 'admission_requirements',
             'value'    => $data[ 'admission_requirement_link' ][ 'name' ] ?? '',
             'itemprop' => 'programPrerequisites'
@@ -215,28 +223,28 @@ if (in_array('fact_sheet', $items)) {
 }
 
 // Content Collapsibles
-if (in_array('content.about', $items)
-    || in_array('content.structure', $items)
-    || in_array('content.specializations', $items)
-    || in_array('content.qualities_and_skills', $items)
-    || in_array('content.why_should_study', $items)
-    || in_array('content.career_prospects', $items)
+if (in_array('about', $items)
+    || in_array('structure', $items)
+    || in_array('specializations', $items)
+    || in_array('qualities_and_skills', $items)
+    || in_array('why_should_study', $items)
+    || in_array('career_prospects', $items)
     || in_array('links.downloads', $items)
-    || in_array('content.special_features', $items)
+    || in_array('special_features', $items)
     || in_array('combinations', $items)) {
     $content_fields_all = [
-        'content.structure',
-        'content.specializations',
-        'content.qualities_and_skills',
-        'content.why_should_study',
-        'content.career_prospects',
+        'structure',
+        'specializations',
+        'qualities_and_skills',
+        'why_should_study',
+        'career_prospects',
         'links.downloads',
-        'content.special_features',
+        'special_features',
         'combinations'
     ];
     $content_fields     = array_intersect($content_fields_all, $items);
 
-    if (in_array('content.structure', $items)
+    if (in_array('structure', $items)
         && ! empty($data[ 'content' ][ 'structure' ][ 'description' ])
         && ! empty($data[ 'url' ])) {
         $data[ 'content' ][ 'structure' ][ 'description' ] .= '<!-- wp:buttons --><div class="wp-block-buttons"><!-- wp:button --><div class="wp-block-button"><a href="' . $data[ 'url' ] . '" class="wp-block-button__link wp-element-button">' . ($labels[ 'url' ] ?? 'url') . '</a></div><!-- /wp:button --></div><!-- /wp:buttons -->';
@@ -247,15 +255,15 @@ if (in_array('content.about', $items)
     $content       = '<div class="width-large"><div class="wp-block-fau-elemental-fau-meta-headline" id="' . $content_id . '">' . $content_title . '</div>'
                      . '<div class="program-details width-small">';
 
-    if (in_array('content.about', $items)) {
+    if (in_array('about', $items)) {
         $content .= '<h2>' . ($labels[ 'about' ] ?? 'about') . '</h2><div itemprop="description">' . do_shortcode(
-                $data[ 'content' ][ 'about' ][ 'description' ]
+                $data[ 'about' ]
             ) . '</div>';
     }
 
     $content_html = '<!-- wp:rrze-elements/collapsibles {"hstart":3,"expandLabel":"Alle ausklappen"} -->';
     foreach ($content_fields as $field) {
-        $field_name = str_replace('content.', '', $field);
+        $field_name = str_replace('', '', $field);
         if ( ! empty($data[ 'content' ][ $field_name ][ 'description' ])) {
             $content_html .= '<!-- wp:rrze-elements/collapse {"hstart":3,"title":"' . ($labels[ $field_name ] ?? $field_name) . '","jumpName":"' . sanitize_title(
                     $labels[ $field_name ] ?? $field_name
@@ -268,7 +276,7 @@ if (in_array('content.about', $items)
                     $labels[ $field_name ] ?? $field_name
                 ) . '","isCustomJumpname":true} --><!-- wp:paragraph -->';
             if ( ! empty($data[ 'combinations' ])) {
-                $content_html .= '<h4>' . ($labels[ 'content.combinations' ] ?? 'combinations') . '</h4><ul class="program-combinations wp-block-list">';
+                $content_html .= '<h4>' . ($labels[ 'combinations' ] ?? 'combinations') . '</h4><ul class="program-combinations wp-block-list">';
                 foreach ($data[ 'combinations' ] as $combination) {
                     $content_html .= sprintf(
                         '<li><a href="%s">%s</a></li>',
@@ -277,10 +285,10 @@ if (in_array('content.about', $items)
                     );
                 }
                 $content_html .= '</ul>';
-                $content_html .= ! empty($descriptions[ 'content.combinations' ]) ? '<p>' . $descriptions[ 'content.combinations' ] . '</p>' : '';
+                $content_html .= ! empty($descriptions[ 'combinations' ]) ? '<p>' . $descriptions[ 'combinations' ] . '</p>' : '';
             }
             if ( ! empty($data[ 'limited_combinations' ])) {
-                $content_html .= '<h4>' . ($labels[ 'content.limited_combinations' ] ?? 'limited_combinations') . '</h4><ul class="program-limited-combinations wp-block-list">';
+                $content_html .= '<h4>' . ($labels[ 'limited_combinations' ] ?? 'limited_combinations') . '</h4><ul class="program-limited-combinations wp-block-list">';
                 foreach ($data[ 'limited_combinations' ] as $limited_combination) {
                     $content_html .= sprintf(
                         '<li><a href="%s">%s</a></li>',
@@ -289,7 +297,7 @@ if (in_array('content.about', $items)
                     );
                 }
                 $content_html .= '</ul>';
-                $content_html .= ! empty($descriptions[ 'content.limited_combinations' ]) ? '<p>' . $descriptions[ 'content.limited_combinations' ] . '</p>' : '';
+                $content_html .= ! empty($descriptions[ 'limited_combinations' ]) ? '<p>' . $descriptions[ 'limited_combinations' ] . '</p>' : '';
             }
             $content_html .= '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
         }
@@ -460,9 +468,11 @@ if (in_array('admission_requirements_application', $items)) {
                                                    . $admission_details;
         }
 
+        $attributes = [];
+        $attributes = array_column($data['attribute'], 'name');
         if ( ! in_array(
                 'Weiterbildungs-/berufsbegleitender Studiengang',
-                $data[ 'attributes' ]
+                $attributes
             ) && ! empty($application_process_buttons)) {
             $how_to_apply_buttons = '';
             foreach ($application_process_buttons as $button) {
@@ -678,7 +688,7 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
     }*/
     $subject_specific_advice_text      = $descriptions[ 'subject_specific_advice' ] ?? '';
     $subject_specific_advice_link_text = ! empty($data[ 'subject_specific_advice' ][ 'link_text' ]) ? $data[ 'subject_specific_advice' ][ 'link_text' ] : (! empty($data[ 'subject_specific_advice' ][ 'name' ]) ? $data[ 'subject_specific_advice' ][ 'name' ] : '');
-    $subject_specific_advice_link_url  = $data[ 'subject_specific_advice' ][ 'link_url' ];
+    $subject_specific_advice_link_url  = $data[ 'subject_specific_advice' ][ 'link_url' ] ?? '';
     if ( ! empty($subject_specific_advice_link_text) && ! empty($subject_specific_advice_link_url)) {
         $advice_buttons[] = sprintf(
             '{"id":"","title":"%1$s","description":"%2$s","url":"%3$s","facultyColor":"default"}',
@@ -690,7 +700,7 @@ if (in_array('student_advice', $items) || in_array('subject_specific_advice', $i
 
     $program_coordinator_text         = $descriptions[ 'program_coordinator' ] ?? '';
     $program_coordinator_link_text    = $labels[ 'program_coordinator' ] ?? '';
-    $program_coordinator_link_url_raw = $data[ 'degree_program_coordinator_org_id' ];
+    $program_coordinator_link_url_raw = $data[ 'degree_program_coordinator_org_id' ] ?? '';
     if (str_starts_with($program_coordinator_link_url_raw, 'http')) {
         $program_coordinator_link_url = esc_url($program_coordinator_link_url_raw);
     } elseif ( ! empty($program_coordinator_link_url_raw)) {

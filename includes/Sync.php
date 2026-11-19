@@ -75,46 +75,62 @@ class Sync
                 wp_set_object_terms($result, [], $taxonomy);
             }
 
-            if (!empty($program['degree'][0]['name'])) {
-                foreach ($program['degree'] as $degree) {
+            if (!empty($program['de']['degree'][0]['name'])) {
+                foreach ($program['de']['degree'] as $degree) {
                     Utils::assign_post_term($result, 'degree', esc_attr($degree['name']), ($degree[ 'parent' ][ 'name' ] ?? null));
                 }
             }
-            if (!empty($program['subject_group'])) {
-                foreach ($program['subject_group'] as $subject_group) {
-                    Utils::assign_post_term($result, 'subject_group', $subject_group);
+            if (!empty($program['de']['subject_group'][0]['name'])) {
+                foreach ($program['de']['subject_group'] as $subject_group) {
+                    Utils::assign_post_term($result, 'subject_group', $subject_group['name']);
                 }
             }
-            if (!empty($program['attributes'])) {
-                foreach ($program['attributes'] as $attribute) {
-                    Utils::assign_post_term($result, 'attribute', $attribute);
+            if (!empty($program['de']['attribute'][0]['name'])) {
+                foreach ($program['de']['attribute'] as $attribute) {
+                    Utils::assign_post_term($result, 'attribute', $attribute['name']);
                 }
             }
-            if (!empty($program['admission_requirement_link'])) {
-                Utils::assign_post_term($result, 'admission_requirement', esc_attr($program['admission_requirement_link']['name']), ($program['admission_requirement_link'][ 'parent']['name'] ?? null));
-            }
-            if (!empty($program['start'])) {
-                foreach ($program['start'] as $start) {
-                    Utils::assign_post_term($result, 'start', $start);
+            if (!empty($program['de']['adm_req_bachelor_teaching'][0]['name'])) {
+                foreach ($program['de']['adm_req_bachelor_teaching'] as $adm_req_bachelor_teaching) {
+                    Utils::assign_post_term($result, 'adm_req_bachelor_teaching', esc_attr($adm_req_bachelor_teaching['name']), ($adm_req_bachelor_teaching['parent']['name'] ?? null));
                 }
             }
-            if (!empty($program['location'])) {
-                foreach ($program['location'] as $location) {
-                    Utils::assign_post_term($result, 'location', $location);
+            if (!empty($program['de']['adm_req_bachelor_teaching_higher'][0]['name'])) {
+                foreach ($program['de']['adm_req_bachelor_teaching_higher'] as $adm_req_bachelor_teaching_higher) {
+                    Utils::assign_post_term($result, 'adm_req_bachelor_teaching_higher', esc_attr($adm_req_bachelor_teaching_higher['name']), ($adm_req_bachelor_teaching_higher['parent']['name'] ?? null));
                 }
             }
-            if (!empty($program['teaching_language'])) {
-                Utils::assign_post_term($result, 'teaching_language', esc_attr($program['teaching_language']));
+            if (!empty($program['de']['adm_req_master'][0]['name'])) {
+                foreach ($program['de']['adm_req_master'] as $adm_req_master) {
+                    Utils::assign_post_term($result, 'adm_req_master', esc_attr($adm_req_master['name']), ($adm_req_master['parent']['name'] ?? null));
+                }
             }
-            if (!empty($program['faculty'])) {
-                foreach ($program['faculty'] as $faculty) {
+            if (!empty($program['de']['start_of_studies'][0]['name'])) {
+                foreach ($program['de']['start_of_studies'] as $start) {
+                    Utils::assign_post_term($result, 'start', $start['name']);
+                }
+            }
+            if (!empty($program['de']['study_location'][0]['name'])) {
+                foreach ($program['de']['study_location'] as $location) {
+                    Utils::assign_post_term($result, 'location', $location['name']);
+                }
+            }
+            if (!empty($program['de']['teaching_language'][0]['name'])) {
+                foreach ($program['de']['teaching_language'] as $language) {
+                    Utils::assign_post_term($result, 'teaching_language', esc_attr($language['name']));
+                }
+            }
+            if (!empty($program['de']['faculty'][0]['name'])) {
+                foreach ($program['de']['faculty'] as $faculty) {
                     if (!empty($faculty['name'])) {
                         Utils::assign_post_term($result, 'faculty', $faculty['name']);
                     }
                 }
             }
-            if (!empty($program['german_language_skills_for_international_students']['name'])) {
-                Utils::assign_post_term($result, 'german_language_skills', $program['german_language_skills_for_international_students']['name']);
+            if (!empty($program['de']['german_for_int_students'][0]['name'])) {
+                foreach ($program['de']['german_for_int_students'] as $german) {
+                    Utils::assign_post_term($result, 'german_language_skills', esc_attr($german['name']), ($german[ 'parent' ][ 'name' ] ?? null));
+                }
             }
         }
 
