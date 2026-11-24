@@ -291,22 +291,10 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'What is the degree program about?'
             ]
         ],
-        'about' => [
-            'labels' => [
-                'de' => 'Inhalt: Worum geht es?',
-                'en' => 'Content: About'
-            ]
-        ],
         'structure' => [
             'labels' => [
                 'de' => 'Aufbau und Struktur',
                 'en' => 'Design and structure'
-            ]
-        ],
-        'structure' => [
-            'labels' => [
-                'de' => 'Inhalt: Struktur',
-                'en' => 'Content: Structure'
             ]
         ],
         'specializations' => [
@@ -315,22 +303,10 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Fields of study and specializations'
             ]
         ],
-        'specializations' => [
-            'labels' => [
-                'de' => 'Inhalt: Schwerpunkte',
-                'en' => 'Content: Specializations'
-            ]
-        ],
         'qualities_and_skills' => [
             'labels' => [
                 'de' => 'Was sollte ich mitbringen?',
                 'en' => 'Which qualities and skills do I need?'
-            ]
-        ],
-        'qualities_and_skills' => [
-            'labels' => [
-                'de' => 'Inhalt: Was mitbringen',
-                'en' => 'Content: Qualities and skills'
             ]
         ],
         'why_should_study' => [
@@ -339,22 +315,10 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Why should I study at FAU?'
             ]
         ],
-        'why_should_study' => [
-            'labels' => [
-                'de' => 'Inhalt: Warum FAU?',
-                'en' => 'Content: Why study at FAU?'
-            ]
-        ],
         'career_prospects' => [
             'labels' => [
                 'de' => 'Welche beruflichen Perspektiven stehen mir offen?',
                 'en' => 'Which career prospects are open to me?'
-            ]
-        ],
-        'career_prospects' => [
-            'labels' => [
-                'de' => 'Inhalt: Karriereperspektiven',
-                'en' => 'Content: Career prospects'
             ]
         ],
         'special_features' => [
@@ -363,22 +327,10 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Special features'
             ]
         ],
-        'special_features' => [
-            'labels' => [
-                'de' => 'Inhalt: Besondere Hinweise',
-                'en' => 'Content: Special features'
-            ]
-        ],
         'testimonials' => [
             'labels' => [
                 'de' => 'Erfahrungsberichte',
                 'en' => 'Testimonials'
-            ]
-        ],
-        'testimonials' => [
-            'labels' => [
-                'de' => 'Inhalt: Erfahrungsberichte',
-                'en' => 'Content: Testimonials'
             ]
         ],
         'info_internationals_link' => [
@@ -567,7 +519,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'Possible degree program combinations'
             ]
         ],
-        'combinations' => [
+        'possible_combinations' => [
             'labels' => [
                 'de' => 'In der Regel ohne Überschneidungen',
                 'en' => 'Possible combinations without overlaps'

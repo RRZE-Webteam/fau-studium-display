@@ -252,21 +252,22 @@ if (in_array('about', $items)
     || in_array('special_features', $items)
     || in_array('combinations', $items)) {
     $content_fields_all = [
-        'structure',
-        'specializations',
-        'qualities_and_skills',
-        'why_should_study',
-        'career_prospects',
+        'content.structure',
+        'content.specializations',
+        'content.qualities_and_skills',
+        'content.why_should_study',
+        'content.career_prospects',
         'links.downloads',
-        'special_features',
+        'content.special_features',
         'combinations'
     ];
     $content_fields     = array_intersect($content_fields_all, $items);
 
-    if (in_array('structure', $items)
-        && ! empty($data[ 'content' ][ 'structure' ][ 'description' ])
+    if (in_array('content.structure', $items)
+        && ! empty($data[ 'structure' ])
         && ! empty($data[ 'url' ])) {
-        $data[ 'content' ][ 'structure' ][ 'description' ] .= '<!-- wp:buttons --><div class="wp-block-buttons"><!-- wp:button --><div class="wp-block-button"><a href="' . $data[ 'url' ] . '" class="wp-block-button__link wp-element-button">' . ($labels[ 'url' ] ?? 'url') . '</a></div><!-- /wp:button --></div><!-- /wp:buttons -->';
+
+        $data[ 'structure' ] .= '<!-- wp:buttons --><div class="wp-block-buttons"><!-- wp:button --><div class="wp-block-button"><a href="' . $data[ 'url' ] . '" class="wp-block-button__link wp-element-button">' . ($labels[ 'url' ] ?? 'url') . '</a></div><!-- /wp:button --></div><!-- /wp:buttons -->';
     }
 
     $content_title = ($labels[ 'program_overview' ] ?? 'program_overview');
@@ -274,7 +275,7 @@ if (in_array('about', $items)
     $content       = '<div class="width-large"><div class="wp-block-fau-elemental-fau-meta-headline" id="' . $content_id . '">' . $content_title . '</div>'
                      . '<div class="program-details width-small">';
 
-    if (in_array('about', $items)) {
+    if (in_array('content.about', $items)) {
         $content .= '<h2>' . ($labels[ 'about' ] ?? 'about') . '</h2><div itemprop="description">' . do_shortcode(
                 $data[ 'about' ]
             ) . '</div>';
@@ -282,12 +283,12 @@ if (in_array('about', $items)
 
     $content_html = '<!-- wp:rrze-elements/collapsibles {"hstart":3,"expandLabel":"Alle ausklappen"} -->';
     foreach ($content_fields as $field) {
-        $field_name = str_replace('', '', $field);
-        if ( ! empty($data[ 'content' ][ $field_name ][ 'description' ])) {
+        $field_name = str_replace('content.', '', $field);
+        if ( ! empty($data[ $field_name ]) && !is_array($data[ $field_name ])) {
             $content_html .= '<!-- wp:rrze-elements/collapse {"hstart":3,"title":"' . ($labels[ $field_name ] ?? $field_name) . '","jumpName":"' . sanitize_title(
                     $labels[ $field_name ] ?? $field_name
                 ) . '","isCustomJumpname":true} --><!-- wp:paragraph -->
-        ' . $data[ 'content' ][ $field_name ][ 'description' ]
+        ' . $data[ $field_name ]
                              . '<!-- /wp:paragraph --><!-- /wp:rrze-elements/collapse -->';
         }
         if ($field == 'combinations' && ( ! empty($data[ 'combinations' ]) || ! empty($data[ 'limited_combinations' ]))) {
@@ -295,7 +296,7 @@ if (in_array('about', $items)
                     $labels[ $field_name ] ?? $field_name
                 ) . '","isCustomJumpname":true} --><!-- wp:paragraph -->';
             if ( ! empty($data[ 'combinations' ])) {
-                $content_html .= '<h4>' . ($labels[ 'combinations' ] ?? 'combinations') . '</h4><ul class="program-combinations wp-block-list">';
+                $content_html .= '<h4>' . ($labels[ 'possible_combinations' ] ?? 'possible_combinations') . '</h4><ul class="program-combinations wp-block-list">';
                 foreach ($data[ 'combinations' ] as $combination) {
                     $content_html .= sprintf(
                         '<li><a href="%s">%s</a></li>',
@@ -304,7 +305,7 @@ if (in_array('about', $items)
                     );
                 }
                 $content_html .= '</ul>';
-                $content_html .= ! empty($descriptions[ 'combinations' ]) ? '<p>' . $descriptions[ 'combinations' ] . '</p>' : '';
+                $content_html .= ! empty($descriptions[ 'possible_combinations' ]) ? '<p>' . $descriptions[ 'possible_combinations' ] . '</p>' : '';
             }
             if ( ! empty($data[ 'limited_combinations' ])) {
                 $content_html .= '<h4>' . ($labels[ 'limited_combinations' ] ?? 'limited_combinations') . '</h4><ul class="program-limited-combinations wp-block-list">';
