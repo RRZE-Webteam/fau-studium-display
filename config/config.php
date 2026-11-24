@@ -201,7 +201,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => '%s semesters'
             ]
         ],
-        'start' => [
+        'start_of_studies' => [
             'labels' => [
                 'de' => 'Studienbeginn',
                 'en' => 'Start of degree program'
@@ -393,7 +393,19 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'The following information is intended for German applicants as well as domestic applicants with foreign educational qualifications. Different regulations and deadlines may apply to international prospective students.'
             ]
         ],
-        'admission_requirements' => [
+        'admission_requirements_bachelor_teaching' => [
+            'labels' => [
+                'de' => 'Zugang zum 1. Fachsemester',
+                'en' => 'Admission to the first semester'
+            ]
+        ],
+        'admission_requirements_bachelor_teaching_higher' => [
+            'labels' => [
+                'de' => 'Zugang höhere Semester',
+                'en' => 'Admission to a higher semester'
+            ]
+        ],
+        'admission_requirements_master' => [
             'labels' => [
                 'de' => 'Zugang',
                 'en' => 'Admission'

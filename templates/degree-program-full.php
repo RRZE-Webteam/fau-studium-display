@@ -138,8 +138,18 @@ if (in_array('fact_sheet', $items)) {
             'itemprop' => 'educationalCredentialAwarded'
         ],
         'admission_requirements_bachelor_teaching' => [
-            'label'    => $labels[ 'admission_requirements' ] ?? 'admission_requirements',
-            'value'    => $data[ 'admission_requirement_link' ][ 'name' ] ?? '',
+            'label'    => $labels[ 'admission_requirements_bachelor_teaching' ] ?? 'admission_requirements_bachelor_teaching',
+            'value'    => $data[ 'adm_req_bachelor_teaching' ][ 0 ][ 'name' ] ?? '',
+            'itemprop' => 'programPrerequisites'
+        ],
+        'admission_requirements_bachelor_teaching_higher' => [
+            'label'    => $labels[ 'admission_requirements_bachelor_teaching_higher' ] ?? 'admission_requirements_bachelor_teaching_higher',
+            'value'    => $data[ 'adm_req_bachelor_teaching_higher' ][ 0 ][ 'name' ] ?? '',
+            'itemprop' => 'programPrerequisites'
+        ],
+        'admission_requirements_master' => [
+            'label'    => $labels[ 'admission_requirements_master' ] ?? 'admission_requirements_master',
+            'value'    => $data[ 'adm_req_master' ][ 0 ][ 'name' ] ?? '',
             'itemprop' => 'programPrerequisites'
         ],
         'standard_duration'      => [
@@ -153,11 +163,11 @@ if (in_array('fact_sheet', $items)) {
         ],
         'teaching_language'      => [
             'label' => $labels[ 'teaching_language' ] ?? 'teaching_language',
-            'value' => $data[ 'teaching_language' ] ?? ''
+            'value' => $data[ 'teaching_language' ][0]['name'] ?? ''
         ],
         'faculty'                => [
             'label' => $labels[ 'faculty' ] ?? 'faculty',
-            'value' => $facts[ 'faculty' ][ 'value' ] = ! empty($data[ 'faculty' ]) ? implode(
+            'value' => ! empty($data[ 'faculty' ]) ? implode(
                 ', ',
                 array_column(
                     $data[ 'faculty' ],
@@ -166,23 +176,32 @@ if (in_array('fact_sheet', $items)) {
             ) : ''
         ],
         'start'                  => [
-            'label' => $labels[ 'start' ] ?? 'start',
-            'value' => ! empty($data[ 'start' ]) ? implode(', ', $data[ 'start' ]) : '',
+            'label' => $labels[ 'start_of_studies' ] ?? 'start_of_studies',
+            'value' => !empty($data[ 'start_of_studies' ]) ? implode(', ', array_column(
+                $data[ 'start_of_studies' ],
+                'name'
+            )) : '',
             //'itemprop' => 'startDate'
         ],
         'number_of_students'     => [
             'label'            => $labels[ 'number_of_students' ] ?? 'number_of_students',
-            'value'            => $data[ 'number_of_students' ][ 'name' ] ?? '',
+            'value'            => $data[ 'number_of_students' ][0][ 'name' ] ?? '',
             'itemprop'         => 'maximumEnrollment',
             'itemprop_content' => $number_of_students ?? ''
         ],
         'location'               => [
             'label' => $labels[ 'location' ] ?? 'location',
-            'value' => $data[ 'location' ][ 'name' ] ?? '',
+            'value' => !empty($data[ 'study_location' ]) ? implode(', ', array_column(
+                $data[ 'study_location' ],
+                'name'
+            )) : '',
         ],
         'attributes'             => [
             'label' => $labels[ 'attributes' ] ?? 'attributes',
-            'value' => isset($data[ 'attributes' ]) ? implode(', ', $data[ 'attributes' ]) : '',
+            'value' => !empty($data[ 'attribute' ]) ? implode(', ', array_column(
+                $data[ 'attribute' ],
+                'name'
+            )) : '',
         ]
     ];
 
