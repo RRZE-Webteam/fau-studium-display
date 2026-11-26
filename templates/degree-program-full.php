@@ -33,6 +33,7 @@ $labels              = get_labels($lang);
 $descriptions        = get_labels($lang, 'description');
 $constants           = get_constants($lang);
 $meinstudium_options = get_meinstudium_options($lang);
+$strings             = $data['settings'];
 
 $number_of_students_raw = $data[ 'number_of_students' ][0][ 'name' ] ?? '';
 if ( ! empty($number_of_students_raw)) {
@@ -379,42 +380,63 @@ if (in_array('videos', $items) && ! empty($data[ 'videos' ])) {
 if (in_array('admission_requirements_application', $items)) {
     $admission_requirements      = [];
     $application_process_buttons = [];
-    if ( ! empty($data[ 'admission_requirements' ][ 'bachelor_or_teaching_degree' ])) {
-        $admission_requirements[ 'bachelor_or_teaching_degree' ] = $labels[ '1st_semester' ] . ': ' . $data[ 'admission_requirements' ][ 'bachelor_or_teaching_degree' ][ 'link_text' ];
-        $application_process_buttons[]                           = [
+    if ( ! empty($data[ 'adm_req_bachelor_teaching' ][0])) {
+        $bt_url = $data[ 'adm_req_bachelor_teaching' ][0][ 'link_url' ];
+        $bt_link_text = !empty($data[ 'adm_req_bachelor_teaching' ][0][ 'link_text' ]) ? $data[ 'adm_req_bachelor_teaching' ][0][ 'link_text' ] : $data[ 'adm_req_bachelor_teaching' ][0][ 'name' ];
+        if (!empty($bt_url)) {
+            $bt_link_text = '<a href="' . $bt_url . '">' . $bt_link_text . '</a>';
+        }
+        $admission_requirements[ 'bachelor_teaching' ] = $labels[ '1st_semester' ] . ': ' . $bt_link_text;
+        $application_process_buttons[] = [
             'text' => $labels[ 'how_to_apply_1st_semester' ],
-            'url'  => $data[ 'admission_requirements' ][ 'bachelor_or_teaching_degree' ][ 'link_url' ],
+            'url'  => $bt_url,
         ];
     }
-    if ( ! empty($data[ 'admission_requirements' ][ 'teaching_degree_higher_semester' ])) {
-        $admission_requirements[ 'teaching_degree_higher_semester' ] = $labels[ 'higher_semesters' ] . ': ' . $data[ 'admission_requirements' ][ 'teaching_degree_higher_semester' ][ 'link_text' ];
-        $application_process_buttons[]                               = [
+    if ( ! empty($data[ 'adm_req_bachelor_teaching_higher' ] [0])) {
+        $bth_url = $data['adm_req_bachelor_teaching'][0]['link_url'];
+        $bth_link_text = !empty($data[ 'adm_req_bachelor_teaching_higher' ][0][ 'link_text' ]) ? $data[ 'adm_req_bachelor_teaching_higher' ][0][ 'link_text' ] : $data[ 'adm_req_bachelor_teaching_higher' ][0][ 'name' ];
+        if (!empty($bth_url)) {
+            $bth_link_text = '<a href="' . $bth_url . '">' . $bth_link_text . '</a>';
+        }
+        $admission_requirements[ 'teaching_degree_higher_semester' ] = $labels[ 'higher_semesters' ] . ': ' . $bth_link_text;
+        $application_process_buttons[] = [
             'text' => $labels[ 'how_to_apply_higher_semester' ],
-            'url'  => $data[ 'admission_requirements' ][ 'teaching_degree_higher_semester' ][ 'link_url' ],
+            'url'  => $bth_url,
         ];
     }
-    if ( ! empty($data[ 'admission_requirements' ][ 'master' ])) {
-        $admission_requirements[ 'master' ] = 'Master: ' . $data[ 'admission_requirements' ][ 'master' ][ 'link_text' ];
+    if ( ! empty($data[ 'adm_req_master' ])) {
+        $m_url = $data[ 'adm_req_master' ][0][ 'link_url' ];
+        $m_link_text = !empty($data[ 'adm_req_master' ][0][ 'link_text' ]) ? $data[ 'adm_req_master' ][0][ 'link_text' ] : $data[ 'adm_req_master' ][0][ 'name' ];
+        if (!empty($m_url)) {
+            $m_link_text = '<a href="' . $m_url . '">' . $m_link_text . '</a>';
+        }
+        $admission_requirements[ 'master' ] = 'Master: ' . $m_link_text;
         $application_process_buttons[]      = [
             'text' => $labels[ 'how_to_apply' ],
-            'url'  => $data[ 'admission_requirements' ][ 'master' ][ 'link_url' ],
+            'url'  => $m_url,
         ];
     }
-    if ( ! empty($data[ 'notes_for_international_applicants' ][ 'link_url' ])) {
+    /*if ( ! empty($data[ 'notes_for_international_applicants' ][ 'link_url' ])) {
         $application_process_buttons[] = [
             'text' => $labels[ 'how_to_apply_internationals' ],
             'url'  => $data[ 'notes_for_international_applicants' ][ 'link_url' ],
         ];
-    }
+    }*/
 
-    if (empty($data[ 'application_deadline_winter_semester' ]) && empty($data[ 'application_deadline_summer_semester' ])) {
+    if (empty($data[ 'application_periods' ])) {
         $deadlines = [];
     } else {
-        $deadlines[ 'winter_semester' ] = $labels[ 'winter_semester' ] . ': ' . (empty($data[ 'application_deadline_winter_semester' ]) ? $labels[ 'not_possible' ] : strip_tags(
-                $data[ 'application_deadline_winter_semester' ]
+        $deadlines['germany'][ 'winter_semester' ] = $labels[ 'winter_semester' ] . ': ' . (empty($data[ 'application_periods' ]['winter']['germany']) ? $labels[ 'not_possible' ] : strip_tags(
+                $data[ 'application_periods' ]['winter']['germany']
             ));
-        $deadlines[ 'summer_semester' ] = $labels[ 'summer_semester' ] . ': ' . (empty($data[ 'application_deadline_summer_semester' ]) ? $labels[ 'not_possible' ] : strip_tags(
-                $data[ 'application_deadline_summer_semester' ]
+        $deadlines['germany']['summer_semester'] = $labels[ 'summer_semester' ] . ': ' . (empty($data[ 'application_periods' ]['summer']['germany']) ? $labels[ 'not_possible' ] : strip_tags(
+                $data[ 'application_periods' ]['summer']['germany']
+            ));
+        $deadlines['international'][ 'winter_semester' ] = $labels[ 'winter_semester' ] . ': ' . (empty($data[ 'application_periods' ]['winter']['international']) ? $labels[ 'not_possible' ] : strip_tags(
+                $data[ 'application_periods' ]['winter']['international']
+            ));
+        $deadlines['international']['summer_semester'] = $labels[ 'summer_semester' ] . ': ' . (empty($data[ 'application_periods' ]['summer']['international']) ? $labels[ 'not_possible' ] : strip_tags(
+                $data[ 'application_periods' ]['summer']['international']
             ));
     }
 
@@ -422,11 +444,11 @@ if (in_array('admission_requirements_application', $items)) {
     if ( ! empty($data[ 'language_skills' ])) {
         $language_skills[] = strip_tags($data[ 'language_skills' ]);
     }
-    if ( ! empty($data[ 'german_language_skills_for_international_students' ][ 'link_text' ])
-         && ! empty($data[ 'german_language_skills_for_international_students' ][ 'link_url' ])) {
-        $language_skills[] = ($labels[ 'german_language_skills_for_international_students' ] ?? 'german_language_skills_for_international_students') . ': <a href="' . $data[ 'german_language_skills_for_international_students' ][ 'link_url' ] . '">' . $data[ 'german_language_skills_for_international_students' ][ 'link_text' ] . '</a>';
-    } elseif ( ! empty($data[ 'german_language_skills_for_international_students' ][ 'name' ])) {
-        $language_skills[] = ($labels[ 'german_language_skills_for_international_students' ] ?? 'german_language_skills_for_international_students') . ': ' . $data[ 'german_language_skills_for_international_students' ][ 'name' ];
+    if ( ! empty($data[ 'german_for_int_students' ][0][ 'link_text' ])
+         && ! empty($data[ 'german_for_int_students' ][0][ 'link_url' ])) {
+        $language_skills[] = ($labels[ 'german_for_int_students' ] ?? 'german_language_skills_for_international_students') . ': <a href="' . $data[ 'german_for_int_students' ][0][ 'link_url' ] . '">' . $data[ 'german_for_int_students' ][0][ 'link_text' ] . '</a>';
+    } elseif ( ! empty($data[ 'german_for_int_students' ][0][ 'name' ])) {
+        $language_skills[] = ($labels[ 'german_for_int_students' ] ?? 'german_language_skills_for_international_students') . ': ' . $data[ 'german_for_int_students' ][0][ 'name' ];
     }
 
     $content_related_master_requirements = (/*in_array('content_related_master_requirements', $items) && */ ! empty($data[ 'content_related_master_requirements' ])) ? '<div itemprop="programPrerequisites">' . str_replace(
@@ -435,7 +457,21 @@ if (in_array('admission_requirements_application', $items)) {
             $data[ 'content_related_master_requirements' ]
         ) . '</div>' : '';
 
-    $admission_details = ! empty($data[ 'details_and_notes' ]) ? $data[ 'details_and_notes' ] : '';
+    $admission_details = [];
+    if (!empty($strings['links']['entrance_qualification']['text'])) {
+        $admission_details[] = '<h4>' . ($strings['links']['entrance_qualification']['label'] ?? '') . '</h4>'
+            .$strings['links']['entrance_qualification']['text'];
+    }
+
+    if (!empty($strings['links']['fees_for_internationals']['text'])) {
+        $admission_details[] = '<h4>' . ($strings['links']['fees_for_internationals']['label'] ?? '') . '</h4>'
+            .$strings['links']['fees_for_internationals']['text'];
+    }
+
+    if (!empty($data['details_and_notes'])) {
+        $admission_details[] = '<h4>' . __('Additional information', 'fau-studium-display') . '</h4>'
+            .$data['details_and_notes'];
+    }
 
     $admission_requirements_application = '';
     if ( ! empty($admission_requirements)
@@ -450,7 +486,9 @@ if (in_array('admission_requirements_application', $items)) {
             <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="#' . $admission_requirements_application_id . '">' . $admission_requirements_application_title . '</a></div>
             <!-- /wp:button -->';*/
         $quicklinks[ 2 ]                    = '{"id":"","title":"' . $admission_requirements_application_title . '","description":"","url":"#' . $admission_requirements_application_id . '","facultyColor":"default"}';
-        $admission_requirements_application .= '<p>' . ($labels[ 'admission_intro' ] ?? '') . '</p>';
+        if (!empty($strings['links']['admission_intro']['text'])) {
+            $admission_requirements_application .= $strings['links']['admission_intro']['text'];
+        }
 
         if ( ! empty($admission_requirements)) {
             $admission_requirements_application .= '<h3>' . ($labels[ 'admission_requirements' ] ?? 'admission_requirements') . '</h3><ul class="wp-block-list">';
@@ -461,13 +499,23 @@ if (in_array('admission_requirements_application', $items)) {
         }
 
         if ( ! empty($deadlines)) {
-            $admission_requirements_application .= '<h3>' . ($labels[ 'application_deadline' ] ?? 'application_deadline') . '</h3><ul class="wp-block-list">';
-            foreach ($deadlines as $deadline) {
-                $admission_requirements_application .= '<li itemprop="applicationDeadline">' . strip_tags(
-                        $deadline
-                    ) . '</li>';
+            $admission_requirements_application .= '<h3>' . ($labels[ 'application_deadline' ] ?? 'application_deadline') . '</h3>';
+            if (!empty($deadlines['germany'])) {
+                $admission_requirements_application .= '<h4>' . ($labels[ 'application_deadline_germany' ] ?? 'application_deadline_germany') . '</h4>'
+                    . '<ul class="wp-block-list">';
+                foreach ($deadlines['germany'] as $deadline) {
+                    $admission_requirements_application .= '<li itemprop="applicationDeadline">' . strip_tags($deadline) . '</li>';
+                }
+                $admission_requirements_application .= '</ul>';
             }
-            $admission_requirements_application .= '</ul>';
+            if (!empty($deadlines['international'])) {
+                $admission_requirements_application .= '<h4>' . ($labels[ 'application_deadline_international' ] ?? 'application_deadline_international') . '</h4>'
+                     . '<ul class="wp-block-list">';
+                foreach ($deadlines['international'] as $deadline) {
+                    $admission_requirements_application .= '<li itemprop="applicationDeadline">' . strip_tags($deadline) . '</li>';
+                }
+                $admission_requirements_application .= '</ul>';
+            }
         }
 
         if ( ! empty($language_skills)) {
@@ -484,8 +532,10 @@ if (in_array('admission_requirements_application', $items)) {
         }
 
         if ( ! empty($admission_details)) {
-            $admission_requirements_application .= '<h3>' . ($labels[ 'details_and_notes' ] ?? 'details_and_notes') . '</h3>'
-                                                   . $admission_details;
+            $admission_requirements_application .= '<h3>' . ($labels[ 'details_and_notes' ] ?? 'details_and_notes') . '</h3>';
+            foreach ($admission_details as $detail) {
+                $admission_requirements_application .= $detail;
+            }
         }
 
         $attributes = [];

@@ -59,7 +59,7 @@ function get_output_fields($format = '') {
             'start',
             'location',
             'admission_requirements',
-            'german_language_skills_for_international_students',
+            'german_for_int_students',
             'application_deadline',
         ],
         'list' => [
@@ -74,7 +74,7 @@ function get_output_fields($format = '') {
             'study_location',
             'teaching_language',
             'faculty',
-            'german_language_skills_for_international_students',
+            'german_for_int_students',
             //'area-of-study',
         ]
     ];
@@ -199,6 +199,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
             'labels' => [
                 'de' => '%s Semester',
                 'en' => '%s semesters'
+            ]
+        ],
+        'start' => [
+            'labels' => [
+                'de' => 'Studienbeginn',
+                'en' => 'Start of degree program'
             ]
         ],
         'start_of_studies' => [
@@ -343,6 +349,12 @@ function get_labels ($lang = 'de', $task = 'labels') {
             'labels' => [
                 'de' => 'Die folgenden Informationen richten sich an deutsche Bewerbende sowie Bildungsinländer/-innen.  Für internationale Studieninteressierte können abweichende Regelungen und Fristen gelten.',
                 'en' => 'The following information is intended for German applicants as well as domestic applicants with foreign educational qualifications. Different regulations and deadlines may apply to international prospective students.'
+            ]
+        ],
+        'admission_requirements' => [
+            'labels' => [
+                'de' => 'Zugang',
+                'en' => 'Admission'
             ]
         ],
         'admission_requirements_bachelor_teaching' => [
@@ -531,12 +543,6 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'limited_combinations' => [
             'labels' => [
-                'de' => 'Eingeschränkte Kombinationen',
-                'en' => 'Limited combinations'
-            ]
-        ],
-        'limited_combinations' => [
-            'labels' => [
                 'de' => 'Mögliche Überschneidungen im Stundenplan',
                 'en' => 'Possible overlaps in the timetable'
             ],
@@ -577,14 +583,26 @@ function get_labels ($lang = 'de', $task = 'labels') {
         ],
         'content_related_master_requirements' => [
             'labels' => [
-                'de' => 'Voraussetzungen für Master',
-                'en' => 'Content related master requirements'
+                'de' => 'Inhaltliche Zugangsvoraussetzungen',
+                'en' => 'Content related requirements'
             ]
         ],
         'application_deadline' => [
             'labels' => [
-                'de' => 'Bewerbungsfrist',
-                'en' => 'Application deadline'
+                'de' => 'Bewerbungszeiträume',
+                'en' => 'Application deadlines'
+            ]
+        ],
+        'application_deadline_germany' => [
+            'labels' => [
+                'de' => 'für deutsche Bewerbende sowie Bildungsinländerinnen und -inländer',
+                'en' => 'for German applicants and applicants with a German higher education entrance qualification'
+            ]
+        ],
+        'application_deadline_international' => [
+            'labels' => [
+                'de' => 'für internationale Bewerbende',
+                'en' => 'for international applicants'
             ]
         ],
         'application_deadline_winter_semester' => [
@@ -647,7 +665,7 @@ function get_labels ($lang = 'de', $task = 'labels') {
                 'en' => 'German language skills'
             ]
         ],
-        'german_language_skills_for_international_students' => [
+        'german_for_int_students' => [
             'labels' => [
                 'de' => 'Deutschkenntnisse für internationale Studierende',
                 'en' => 'German language skills for international applicants'

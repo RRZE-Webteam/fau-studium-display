@@ -169,24 +169,6 @@ class Settings
                                              'parent_slug'  => $this->slug,
                                          ]);
             $sync_options->add_field([
-                                         'name' => __('General Sync Options', 'fau-studium-display'),
-                                         //'desc' => __('', 'fau-studium-display'),
-                                         'type' => 'title',
-                                         'id'   => 'sync_options_heading'
-                                     ]);
-            $sync_options->add_field([
-                                           'id' => 'sync_languages',
-                                           'name' => esc_html__('Languages', 'fau-studium-display'),
-                                           'desc' => __('A separate degree program post will be created for each selected language.', 'fau-studium-display'),
-                                           'type' => 'multicheck',
-                                           'options' => [
-                                               'de' => __('German', 'fau-studium-display'),
-                                               'en' => __('English', 'fau-studium-display')
-                                           ],
-                                           'default' => 'de',
-                                           'select_all_button' => false,
-                                       ]);
-            $sync_options->add_field([
                                          'name' => __('Import degree programs', 'fau-studium-display'),
                                          //'desc' => __('', 'fau-studium-display'),
                                          'type' => 'title',
@@ -241,8 +223,8 @@ class Settings
         }
         check_ajax_referer('fau_studium_display_admin_ajax_nonce');
 
-        $faculties = Utils::get_faculty_options(true);
-        $degrees = Utils::get_degree_options(true, true);
+        $faculties = Utils::get_faculty_options(true, true);
+        $degrees = Utils::get_degree_options(true, true, true);
         if (empty($faculties) || empty($degrees) || !is_array($faculties) || !is_array($degrees)) {
             wp_send_json_error(__('Could not load filter options. Please try again.', 'fau-studium-display'), 502);
         }

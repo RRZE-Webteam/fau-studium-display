@@ -357,10 +357,16 @@ class Utils
         return $degreeProgramOptions;
     }
 
-    public static function get_degree_options($parents_only = false, $from_api = false) {
+    public static function get_degree_options($parents_only = false, $from_api = false, $cache = true) {
         $degreeOptions = [];
         if ($from_api) {
-            $degrees = (new API)->get_degrees($parents_only);
+            if ($cache) {
+                $degrees = get_transient('fau-studium-display_degrees');
+            }
+            if (empty($degrees)) {
+                $degrees = (new API)->get_degrees($parents_only);
+                set_transient('fau-studium-display_degrees', $degrees, 60 * 60 * 24);
+            }
             foreach ($degrees as $degree) {
                 $degreeOptions[] = [
                     'label' => $degree,
@@ -393,10 +399,16 @@ class Utils
         return $degreeOptions;
     }
 
-    public static function get_faculty_options($from_api = false) {
+    public static function get_faculty_options($from_api = false, $cache = true) {
         $facultyOptions = [];
         if ($from_api) {
-            $faculties = (new API)->get_faculties();
+            if ($cache) {
+                $faculties = get_transient('fau-studium-display_faculties');
+            }
+            if (empty($faculties)) {
+                $faculties = (new API)->get_faculties();
+                set_transient('fau-studium-display_faculties', $faculties, 60 * 60 * 24);
+            }
             foreach ($faculties as $faculty) {
                 $facultyOptions[] = [
                     'label' => $faculty,

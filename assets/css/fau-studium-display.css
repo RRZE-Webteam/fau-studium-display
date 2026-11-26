@@ -1274,8 +1274,17 @@
 .fau-studium-display.degree-program-full .program-admission h3 {
   font-size: var(--H-Heading-4, 1.25rem);
 }
+.fau-studium-display.degree-program-full .program-admission h4 {
+  font-size: var(--P-Body-Text, 1.125rem);
+  color: var(--FAU-Col-FAU-Schwarz-100);
+  margin-bottom: 0.5rem;
+}
+.fau-studium-display.degree-program-full .program-admission p {
+  margin: 0.5rem 0;
+}
 .fau-studium-display.degree-program-full .program-admission li {
   padding: 0;
+  margin-bottom: 0.5rem;
 }
 .fau-studium-display.degree-program-full .student-advice-more {
   background-color: var(--FAU_Col_FAU-Blau, #04316A);
